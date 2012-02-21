@@ -3,6 +3,20 @@
 	<div class="field">
 		<%= f.text_area :content %>
 	</div>
+	<div class="field">
+		<%= f.label "Case number?" %><br />
+		<%= f.text_area :casenumber %>
+	</div>
+	<div class="field">
+		<%= f.label "Why type of event is this?" %><br />
+		<% categories = { 'screening'=>'screening', 'trial'=>'trial', 'phone call or email'=>'communication', 'decline to prosecute'=>'dtp', 'plea deal'=>'plea', 'dismissal or NP'=>'dropped' } %>
+		<% list=categories.sort %>
+		<%= f.select :category, list %>
+	</div>
+	<div class="field">
+		<%= f.label "When did this happen?" %><br />
+		<%= f.date_select :event_date %>
+	</div>
 	<div class="actions">
 		<%= f.submit "Submit" %>
 	</div>

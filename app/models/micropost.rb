@@ -1,5 +1,5 @@
 class Micropost < ActiveRecord::Base
-	attr_accessible :content
+	attr_accessible :content, :casenumber, :category, :event_date, :unit
 	
 	belongs_to :user
 	has_and_belongs_to_many :tags
@@ -9,6 +9,9 @@ class Micropost < ActiveRecord::Base
 	
 	default_scope :order => 'microposts.created_at DESC'
 	
+	def description
+		self.unit.to_s+", "+self.casenumber.to_s+", "+self.category.to_s+", "+self.event_date.to_s
+	end
 	
 	def tags_used
 		tempstring = "("+tags.count.to_s+" tags)"
@@ -19,7 +22,7 @@ class Micropost < ActiveRecord::Base
 	end
 	
 	def content_and_tags
-		content + ", tags: "+tags_used
+		content + ", tags: "+description #NOTE: this is temp
 	end
 	
 end  

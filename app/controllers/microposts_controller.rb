@@ -7,7 +7,7 @@ class MicropostsController < ApplicationController
 	
 	def create
 		@micropost = current_user.microposts.build(params[:micropost])
-		
+		@micropost.unit = current_user.unit
 		if @micropost.save
 			@micropost.tags.build
 			@micropost.tags.create(:name=>"test")

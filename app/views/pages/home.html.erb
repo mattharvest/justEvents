@@ -2,7 +2,7 @@
 	<table class="front" summary="For signed-in users">
 		<tr>
 			<td class="main">
-				<h1 class="micropost">What's up?</h1>
+				<h1 class="micropost">what's happened?</h1>
 				<%= render 'shared/micropost_form' %>
 				<%= render 'shared/feed' %>
 			</td>
@@ -12,9 +12,9 @@
 		</tr>
 	</table>
 <% else %>
-	<h1>Sample App</h1>
+	<h1>justEvent</h1>
 	<p>
-		Home page for justEvent, an event-logging tool for ASAs
+		justEvent, an event-logging tool for ASAs
 	</p>
 	<%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
 <% end %>

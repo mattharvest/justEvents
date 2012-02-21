@@ -1,7 +1,6 @@
 class Micropost < ActiveRecord::Base
 	attr_accessible :content
 	
-	
 	belongs_to :user
 	has_and_belongs_to_many :tags
 	
@@ -12,15 +11,11 @@ class Micropost < ActiveRecord::Base
 	
 	
 	def tags_used
-		tempstring = nil
+		tempstring = "("+tags.count.to_s+" tags)"
 		self.tags.each do |t|
 			tempstring+=t.to_s
 		end
-		if !tempstring.nil?
-			return tempstring
-		else
-			return ""
-		end
+		tempstring
 	end
 	
 	def content_and_tags

@@ -35,6 +35,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@title = @user.name
 		@microposts = @user.microposts.paginate(:page => params[:page])
+		#@microposts = @user.microposts
 	end
 	
 	def edit

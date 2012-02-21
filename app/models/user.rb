@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 	end
 	
 	def feed
-		Micropost.where("user_id=?", id)
+		microposts
 	end
 	
 	def self.authenticate(email, submitted_password)

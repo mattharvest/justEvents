@@ -4,7 +4,6 @@
 			<%= link_to feed_item.user.name, feed_item.user %>
 		</span>
 		<span class="content"><%= feed_item.content_and_tags %></span>
-		<span class="tags"><%= feed_item.tags.count %> tags</span>
 		<span class="timestamp">
 			Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
 		</span>

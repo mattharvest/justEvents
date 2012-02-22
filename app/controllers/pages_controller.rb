@@ -11,6 +11,8 @@ class PagesController < ApplicationController
 		@title="Reports"
 		if signed_in?&&!current_user.admin?
 			unit_posts
+		elsif signed_in?
+			all_posts
 		else
 			self_posts
 		end

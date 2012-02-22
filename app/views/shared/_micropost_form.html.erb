@@ -11,6 +11,8 @@
 		<%= f.label "Why type of event is this?" %><br />
 		<% juvenile_categories = {
 			'screening' => 'screening',
+			'continuance' => 'continuance',
+			'writ' => 'writ',
 			'merits hearing' => 'trial',
 			'plea deal' => 'plea',
 			'decline to prosecute' => 'dtp',
@@ -24,9 +26,11 @@
 		<% circuit_categories = {
 			'screening'=>'screening',
 			'trial'=>'trial',
-			'plea deal'=>'plea',
+			'plea deal (incl. stet)'=>'plea',
 			'nolle prosequi'=>'dtp',
 			'acquittal'=>'acquittal'
+			'bench warrant'=>'bench warrant',
+			'other'=>'other'
 			} %>
 		<% community_categories = {
 			'community need identified'=>'community need identified'

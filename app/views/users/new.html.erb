@@ -11,8 +11,23 @@
 		<%= f.text_field :email %>
 	</div>
 	<div class="field">
+		<% units = {
+			'Grand Jury' => 'grand jury',
+			'Community Prosecution' => 'community prosecution',
+			'DV' => 'DV',
+			'Juvenile' => 'juvenile',
+			'District Court' => 'district',
+			'FTU' => 'FTU',
+			'Child Abuse and Sex' => 'child abuse and sex',
+			'Violent Crime' => 'violent crime',
+			'Motor Vehicle' => 'motor vehicle',
+			'Guns and Drugs' => 'guns and drugs',
+			'Homicide' => 'homicide',
+			'Post-Conviction' => 'postconviction',
+			'Special Prosecution' => 'special prosecution'
+			} %>
 		<%= f.label :unit %><br />
-		<%= f.text_field :unit %>
+		<%= f.select :unit, units.sort%>
 	</div>
 	<div class="field">
 		<%= f.label :password %><br />

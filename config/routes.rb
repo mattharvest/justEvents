@@ -12,6 +12,7 @@ JustEvents::Application.routes.draw do
   match '/users', :to => 'pages#users'
   match '/posts', :to => 'pages#posts'
   match '/signup', :to => 'users#new' 
+  match '/reports', :to => 'pages#reports'
   root :to => 'pages#home'
 
   # The priority is based upon order of creation:

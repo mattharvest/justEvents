@@ -6,11 +6,12 @@ class Micropost < ActiveRecord::Base
 	
 	validates :content, :presence => true, :length => { :maximum => 255 }
 	validates :user_id, :presence => true	
+	validates :casenumber, :presence => true
 	
 	default_scope :order => 'microposts.created_at DESC'
 	
 	def description
-		self.unit.to_s+", "+self.casenumber.to_s+", "+self.category.to_s+", "+self.event_date.to_s
+		casenumber.to_s+", "+unit.to_s+", "+category.to_s+", "+event_date.to_s
 	end
 	
 	def tags_used
@@ -25,4 +26,7 @@ class Micropost < ActiveRecord::Base
 		content + ", tags: "+description #NOTE: this is temp
 	end
 	
+	def report_info
+		event_date.to_s+" | "+user.name+" | "+casenumber.to_s+" | "+content+" | "+unit.to_s+" | "+category.to_s
+	end
 end  

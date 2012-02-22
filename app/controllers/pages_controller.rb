@@ -6,6 +6,27 @@ class PagesController < ApplicationController
 			@feed_items = current_user.feed.paginate(:page => params[:page])
 		end
 	end
+	
+	def reports
+		@title="Reports"
+		if signed_in?&&!current_user.admin?
+			unit_posts
+		else
+			self_posts
+		end
+	end
+	
+	def all_posts
+		@posts = Micropost.find(:all)
+	end
+	
+	def unit_posts
+		@posts = Micropost.where("unit=?", current_user.unit)
+	end
+	
+	def self_posts
+		@posts = Micropost.where("user_id=?", current_user.id)
+	end
 
 	def help
 		@title = "Help"
@@ -17,6 +38,7 @@ class PagesController < ApplicationController
 	
 	def posts
 		@title = "Posts"
+		self_posts
 	end
 
 end

@@ -9,8 +9,52 @@
 	</div>
 	<div class="field">
 		<%= f.label "Why type of event is this?" %><br />
-		<% categories = { 'screening'=>'screening', 'trial'=>'trial', 'phone call or email'=>'communication', 'decline to prosecute'=>'dtp', 'plea deal'=>'plea', 'dismissal or NP'=>'dropped' } %>
-		<% list=categories.sort %>
+		<% juvenile_categories = {
+			'screening' => 'screening',
+			'merits hearing' => 'trial',
+			'plea deal' => 'plea',
+			'decline to prosecute' => 'dtp',
+			'acquittal' => 'acquittal'
+			} %>
+		<% grandjury_categories = {
+			'screening' => 'screening',
+			'charged' => 'charged',
+			'returned for investigation' => 'RFI'
+			} %>
+		<% circuit_categories = {
+			'screening'=>'screening',
+			'trial'=>'trial',
+			'plea deal'=>'plea',
+			'nolle prosequi'=>'dtp',
+			'acquittal'=>'acquittal'
+			} %>
+		<% community_categories = {
+			'community need identified'=>'community need identified'
+			} %>
+		<% postconviction_categories = {
+			'corum nobis' => 'corum nobis',
+			'appeal filed' => 'appeal filed',
+			'appeal rejected' => 'appeal rejected',
+			'verdict overturned' => 'verdict overturned'
+			} %>
+		<% specialprosecution_categories = {
+			'suspect suggested'=>'new suspect',
+			'suspect rejected'=>'suspect rejected'
+			} %>
+		<% if current_user.unit=="juvenile" %>
+			<% list=juvenile_categories.sort %>
+		<% elsif current_user.unit=="grand jury" %>
+			<% list=grandjury_categories.sort %>
+		<% elsif current_user.unit=="community prosecution" %>
+			<% list=community_categories.merge(circuit_categories).sort %>
+		<% elsif current_user.unit=="post-conviction" %>
+			<% list=postconviction_categories.sort %>
+		<% elsif current_user.unit=="special prosecution" %>
+			<% list=specialprosecution_categories.merge(circuit_categories).sort %>
+		<% else %>
+			<% list=circuit_categories.sort %>
+		<% end %>
+		
 		<%= f.select :category, list %>
 	</div>
 	<div class="field">

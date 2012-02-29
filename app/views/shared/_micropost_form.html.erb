@@ -8,9 +8,12 @@
 		<%= f.text_field :casenumber %>
 	</div>
 	<div class="field">
-		<%= 
-		if current_user.unit=="juvenile"	f.label "Respondent DOB?"
-		else 								f.label "Defendant DOB?" end %><br />
+		<% if current_user.unit=="juvenile"	
+			dob_label= "Respondent DOB?"
+		else
+			dob_label "Defendant DOB?"
+		end %>
+		<%=f.label dob_label %><br />
 		<%=f.date_select :dob =%><br />
 	</div>
 	<div class="field">

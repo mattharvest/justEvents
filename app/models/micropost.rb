@@ -1,5 +1,5 @@
 class Micropost < ActiveRecord::Base
-	attr_accessible :content, :casenumber, :category, :event_date, :unit
+	attr_accessible :content, :casenumber, :category, :event_date, :unit, :adf, :dob
 	
 	belongs_to :user
 	has_and_belongs_to_many :tags
@@ -27,6 +27,6 @@ class Micropost < ActiveRecord::Base
 	end
 	
 	def report_info
-		event_date.to_s+" | "+user.name+" | "+user.email+" | "+casenumber.to_s+" | "+content+" | "+unit.to_s+" | "+category.to_s+" | "+created_at.to_s
+		event_date.to_s+" | "+user.name+" | "+user.email+" | "+casenumber.to_s+" | "+dob.to_s+" | "+adf+" | "+content+" | "+unit.to_s+" | "+category.to_s+" | "+created_at.to_s
 	end
 end  

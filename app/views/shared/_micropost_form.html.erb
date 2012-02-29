@@ -5,8 +5,18 @@
 	</div>
 	<div class="field">
 		<%= f.label "Case number?" %><br />
-		<%= f.text_area :casenumber %>
+		<%= f.text_field :casenumber %>
 	</div>
+	<div class="field">
+		<%= 
+		if current_user.unit=="juvenile"
+			f.label "Respondent DOB?"
+		else
+			f.label "Defendant DOB?" end %><br />
+			<%=f.date_select :dob =%><br />
+	<div class="field">
+		<%= f.label "Defense Attorney? (Last, First)" %><br />
+		<%= f.text_field :adf %>
 	<div class="field">
 		<%= f.label "Why type of event is this?" %><br />
 		<% juvenile_categories = {

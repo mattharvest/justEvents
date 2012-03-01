@@ -1,9 +1,27 @@
-<% dob_label="Defendant DOB?" %>
-<% if current_user.unit=="juvenile"	
-	dob_label= "Respondent DOB?"
-	end %>
-
-<% juvenile_categories = {
+<%= form_for @micropost do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+	<div class="field">
+		<%= f.text_area :content %>
+	</div>
+	<div class="field">
+		<%= f.label "Case number?" %><br />
+		<%= f.text_field :casenumber %>
+	</div>
+	<div class="field">
+		<% dob_label="Defendant DOB?" %>
+		<% if current_user.unit=="juvenile"	
+			dob_label= "Respondent DOB?"
+		end %>
+		<%=f.label dob_label %><br />
+		<%=f.date_select :dob =%><br />
+	</div>
+	<div class="field">
+		<%= f.label "Defense Attorney? (Last, First)" %><br />
+		<%= f.text_field :adf %>
+	</div>
+	<div class="field">
+		<%= f.label "Why type of event is this?" %><br />
+		<% juvenile_categories = {
 			'screening' => 'screening',
 			'continuance' => 'continuance',
 			'writ' => 'writ',
@@ -54,14 +72,14 @@
 		else
 			list=circuit_categories.sort
 		end %>
-	
-	<%= simple_form_for @micropost do |f| %>
-		<%= f.input :content, :label=>'What happened?' %>
-		<%= f.input :casenumber, :label=>'Casenumber?' %>
-		<%= f.input :adf, :label=>'Defense Attorney (lastname, firstname)' %>
-		<%= f.input :dob, :label=>dob_label, :as => :date, :start_year => Date.today.year-90 %>
-		<%= f.input :category, :label=>'Category?', :collection => list %>
-		<%= f.input :event_date, :label=>'When did this happen?', :as => :date %>
 		
-		<%= f.button :submit %>
-	<% end %>
+		<%= f.select :category, list %>
+	</div>
+	<div class="field">
+		<%= f.label "When did this happen?" %><br />
+		<%= f.date_select :event_date %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Submit" %>
+	</div>
+<% end %>

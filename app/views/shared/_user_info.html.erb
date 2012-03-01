@@ -1,8 +1,4 @@
-<div class="user_info">
-	<a href="<%= user_path(current_user) %>">
-    <span class="user_name">
-		<%= current_user.name %><br />
-		<%= current_user.unit %><br />
-
-	</a>
-</div>
+<a href="<%= user_path(current_user) %>">
+	<%= current_user.name %><br />
+	<%= current_user.unit %><br />
+</a>

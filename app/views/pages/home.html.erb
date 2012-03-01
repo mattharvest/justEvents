@@ -1,20 +1,12 @@
 <% if signed_in? %>
-	<table class="front" summary="For signed-in users">
-		<tr>
-			<td class="main">
-				<h1 class="micropost">what's happened?</h1>
-				<%= render 'shared/micropost_form' %>
-				<%= render 'shared/feed' %>
-			</td>
-			<td class="sidebar round">
-				<%= render 'shared/user_info' %>
-			</td>
-		</tr>
-	</table>
+	<h1>what's happened?</h1>
+		<%= render 'shared/micropost_form' %>
+		<%= render 'shared/feed' %>
+		<%= render 'shared/user_info' %>
 <% else %>
-	<h1>justEvent</h1>
+	<h1>justEvents</h1>
 	<p>
-		justEvent, an event-logging tool for ASAs
+		justEvents, an event-logging tool for ASAs
 	</p>
 	<%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
 <% end %>

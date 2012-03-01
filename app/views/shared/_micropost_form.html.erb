@@ -59,11 +59,11 @@
 		<%= f.semantic_errors %>
 		<%= f.inputs do %>
 			<%= f.input :content, :label=>'What happened?' %>
-			<%= f.input :casenumber, :label=>'Casenumber?' %>
-			<%= f.input :adf, :label=>'Defense Attorney (lastname, firstname)' %>
-			<%= f.input :dob, :label=>dob_label, :as => :date, :start_year => Date.today.year-90 %>
+			<%= f.input :casenumber, :label=>'Case number?', :hint=>'CR..., CT..., JA..., etc.' %>
+			<%= f.input :adf, :label=>'Defense Attorney', :hint=> '(lastname, firstname)' %>
+			<%= f.input :dob, :label=>dob_label, :as => :date, :start_year => Date.today.year-90, :hint=>'mm/dd/yyyy' %>
 			<%= f.input :category, :label=>'Category?', :collection => list %>
-			<%= f.input :event_date, :label=>'When did this happen?', :as => :date %>
+			<%= f.input :event_date, :label=>'When did this happen?', :as => :date, :hint=>'mm/dd/yyyy' %>
 		<% end %>
 		<%= f.buttons do %>
 			<%= f.commit_button :submit => {:class => "primary"} %>

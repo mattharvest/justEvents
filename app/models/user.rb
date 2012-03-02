@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 							:length => { :within => 6..40 }
 	validates :registration_code, 	:presence => true,
 									:if => :valid_code?
+	
 	before_save :encrypt_password
 	
 	def valid_code?

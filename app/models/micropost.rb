@@ -1,12 +1,14 @@
 class Micropost < ActiveRecord::Base
-	
+
 	belongs_to :user
 	has_and_belongs_to_many :tags
 	
 	validates :content, :presence => true, :length => { :maximum => 255 }
 	validates :user_id, :presence => true	
 	validates :casenumber, :presence => true
-
+	
+	validates :dob, :presence => true
+	validates :event_date, :presence => true
 	
 	default_scope :order => 'microposts.created_at DESC'
 	

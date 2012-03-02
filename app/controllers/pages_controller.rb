@@ -28,6 +28,7 @@ class PagesController < ApplicationController
 	
 	def self_posts
 		@posts = Micropost.where("user_id=?", current_user.id)
+		@feed_items = current_user.feed
 	end
 
 	def help

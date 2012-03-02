@@ -1,4 +1,8 @@
-<h1>justEvents</h1>
-<p>
-Posts
-</p>
+<h1>Your posts</h1>
+<% if signed_in? %>
+		<%= render 'shared/feed' %>
+<% else %>
+	<h1>You're not logged in!"</h1>
+	Please log in or sign up.
+	<%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+<% end %>

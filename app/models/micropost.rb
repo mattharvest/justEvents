@@ -1,5 +1,4 @@
 class Micropost < ActiveRecord::Base
-	attr_accessible :content, :casenumber, :category, :event_date, :unit, :adf, :dob
 	
 	belongs_to :user
 	has_and_belongs_to_many :tags
@@ -7,13 +6,15 @@ class Micropost < ActiveRecord::Base
 	validates :content, :presence => true, :length => { :maximum => 255 }
 	validates :user_id, :presence => true	
 	validates :casenumber, :presence => true
-	validates :event_date, :presence => true
+
 	
 	default_scope :order => 'microposts.created_at DESC'
+	
 	
 	def description
 		casenumber.to_s+", "+unit.to_s+", "+category.to_s+", "+event_date.to_s
 	end
+	
 	
 	def tags_used
 		tempstring = "("+tags.count.to_s+" tags)"

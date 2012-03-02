@@ -55,17 +55,18 @@
 			list=circuit_categories.sort
 		end %>
 	
-	<%= semantic_form_for @micropost do |f| %>
-		<%= f.semantic_errors %>
-		<%= f.inputs do %>
-			<%= f.input :content, :label=>'What happened?' %>
-			<%= f.input :casenumber, :label=>'Case number?', :hint=>'CR..., CT..., JA..., etc.' %>
-			<%= f.input :adf, :label=>'Defense Attorney', :hint=> '(lastname, firstname)' %>
-			<%= f.input :dob, :label=>dob_label, :hint=>'mm/dd/yyyy' %>
-			<%= f.input :category, :label=>'Category?', :collection => list %>
-			<%= f.input :event_date, :label=>'When did this happen?', :hint=>'mm/dd/yyyy' %>
-		<% end %>
-		<%= f.actions do %>
-			<%= f.action(:submit) %>
-		<% end %>
+<%= semantic_form_for @micropost do |f| %>
+	<%= f.semantic_errors %>
+	<%= f.inputs do %>
+		<%= f.input :content, :label=>'What happened?' %>
+		<%= f.input :casenumber, :label=>'Case number?', :hint=>'CR..., CT..., JA..., etc.' %>
+		<%= f.input :adf, :label=>'Defense Attorney', :hint=> '(lastname, firstname)' %>
+		<%= f.input :dob, :as=>'string', :label=>dob_label, :hint=>'mm/dd/yyyy' %>
+		<%= f.input :event_date, :as=>'string', :label=>'Event date?', :hint=>'mm/dd/yyyy' %>
+		<%= f.input :category, :label=>'Category?', :collection => list %>
+		
 	<% end %>
+	<%= f.actions do %>
+		<%= f.action(:submit) %>
+	<% end %>
+<% end %>

@@ -1,3 +1,5 @@
 <% unless @feed_items.empty? %>
-	<p><%= render :partial => 'shared/feed_item', :collection => @feed_items %></p>
+	<table class="table table-striped">
+		<p><%= render :partial => 'shared/feed_item', :collection => @feed_items %></p>
+	</table>
 <% end %>

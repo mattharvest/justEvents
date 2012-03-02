@@ -7,6 +7,7 @@ class Micropost < ActiveRecord::Base
 	validates :content, :presence => true, :length => { :maximum => 255 }
 	validates :user_id, :presence => true	
 	validates :casenumber, :presence => true
+	validates :event_date, :presence => true
 	
 	default_scope :order => 'microposts.created_at DESC'
 	

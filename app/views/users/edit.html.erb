@@ -1,28 +1,34 @@
-<h1>Edit user</h1>
+<% units = {
+			'Grand Jury' => 'grand jury',
+			'Community Prosecution' => 'community prosecution',
+			'DV' => 'DV',
+			'Juvenile' => 'juvenile',
+			'District Court' => 'district',
+			'FTU' => 'FTU',
+			'Child Abuse and Sex' => 'child abuse and sex',
+			'Violent Crime' => 'violent crime',
+			'Motor Vehicle' => 'motor vehicle',
+			'Guns and Drugs' => 'guns and drugs',
+			'Homicide' => 'homicide',
+			'Post-Conviction' => 'postconviction',
+			'Special Prosecution' => 'special prosecution'
+			} %>
 
-<%= form_for(@user) do |f| %>
+<h1>Sign up</h1>
+
+<div class="well">
+<%= semantic_form_for(@user) do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>
-	<div class="field">
-		<%= f.label :name %><br />
-		<%= f.text_field :name %>
-	</div>
-	<div class="field">
-		<%= f.label :email %><br />
-		<%= f.text_field :email %>
-	</div>
-	<div class="field">
-		<%= f.label :unit %><br />
-		<%= f.text_field :unit %>
-	</div>
-	<div class="field">
-		<%= f.label :password %><br />
-		<%= f.text_field :password %>
-	</div>
-	<div class="field">
-		<%= f.label :password_confirmation, "Confirmation" %><br />
-		<%= f.text_field :password_confirmation %>
-	</div>
-	<div class="actions">
-		<%= f.submit "Update" %><br />
-	</div>
+	<%= f.inputs do %>
+		<%= f.input :name, :label=>'Name?' %>
+		<%= f.input :email, :label=>'Email?', :hint=>'This MUST match your county email address' %>
+		<%= f.input :unit, :label=>'Unit?', :collection => units %>
+		<%= f.input :password, :label=>'Password?' %>
+		<%= f.input :password_confirmation, :label=>'Confirm password' %>
+	<% end %>
+	<%= f.actions do %>
+		<%= f.action(:submit) %>
+	<% end %>
 <% end %>
+</div>
+

@@ -10,7 +10,6 @@
 						<div class="nav-collapse">
 							<ul class="nav">
 									<li class="active"><%= link_to "Home", root_path %></li>
-									<li><%= link_to "Help", help_path %></li>
 									<% if signed_in? %>
 										<li><%= link_to "Profile", current_user %></li>
 										<li><%= link_to "Edit", edit_user_path(current_user) %></li>

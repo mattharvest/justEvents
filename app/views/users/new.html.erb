@@ -1,17 +1,4 @@
-<h1>Sign up</h1>
-
-<%= form_for(@user) do |f| %>
-	<%= render 'shared/error_messages', :object => f.object %>
-	<div class="field">
-		<%= f.label :name %><br />
-		<%= f.text_field :name %>
-	</div>
-	<div class="field">
-		<%= f.label :email %><br />
-		<%= f.text_field :email %>
-	</div>
-	<div class="field">
-		<% units = {
+<% units = {
 			'Grand Jury' => 'grand jury',
 			'Community Prosecution' => 'community prosecution',
 			'DV' => 'DV',
@@ -26,18 +13,23 @@
 			'Post-Conviction' => 'postconviction',
 			'Special Prosecution' => 'special prosecution'
 			} %>
-		<%= f.label :unit %><br />
-		<%= f.select :unit, units.sort%>
-	</div>
-	<div class="field">
-		<%= f.label :password %><br />
-		<%= f.password_field :password %>
-	</div>
-	<div class="field">
-		<%= f.label :password_confirmation, "Confirmation" %><br />
-		<%= f.password_field :password_confirmation %>
-	</div>
-	<div class="actions">
-		<%= f.submit "Sign up" %>
-	</div>
+
+<h1>Sign up</h1>
+
+<div class="well">
+<%= semantic_form_for(@user) do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+	<%= f.inputs do %>
+		<%= f.input :name, :label=>'Name?' %>
+		<%= f.input :email, :label=>'Email?', :hint=>'This MUST match your county email address' %>
+		<%= f.input :unit, :label=>'Unit?', :collection => units %>
+		<%= f.input :password, :label=>'Password?' %>
+		<%= f.input :password_confirmation, :label=>'Confirm password' %>
+		<%= f.input :registration_code, :label=>'Registration Code' %>
+	<% end %>
+	<%= f.actions do %>
+		<%= f.action(:submit) %>
+	<% end %>
 <% end %>
+</div>
+

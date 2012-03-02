@@ -1,4 +1,3 @@
-<a href="<%= user_path(current_user) %>">
-	<%= current_user.name %><br />
-	<%= current_user.unit %><br />
-</a>
+
+<i class="icon-user"></i><%= link_to current_user.name, current_user %>
+<h6><%= current_user.unit %></h6>

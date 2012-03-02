@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 	attr_accessor :password
+	attr_accessor :registration_code
 	attr_accessible :name, :email, :password, :password_confirmation, :unit
 	
 	has_many :microposts, :dependent => :destroy
@@ -13,7 +14,13 @@ class User < ActiveRecord::Base
 	validates :password, 	:presence	=> true,
 							:confirmation => true,
 							:length => { :within => 6..40 }
+	validates :registration_code, 	:presence => true,
+									:if => :valid_code?
 	before_save :encrypt_password
+	
+	def valid_code?
+		registration_code=="mattharvest"
+	end
 	
 	def has_password?(submitted_password)
 		encrypted_password == encrypt(submitted_password)		

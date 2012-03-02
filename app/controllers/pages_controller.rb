@@ -41,7 +41,12 @@ class PagesController < ApplicationController
 	
 	def posts
 		@title = "Posts"
-		self_posts
+		if signed_in?
+			self_posts
+		else
+			@posts={}
+			@feed_items={}
+		end
 	end
 
 end

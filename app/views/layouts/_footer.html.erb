@@ -1,7 +1,8 @@
 <footer>
-    <ul>
-      <li><%= link_to "Help", help_path %></li>
-      <li><%= link_to "Contact", '#' %></li>
-	  <li><%= debug(params) %>
-    </ul>
+	<a class="btn" href="<%=help_path%>">Help</a>
+	<blockquote>
+		<small>
+		<%= debug(params) %>
+		</small>
+	</blockquote>
 </footer>

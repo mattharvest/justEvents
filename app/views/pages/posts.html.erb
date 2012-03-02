@@ -2,7 +2,10 @@
 <% if signed_in? %>
 		<%= render 'shared/feed' %>
 <% else %>
-	<h1>You're not logged in!"</h1>
-	Please log in or sign up.
-	<%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+	<div class="hero-unit">
+		<h1>You're not logged in!</h1>
+		<p>Please log in or sign up.</p>
+		<a class="btn btn-primary btn-large" href="<%= signup_path %>">Sign Up!</a>
+		<h6>This software is available only to Prince George's County ASAs.  If you are not on the whitelist, your signup will fail.  Contact ASA Bohrer with any questions.</h6>
+	</div>
 <% end %>

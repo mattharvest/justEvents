@@ -8,7 +8,7 @@
 			'continuance' => 'continuance',
 			'writ' => 'writ',
 			'merits hearing' => 'trial',
-			'plea deal' => 'plea',
+			'plea deal (incl. stet)' => 'plea',
 			'decline to prosecute' => 'dtp',
 			'acquittal' => 'acquittal',
 			'dismissal' => 'dismissal'
@@ -16,9 +16,12 @@
 		grandjury_categories = {
 			'screening' => 'screening',
 			'charged' => 'charged',
-			'returned for investigation' => 'RFI'
+			'returned for investigation' => 'RFI',
+			'declined to prosecute' => 'dtp'
 			}
 		circuit_categories = {
+			'preliminary hearing'=>'ph',
+			'sent to district court'=>'dcwl',
 			'screening'=>'screening',
 			'trial'=>'trial',
 			'plea deal (incl. stet)'=>'plea',
@@ -29,7 +32,8 @@
 			'Broadcast Notice'=>'notice'
 			}
 		community_categories = {
-			'community need identified'=>'community need identified'
+			'community need identified'=>'community need identified',
+			'suspect assigned to attorney'=>'assigned'
 			}
 		postconviction_categories = {
 			'corum nobis' => 'corum nobis',
@@ -62,8 +66,8 @@
 			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3}, :label=>'What happened?' %>
 			<%= f.input :casenumber, :label=>'Case number?', :hint=>'CR..., CT..., JA..., etc.' %>
 			<%= f.input :adf, :label=>'Defense Attorney', :hint=> '(lastname, firstname)' %>
-			<%= f.input :dob, :as=>'string', :label=>dob_label, :hint=>'mm/dd/yyyy' %>
-			<%= f.input :event_date, :as=>'string', :label=>'Event date?', :hint=>'mm/dd/yyyy' %>
+			<%= f.input :dob, :as=>'string', :label=>dob_label, :hint=>'Month Day, Year' %>
+			<%= f.input :event_date, :as=>'string', :label=>'Event date?', :hint=>'Month Day, Year' %>
 			<%= f.input :category, :label=>'Category?', :collection => list %>
 		<% end %>
 		<%= f.actions do %>

@@ -1,4 +1,6 @@
+require 'csv'
 class PagesController < ApplicationController
+
 	def home
 		@title="Home"
 		if signed_in?
@@ -16,6 +18,21 @@ class PagesController < ApplicationController
 		else
 			self_posts
 		end
+	end
+	
+	def export_to_csv
+		#NEEDS TO BE EXPANDED TO TAKE DATE RANGE AS PARAMETERS
+		all_posts
+		csv_string = CSV.generate do |c|
+			c << ["user", "casenumber", "content", "event_date"]
+			@posts.each do |post|
+				c << [post.user.name, post.casenumber, post.content, post.event_date.to_s]
+			end
+		end
+		
+		send_data csv_string,
+			:type => 'text/csv; charset=iso8859-1; header=present',
+			:disposition => 'attachment; filename=posts.csv'
 	end
 	
 	def all_posts

@@ -13,6 +13,7 @@ JustEvents::Application.routes.draw do
   match '/posts', :to => 'pages#posts'
   match '/signup', :to => 'users#new' 
   match '/reports', :to => 'pages#reports'
+  match '/csv', :to => 'pages#export_to_csv'
   root :to => 'pages#home'
 
   # The priority is based upon order of creation:

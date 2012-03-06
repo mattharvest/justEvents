@@ -66,11 +66,11 @@
 	<%= semantic_form_for @micropost do |f| %>
 		<%= f.semantic_errors %>
 		<%= f.inputs do %>
-			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3}, :label=>'What happened?', :hint=>'[respondent name], [text of event]'%>
-			<%= f.input :casenumber, :label=>'Case number?', :hint=>'CR..., CT..., JA..., etc.' %>
-			<%= f.input :adf, :label=>'Defense Attorney', :hint=> '(lastname, firstname)' %>
-			<%= f.input :dob, :as=>'string', :label=>dob_label, :hint=>'Month Day, Year' %>
-			<%= f.input :event_date, :as=>'string', :label=>'Event date?', :hint=>'Month Day, Year' %>
+			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[respondent name], [text of event]'}, :label=>'What happened?'%>
+			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
+			<%= f.input :adf, :label=>'Defense Attorney', :placeholder=> 'Lastname, Firstname' %>
+			<%= f.input :dob, :as=>'string', :label=>dob_label, :placeholder=>'Month Day, Year' %>
+			<%= f.input :event_date, :as=>'string', :label=>'Event date?', :placeholder=>'Month Day, Year' %>
 			<%= f.input :category, :label=>'Category?', :collection => list %>
 		<% end %>
 		<%= f.actions do %>

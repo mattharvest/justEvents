@@ -29,7 +29,10 @@
 			'acquittal'=>'acquittal',
 			'bench warrant'=>'bench warrant',
 			'other'=>'other',
-			'Broadcast Notice'=>'notice'
+			'Broadcast Notice'=>'notice',
+			'NCIC'=>'NCIC',
+			'search warrant'=>'search warrant',
+			'subpoeana issued'=>'subpoena issued'
 			}
 		community_categories = {
 			'community need identified'=>'community need identified',
@@ -48,11 +51,11 @@
 		if current_user.unit=="juvenile"
 			list=juvenile_categories.sort
 		elsif current_user.unit=="grand jury"
-			list=grandjury_categories.sort
+			list=grandjury_categories.merge(circuit_categories).sort
 		elsif current_user.unit=="community prosecution"
 			list=community_categories.merge(circuit_categories).sort
 		elsif current_user.unit=="post-conviction"
-			list=postconviction_categories.sort
+			list=postconviction_categories.merge(circuit_categories).sort
 		elsif current_user.unit=="special prosecution"
 			list=specialprosecution_categories.merge(circuit_categories).sort
 		else

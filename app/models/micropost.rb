@@ -31,15 +31,33 @@ class Micropost < ActiveRecord::Base
 	
 	def report_info
 		tempstring = ""
+		if user.name.nil?
+			user.name='nil'
+		end
+		if user.email.nil?
+			user.email='nil'
+		end
+		if casenumber.nil?
+			casenumber='nil'
+		end
+		if adf.nil?
+			adf="nil"
+		end
+		if content.nil?
+			content='nil'
+		end
+		if unit.nil?
+			unit='nil'
+		end
+		if category.nil?
+			category='nil'
+		end
 		if !event_date.nil?
 			tempstring += event_date.to_s
 		end
 		tempstring +=" | "+user.name+" | "+user.email+" | "+casenumber.to_s+" | "
 		if !dob.nil?
 			tempstring += dob.to_s + " | "
-		end
-		if adf.nil?
-			adf=""
 		end
 		tempstring+=adf+" | "+content+" | "+unit+" | "+category+" | "+created_at.to_s
 		tempstring

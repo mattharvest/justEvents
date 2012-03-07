@@ -11,9 +11,6 @@ class Micropost < ActiveRecord::Base
 	validates :casenumber, :presence => true,
 		:format   => { :with => casenum_regex }
 	
-	validates :dob, :presence => true
-	validates :event_date, :presence => true
-	
 	default_scope :order => 'microposts.created_at DESC'
 	
 	def description
@@ -33,6 +30,18 @@ class Micropost < ActiveRecord::Base
 	end
 	
 	def report_info
-		event_date.to_s+" | "+user.name+" | "+user.email+" | "+casenumber.to_s+" | "+dob.to_s+" | "+adf+" | "+content+" | "+unit.to_s+" | "+category.to_s+" | "+created_at.to_s
+		tempstring = ""
+		if !event_date.nil?
+			tempstring += event_date.to_s
+		end
+		tempstring +=" | "+user.name+" | "+user.email+" | "+casenumber.to_s+" | "
+		if !dob.nil?
+			tempstring += dob.to_s + " | "
+		end
+		if adf.nil?
+			adf=""
+		end
+		tempstring+=adf+" | "+content+" | "+unit+" | "+category+" | "+created_at.to_s
+		tempstring
 	end
 end  

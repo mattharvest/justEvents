@@ -37,9 +37,7 @@ class Micropost < ActiveRecord::Base
 		if user.email.nil?
 			user.email='nil'
 		end
-		if casenumber.nil?
-			casenumber='CR0E00000000'
-		end
+
 		if adf.nil?
 			adf="nil"
 		end

@@ -6,7 +6,7 @@
 	</p>
 	<small>	<%= link_to feed_item.user.name, feed_item.user %></small>
 	<small> Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
-		<% if current_user?(feed_item.user) %>
+		<% if current_user?(feed_item.user) || current_user.admin? %>
 		<%= link_to "delete", feed_item, 	:method => :delete, 
 											:confirm => "You sure?", 
 											:title => feed_item.report_info%>

@@ -72,6 +72,9 @@ class PagesController < ApplicationController
 			@posts={}
 			@feed_items={}
 		end
+		if current_user.admin?
+			all_posts
+		end
 	end
 
 end

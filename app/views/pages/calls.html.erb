@@ -1,0 +1,26 @@
+<% if signed_in? %>
+	<div class="container-fluid">
+		<h1>What's the call?</h1>
+		<div class="row-fluid">
+			<div class="span10">
+				<%= render 'shared/call_form' %>
+			</div>
+			<div class="span2">
+				<%= render 'shared/user_info' %>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<%= render 'shared/feed' %>
+		</div>
+	<div>
+<% else %>
+	<div class="hero-unit">
+		<h1>justEvents</h1>
+		<p>
+			justEvents, an event-logging tool for ASAs
+		</p>
+		<a class="btn btn-primary btn-large" href="<%= signup_path %>">Sign Up!</a>
+		<h6>This software is available only to Prince George's County SAO employees.  If you are not on the whitelist, your signup will fail.  Contact ASA Bohrer with any questions.</h6>
+	</div>
+<% end %>
+<div>

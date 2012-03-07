@@ -48,15 +48,15 @@
 			'suspect suggested'=>'new suspect',
 			'suspect rejected'=>'suspect rejected'
 			}
-		if current_user.unit=="juvenile"
+		if current_user.unit.eql?("juvenile")
 			list=juvenile_categories.sort
-		elsif current_user.unit=="grand jury"
+		elsif current_user.unit.eql?("grand jury")
 			list=grandjury_categories.merge(circuit_categories).sort
-		elsif current_user.unit=="community prosecution"
+		elsif current_user.unit.eql?("community prosecution")
 			list=community_categories.merge(circuit_categories).sort
-		elsif current_user.unit=="post-conviction"
+		elsif current_user.unit.eql?("postconviction")
 			list=postconviction_categories.merge(circuit_categories).sort
-		elsif current_user.unit=="special prosecution"
+		elsif current_user.unit.eql?("special prosecution")
 			list=specialprosecution_categories.merge(circuit_categories).sort
 		else
 			list=circuit_categories.sort
@@ -69,8 +69,8 @@
 			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[respondent name], [text of event]'}, :label=>'What happened?'%>
 			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
 			<%= f.input :adf, :label=>'Defense Attorney', :placeholder=> 'Lastname, Firstname' %>
-			<%= f.input :dob, :as=>'string', :label=>dob_label, :placeholder=>'Month Day, Year' %>
-			<%= f.input :event_date, :as=>'string', :label=>'Event date?', :placeholder=>'Month Day, Year' %>
+			<%= f.input :dob, :as=>'string', :label=>dob_label, :placeholder=>'DD/MM/YYYY' %>
+			<%= f.input :event_date, :as=>'string', :label=>'Event date?', :placeholder=>'DD/MM/YYYY' %>
 			<%= f.input :category, :label=>'Category?', :collection => list %>
 		<% end %>
 		<%= f.actions do %>

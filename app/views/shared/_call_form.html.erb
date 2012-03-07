@@ -1,0 +1,13 @@
+<div class="well">	
+	<%= semantic_form_for @micropost do |f| %>
+		<%= f.semantic_errors %>
+		<%= f.inputs do %>
+			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[phone number], [content of message]'}, :label=>'What happened?'%>
+			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
+			<%= f.input :category, :as=>'hidden', :input_html => { :value=>'phonecall' } %>
+		<% end %>
+		<%= f.actions do %>
+			<%= f.action(:submit) %>
+		<% end %>
+	<% end %>
+</div>

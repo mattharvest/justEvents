@@ -20,6 +20,14 @@ class PagesController < ApplicationController
 		end
 	end
 	
+	def calls
+		@title="Calls"
+		if signed_in?
+			@micropost = Micropost.new
+			@feed_items = current_user.feed
+		end
+	end
+	
 	def export_to_csv
 		#NEEDS TO BE EXPANDED TO TAKE DATE RANGE AS PARAMETERS
 		all_posts

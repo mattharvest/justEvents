@@ -7,10 +7,10 @@ class MicropostsController < ApplicationController
 	
 	def create
 		@micropost = current_user.microposts.build(params[:micropost])
+		@micropost.dob = Date.strptime(@micropost.dob.to_s, "%d/%m/%Y")
+		@micropost.event_date = Date.strptime(@micropost.event_date.to_s, "%d/%m/%Y")
 		@micropost.unit = current_user.unit
 		if @micropost.save
-			@micropost.tags.build
-			@micropost.tags.create(:name=>"test")
 			flash[:success] = "Micropost created"
 			redirect_to root_path
 		else

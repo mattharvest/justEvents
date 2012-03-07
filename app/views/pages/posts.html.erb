@@ -1,6 +1,10 @@
 <h1>Your posts</h1>
 <% if signed_in? %>
-		<%= render 'shared/feed' %>
+		<% unless @feed_items.empty? %>
+			<table class="table table-striped">
+				<p><%= render :partial => 'shared/feed_item', :collection => Micropost.find(:all) %></p>
+			</table>
+<% end %>
 <% else %>
 	<div class="hero-unit">
 		<h1>You're not logged in!</h1>

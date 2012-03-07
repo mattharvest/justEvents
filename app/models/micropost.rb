@@ -53,13 +53,15 @@ class Micropost < ActiveRecord::Base
 			category='nil'
 		end
 		if !event_date.nil?
-			tempstring += event_date.to_s
+			eventstring = event_date.to_s
+		else
+			eventstring = "nil |"
 		end
-		tempstring +=" | "+user.name+" | "+user.email+" | "+casenumber.to_s+" | "
 		if !dob.nil?
-			tempstring += dob.to_s + " | "
+			dobstring = dob.to_s + " | "
+		else
+			dobstring="nil |"
 		end
-		tempstring+=adf+" | "+content+" | "+unit+" | "+category+" | "+created_at.to_s
-		tempstring
+		eventstring+user.name+" | "+user.email+" | "+casenumber+" | "+ adf+" | "+content+" | "+unit+" | "+category+" | "+created_at.to_s
 	end
 end  

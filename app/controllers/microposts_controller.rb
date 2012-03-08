@@ -16,7 +16,8 @@ class MicropostsController < ApplicationController
 		@micropost.unit = current_user.unit
 		if @micropost.save
 			flash[:success] = "Micropost created"
-			redirect_to root_path
+			#always go to where you were, so the different Micropost forms dont get confusing
+			redirect_to :back
 		else
 			@feed_items=[]
 			render 'pages/home'

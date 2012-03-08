@@ -9,22 +9,40 @@
 					<a class="brand" href="#">justEvents</a>
 						<div class="nav-collapse">
 							<ul class="nav">
-									<li class="active"><%= link_to "Home", root_path %></li>
-									<% if signed_in? %>
-										<li><%= link_to "Profile", current_user %></li>
-										<li><%= link_to "Edit", edit_user_path(current_user) %></li>
-										<li><%= link_to "Posts", posts_path %></li>
-										<li><%= link_to "Users", users_path %></li>
-										<li><%= link_to "Sign Out", signout_path, :method => :delete %></li>
-										<% if current_user.admin? %>
-											<li><%= link_to "Reports", reports_path %></li>
-											<% end %>
-									<% else %>
-										<li><%= link_to "Sign in", signin_path %></li>
-									<% end %>
+								<li class="active"><%= link_to "New Post", root_path %></li>
+								<% if signed_in? %>
+									<li><%= link_to "Your Posts", posts_path %></li>
+									<li><%= link_to "Calls", calls_path %></li>
+									<li></li>
+									<li class="dropdown" id="UserMenu">
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">User</a>
+										<ul class="dropdown-menu">
+											<li><%= link_to "Profile", current_user %></li>
+											<li><%= link_to "Edit", edit_user_path(current_user) %></li>
+										</ul>
+								</li>
+									<li><%= link_to "Sign Out", signout_path, :method => :delete %></li>
+									<% if current_user.admin? %>
+										<li class="dropdown" id="AdminMenu">
+											<a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin</a>
+											<ul class="dropdown-menu">
+												<li><%= link_to "Users", users_path %></li>
+												<li><%= link_to "Reports", reports_path %></li>
+											</ul>
+										</li>
+										<% end %>
+								<% else %>
+									<li><%= link_to "Sign in", signin_path %></li>
+								<% end %>
+
 							</ul>
 						</div><!--/.nav-collapse -->
 				</div>
 			</div>
-		</div>							
+		</div>
+<script>
+	$(function () {
+		$('.dropdown-toggle').dropdown()
+		})
+</script>
 

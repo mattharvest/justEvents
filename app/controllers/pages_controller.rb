@@ -11,12 +11,10 @@ class PagesController < ApplicationController
 	
 	def reports
 		@title="Reports"
-		if signed_in?&&!current_user.admin?
-			unit_posts
-		elsif signed_in?
-			all_posts
-		else
-			self_posts
+		if signed_in?
+			@posts=Micropost.find(:all)
+			@unit_posts = Micropost.where("unit=?", current_user.unit)
+			@self_posts = Micropost.where("user_id=?", current_user.id)
 		end
 	end
 	
@@ -43,18 +41,6 @@ class PagesController < ApplicationController
 			:disposition => 'attachment; filename=posts.csv'
 	end
 	
-	def all_posts
-		@posts = Micropost.find(:all)
-	end
-	
-	def unit_posts
-		@posts = Micropost.where("unit=?", current_user.unit)
-	end
-	
-	def self_posts
-		@posts = Micropost.where("user_id=?", current_user.id)
-		@feed_items = current_user.feed
-	end
 
 	def help
 		@title = "Help"
@@ -67,13 +53,9 @@ class PagesController < ApplicationController
 	def posts
 		@title = "Posts"
 		if signed_in?
-			self_posts
-		else
-			@posts={}
-			@feed_items={}
-		end
-		if current_user.admin?
-			all_posts
+			@posts=Micropost.find(:all)
+			@unit_posts = Micropost.where("unit=?", current_user.unit)
+			@self_posts = Micropost.where("user_id=?", current_user.id)
 		end
 	end
 

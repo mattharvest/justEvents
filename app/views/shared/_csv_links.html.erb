@@ -1,0 +1,26 @@
+<% if signed_in? %>
+	<div class="hero-unit">
+		<h1>CSV (comma separated values)</h1>
+		<p>These links will generate CSV files of the appropriate range.  Generally, you should be using these to link with Excel, but they are also available for JD.  Only links for your unit are available.</p>
+	
+	<% if (current_user.name.casecmp("chief")<0)&&(!current_user.admin?) %>
+		<h1> You are neither chief nor administrator.  These links are not for you.</h1>
+	<% else %>
+		<ul>
+			<% if current_user.admin? %>
+				<li><i class="icon-download"></i><%= link_to 'All Posts', csv_path(:scope=>"basic") %></li>
+			<% end %>
+			<li><i class="icon-download"></i><%= link_to 'All posts in your unit', csv_path(:scope=>"unit"), :targetunit=>current_user.unit %></li>
+			<li><i class="icon-download"></i><%= link_to 'Posts in your unit for the last week', csv_path(:scope=>"dateunit", :targetunit=>current_user.unit, :start=>(Date.today-7).to_s, :end=>Date.today.to_s) %></li>
+		</ul>
+	<% end %>
+	</div>
+	
+<% else %>
+	<div class="hero-unit">
+		<h1>You're not logged in!</h1>
+		<p>Please log in or sign up.</p>
+		<a class="btn btn-primary btn-large" href="<%= signup_path %>">Sign Up!</a>
+		<h6>This software is available only to Prince George's County ASAs.  If you are not on the whitelist, your signup will fail.  Contact ASA Bohrer with any questions.</h6>
+	</div>
+<% end %>

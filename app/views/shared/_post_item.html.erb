@@ -10,7 +10,7 @@
 	<td>	<%= post_item.created_at.to_s %> 	</td>
 	<td>	<% if current_user?(post_item.user) || current_user.admin? %>
 				<%= link_to "delete", post_item, 	:method => :delete, 
-													:confirm => "You sure?", 
+													:confirm => "You sure?"
 													%>
 			<% end %>							</td>
 </tr>

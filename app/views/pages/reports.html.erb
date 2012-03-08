@@ -1,15 +1,19 @@
 <h1>Reports</h1>
 <ul class="nav nav-tabs">
-	<li><a href="basic" data-toggle="tab">Basic</a></li>
-	<li><a href="unit" data-toggle="tab">Your Unit</a></li>
+	<li><a href="#basic" data-toggle="tab">Basic</a></li>
+	<li><a href="#unit" data-toggle="tab">Your Unit</a></li>
+	<li><a href="#csv" data-toggle="tab">CSV files</a></li>
 </ul>
 
 <div class="tab-content">
-	<div class="tab-pane active" id="basic">
+	<div class="tab-pane" id="basic">
 		<%= render 'shared/basic_report' %>
 	</div>
 	<div class="tab-pane" id="unit">
 		<%= render 'shared/unit_report' %>
+	</div>
+	<div class="tab-pane" id="csv">
+		<%= render 'shared/csv_links' %>
 	</div>
 </div>
 

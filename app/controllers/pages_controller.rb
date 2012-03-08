@@ -27,9 +27,24 @@ class PagesController < ApplicationController
 	end
 	
 	def export_to_csv
-		#NEEDS TO BE EXPANDED TO TAKE DATE RANGE AS PARAMETERS
-		all_posts
 		csv_string = CSV.generate do |c|
+		scope=params[:scope]	
+		if scope.eql?("unit")
+			@posts = Micropost.where("unit=?", params[:targetunit])
+		elsif scope=="basic"
+			@posts = Micropost.find(:all)	
+		elsif scope=="date"
+			#expecting 'start' and 'end' in yyyy-mm-dd format
+			startdate = Date.strptime(params[:start], "%Y-%m-%d")
+			enddate = Date.strptime(params[:end], "%Y-%m-%d")
+			@posts = Micropost.find(:all, :conditions => ["event_date > ? AND event_date < ?", startdate, enddate])
+		elsif scope=="dateunit"
+			startdate = Date.strptime(params[:start], "%Y-%m-%d")
+			enddate = Date.strptime(params[:end], "%Y-%m-%d")
+			@posts = Micropost.all(:conditions => {
+				:event_date => startdate..enddate, :unit=> params[:targetunit]})
+		end
+		
 			c << ["user", "casenumber", "content", "event_date"]
 			@posts.each do |post|
 				c << [post.user.name, post.casenumber, post.content, post.event_date.to_s]

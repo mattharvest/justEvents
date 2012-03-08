@@ -10,8 +10,8 @@
 			<% if current_user.admin? %>
 				<li><i class="icon-download"></i><%= link_to 'All Posts', csv_path(:scope=>"basic") %></li>
 			<% end %>
-			<li><i class="icon-download"></i><%= link_to 'All posts in your unit', csv_path(:scope=>"unit"), :targetunit=>current_user.unit %></li>
-			<li><i class="icon-download"></i><%= link_to 'Posts in your unit for the last week', csv_path(:scope=>"dateunit", :targetunit=>current_user.unit, :start=>(Date.today-7).to_s, :end=>Date.today.to_s) %></li>
+			<li><i class="icon-download"></i><%= link_to 'All posts in your unit', csv_path(:scope=>"unit", :targetunit=>current_user.unit) %></li>
+			<li><i class="icon-download"></i><%= link_to 'Posts in your unit for the last week', csv_path(:scope=>"dateunit", :targetunit=>current_user.unit, :start=>(Date.today-7).to_s(:format='%Y-%m-%d'), :end=>Date.today.to_s(:format='%Y-%m-%d')) %></li>
 		</ul>
 	<% end %>
 	</div>

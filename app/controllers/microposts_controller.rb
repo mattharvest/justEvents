@@ -27,16 +27,20 @@ class MicropostsController < ApplicationController
 	def destroy
 		if @micropost.destroy
 			flash[:notice] = "Micropost destroyed"
-			redirect_back_or root_path
+			redirect_to :back
 		else
 			flash[:notice] = "Micropost not destroyed"
-			redirect_to root_path
+			redirect_to :back
 		end
 	end
 	
 	private
 		def authorized_user
 			@micropost = current_user.microposts.find_by_id(params[:id])
-			redirect_to root_path if @micropost.nil?
+			if !current_user.admin? 
+				redirect_to root_path if @micropost.nil?
+			else
+				@micropost = Micropost.find_by_id(params[:id])
+			end
 		end
 end

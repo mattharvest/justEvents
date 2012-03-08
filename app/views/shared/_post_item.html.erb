@@ -1,10 +1,11 @@
 <tr>
 	<td>	<%= post_item.event_date.to_s %> 	</td>
-	<td>	<%= post_item.user.name %> 		</td>
+	<td>	<%= post_item.user.name %> 			</td>
+	<td>	<%= post_item.user.unit %>			</td>
 	<td>	<%= post_item.user.email %> 		</td>
-	<td>	<%= post_item.dob.to_s %> 		</td>
+	<td>	<%= post_item.dob.to_s %> 			</td>
 	<td>	<%= post_item.adf %> 				</td>
-	<td>	<%= post_item.category %> 		</td>
+	<td>	<%= post_item.category %> 			</td>
 	<td>	<%= post_item.content %> 			</td>
 	<td>	<%= post_item.created_at.to_s %> 	</td>
 	<td>	<% if current_user?(post_item.user) || current_user.admin? %>

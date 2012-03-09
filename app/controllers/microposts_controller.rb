@@ -8,10 +8,10 @@ class MicropostsController < ApplicationController
 	def create
 		@micropost = current_user.microposts.build(params[:micropost])
 		if !@micropost.dob.nil?
-			@micropost.dob = Date.strptime(@micropost.dob.to_s, "%d/%m/%Y")
+			@micropost.dob = Date.parse(params[:micropost][:dob])
 		end
 		if !@micropost.event_date.nil?
-			@micropost.event_date = @micropost.created_at
+			@micropost.event_date = Date.parse(params[:micropost][:event_date])
 		end
 		@micropost.unit = current_user.unit
 		if @micropost.save

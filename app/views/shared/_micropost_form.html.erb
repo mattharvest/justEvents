@@ -68,7 +68,16 @@
 		<%= f.inputs do %>
 			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[respondent name], [text of event]'}, :label=>'What happened?'%>
 			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
-			<%= f.input :adf, :label=>'Defense Attorney', :placeholder=> 'Lastname, Firstname' %>
+			
+			<%= f.input :adf, 
+				:label=>'Defense Attorney', 
+				:as=>'string',
+				:placeholder=> 'Lastname, Firstname', 
+				:input_html => { 
+					:provide => 'typeahead',
+
+				} %>
+			
 			<%= f.input :dob, :as=>'string', :label=>dob_label, :placeholder=>'DD/MM/YYYY' %>
 			<%= f.input :event_date, :as=>'string', :label=>'Event date?', :placeholder=>'DD/MM/YYYY' %>
 			<%= f.input :category, :label=>'Category?', :collection => list %>
@@ -78,3 +87,13 @@
 		<% end %>
 	<% end %>
 </div>
+
+<script>
+	$(function () {
+		$(".typeahead").typeahead(
+			{
+				source: ["one", "two", "three"],
+				items: 3
+			});
+		})
+</script>

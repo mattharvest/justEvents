@@ -5,11 +5,11 @@ class Casefile < ActiveRecord::Base
 	
 	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]/i
 	
-	validates :CCN, :format => { :with => casenum_regex }
-	validates :CR, :format => { :with => casenum_regex }
-	validates :CT, :format => { :with => casenum_regex }
-	validates :CJ, :format => { :with => casenum_regex }
-	validates :CA, :format => { :with => casenum_regex }
+	#validates :CCN, :format => { :with => casenum_regex }
+	#validates :CR, :format => { :with => casenum_regex }
+	#validates :CT, :format => { :with => casenum_regex }
+	#validates :CJ, :format => { :with => casenum_regex }
+	#validates :CA, :format => { :with => casenum_regex }
 	
 	
 	def casenumber?(submitted_casenumber)
@@ -21,25 +21,7 @@ class Casefile < ActiveRecord::Base
 	end
 	
 	def summary
-		returnstring=""
-		if(!CCN.nil?) 
-			returnstring+="CCN: "+CCN
-		end
-		if(!CR.nil?) 
-			returnstring+="CR: "+CR
-		end
-		if(!CT.nil?) 
-			returnstring+="CT: "+CT
-		end
-		if(!CJ.nil?) 
-			returnstring+="CJ: "+CJ
-		end
-		if(!CA.nil?) 
-			returnstring+="CA: "+CA
-		end
-		if(!SAO.nil?) 
-			returnstring+="SAO: "+SAO
-		end
+		returnstring="CR: "+self.CR.to_s
 	end
 		
 end

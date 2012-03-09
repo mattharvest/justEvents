@@ -14,9 +14,7 @@
 	</head>
 	<body>
 		<%= render 'layouts/header' %>
-		<% flash.each do |key, value| %>
-          <div class="flash <%= key %>"><%= value %></div>
-        <% end %>
+		<%= render 'layouts/messages' %>
 		<%= yield %>
 		<%= render 'layouts/footer' %>
 	</body>

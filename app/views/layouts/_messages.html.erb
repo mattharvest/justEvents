@@ -1,0 +1,14 @@
+		<% flash.each do |key, value| %>
+			<% if key.to_s.include?("success") %>
+				<div class="alert alert-success">
+			<% elsif key.to_s.include?("failure") %>
+				<div class="alert alert-error">
+			<% elsif key.to_s.include?("notice") %>
+				<div class="alert">
+			<% else %>
+				<div class="alert alert-info span2">
+					<%= key %>
+			<% end %>
+					<%= value %>
+				</div>
+        <% end %>

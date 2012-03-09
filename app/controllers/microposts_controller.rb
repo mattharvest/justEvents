@@ -16,30 +16,29 @@ class MicropostsController < ApplicationController
 		@micropost.unit = current_user.unit
 		
 		stub = @micropost.casenumber[0..1]
-		casefile = Casefile.Build(:CR=>@micropost.casenumber)
-		
+
 		if stub=="CC"
-			casefile = Casefile.find_or_create_by_CCN(@micropost.casenumber)
+			@casefile = Casefile.find_or_create_by_CCN(@micropost.casenumber)
 		elsif stub=="CR"
-			casefile = Casefile.find_or_create_by_CR(@micropost.casenumber)
+			@casefile = Casefile.find_or_create_by_CR(@micropost.casenumber)
 		elsif stub=="CT"
-			casefile = Casefile.find_or_create_by_CT(@micropost.casenumber)
+			@casefile = Casefile.find_or_create_by_CT(@micropost.casenumber)
 		elsif stub=="CJ"
-			casefile = Casefile.find_or_create_by_CJ(@micropost.casenumber)
+			@casefile = Casefile.find_or_create_by_CJ(@micropost.casenumber)
 		elsif stub=="CA"
-			casefile = Casefile.find_or_create_by_CA(@micropost.casenumber)
+			@casefile = Casefile.find_or_create_by_CA(@micropost.casenumber)
 		elsif stub=="SAO"
-			casefile = Casefile.find_or_create_by_SAO(@micropost.casenumber)
+			@casefile = Casefile.find_or_create_by_SAO(@micropost.casenumber)
 		end
 		
-		if casefile.save
-			flash[:success]="Casefile created/saved"
+		if @casefile.save
+			flash[:casefilesuccess]="Casefile created/saved"
 		else
-			flash[:failure]="Casefile not created"
+			flash[:casefilefailure]="Casefile not created, "+casefile.CR
 		end
 		
 		if @micropost.save
-			flash[:success] = "Micropost created"
+			flash[:micropostsuccess]= "Micropost created"
 			#always go to where you were, so the different Micropost forms dont get confusing
 			redirect_to :back
 		else

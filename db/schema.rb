@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120229205549) do
+ActiveRecord::Schema.define(:version => 20120309184933) do
+
+  create_table "casefiles", :force => true do |t|
+    t.string   "CCN"
+    t.string   "CR"
+    t.string   "CT"
+    t.string   "CJ"
+    t.string   "CA"
+    t.string   "SAO"
+    t.string   "defendant"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "microposts", :force => true do |t|
     t.string   "content"

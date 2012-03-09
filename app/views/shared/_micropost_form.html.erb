@@ -75,7 +75,8 @@
 				:placeholder=> 'Lastname, Firstname', 
 				:input_html => { 
 					:provide => 'typeahead',
-
+					:source => '["Jones, Debra","Gupta, Kavita", "Johnson, Lyvette", "Josendale, Erin", "Saccarelli, Gale", "Whitehall, Beatrix", "Wilson, Monica", "Peek, Leslie", "Abdullah, Raouf",	"Edwards, Christal", "Okeke, Loretta", "Powell, Greg", "Pride-Hebron, Kelly", "Shelton, Bill", "Uba-Okarafor, Vivent", "Mungin, Vaughn", "Handy, Ronald", "Ucheomunu, Andrew", "Moore, Sonya", "Azari, Omid"]',
+					:data-items=>20
 				} %>
 			
 			<%= f.input :dob, :as=>'string', :label=>dob_label, :placeholder=>'DD/MM/YYYY' %>

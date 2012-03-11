@@ -4,7 +4,7 @@ JustEvents::Application.routes.draw do
   get "sessions/new"
 
   resources :users
-  resources :casefiles
+  resources :casefiles, :only => [:create, :destroy]
   resources :sessions, :only => [:new, :create, :destroy]
   resources :microposts, :only => [:create, :destroy]
   resources :tags, :only => [:create, :destroy]

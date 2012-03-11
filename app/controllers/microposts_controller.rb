@@ -18,23 +18,31 @@ class MicropostsController < ApplicationController
 		stub = @micropost.casenumber[0..1]
 
 		if stub=="CC"
-			@casefile = Casefile.find_or_create_by_CCN(@micropost.casenumber)
+			@casefile = Casefile.find_or_create_by_ccn(@micropost.casenumber)
 		elsif stub=="CR"
-			@casefile = Casefile.find_or_create_by_CR(@micropost.casenumber)
+			@casefile = Casefile.find_or_create_by_cr(@micropost.casenumber)
 		elsif stub=="CT"
-			@casefile = Casefile.find_or_create_by_CT(@micropost.casenumber)
+			@casefile = Casefile.find_or_create_by_ct(@micropost.casenumber)
 		elsif stub=="CJ"
-			@casefile = Casefile.find_or_create_by_CJ(@micropost.casenumber)
+			@casefile = Casefile.find_or_create_by_cj(@micropost.casenumber)
 		elsif stub=="CA"
-			@casefile = Casefile.find_or_create_by_CA(@micropost.casenumber)
-		elsif stub=="SAO"
-			@casefile = Casefile.find_or_create_by_SAO(@micropost.casenumber)
+			@casefile = Casefile.find_or_create_by_ca(@micropost.casenumber)
+		elsif stub=="SA"
+			@casefile = Casefile.find_or_create_by_sao(@micropost.casenumber)
+		elsif stub=="JA"
+			@casefile = Casefile.find_or_create_by_ja(@micropost.casenumber)
+		end
+		
+		if @micropost.defendant.nil?
+			@casefile.defendant="Doe, John"
+		else
+			@casefile.defendant=@micropost.defendant
 		end
 		
 		if @casefile.save
-			flash[:casefilesuccess]="Casefile created/saved"
+			flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
 		else
-			flash[:casefilefailure]="Casefile not created, "+casefile.CR
+			flash[:casefilefailure]="Casefile not created, "+casefile.cr
 		end
 		
 		if @micropost.save

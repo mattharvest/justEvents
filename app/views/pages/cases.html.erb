@@ -3,12 +3,22 @@
 	<h1>All Casefiles</h1>
 	<h2><%= @casefiles.count %> casefiles.</h2>
 	<table class="table table-striped table-bordered table-condensed">
-		<% @casefiles.each do |c| %>
 		<tr>
-			<td>	Case Number </td>
-			<td>	<%= c.summary %></td>
+			<td>Defendant</td>
+			<td>CCN</td>
+			<td>CR</td>
+			<td>CA</td>
+			<td>CJ</td>
+			<td>JA</td>
+			<td>CT</td>
+			<td>SAO</td>
+			<% if current_user.admin? %>
+				<td>Delete Button</td>
+			<% end %>
 		</tr>
-		<% end %>
+		<tr>
+			<%= render :partial => 'shared/case_item', :collection => @casefiles %>
+		</tr>
 	</table>
 <% else %>
 	<div class="hero-unit">

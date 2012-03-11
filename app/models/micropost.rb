@@ -18,6 +18,9 @@ class Micropost < ActiveRecord::Base
 	end
 	
 	def content_and_tags
-		event_date.to_s+": "+content + " ("+description+")" #NOTE: this is temp
+		if self.defendant.nil?
+			self.defendant="Doe, John"
+		end
+		event_date.to_s+": "+defendant+", "+content + " ("+description+")" #NOTE: this is temp
 	end
 end  

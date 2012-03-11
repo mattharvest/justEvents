@@ -1,0 +1,18 @@
+<tr>
+	<td>	<%= case_item.defendant%>	</td>
+	<td>	<%= case_item.ccn %> 		</td>
+	<td>	<%= case_item.cr %> 		</td>
+	<td>	<%= case_item.ca %> 		</td>
+	<td>	<%= case_item.cj %> 		</td>
+	<td>	<%= case_item.ja %> 		</td>
+	<td>	<%= case_item.ct %> 		</td>
+	<td>	<%= case_item.sao %> 		</td>
+
+	<% if current_user.admin? %>
+			<td>	
+			<%= link_to "delete", case_item, 	:method => :delete, 
+												:confirm => "You sure?"
+												%>							
+			</td>
+	<%end%>
+</tr>

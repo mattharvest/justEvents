@@ -9,6 +9,11 @@ class PagesController < ApplicationController
 		end
 	end
 	
+	def cases
+		@title="Casefiles"
+		@casefiles = Casefile.find(:all)
+	end
+	
 	def reports
 		@title="Reports"
 		if signed_in?

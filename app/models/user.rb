@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 	attr_accessible :name, :email, :password, :password_confirmation, :unit
 	
 	has_many :microposts, :dependent => :destroy
+	has_many :casefiles
 	
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	

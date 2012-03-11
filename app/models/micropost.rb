@@ -14,18 +14,13 @@ class Micropost < ActiveRecord::Base
 	default_scope :order => 'microposts.created_at DESC'
 	
 	def description
-		casenumber.to_s+", "+unit.to_s+", "+category.to_s+", "+event_date.to_s
-	end
-	
-	def tags_used
-		tempstring = "("+tags.count.to_s+" tags)"
-		self.tags.each do |t|
-			tempstring+=t.to_s
-		end
-		tempstring
+		casenumber+", "+unit+", "+category
 	end
 	
 	def content_and_tags
-		content + ", tags: "+description #NOTE: this is temp
+		if self.defendant.nil?
+			self.defendant="Doe, John"
+		end
+		event_date.to_s+": "+defendant+", "+content + " ("+description+")" #NOTE: this is temp
 	end
 end  

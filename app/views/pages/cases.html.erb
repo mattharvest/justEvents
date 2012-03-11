@@ -1,0 +1,30 @@
+<% # %>
+<% if signed_in? %>
+	<h1>All Casefiles</h1>
+	<h2><%= @casefiles.count %> casefiles.</h2>
+	<table class="table table-striped table-bordered table-condensed">
+		<tr>
+			<td>Defendant</td>
+			<td>CCN</td>
+			<td>CR</td>
+			<td>CA</td>
+			<td>CJ</td>
+			<td>JA</td>
+			<td>CT</td>
+			<td>SAO</td>
+			<% if current_user.admin? %>
+				<td>Delete Button</td>
+			<% end %>
+		</tr>
+		<tr>
+			<%= render :partial => 'shared/case_item', :collection => @casefiles %>
+		</tr>
+	</table>
+<% else %>
+	<div class="hero-unit">
+		<h1>You're not logged in!</h1>
+		<p>Please log in or sign up.</p>
+		<a class="btn btn-primary btn-large" href="<%= signup_path %>">Sign Up!</a>
+		<h6>This software is available only to Prince George's County ASAs.  If you are not on the whitelist, your signup will fail.  Contact ASA Bohrer with any questions.</h6>
+	</div>
+<% end %>

@@ -66,10 +66,13 @@
 	<%= semantic_form_for @micropost do |f| %>
 		<%= f.semantic_errors %>
 		<%= f.inputs do %>
-			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[respondent name], [text of event]'}, :label=>'What happened?', :hint=>'[respondent name], [text]'%>
+			
 			<%= f.input :defendant, :as=>'string', :input_html => {:placeholder=>'[defendant]'} %>
+			
 			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[text of event]'}, :label=>'What happened?'%>
+			
 			<%= f.input :category, :label=>'Category?', :collection => list %>
+			
 			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
 			
 			<%= f.input :adf, 

@@ -4,12 +4,14 @@ class Casefile < ActiveRecord::Base
 	
 	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9][A-Z]/i
 	
-	#validates :CCN, :format => { :with => casenum_regex }
-	#validates :CR, :format => { :with => casenum_regex }
-	#validates :CT, :format => { :with => casenum_regex }
-	#validates :CJ, :format => { :with => casenum_regex }
-	#validates :CA, :format => { :with => casenum_regex }
-	#validates :JA, :format => { :with => casenum_regex }
+	#validation isn't working at the moment....
+	
+	#validates :ccn, :format => { :with => casenum_regex }
+	#validates :cr, :format => { :with => casenum_regex }
+	#validates :ct, :format => { :with => casenum_regex }
+	#validates :cj, :format => { :with => casenum_regex }
+	#validates :ca, :format => { :with => casenum_regex }
+	#validates :ja, :format => { :with => casenum_regex }
 	
 	
 	def casenumber?(submitted_casenumber)
@@ -22,8 +24,25 @@ class Casefile < ActiveRecord::Base
 		(ja==submitted_casenumber)
 	end
 	
-	def microposts
+	def get_microposts
 		#find all associated microposts
+			Micropost.find_all_by_casenumber(ccn)|
+			Micropost.find_all_by_casenumber(cr)|
+			Micropost.find_all_by_casenumber(ct)|
+			Micropost.find_all_by_casenumber(cj)|
+			Micropost.find_all_by_casenumber(ca)|
+			Micropost.find_all_by_casenumber(sao)|
+			Micropost.find_all_by_casenumber(ja)
+	end
+	
+	def get_todos
+			Todoitem.find_all_by_casenumber(ccn)|
+			Todoitem.find_all_by_casenumber(cr)|
+			Todoitem.find_all_by_casenumber(ct)|
+			Todoitem.find_all_by_casenumber(cj)|
+			Todoitem.find_all_by_casenumber(ca)|
+			Todoitem.find_all_by_casenumber(sao)|
+			Todoitem.find_all_by_casenumber(ja)	
 	end
 	
 	def summary
@@ -61,5 +80,4 @@ class Casefile < ActiveRecord::Base
 			", SAO: "+self.sao.to_s+
 			", "+self.defendant
 	end
-		
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120311024416) do
+ActiveRecord::Schema.define(:version => 20120312132652) do
 
   create_table "casefiles", :force => true do |t|
     t.string   "defendant"
@@ -52,6 +52,29 @@ ActiveRecord::Schema.define(:version => 20120311024416) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "todoitems", :force => true do |t|
+    t.string   "content"
+    t.date     "duedate"
+    t.integer  "priority"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.boolean  "complete"
+    t.string   "casenumber"
+    t.integer  "user_id"
+  end
+
+  add_index "todoitems", ["created_at"], :name => "index_todoitems_on_todolist_id_and_created_at"
+
+  create_table "todolists", :force => true do |t|
+    t.string   "name"
+    t.integer  "casefile_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
+  end
+
+  add_index "todolists", ["casefile_id", "created_at"], :name => "index_todolists_on_casefile_id_and_created_at"
 
   create_table "users", :force => true do |t|
     t.string   "name"

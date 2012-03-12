@@ -1,0 +1,5 @@
+<% unless @todos.empty? %>
+	<table class="table table-striped">
+		<p><%= render :partial => 'shared/todo_item', :collection => @todos %></p>
+	</table>
+<% end %>

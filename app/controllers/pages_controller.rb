@@ -23,6 +23,15 @@ class PagesController < ApplicationController
 		end
 	end
 	
+	def todos
+		@title="Todos"
+		@todos=[] #default
+		if signed_in?
+			@todoitem = Todoitem.new
+			@todos = Todoitem.find(:all)
+		end
+	end
+	
 	def calls
 		@title="Calls"
 		if signed_in?

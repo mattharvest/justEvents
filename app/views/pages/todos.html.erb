@@ -1,9 +1,9 @@
 <% if signed_in? %>
 	<div class="container-fluid">
-		<h1>what's happened?</h1>
+		<h1>what's to be done?</h1>
 		<div class="row-fluid">
 			<div class="span4">
-				<%= render 'shared/micropost_form' %>
+				<%= render 'shared/todoitem_form' %>
 			</div>
 			<div class="span2">
 				<%= render 'shared/user_info' %>
@@ -11,7 +11,7 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span6">
-				<%= render 'shared/feed' %>
+				<%= render 'shared/todos' %>
 			</div>
 		</div>
 	<div>

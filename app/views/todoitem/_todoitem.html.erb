@@ -1,0 +1,15 @@
+<tr>
+	<td class="todoitem">
+		<span class="content"><%= todoitem.summary %></span>
+		<span class="timestamp">
+			Created <%= time_ago_in_words(todoitem.created_at) %> ago.
+		</span>
+	</td>
+	<% if current_user?(todoitem.user) %>
+		<td>
+			<%= link_to "delete", todoitem, 	:method => :delete, 
+												:confirm => "You sure?", 
+												:title => todoitem.summary %>
+		</td>
+	<% end %>
+</tr>

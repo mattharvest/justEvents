@@ -1,0 +1,21 @@
+<% if signed_in? %>
+	<div class="container-fluid">
+		<h1>Case file for <%=@casefile.defendant %></h1>
+		<div class="row-fluid">
+			<div class="span6">
+				<table class="table table-striped">
+					<%= render :partial => 'shared/todo_item', :collection => @todos %>
+				</table>
+			</div>
+		</div>
+		<div class="row-fluid">
+				<table class="table table-striped">
+					<%= render :partial => 'shared/feed_item', :collection => @microposts %>
+				</table>
+		</div>
+
+	<div>
+<% else %>
+	<%= render 'shared/introstub' %>
+<% end %>
+<div>

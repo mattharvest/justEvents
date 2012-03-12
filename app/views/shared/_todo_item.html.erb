@@ -1,0 +1,23 @@
+<tr>
+	<td>
+	<blockquote>
+		<p>
+		<%= todo_item.summary %>
+		</p>
+		<small>	<%= link_to todo_item.user.name, todo_item.user %></small>
+		<small>
+			<% if current_user?(todo_item.user) || current_user.admin? %>
+			<%= link_to "delete", todo_item, 	:method => :delete, 
+												:confirm => "You sure?", 
+												:title => todo_item.summary
+												%>
+			<%= link_to "complete", todoitems_path(todo_item.id, :todoitem => {:test=>"test"}),
+												:method => :put, 
+												:confirm => "Mark complete?", 
+												:title => "Mark complete?",
+												%>
+			<% end %>
+		</small>
+	</blockquote>
+	</td>
+</tr>

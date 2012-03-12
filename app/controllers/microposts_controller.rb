@@ -42,7 +42,7 @@ class MicropostsController < ApplicationController
 		if @casefile.save
 			flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
 		else
-			flash[:casefilefailure]="Casefile not created, "+casefile.cr
+			flash[:casefilefailure]="Casefile not created, "+@casefile.summary
 		end
 		
 		if @micropost.save

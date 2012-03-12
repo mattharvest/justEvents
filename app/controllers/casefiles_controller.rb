@@ -8,6 +8,16 @@ class CasefilesController < ApplicationController
 		@casefile = current_user.casefiles.build(params[:casefile])
 	end
 	
+	def show
+		@casefile = Casefile.find(params[:id])
+		@title=@casefile.defendant
+
+		@microposts = @casefile.get_microposts
+		@todos = @casefile.get_todos
+
+		flash[:notice]="Microposts: "+@microposts.count.to_s+", Todos: "+@todos.count.to_s
+	end
+	
 	def destroy
 		@casefile = Casefile.find(params[:id])
 		if !@casefile.nil?

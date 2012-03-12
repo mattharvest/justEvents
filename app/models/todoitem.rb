@@ -11,7 +11,11 @@ class Todoitem < ActiveRecord::Base
 		:format   => { :with => casenum_regex }
 	
 	def summary
-		content+" (due "+duedate.to_s+") ("+priority.to_s+")"
+		if complete
+			content+" completed on "+updated_at.to_s
+		else
+			content+" (due "+duedate.to_s+")"
+		end
 	end
 	
 end

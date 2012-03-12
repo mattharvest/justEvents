@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120312132652) do
+ActiveRecord::Schema.define(:version => 20120312190958) do
 
   create_table "casefiles", :force => true do |t|
     t.string   "defendant"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20120312132652) do
     t.date     "dob"
     t.string   "adf"
     t.string   "defendant"
+    t.integer  "casefile_id"
   end
 
   add_index "microposts", ["user_id", "created_at"], :name => "index_microposts_on_user_id_and_created_at"

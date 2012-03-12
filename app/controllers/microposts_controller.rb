@@ -6,6 +6,7 @@ class MicropostsController < ApplicationController
 	end
 	
 	def create
+		params[:micropost][:casenumber].upcase!
 		@micropost = current_user.microposts.build(params[:micropost])
 		if !@micropost.dob.nil?
 			@micropost.dob = Date.parse(params[:micropost][:dob])
@@ -15,23 +16,8 @@ class MicropostsController < ApplicationController
 		end
 		@micropost.unit = current_user.unit
 		
-		stub = @micropost.casenumber[0..1]
-
-		if stub=="CC"
-			@casefile = Casefile.find_or_create_by_ccn(@micropost.casenumber)
-		elsif stub=="CR"
-			@casefile = Casefile.find_or_create_by_cr(@micropost.casenumber)
-		elsif stub=="CT"
-			@casefile = Casefile.find_or_create_by_ct(@micropost.casenumber)
-		elsif stub=="CJ"
-			@casefile = Casefile.find_or_create_by_cj(@micropost.casenumber)
-		elsif stub=="CA"
-			@casefile = Casefile.find_or_create_by_ca(@micropost.casenumber)
-		elsif stub=="SA"
-			@casefile = Casefile.find_or_create_by_sao(@micropost.casenumber)
-		elsif stub=="JA"
-			@casefile = Casefile.find_or_create_by_ja(@micropost.casenumber)
-		end
+		@casefile = @micropost.get_casefile
+		@micropost.casefile_id = @casefile.id
 		
 		if @micropost.defendant.nil?
 			@casefile.defendant="Doe, John"
@@ -64,6 +50,7 @@ class MicropostsController < ApplicationController
 			redirect_to :back
 		end
 	end
+	
 	
 	private
 		def authorized_user

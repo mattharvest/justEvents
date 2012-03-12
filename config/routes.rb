@@ -8,8 +8,11 @@ JustEvents::Application.routes.draw do
   resources :casefiles
   resources :sessions, :only => [:new, :create, :destroy]
   resources :microposts
-  resources :todoitems
+  resources :todoitems, :only => [:new, :create, :destroy, :update]
   resources :tags, :only => [:create, :destroy]
+
+   match '/todoitems/:id/update' => 'todoitems#update', :as=>'complete_task'
+ 
   
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
@@ -21,8 +24,9 @@ JustEvents::Application.routes.draw do
   match '/csv', :to => 'pages#export_to_csv'
   match '/calls', :to => 'pages#calls'
   match '/cases', :to => 'pages#cases'
-  match '/todos', :to => 'pages#todos'
   match '/todoitems', :to => 'pages#todos'
+  match '/todo', :to=>'pages#todos'
+  
   
   root :to => 'pages#home'
 

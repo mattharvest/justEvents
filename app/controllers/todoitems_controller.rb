@@ -59,10 +59,15 @@ class TodoitemsController < ApplicationController
 	
 	def update
 		@todoitem = Todoitem.find_by_id(params[:id])
-
-		@todoitem.complete=params[:test]
+		if params[:complete]=="true"
+			flash[:todonotice]="Task marked complete!"
+			@todoitem.complete=true
+		else
+			flash[:todonotice]="Task not marked complete, "+params[:complete]
+			@todoitem.complete=false
+		end		
 		@todoitem.save
-		flash[:todonotice]=params[:test].to_s
+		
 		redirect_to :back
 		
 	end

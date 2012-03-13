@@ -12,7 +12,7 @@ class Todoitem < ActiveRecord::Base
 	
 	def summary
 		if complete
-			content+" completed on "+updated_at.to_s
+			content+" (completed on "+updated_at.to_s+")"
 		else
 			content+" (due "+duedate.to_s+")"
 		end

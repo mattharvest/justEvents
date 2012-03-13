@@ -48,9 +48,13 @@ class Micropost < ActiveRecord::Base
 		elsif stub=="CC"
 			@casefile = Casefile.find_or_create_by_ccn(casenumber)
 		end
-		casefile_id=@casefile.id
-		@casefile.defendant = self.defendant
-		@casefile.save
-		@casefile
+		if !@casefile.nil?
+			casefile_id=@casefile.id
+			@casefile.defendant = self.defendant
+			@casefile.save
+			@casefile
+		else
+			#this is serious...
+		end
 	end
 end  

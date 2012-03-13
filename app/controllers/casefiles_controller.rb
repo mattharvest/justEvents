@@ -24,7 +24,7 @@ class CasefilesController < ApplicationController
 		
 			if @casefile.destroy
 				flash[:casefilesuccess] = "Casefile destroyed"
-				redirect_to :back
+				redirect_to :cases
 			else
 				flash[:casefileerror] = "Casefile not destroyed"
 				redirect_to :back

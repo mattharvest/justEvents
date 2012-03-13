@@ -32,9 +32,8 @@ class Micropost < ActiveRecord::Base
 		
 		#this ALWAYS updates the casefile, since it might have changed due to a casefile merge
 		
-		if stub=="CC"
-			@casefile = Casefile.find_or_create_by_ccn(casenumber)
-		elsif stub=="CR"
+
+		if stub=="CR"
 			@casefile = Casefile.find_or_create_by_cr(casenumber)
 		elsif stub=="CT"
 			@casefile = Casefile.find_or_create_by_ct(casenumber)
@@ -46,6 +45,8 @@ class Micropost < ActiveRecord::Base
 			@casefile = Casefile.find_or_create_by_sao(casenumber)
 		elsif stub=="JA"
 			@casefile = Casefile.find_or_create_by_ja(casenumber)
+		elsif stub=="CC"
+			@casefile = Casefile.find_or_create_by_ccn(casenumber)
 		end
 		casefile_id=@casefile.id
 		@casefile.defendant = self.defendant

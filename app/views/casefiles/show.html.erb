@@ -25,7 +25,7 @@
 			<td>	<%= @casefile.ja %> 		</td>
 			<td>	<%= @casefile.ct %> 		</td>
 			<td>	<%= @casefile.sao %> 		</td>
-			<td>	<%= link_to "edit", edit_case_path(case_item),
+			<td>	<%= link_to "edit", edit_case_path(@casefile),
 					:method => :edit,
 					:class => "btn btn-mini" %>	</td>
 			<% if current_user.admin? %>

@@ -26,7 +26,12 @@ class Micropost < ActiveRecord::Base
 	
 	def get_casefile
 		stub = casenumber[0..1]
-
+		if self.defendant.nil?
+			self.defendant="Doe, John"
+		end
+		
+		#this ALWAYS updates the casefile, since it might have changed due to a casefile merge
+		
 		if stub=="CC"
 			@casefile = Casefile.find_or_create_by_ccn(casenumber)
 		elsif stub=="CR"
@@ -43,6 +48,8 @@ class Micropost < ActiveRecord::Base
 			@casefile = Casefile.find_or_create_by_ja(casenumber)
 		end
 		casefile_id=@casefile.id
+		@casefile.defendant = self.defendant
+		@casefile.save
 		@casefile
 	end
 end  

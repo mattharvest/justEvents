@@ -5,34 +5,9 @@
 	<%= feed_item.content_and_tags %>
 	</p>
 	<small>	<%= link_to feed_item.user.name, feed_item.user %></small>
-	<% @casefile = Casefile.find_or_create_by_id(feed_item.casefile_id)%>
-	<% if !feed_item.defendant.nil?
-			@casefile.defendant = feed_item.defendant
-		else
-			@casefile.defendant = "Doe, John"
-		end
-		
-		stub = feed_item.casenumber[0..1]
 
-		if stub=="CC"
-			@casefile.ccn=feed_item.casenumber
-		elsif stub=="CR"
-			@casefile.cr=feed_item.casenumber
-		elsif stub=="CT"
-			@casefile.ct=feed_item.casenumber
-		elsif stub=="CJ"
-			@casefile.cj=feed_item.casenumber
-		elsif stub=="CA"
-			@casefile.ca=feed_item.casenumber
-		elsif stub=="SA"
-			@casefile.sa=feed_item.casenumber
-		elsif stub=="JA"
-			@casefile.ja=feed_item.casenumber
-		end
-		@casefile.save
-		%>
 	
-	<small> Posted <%= time_ago_in_words(feed_item.created_at) %> ago. in <%= link_to @casefile.defendant, @casefile %>
+	<small> Posted <%= time_ago_in_words(feed_item.created_at) %> ago. in <%= link_to feed_item.defendant, feed_item.get_casefile %>
 		<% if current_user?(feed_item.user) || current_user.admin? %>
 			<i class="icon-remove"></i><button class="btn btn-mini"><%= link_to "delete", feed_item, 	
 												:method => :delete, 

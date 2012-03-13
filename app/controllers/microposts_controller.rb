@@ -17,13 +17,6 @@ class MicropostsController < ApplicationController
 		@micropost.unit = current_user.unit
 		
 		@casefile = @micropost.get_casefile
-		@micropost.casefile_id = @casefile.id
-		
-		if @micropost.defendant.nil?
-			@casefile.defendant="Doe, John"
-		else
-			@casefile.defendant=@micropost.defendant
-		end
 		
 		if @casefile.save
 			flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary

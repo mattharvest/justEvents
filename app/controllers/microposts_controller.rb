@@ -15,23 +15,21 @@ class MicropostsController < ApplicationController
 			@micropost.event_date = Date.parse(params[:micropost][:event_date])
 		end
 		@micropost.unit = current_user.unit
-		
-		@casefile = @micropost.get_casefile
-		
-		if @casefile.save
-			flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
-		else
-			flash[:casefilefailure]="Casefile not created, "+@casefile.summary
-		end
-		
 		if @micropost.save
 			flash[:micropostsuccess]= "Micropost created"
+			@casefile = @micropost.get_casefile		
+			if @casefile.save
+				flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
+			else
+				flash[:casefilefailure]="Casefile not created, "+@casefile.summary
+			end
 			#always go to where you were, so the different Micropost forms dont get confusing
 			redirect_to :back
 		else
 			@feed_items=[]
 			render 'pages/home'
 		end
+
 	end
 	
 	def destroy

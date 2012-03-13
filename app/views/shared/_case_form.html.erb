@@ -1,0 +1,31 @@
+<div class="well">	
+	<%= semantic_form_for @casefile do |f| %>
+		<%= f.semantic_errors %>
+		<%= f.inputs do %>
+			
+			<%= f.input :defendant, :as=>'string', :input_html => {}, :label=>'Defendant'%>
+			
+			<%= f.input :ccn, :as=>'string', :input_html => {}, :label=>'CCN'%>
+			<%= f.input :cr, :as=>'string', :input_html => {}, :label=>'CR'%>
+			<%= f.input :ca, :as=>'string', :input_html => {}, :label=>'CA'%>
+			<%= f.input :cj, :as=>'string', :input_html => {}, :label=>'CJ'%>
+			<%= f.input :ct, :as=>'string', :input_html => {}, :label=>'CT'%>
+			<%= f.input :ja, :as=>'string', :input_html => {}, :label=>'JA'%>
+			<%= f.input :sao, :as=>'string', :input_html => {}, :label=>'SAO'%>
+
+		<% end %>
+		<%= f.actions do %>
+			<%= f.action(:submit) %>
+		<% end %>
+	<% end %>
+</div>
+
+<script>
+	$(function () {
+		$(".typeahead").typeahead(
+			{
+				source: ["one", "two", "three"],
+				items: 3
+			});
+		})
+</script>

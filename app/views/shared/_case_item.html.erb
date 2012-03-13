@@ -7,11 +7,16 @@
 	<td>	<%= case_item.ja %> 		</td>
 	<td>	<%= case_item.ct %> 		</td>
 	<td>	<%= case_item.sao %> 		</td>
+	<td>	<%= link_to "edit", edit_case_path(case_item),
+					:method => :edit,
+					:class => "btn btn-mini" %>	</td>
 
 	<% if current_user.admin? %>
 			<td>	
 			<%= link_to "delete", case_item, 	:method => :delete, 
-												:confirm => "You sure?"
+												:confirm => "You sure?",
+												:class => "btn btn-mini",
+												:title => "delete this case"
 												%>							
 			</td>
 	<%end%>

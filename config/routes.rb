@@ -4,14 +4,15 @@ JustEvents::Application.routes.draw do
 
   get "sessions/new"
 
-  resources :users
-  resources :casefiles
+resources :users
+resources :casefiles
   resources :sessions, :only => [:new, :create, :destroy]
   resources :microposts
   resources :todoitems, :only => [:new, :create, :destroy, :update]
   resources :tags, :only => [:create, :destroy]
 
    match '/todoitems/:id/update' => 'todoitems#update', :as=>'complete_task'
+   match '/casefiles/:id/edit' => 'casefiles#edit', :as=>'edit_case'
  
   
   match '/signin', :to => 'sessions#new'

@@ -11,6 +11,7 @@
 			<td>JA</td>
 			<td>CT</td>
 			<td>SAO</td>
+			<td>Edit</td>
 			<% if current_user.admin? %>
 				<td>Delete Button</td>
 			<% end %>
@@ -24,7 +25,9 @@
 			<td>	<%= @casefile.ja %> 		</td>
 			<td>	<%= @casefile.ct %> 		</td>
 			<td>	<%= @casefile.sao %> 		</td>
-
+			<td>	<%= link_to "edit", edit_case_path(case_item),
+					:method => :edit,
+					:class => "btn btn-mini" %>	</td>
 			<% if current_user.admin? %>
 					<td>	
 					<%= link_to "delete", @casefile, 	:method => :delete, 

@@ -8,6 +8,19 @@ class CasefilesController < ApplicationController
 		@casefile = current_user.casefiles.build(params[:casefile])
 	end
 	
+	def edit
+		@casefile = Casefile.find(params[:id])
+	end
+	
+	def update
+		@casefile = Casefile.find(params[:id])
+		if @casefile.update_attributes(params[:casefile])
+			redirect_to :cases
+		else
+			render 'edit'
+		end
+	end
+	
 	def show
 		@casefile = Casefile.find(params[:id])
 		@title=@casefile.defendant

@@ -6,15 +6,20 @@
 		<small>	<%= link_to todo_item.user.name, todo_item.user %></small>
 			
 			<% if current_user?(todo_item.user) || current_user.admin? %>
-			<i class="icon-remove"></i><button class="btn btn-mini"><%= link_to "delete", todo_item, 	:method => :delete, 
+			<i class="icon-remove"></i><%= link_to "delete", todo_item, 	:method => :delete, 
 												:confirm => "You sure?", 
+												:class => "btn btn-mini",
 												:title => todo_item.summary
-												%></button>
-			<i class="icon-ok"></i><button class="btn btn-mini"><%= link_to "complete", complete_task_path(todo_item.id, :complete=>"true"),
-												:confirm => "Mark complete?", 
-												:title => "Mark complete?",
-												%></button>
-			
+												%>
+			<% if !todo_item.complete %>
+				<i class="icon-ok"></i><%= link_to "complete", complete_task_path(todo_item.id, :complete=>"true"),
+													:confirm => "Mark complete?", 
+													:title => "Mark complete?",
+													:class => "btn btn-mini"
+													%>
+			<% else %>
+				<i class="icon-ok"></i><button class="btn btn-mini disabled">complete</button>
+			<% end %>
 			
 			<% end %>
 	</td>

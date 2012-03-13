@@ -42,7 +42,6 @@ class TodoitemsController < ApplicationController
 			#always go to where you were, so the different forms dont get confusing
 			redirect_to :back
 		else
-			@feed_items=[]
 			render 'pages/home'
 		end
 	end

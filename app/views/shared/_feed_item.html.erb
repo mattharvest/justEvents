@@ -8,11 +8,12 @@
 
 	<small> Posted <%= time_ago_in_words(feed_item.created_at) %> ago. in <%= link_to feed_item.defendant, feed_item.get_casefile %>
 		<% if current_user?(feed_item.user) || current_user.admin? %>
-			<i class="icon-remove"></i><button class="btn btn-mini"><%= link_to "delete", feed_item, 	
+			<i class="icon-remove"></i><%= link_to "delete", feed_item, 	
 												:method => :delete, 
 												:confirm => "You sure?", 
-												:title => feed_item.content
-												%></button>
+												:class => "btn btn-mini",
+												:title => "delete this micropost"
+												%>
 		<% end %>
 	</small>
 	</blockquote>

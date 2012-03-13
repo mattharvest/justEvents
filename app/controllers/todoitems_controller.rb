@@ -2,6 +2,25 @@ class TodoitemsController < ApplicationController
 	before_filter :authenticate, :only => [:create, :destroy]
 	before_filter :authorized_user, :only => :destroy
 	
+	def get_casefile(casenum)
+		stub = casenum[0..1]
+		if stub=="CC"
+			Casefile.find_or_create_by_ccn(@todoitem.casenumber)
+		elsif stub=="CR"
+			Casefile.find_or_create_by_cr(@todoitem.casenumber)
+		elsif stub=="CT"
+			Casefile.find_or_create_by_ct(@todoitem.casenumber)
+		elsif stub=="CJ"
+			Casefile.find_or_create_by_cj(@todoitem.casenumber)
+		elsif stub=="CA"
+			Casefile.find_or_create_by_ca(@todoitem.casenumber)
+		elsif stub=="SA"
+			Casefile.find_or_create_by_sao(@todoitem.casenumber)
+		elsif stub=="JA"
+			Casefile.find_or_create_by_ja(@todoitem.casenumber)
+		end
+	end
+	
 	def create
 		@todoitem = current_user.todoitems.build(params[:todoitem])
 		if @todoitem.priority.nil?
@@ -9,23 +28,7 @@ class TodoitemsController < ApplicationController
 		end
 		@todoitem.complete=false
 		
-		stub = @todoitem.casenumber[0..1]
-
-		if stub=="CC"
-			@casefile = Casefile.find_or_create_by_ccn(@todoitem.casenumber)
-		elsif stub=="CR"
-			@casefile = Casefile.find_or_create_by_cr(@todoitem.casenumber)
-		elsif stub=="CT"
-			@casefile = Casefile.find_or_create_by_ct(@todoitem.casenumber)
-		elsif stub=="CJ"
-			@casefile = Casefile.find_or_create_by_cj(@todoitem.casenumber)
-		elsif stub=="CA"
-			@casefile = Casefile.find_or_create_by_ca(@todoitem.casenumber)
-		elsif stub=="SA"
-			@casefile = Casefile.find_or_create_by_sao(@todoitem.casenumber)
-		elsif stub=="JA"
-			@casefile = Casefile.find_or_create_by_ja(@todoitem.casenumber)
-		end
+		@casefile = get_casefile(@todoitem.casenumber)
 		
 		if @casefile.defendant.nil?
 			@casefile.defendant="Doe, John"
@@ -61,6 +64,17 @@ class TodoitemsController < ApplicationController
 		if params[:complete]=="true"
 			flash[:todonotice]="Task marked complete!"
 			@todoitem.complete=true
+			
+			@casefile = get_casefile(@todoitem.casenumber)
+			
+			@micropost = current_user.microposts.build(
+				:defendant => @casefile.defendant,
+				:casenumber => @todoitem.casenumber,
+				:content => "Todo Completed: "+@todoitem.content,
+				:event_date => Date.today,
+				:category => "todoitem"
+				)
+			@micropost.save
 		else
 			flash[:todonotice]="Task not marked complete, "+params[:complete]
 			@todoitem.complete=false

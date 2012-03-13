@@ -14,14 +14,14 @@ class Micropost < ActiveRecord::Base
 	default_scope :order => 'microposts.created_at DESC'
 	
 	def description
-		casenumber+", "+unit+", "+category
+		casenumber.to_s+", "+unit.to_s+", "+category.to_s
 	end
 	
 	def content_and_tags
 		if self.defendant.nil?
 			self.defendant="Doe, John"
 		end
-		event_date.to_s+": "+defendant+", "+content + " ("+description+")" #NOTE: this is temp
+		event_date.to_s+": "+defendant.to_s+", "+content.to_s + " ("+description+")" #NOTE: this is temp
 	end
 	
 	def get_casefile
@@ -50,7 +50,9 @@ class Micropost < ActiveRecord::Base
 		end
 		if !@casefile.nil?
 			casefile_id=@casefile.id
-			@casefile.defendant = self.defendant
+			if @casefile.defendant.nil? || @casefile.defendant=="Doe, John"
+				@casefile.defendant = self.defendant
+			end
 			@casefile.save
 			@casefile
 		else

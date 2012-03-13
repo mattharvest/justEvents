@@ -17,18 +17,19 @@ class MicropostsController < ApplicationController
 		@micropost.unit = current_user.unit
 		if @micropost.save
 			flash[:micropostsuccess]= "Micropost created"
-			@casefile = @micropost.get_casefile		
-			if @casefile.save
-				flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
-			else
-				flash[:casefilefailure]="Casefile not created, "+@casefile.summary
-			end
 			#always go to where you were, so the different Micropost forms dont get confusing
 			redirect_to :back
 		else
 			@feed_items=[]
 			render 'pages/home'
 		end
+		
+		@casefile = @micropost.get_casefile		
+			if @casefile.save
+				flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
+			else
+				flash[:casefilefailure]="Casefile not created, "+@casefile.summary
+			end
 
 	end
 	

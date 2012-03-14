@@ -44,7 +44,7 @@
 			'appeal rejected' => 'appeal rejected',
 			'verdict overturned' => 'verdict overturned'
 			} 
-		specialprosecution_categories = {
+		specialinvestigation_categories = {
 			'suspect suggested'=>'new suspect',
 			'suspect rejected'=>'suspect rejected'
 			}
@@ -56,8 +56,8 @@
 			list=community_categories.merge(circuit_categories).sort
 		elsif current_user.unit.eql?("postconviction")
 			list=postconviction_categories.merge(circuit_categories).sort
-		elsif current_user.unit.eql?("special prosecution")
-			list=specialprosecution_categories.merge(circuit_categories).sort
+		elsif current_user.unit.eql?("special investigation")
+			list=specialinvestigation_categories.merge(circuit_categories).sort
 		else
 			list=circuit_categories.sort
 		end %>

@@ -2,34 +2,40 @@ class MicropostsController < ApplicationController
 	before_filter :authenticate, :only => [:create, :destroy]
 	before_filter :authorized_user, :only => :destroy
 	
+	
 	def index
 	end
 	
 	def create
 		params[:micropost][:casenumber].upcase!
 		@micropost = current_user.microposts.build(params[:micropost])
+		
 		if !@micropost.dob.nil?
 			@micropost.dob = Date.parse(params[:micropost][:dob])
 		end
 		if !@micropost.event_date.nil?
 			@micropost.event_date = Date.parse(params[:micropost][:event_date])
 		end
+		
 		@micropost.unit = current_user.unit
+		
 		if @micropost.save
 			flash[:micropostsuccess]= "Micropost created"
-			#always go to where you were, so the different Micropost forms dont get confusing
-			redirect_to :back
-		else
-			@feed_items=[]
-			render 'pages/home'
-		end
-		
-		@casefile = @micropost.get_casefile		
+			
+			@casefile = @micropost.get_casefile
 			if @casefile.save
 				flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
 			else
 				flash[:casefilefailure]="Casefile not created, "+@casefile.summary
 			end
+			redirect_to :back
+		else
+			@feed_items=[]
+			flash[:micropostfailure]="Micropost not created, "+@micropost.casenumber
+			redirect_to :back
+		end
+		
+
 
 	end
 	

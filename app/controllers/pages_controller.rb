@@ -60,9 +60,9 @@ class PagesController < ApplicationController
 				:event_date => startdate..enddate, :unit=> params[:targetunit]})
 		end
 		
-			c << ["event_date", "user", "user.email", "user.unit", "defendant", "adf", "category", "content", "created_at"]
+			c << ["event_date", "user", "user.email", "user.unit", "defendant", "dob", "adf", "category", "content", "created_at"]
 			@posts.each do |post|
-				c << [post.event_date.to_s, post.user.name, post.user.email, post.user.unit, post.defendant, post.adf, post.category, post.content, post.created_at.to_s]
+				c << [post.event_date.to_s, post.user.name, post.user.email, post.user.unit, post.defendant, post.dob, post.adf, post.category, post.content, post.created_at.to_s]
 			end
 		end
 		

@@ -5,14 +5,14 @@
 		<%= f.inputs do %>
 			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[text of event]'}, :label=>'Task?'%>
 			
-			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
+			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.'%>
 				
 			<div class="input-append date" id="todoitem_duedate" data-date="2012-12-12" data-date-format="yyyy-mm-dd">
 				<input type="text" value="2012-12-12" readonly class="span2" name="todoitem[duedate]">
 				<span class="add-on">
 					<i class="icon-th"></i>
 				</span>
-				<span class="help-inline">Due Date</span>
+				<span class="help-inline">Due</span>
 			</div>
 		<% end %>
 		<%= f.actions do %>

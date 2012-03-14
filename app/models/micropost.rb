@@ -8,9 +8,8 @@ class Micropost < ActiveRecord::Base
 	
 	validates :content, :presence => true
 	validates :user_id, :presence => true	
-	validates :casenumber, :presence => true,
-		:format   => { :with => casenum_regex }
-	
+	validates :casenumber, :presence => true, :format => { :with => casenum_regex } 
+
 	default_scope :order => 'microposts.created_at DESC'
 	
 	def description
@@ -31,8 +30,6 @@ class Micropost < ActiveRecord::Base
 		end
 		
 		#this ALWAYS updates the casefile, since it might have changed due to a casefile merge
-		
-
 		if stub=="CR"
 			@casefile = Casefile.find_or_create_by_cr(casenumber)
 		elsif stub=="CT"

@@ -2,16 +2,16 @@ class Casefile < ActiveRecord::Base
 	
 	attr_accessible :ccn, :cr, :ct, :ca, :ca, :ja, :sao, :defendant
 	
-	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9][A-Z]/i
-	
+	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]/i
+
 	#validation isn't working at the moment....
 	
-	#validates :ccn, :format => { :with => casenum_regex }
-	#validates :cr, :format => { :with => casenum_regex }
-	#validates :ct, :format => { :with => casenum_regex }
-	#validates :cj, :format => { :with => casenum_regex }
-	#validates :ca, :format => { :with => casenum_regex }
-	#validates :ja, :format => { :with => casenum_regex }
+	#validates :ccn, :format => { :with => /CCN[0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/ }
+	#validates :cr, :format => { :with => /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/ }
+	#validates :ct, :format => { :with => /CT[0-9][0-9][0-9][0-9][0-9][0-9] }
+	#validates :cj, :format => { :with => /CJ[0-9][0-9][0-9][0-9][0-9][0-9]/ }
+	#validates :ca, :format => { :with => /CA[0-9][0-9][0-9][0-9][0-9][0-9]/ }
+	#validates :ja, :format => { :with => /JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]/ }
 	
 	
 	def casenumber?(submitted_casenumber)

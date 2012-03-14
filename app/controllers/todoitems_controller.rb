@@ -2,6 +2,7 @@ class TodoitemsController < ApplicationController
 	before_filter :authenticate, :only => [:create, :destroy]
 	before_filter :authorized_user, :only => :destroy
 	
+	
 	def get_casefile(casenum)
 		stub = casenum[0..1]
 		if stub=="CC"
@@ -18,35 +19,37 @@ class TodoitemsController < ApplicationController
 			Casefile.find_or_create_by_sao(@todoitem.casenumber)
 		elsif stub=="JA"
 			Casefile.find_or_create_by_ja(@todoitem.casenumber)
+		else
+			false
 		end
 	end
 	
 	def create
+		params[:todoitem][:casenumber].upcase!
 		@todoitem = current_user.todoitems.build(params[:todoitem])
 		if @todoitem.priority.nil?
 			@todoitem.priority=1
 		end
 		@todoitem.complete=false
 		
-		@casefile = get_casefile(@todoitem.casenumber)
-		
-		if @casefile.defendant.nil?
-			@casefile.defendant="Doe, John"
-		end
-		
-		if @casefile.save
-			flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
-		else
-			flash[:casefilefailure]="Casefile not created, "+@casefile.summary
-		end
-		
 		if @todoitem.save
 			flash[:todoitemsuccess]= "Todo item created"
 			#always go to where you were, so the different forms dont get confusing
-			redirect_to :back
+			@casefile = get_casefile(@todoitem.casenumber)
+			
+			if @casefile.defendant.nil?
+				@casefile.defendant="Doe, John"
+			end
+			
+			if @casefile.save
+				flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
+			else
+				flash[:casefilefailure]="Casefile not created, "+@casefile.summary
+			end
 		else
-			render 'pages/home'
+			flash[:todoitemfailure]="No casenumber provided or content is blank"
 		end
+		redirect_to :back
 	end
 	
 	def destroy

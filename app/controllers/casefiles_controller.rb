@@ -1,11 +1,11 @@
 class CasefilesController < ApplicationController
 
   	def new
-		@casefile = current_user.casefiles.new
+		@casefile = Casefile.new
 	end
 	
 	def create
-		@casefile = current_user.casefiles.build(params[:casefile])
+		@casefile = Casefile.build(params[:casefile])
 	end
 	
 	def edit

@@ -2,20 +2,13 @@ class MicropostsController < ApplicationController
 	before_filter :authenticate, :only => [:create, :destroy]
 	before_filter :authorized_user, :only => :destroy
 	
-	
-	def index
+	def new
 	end
 	
 	def create
 		params[:micropost][:casenumber].upcase!
-		@micropost = current_user.microposts.build(params[:micropost])
+		@micropost = current_user.microposts.new(params[:micropost])
 		
-		if !@micropost.dob.nil?
-			@micropost.dob = Date.parse(params[:micropost][:dob])
-		end
-		if !@micropost.event_date.nil?
-			@micropost.event_date = Date.parse(params[:micropost][:event_date])
-		end
 		
 		@micropost.unit = current_user.unit
 		
@@ -24,7 +17,7 @@ class MicropostsController < ApplicationController
 			
 			@casefile = @micropost.get_casefile
 			if @casefile.save
-				flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
+				flash[:casefilesuccess]="Casefile created/saved, "+@casefile.summary
 			else
 				flash[:casefilefailure]="Casefile not created, "+@casefile.summary
 			end
@@ -32,11 +25,9 @@ class MicropostsController < ApplicationController
 		else
 			@feed_items=[]
 			flash[:micropostfailure]="Micropost not created, "+@micropost.casenumber
+			flash[:errorsnotice]=@micropost.errors.full_messages
 			redirect_to :back
 		end
-		
-
-
 	end
 	
 	def destroy

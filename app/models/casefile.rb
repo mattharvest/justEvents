@@ -26,47 +26,26 @@ class Casefile < ActiveRecord::Base
 	
 	def get_microposts
 		#find all associated microposts
-			Micropost.find_all_by_casenumber(ccn)|
-			Micropost.find_all_by_casenumber(cr)|
-			Micropost.find_all_by_casenumber(ct)|
-			Micropost.find_all_by_casenumber(cj)|
-			Micropost.find_all_by_casenumber(ca)|
-			Micropost.find_all_by_casenumber(sao)|
-			Micropost.find_all_by_casenumber(ja)
+		Micropost.find_all_by_casenumber(ccn)|
+		Micropost.find_all_by_casenumber(cr)|
+		Micropost.find_all_by_casenumber(ct)|
+		Micropost.find_all_by_casenumber(cj)|
+		Micropost.find_all_by_casenumber(ca)|
+		Micropost.find_all_by_casenumber(sao)|
+		Micropost.find_all_by_casenumber(ja)
 	end
 	
 	def get_todos
-			Todoitem.find_all_by_casenumber(ccn)|
-			Todoitem.find_all_by_casenumber(cr)|
-			Todoitem.find_all_by_casenumber(ct)|
-			Todoitem.find_all_by_casenumber(cj)|
-			Todoitem.find_all_by_casenumber(ca)|
-			Todoitem.find_all_by_casenumber(sao)|
-			Todoitem.find_all_by_casenumber(ja)	
+		Todoitem.find_all_by_casenumber(ccn)|
+		Todoitem.find_all_by_casenumber(cr)|
+		Todoitem.find_all_by_casenumber(ct)|
+		Todoitem.find_all_by_casenumber(cj)|
+		Todoitem.find_all_by_casenumber(ca)|
+		Todoitem.find_all_by_casenumber(sao)|
+		Todoitem.find_all_by_casenumber(ja)	
 	end
 	
 	def summary
-		if ccn.nil?
-			ccn="[blank]"
-		end
-		if cr.nil?
-			cr="[blank]"
-		end
-		if ct.nil?
-			ct="[blank]"
-		end
-		if ca.nil?
-			ca="[blank]"
-		end
-		if cj.nil?
-			cj="[blank]"
-		end
-		if ja.nil?
-			ja="[blank]"
-		end
-		if sao.nil?
-			sao="[blank]"
-		end
 		if defendant.nil?
 			defendant="Doe, John"
 		end

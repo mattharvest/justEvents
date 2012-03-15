@@ -22,11 +22,15 @@ class TodoitemsController < ApplicationController
 		else
 			false
 		end
+		
+		if @casefile.defendant.nil?
+			@casefile.defendant="Doe, John"
+		end
 	end
 	
 	def create
 		params[:todoitem][:casenumber].upcase!
-		@todoitem = current_user.todoitems.build(params[:todoitem])
+		@todoitem = current_user.todoitems.new(params[:todoitem])
 		if @todoitem.priority.nil?
 			@todoitem.priority=1
 		end
@@ -37,17 +41,13 @@ class TodoitemsController < ApplicationController
 			#always go to where you were, so the different forms dont get confusing
 			@casefile = get_casefile(@todoitem.casenumber)
 			
-			if @casefile.defendant.nil?
-				@casefile.defendant="Doe, John"
-			end
-			
 			if @casefile.save
 				flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
 			else
 				flash[:casefilefailure]="Casefile not created, "+@casefile.summary
 			end
 		else
-			flash[:todoitemfailure]="No casenumber provided or content is blank"
+			flash[:todoitemfailure]=@todoitem.errors.full_messages
 		end
 		redirect_to :back
 	end

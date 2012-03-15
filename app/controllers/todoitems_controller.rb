@@ -22,10 +22,7 @@ class TodoitemsController < ApplicationController
 		else
 			false
 		end
-		
-		if @casefile.defendant.nil?
-			@casefile.defendant="Doe, John"
-		end
+	
 	end
 	
 	def create
@@ -40,6 +37,10 @@ class TodoitemsController < ApplicationController
 			flash[:todoitemsuccess]= "Todo item created"
 			#always go to where you were, so the different forms dont get confusing
 			@casefile = get_casefile(@todoitem.casenumber)
+			
+			if @casefile.defendant.nil?
+				@casefile.defendant="Doe, John"
+			end
 			
 			if @casefile.save
 				flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary

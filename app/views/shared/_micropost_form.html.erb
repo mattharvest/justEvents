@@ -68,19 +68,14 @@
 		<%= f.inputs do %>
 			
 			<%= f.input :defendant, :as=>'string', :input_html => {:placeholder=>'[defendant]'} %>
-			
 			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[text of event]'}, :label=>'What happened?'%>
-			
 			<%= f.input :category, :label=>'Category?', :collection => list %>
-			
 			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
-			
 			<%= f.input :adf, 
 				:label=>'Defense Attorney', 
 				:as=>'string',
 				:placeholder=> 'Lastname, Firstname' 
 				%>
-				
 			<div class="input-append date" id="micropost_dob" data-date="2012-12-12" data-date-format="yyyy-mm-dd">
 				<input type="text" value="2012-12-12" readonly class="span2" name="micropost[dob]">
 				<span class="add-on">

@@ -1,22 +1,25 @@
 <tr>
 	<td>
 		<p>
+		<% if todo_item.complete %>
+			<em>
+		<% end %>
 		<%= todo_item.summary %>
+		<% if todo_item.complete %>
+			</em>
+		<% end %>		
 		</p>
 		<small>	<%= link_to todo_item.user.name, todo_item.user %></small>
-			
+		<small> Created <%= time_ago_in_words(todo_item.created_at) %> ago in <%= link_to todo_item.casenumber.to_s, todo_item.retrieve_casefile %>			
 			<% if current_user?(todo_item.user) || current_user.admin? %>
-			<i class="icon-remove"></i><%= link_to "delete", todo_item, 	:method => :delete, 
-												:confirm => "You sure?", 
-												:class => "btn btn-mini",
-												:title => todo_item.summary
-												%>
+
 			<% if !todo_item.complete %>
-				<i class="icon-ok"></i><%= link_to "complete", complete_task_path(todo_item.id, :complete=>"true"),
-													:confirm => "Mark complete?", 
-													:title => "Mark complete?",
-													:class => "btn btn-mini"
-													%>
+				<a class="btn btn-mini" href=<%=complete_task_path(todo_item.id, :complete=>"true")%>>
+					<i class="icon-ok"></i>
+				</a>
+				<a class="btn btn-mini btn-inverse" href=<%= delete_task_path(todo_item.id)%>>
+					<i class="icon-remove icon-white"></i>
+				</a>
 			<% else %>
 				<i class="icon-ok"></i><button class="btn btn-mini disabled">complete</button>
 			<% end %>

@@ -31,6 +31,11 @@ class TodoitemsController < ApplicationController
 		if @todoitem.priority.nil?
 			@todoitem.priority=1
 		end
+		
+		if @todoitem.duedate.nil?
+			@todoitem.duedate = Date.today+14
+		end
+		
 		@todoitem.complete=false
 		
 		if @todoitem.save

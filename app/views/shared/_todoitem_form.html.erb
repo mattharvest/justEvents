@@ -1,4 +1,6 @@
-	
+<% user_list = User.all.collect {|p| [p.name, p.id] } %>
+
+
 <div class="well">	
 	<%= semantic_form_for @todoitem do |f| %>
 		<%= f.semantic_errors %>
@@ -14,6 +16,20 @@
 				</span>
 				<span class="help-inline">Due</span>
 			</div>
+			<div class="accordion" id="assignments">
+				<div class="accordion-group'">
+					<div class="accordion-heading">
+						<a class="accordion-toggle btn btn-small" data-toggle="collapse" data-parent="assigments" data-target="#collapseOne">
+							Assign to another user?
+						</a>
+					</div>
+					<div id="collapseOne" class="collapse in">
+						<div class="accordion-inner">
+							<%= f.input :user_id, :label=>'Assign to?', :as=>'select', :collection=>user_list %>
+						</div>
+					</div>
+				</div>
+			</div>
 		<% end %>
 		<%= f.actions do %>
 			<%= f.action(:submit) %>
@@ -23,4 +39,5 @@
 
 <script>
 	$('#todoitem_duedate').datepicker()
+	$(".collapse").collapse()
 </script>

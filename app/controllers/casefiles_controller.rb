@@ -10,6 +10,8 @@ class CasefilesController < ApplicationController
 	
 	def edit
 		@casefile = Casefile.find(params[:id])
+		@todoitem = Todoitem.new
+		@micropost = Micropost.new
 	end
 	
 	def update
@@ -27,6 +29,9 @@ class CasefilesController < ApplicationController
 
 		@microposts = @casefile.get_microposts
 		@todos = @casefile.get_todos
+		
+		@todoitem = Todoitem.new
+		@micropost = Micropost.new
 
 		flash[:notice]="Microposts: "+@microposts.count.to_s+", Todos: "+@todos.count.to_s
 	end

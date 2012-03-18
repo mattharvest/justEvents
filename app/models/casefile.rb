@@ -1,5 +1,5 @@
 class Casefile < ActiveRecord::Base
-	
+	attr_accessor :lead_casenumber
 	attr_accessible :ccn, :cr, :ct, :ca, :ca, :ja, :sao, :defendant
 	
 	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]/i
@@ -13,6 +13,21 @@ class Casefile < ActiveRecord::Base
 	#validates :ca, :format => { :with => /CA[0-9][0-9][0-9][0-9][0-9][0-9]/ }
 	#validates :ja, :format => { :with => /JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]/ }
 	
+	def lead_casenumber
+		if !ct.blank?
+			ct
+		elsif !cj.blank?
+			cj
+		elsif !ca.blank?
+			ca
+		elsif !cr.blank?
+			cr
+		elsif !ja.blank?
+			ja
+		else
+			ccn
+		end
+	end
 	
 	def casenumber?(submitted_casenumber)
 		(ccn==submitted_casenumber)||

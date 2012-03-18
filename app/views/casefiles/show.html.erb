@@ -1,3 +1,5 @@
+<% user_list = User.all.collect {|p| [p.name, p.id] } %>
+
 <% if signed_in? %>
 	<div class="container-fluid">
 		<h1>Case file for <%=@casefile.defendant %></h1>
@@ -30,9 +32,10 @@
 					:class => "btn btn-mini" %>	</td>
 			<% if current_user.admin? %>
 					<td>	
-					<%= link_to "delete", @casefile, 	:method => :delete, 
-														:confirm => "You sure?"
-														%>							
+
+					<a class="btn btn-mini btn-inverse" href=<%= delete_casefile_path(@casefile.id)%>>
+						<i class="icon-remove icon-white"></i>
+					</a>														
 					</td>
 			<%end%>
 		</tr>
@@ -46,6 +49,36 @@
 			</div>
 		</div>
 		<div class="row-fluid">
+			<form 
+				action="/todoitems"
+				id="new_todoitem"
+				class="well form-inline" 
+				method="post" 
+				>
+				<input 
+					id="todoitem_content_input" 
+					name="todoitem[content]" 
+					type="text"
+					class="input-small"
+					>
+				<input 
+					class="input-small"
+					id="todoitem_casenumber_input" 
+					name="todoitem[casenumber]" 
+					value= <%=@casefile.lead_casenumber.to_s%>
+					type="hidden"
+					>
+				<input 
+					class="action input_action btn btn-primary" 
+					id="todoitem_submit_action" 
+					name="commit" 
+					type="submit" 
+					value="add"
+					>
+			</form>
+		</div>
+
+		<div class="row-fluid">
 			<h3> What's happened: </h3>
 				<table class="table table-striped">
 					<%= render :partial => 'shared/feed_item', :collection => @microposts %>
@@ -57,3 +90,8 @@
 	<%= render 'shared/introstub' %>
 <% end %>
 <div>
+
+<script>
+	$('#todoitem_duedate').datepicker()
+	$(".collapse").collapse()
+</script>

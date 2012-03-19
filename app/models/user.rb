@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
 	def name_comma
 		if !name.nil?
 			tokens = name.split(' ')
-			tokens[1]+", "+tokens[0]
+			tokens.last.to_s+", "+tokens.first.to_s
 		else
 			name.to_s
 		end

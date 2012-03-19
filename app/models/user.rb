@@ -39,8 +39,12 @@ class User < ActiveRecord::Base
 	end
 	
 	def name_comma
-		tokens = name.split(' ')
-		tokens[1]+", "+tokens[0]
+		if !name.nil?
+			tokens = name.split(' ')
+			tokens[1]+", "+tokens[0]
+		else
+			name.to_s
+		end
 	end
 	
 	def has_password?(submitted_password)

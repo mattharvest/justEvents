@@ -14,6 +14,11 @@ class PagesController < ApplicationController
 		@casefiles = Casefile.find(:all)
 	end
 	
+	def fulldisposition
+		@title="Full Disposition"
+		@micropost = Micropost.new
+	end
+	
 	def reports
 		@title="Reports"
 		if signed_in?

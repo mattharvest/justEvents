@@ -1,0 +1,157 @@
+<% dob_label="Defendant DOB?" %>
+<% if current_user.unit=="juvenile"	
+	dob_label= "Respondent DOB?"
+	end %>
+	
+<% user_list = User.all.collect {|p| [p.name_comma, p.id] } %>
+
+<% juvenile_categories = {
+			'screening' => 'screening',
+			'continuance' => 'continuance',
+			'writ' => 'writ',
+			'merits hearing' => 'trial',
+			'plea deal (incl. stet)' => 'plea',
+			'decline to prosecute' => 'dtp',
+			'acquittal' => 'acquittal',
+			'dismissal' => 'dismissal',
+			'waiver-up' => 'waiver up'
+			} 
+		grandjury_categories = {
+			'screening' => 'screening',
+			'charged' => 'charged',
+			'returned for investigation' => 'RFI',
+			'declined to prosecute' => 'dtp'
+			}
+		circuit_categories = {
+			'preliminary hearing'=>'ph',
+			'sent to district court'=>'dcwl',
+			'screening'=>'screening',
+			'trial'=>'trial',
+			'plea deal (incl. stet)'=>'plea',
+			'nolle prosequi'=>'dtp',
+			'acquittal'=>'acquittal',
+			'bench warrant'=>'bench warrant',
+			'other'=>'other',
+			'Broadcast Notice'=>'notice',
+			'NCIC'=>'NCIC',
+			'search warrant'=>'search warrant',
+			'subpoeana issued'=>'subpoena issued',
+			'waiver down to juvenile'=>'waiver down'
+			}
+		community_categories = {
+			'community need identified'=>'community need identified',
+			'suspect assigned to attorney'=>'assigned'
+			}
+		postconviction_categories = {
+			'corum nobias' => 'corum nobis',
+			'appeal filed' => 'appeal filed',
+			'appeal rejected' => 'appeal rejected',
+			'verdict overturned' => 'verdict overturned'
+			} 
+		specialinvestigation_categories = {
+			'suspect suggested'=>'new suspect',
+			'suspect rejected'=>'suspect rejected'
+			}
+		if current_user.unit.eql?("juvenile")
+			list=juvenile_categories.sort
+		elsif current_user.unit.eql?("grand jury")
+			list=grandjury_categories.merge(circuit_categories).sort
+		elsif current_user.unit.eql?("community prosecution")
+			list=community_categories.merge(circuit_categories).sort
+		elsif current_user.unit.eql?("postconviction")
+			list=postconviction_categories.merge(circuit_categories).sort
+		elsif current_user.unit.eql?("special investigation")
+			list=specialinvestigation_categories.merge(circuit_categories).sort
+		else
+			list=circuit_categories.sort
+		end %>
+		
+<div class="well">	
+	<%= semantic_form_for @micropost do |f| %>
+		<%= f.semantic_errors %>
+		<%= f.inputs do %>
+			<div class="accordion" id="form_accordion">
+				<div class="accordion-group'">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="form_accordion" data-target="#partyInfo">
+							Party Info
+						</a>
+					</div>
+					<div id="partyInfo" class="accordion-body collapse in">
+						<div class="accordion-inner">
+							<%= f.input :teamleader, :label=>'Team Leader?', :as=>'select', :collection=>user_list.sort %>
+							<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
+							<%= f.input :defendant, :as=>'string', :placeholder=>'[defendant]' %>
+										<div class="input-append date" id="micropost_dob" data-date="2012-12-12" data-date-format="yyyy-mm-dd">
+											<input type="text" value="2012-12-12" readonly class="span2" name="micropost[dob]">
+											<span class="add-on">
+												<i class="icon-th"></i>
+											</span>
+											<span class="help-inline">DOB</span>
+										</div>
+							<div class="input" id="micropost_judge" name="micropost[judge]">
+								<label>Judge:</label>
+								<input type="text"
+									class="span3"
+									data-provide="typeahead"
+									data-source='["Tillerson Adams, Sheila R.", "Alves, Krystal Quinn", "Clark, Toni E.", "Cotton, DaNeeka Varner", "Davey, John Paul", "Dawson, Herman C.", "El-Amin, Hassan Ali", "Shaw Geter, Melanie M.", "Green, Leo E. Jr", "Jackson, Dwight D.", "Krauser, Sherrie L.", "Lamasney, Maureen M.", "Martin, Larnzell Jr.", "Mittelstaedt, Crystal Dixon", "Nichols, C. Philip, Jr.", "Northrop, Albert W.", "Pearson, Michael R.", "Rattal, Nicholas E.", "Serrette, Cathy", "Wallace, Sean D.", "Weatherly, Julia B.", "Whalen, Michael P.", "Woodard, Beverly J.", "Ahalt, A. Monty", "Beard, DeLawrence", "Casula, Joseph", "Cave, William M.", "Chapdelaine, A. Michael", "Clark, Richard", "Femia, Vincent J.",  "Kahl, Christian M.", "Kaminetz, Marvin S.", "Lombardi, James J.", "Mason, Robert", "McGuckian, Paul A.", "McKee, Graydon S.  III", "Platt, Steven I.", "Ryan, James L.", "Smith, Thomas P."]'>
+
+							</div>
+							<div class="input" id="micropost_adf" name="micropost[adf]">
+								<label>ADF:</label>	
+								<input type="text" 
+									class="span3" 
+									data-provide="typeahead" 
+									data-items="4" 
+									data-source='["Jones, Debra", "Gupta, Kavita", "Johnson, Lyvette", "Josendale, Erin", "Saccarelli, Gale", "Whitehall, Beatrix", "Wilson, Monica", "Peek, Leslie", "Abdullah, Raouf", "Edwards, Christal", "Okeke, Loretta", "Powell, Greg", "Pride-Hebron, Kelly", "Shelton, Bill", "Uba-Okarafor, Vivent", "Mungin, Vaughn", "Handy, Ronald", "Ucheomunu, Andrew", "Moore, Sonya", "Azari, Omid"]'>			
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group'">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="form_accordion" data-target="#sentenceInfo">
+							Sentence Info
+						</a>
+					</div>
+					<div id="sentenceInfo" class="accordion-body collapse in">
+						<div class="accordion-inner">
+							<%= f.input :enhanced, :label=>'Enhanced/Mandatory penalties?' %>
+							<%= f.input :gang, :label=>'Gang name (if related)?' %>
+							<%= f.input :guidelines, :label=>'Sentence guidelines range for convicted charges?' %>
+							<%= f.input :jail, :label=>'Jail?', :hint=>' months' %>
+							<%= f.input :probation, :label=>'Probation?', :placeholder=>'Y years, [un]supervised'%>
+							<%= f.input :restitution, :label=>'Restitition? (whole dollars only)', :input_html=> {:class=>'span2'} %>
+							<%= f.input :communityservice, :label=>'Community service?', :hint=>' hours', :input_html=> {:class=>'span1'} %>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="input-append date" id="micropost_event_date" data-date="2012-12-12" data-date-format="yyyy-mm-dd">
+				<input type="text" value="2012-12-12" readonly class="span2" name="micropost[event_date]">
+				<span class="add-on">
+					<i class="icon-th"></i>
+				</span>
+				<span class="help-inline">when?</span>
+			</div>
+			
+			<%= f.input :leadcharge, :label=>'Lead charge?' %>
+			<%= f.input :convictedcharges, :label=>'Convicted charges?', :input_html => { :class=>'autogrow' }%>
+			<%= f.input :category, :label=>'Category?', :collection => list %>
+			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[text of event]'}, :label=>'What happened?'%>
+
+		<% end %>
+		<%= f.actions do %>
+			<%= f.action(:submit) %>
+		<% end %>
+	<% end %>
+</div>
+
+<script>
+	$('.typeahead').typeahead()
+	$('#micropost_dob').datepicker()
+	$('#micropost_event_date').datepicker()
+	$('.collapse').collapse()
+</script>

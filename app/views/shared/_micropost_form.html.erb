@@ -11,7 +11,8 @@
 			'plea deal (incl. stet)' => 'plea',
 			'decline to prosecute' => 'dtp',
 			'acquittal' => 'acquittal',
-			'dismissal' => 'dismissal'
+			'dismissal' => 'dismissal',
+			'waiver-up' => 'waiver up'
 			} 
 		grandjury_categories = {
 			'screening' => 'screening',
@@ -32,14 +33,15 @@
 			'Broadcast Notice'=>'notice',
 			'NCIC'=>'NCIC',
 			'search warrant'=>'search warrant',
-			'subpoeana issued'=>'subpoena issued'
+			'subpoeana issued'=>'subpoena issued',
+			'waiver down to juvenile'=>'waiver down'
 			}
 		community_categories = {
 			'community need identified'=>'community need identified',
 			'suspect assigned to attorney'=>'assigned'
 			}
 		postconviction_categories = {
-			'corum nobis' => 'corum nobis',
+			'corum nobias' => 'corum nobis',
 			'appeal filed' => 'appeal filed',
 			'appeal rejected' => 'appeal rejected',
 			'verdict overturned' => 'verdict overturned'
@@ -70,12 +72,18 @@
 			<%= f.input :defendant, :as=>'string', :input_html => {:placeholder=>'[defendant]'} %>
 			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[text of event]'}, :label=>'What happened?'%>
 			<%= f.input :category, :label=>'Category?', :collection => list %>
-			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
-			<%= f.input :adf, 
-				:label=>'Defense Attorney', 
-				:as=>'string',
-				:placeholder=> 'Lastname, Firstname' 
-				%>
+			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.',%>
+			
+			<div class="input" id="micropost_adf" name="micropost[adf]">
+				<label>ADF:</label>	
+				<input type="text" 
+					class="span3" 
+					data-provide="typeahead" 
+					data-items="4" 
+					data-source='["Jones, Debra", "Gupta, Kavita", "Johnson, Lyvette", "Josendale, Erin", "Saccarelli, Gale", "Whitehall, Beatrix", "Wilson, Monica", "Peek, Leslie", "Abdullah, Raouf", "Edwards, Christal", "Okeke, Loretta", "Powell, Greg", "Pride-Hebron, Kelly", "Shelton, Bill", "Uba-Okarafor, Vivent", "Mungin, Vaughn", "Handy, Ronald", "Ucheomunu, Andrew", "Moore, Sonya", "Azari, Omid"]'>
+				
+			</div>
+			
 			<div class="input-append date" id="micropost_dob" data-date="2012-12-12" data-date-format="yyyy-mm-dd">
 				<input type="text" value="2012-12-12" readonly class="span2" name="micropost[dob]">
 				<span class="add-on">
@@ -83,6 +91,7 @@
 				</span>
 				<span class="help-inline">DOB</span>
 			</div>
+			
 			<div class="input-append date" id="micropost_event_date" data-date="2012-12-12" data-date-format="yyyy-mm-dd">
 				<input type="text" value="2012-12-12" readonly class="span2" name="micropost[event_date]">
 				<span class="add-on">
@@ -98,13 +107,7 @@
 </div>
 
 <script>
-	$(function () {
-		$(".typeahead").typeahead(
-			{
-				source: ["one", "two", "three"],
-				items: 3
-			});
-		})
+	$('.typeahead').typeahead()
 	$('#micropost_dob').datepicker()
 	$('#micropost_event_date').datepicker()
 </script>

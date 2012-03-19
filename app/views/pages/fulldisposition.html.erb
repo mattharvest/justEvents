@@ -1,0 +1,16 @@
+<% if signed_in? %>
+	<div class="container-fluid">
+		<h1>what's happened, in full?</h1>
+		<div class="row-fluid">
+			<div class="span6">
+				<%= render 'shared/fulldisposition_form' %>
+			</div>
+			<div class="span2">
+				<%= render 'shared/user_info' %>
+			</div>
+		</div>
+	<div>
+<% else %>
+	<%= render 'shared/introstub' %>
+<% end %>
+<div>

@@ -30,6 +30,7 @@ resources :casefiles
   match '/cases', :to => 'pages#cases'
   match '/todoitems', :to => 'pages#todos'
   match '/todo', :to=>'pages#todos'
+  match '/fulldisposition', :to=>'pages#fulldisposition'
   
   
   root :to => 'pages#home'

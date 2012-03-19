@@ -1,7 +1,7 @@
 class Micropost < ActiveRecord::Base
 
 	belongs_to :user
-	attr_accessible :dob, :adf, :defendant, :category, :casenumber, :event_date, :unit, :content, :casefile_id
+	attr_accessible :dob, :adf, :defendant, :category, :casenumber, :event_date, :unit, :content, :casefile_id, :gang, :jail, :probation, :restitution, :communityservice, :judge, :leadcharge, :convictedcharges, :enhanced, :guidelines, :teamleader
 	
 	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9][A-Z]|CCN[0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/i
 	

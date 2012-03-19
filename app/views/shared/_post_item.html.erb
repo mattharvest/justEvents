@@ -1,7 +1,7 @@
 <tr>
 	<td>	<%= post_item.event_date.to_s %> 	</td>
 	<td>	<%= post_item.defendant %>			</td>
-	<td>	<%= post_item.casenumber %>			</td>
+	<td>	<%= link_to post_item.casenumber, post_item.get_casefile %>			</td>
 	<td>	<%= post_item.user.name %> 			</td>
 	<td>	<%= post_item.user.unit %>			</td>
 	<td>	<%= post_item.user.email %> 		</td>

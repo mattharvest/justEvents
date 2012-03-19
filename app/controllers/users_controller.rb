@@ -34,7 +34,8 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@title = @user.name
-		@microposts = @user.microposts
+		@microposts = @user.microposts		
+		@recent_posts = @user.microposts.find(:all, :limit => 7, :order => 'created_at DESC')
 	end
 	
 	def edit

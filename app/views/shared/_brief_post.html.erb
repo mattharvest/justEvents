@@ -1,0 +1,6 @@
+<tr>
+	<td>
+	<%= link_to brief_post.casenumber, brief_post.get_casefile %> 
+		on <%= brief_post.event_date.to_s %>: <%= brief_post.content %> (<%=brief_post.category%>) by <%= link_to brief_post.user.name, brief_post.user %> 
+	</td>
+</tr>

@@ -1,9 +1,37 @@
+<% if current_user?(@user.id) %>
+	<div class="hero-unit">
+		<h3>This is your user page,</h3><h1> <%=@user.name %></h1>
+		<p>Unit: <%=@user.unit%></p>
+		<blockquote>
+			<p>There isn't much here, but there will be!</p>
+			<small>There are many like it, but this is yours.</small>
+		</blockquote>
+	</div>
+<% else %>
+	<div class="hero-unit">
+		<h3>the user page of</h3><h1><%=@user.name %></h1>
+		<p>Unit: <%=@user.unit%></p>
+		<blockquote>
+			<small>There are many like it, but this is theirs.</small>
+		</blockquote>
+	</div>
+<% end %>
 
-<div class="hero-unit">
-	<h3>This is your user page,</h3><h1> <%=@user.name %></h1>
-	<p>Unit: <%=@user.unit%><p>
-	<blockquote>
-		<p>There isn't much here, but there will be!</p>
-		<small>There are many like it, but this is yours.</small>
-	</blockquote>
+<div class="container-fluid">
+	<div class="span4"
+		<h3>Pending ToDo items</h3>
+			<div class="row-fluid">
+				<table class="table table-condensed table-striped">
+					<%= render :partial => 'shared/brief_todo', :collection => @user.todoitems %>
+				</table>
+			</div>
+	</div>
+	<div class="span4"
+		<h3>Seven Recent Posts</h3>
+			<div class="row-fluid">
+				<table class="table table-striped">
+					<%= render :partial => 'shared/brief_post', :collection => @recent_posts %>
+				</table>
+			</div>
+	</div>
 </div>

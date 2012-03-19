@@ -32,7 +32,6 @@
 					:class => "btn btn-mini" %>	</td>
 			<% if current_user.admin? %>
 					<td>	
-
 					<a class="btn btn-mini btn-inverse" href=<%= delete_casefile_path(@casefile.id)%>>
 						<i class="icon-remove icon-white"></i>
 					</a>														
@@ -44,7 +43,7 @@
 			<h3> What needs to be done:</h3>
 			<div class="span12">
 				<table class="table table-striped">
-					<%= render :partial => 'shared/todo_item', :collection => @todos %>
+					<%= render :partial => 'shared/brief_todo', :collection => @todos %>
 				</table>
 			</div>
 		</div>
@@ -81,7 +80,7 @@
 		<div class="row-fluid">
 			<h3> What's happened: </h3>
 				<table class="table table-striped">
-					<%= render :partial => 'shared/feed_item', :collection => @microposts %>
+					<%= render :partial => 'shared/brief_post', :collection => @microposts %>
 				</table>
 		</div>
 

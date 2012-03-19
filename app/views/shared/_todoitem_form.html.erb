@@ -1,5 +1,4 @@
-<% user_list = User.all.collect {|p| [p.name, p.id] } %>
-
+<% user_list = User.all.collect {|p| [p.name_comma, p.id] } %>
 
 <div class="well">	
 	<%= semantic_form_for @todoitem do |f| %>
@@ -25,7 +24,7 @@
 					</div>
 					<div id="collapseOne" class="collapse in">
 						<div class="accordion-inner">
-							<%= f.input :user_id, :label=>'Assign to?', :as=>'select', :collection=>user_list %>
+							<%= f.input :user_id, :label=>'Assign to?', :as=>'select', :collection=>user_list.sort %>
 						</div>
 					</div>
 				</div>

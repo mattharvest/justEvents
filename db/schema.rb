@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120312190958) do
+ActiveRecord::Schema.define(:version => 20120319122401) do
 
   create_table "casefiles", :force => true do |t|
     t.string   "defendant"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20120312190958) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin",              :default => false
+    t.string   "title"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

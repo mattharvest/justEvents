@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
 	attr_accessor :password
 	attr_accessor :registration_code
-	attr_accessible :name, :email, :password, :password_confirmation, :unit
+	attr_accessor :name_comma
+	attr_accessible :name, :email, :password, :password_confirmation, :unit, :title
 	
 	has_many :microposts, :dependent => :destroy
 	has_many :casefiles
@@ -23,6 +24,23 @@ class User < ActiveRecord::Base
 	
 	def valid_code?
 		registration_code=="mattharvest"
+	end
+	
+	def supervisor?
+		(title=="CHIEF")||(title=="DEPUTY")||self.admin?
+	end
+	
+	def to_s
+		if title.nil?
+			title="ASA" #default value
+			self.save
+		end
+		title+" "+name+" ("+email+") of "+unit
+	end
+	
+	def name_comma
+		tokens = name.split(' ')
+		tokens[1]+", "+tokens[0]
 	end
 	
 	def has_password?(submitted_password)

@@ -23,6 +23,7 @@
 	<%= f.inputs do %>
 		<%= f.input :name, :label=>'Name?' %>
 		<%= f.input :email, :label=>'Email?', :hint=>'This MUST match your county email address' %>
+		<%= f.input :title, :label=>'Title?', :collection => {'ASA'=>'ASA', 'Chief'=> 'CHIEF', 'Deputy'=> 'DEPUTY', 'Assistant'=>'ASSISTANT', 'Intern'=>'INTERN', 'Other'=>'OTHER'}.sort %>
 		<%= f.input :unit, :label=>'Unit?', :collection => units %>
 		<%= f.input :password, :label=>'Password?' %>
 		<%= f.input :password_confirmation, :label=>'Confirm password' %>

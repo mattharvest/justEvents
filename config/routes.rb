@@ -15,6 +15,7 @@ resources :casefiles
    match '/casefiles/:id/edit' => 'casefiles#edit', :as=>'edit_case'
    match '/todoitems/:id/delete' => 'todoitems#destroy', :as=>'delete_task'
    match '/casefiles/:id/delete' => 'casefiles#destroy', :as=>'delete_casefile'
+
  
   
   match '/signin', :to => 'sessions#new'

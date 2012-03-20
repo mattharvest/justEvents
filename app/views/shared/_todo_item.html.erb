@@ -14,7 +14,7 @@
 			<% if current_user?(todo_item.user) || current_user.admin? %>
 
 			<% if !todo_item.complete %>
-				<a class="btn btn-mini" href=<%=complete_task_path(todo_item.id, :complete=>"true")%>>
+				<a class="btn btn-mini" href=<%=update_task_path(todo_item.id, :complete=>"true")%>>
 					<i class="icon-ok"></i>
 				</a>
 				<a class="btn btn-mini btn-inverse" href=<%= delete_task_path(todo_item.id)%>>

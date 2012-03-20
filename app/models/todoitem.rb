@@ -1,6 +1,8 @@
 class Todoitem < ActiveRecord::Base
 	belongs_to :user
 	
+	attr_accessor :daysleft
+	
 	attr_accessible :content, :duedate, :priority, :complete, :casenumber, :user_id
 	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]/i
 	
@@ -8,6 +10,10 @@ class Todoitem < ActiveRecord::Base
 	validates :user_id, :presence => true
 	validates :duedate, :presence => true
 	validates :casenumber, :format  => { :with => casenum_regex }, :presence => true
+	
+	def daysleft
+		(duedate-Date.today).to_i
+	end
 	
 	def summary
 		if complete

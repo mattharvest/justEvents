@@ -84,9 +84,21 @@ class TodoitemsController < ApplicationController
 				:category => "todoitem"
 				)
 			@micropost.save
+		elsif !params[:duedate].nil?
+			#update the date
+			@todoitem.duedate=params[:duedate]
+			@casefile = get_casefile(@todoitem.casenumber)
+			
+			@micropost = current_user.microposts.build(
+				:defendant=>@casefile.defendant,
+				:casenumber=>@todoitem.casenumber,
+				:content=>"Todo postponed, now due "+@todoitem.duedate.to_s,
+				:event_date=>Date.today,
+				:category=>"todoitem"
+				)
+			@micropost.save
 		else
-			flash[:todonotice]="Task not marked complete, "+params[:complete]
-			@todoitem.complete=false
+			flash[:todonotice]="Task not updated"
 		end		
 		@todoitem.save
 		

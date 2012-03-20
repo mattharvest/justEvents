@@ -11,7 +11,7 @@ resources :casefiles
   resources :todoitems, :only => [:new, :create, :destroy, :update]
   resources :tags, :only => [:create, :destroy]
 
-   match '/todoitems/:id/update' => 'todoitems#update', :as=>'complete_task'
+   match '/todoitems/:id/update' => 'todoitems#update', :as=>'update_task'
    match '/casefiles/:id/edit' => 'casefiles#edit', :as=>'edit_case'
    match '/todoitems/:id/delete' => 'todoitems#destroy', :as=>'delete_task'
    match '/casefiles/:id/delete' => 'casefiles#destroy', :as=>'delete_casefile'

@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 	attr_accessor :password
 	attr_accessor :registration_code
 	attr_accessor :name_comma
+	attr_accessor :pending_todos
+	attr_accessor :finished_todos
 	attr_accessible :name, :email, :password, :password_confirmation, :unit, :title
 	
 	has_many :microposts, :dependent => :destroy
@@ -24,6 +26,26 @@ class User < ActiveRecord::Base
 	
 	def valid_code?
 		registration_code=="mattharvest"
+	end
+	
+	def pending_todos
+		pending = []
+		self.todoitems.each do |t|
+			if !t.complete
+				pending << t
+			end
+		end
+		pending.sort_by{|t| t[:duedate]}
+	end
+
+	def finished_todos
+		finished = []
+		self.todoitems.each do |t|
+			if t.complete
+				finished << t
+			end
+		end
+		finished.sort_by{|t| t[:duedate]}
 	end
 	
 	def supervisor?

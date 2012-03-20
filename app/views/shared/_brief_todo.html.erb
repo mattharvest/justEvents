@@ -1,24 +1,35 @@
+
 <tr>
 	<td>
 		<%= link_to brief_todo.casenumber.to_s, brief_todo.retrieve_casefile %>
 		<% if brief_todo.complete %>
 			<em>
 		<% end %>
+		
 		<%= brief_todo.summary %>
 		<% if brief_todo.complete %>
 			</em>
 		<% end %> by <%= link_to brief_todo.user.name, brief_todo.user %> 			
 			<% if current_user?(brief_todo.user) || current_user.admin? %>
 				<% if !brief_todo.complete %>
-					<a class="btn btn-mini" href=<%=complete_task_path(brief_todo.id, :complete=>"true")%>>
+					<a class="btn btn-mini" href=<%=update_task_path(brief_todo.id, :complete=>"true")%>>
 						<i class="icon-ok"></i>
 					</a>
 					<a class="btn btn-mini btn-inverse" href=<%= delete_task_path(brief_todo.id)%>>
 						<i class="icon-remove icon-white"></i>
 					</a>
+					<a class="btn btn-mini" href=<%=update_task_path(brief_todo.id, :duedate=>brief_todo.duedate+7)%>>
+						postpone
+					</a>
 				<% else %>
 					<i class="icon-ok"></i><button class="btn btn-mini disabled">complete</button>
 				<% end %>
 			<% end %>
+			
+
 	</td>
 </tr>
+
+<script>
+	$(".datepicker").datepicker()
+</script>

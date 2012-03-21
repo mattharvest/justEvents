@@ -1,7 +1,8 @@
 <% if signed_in? %>
-	<h1>All Casefiles</h1>
-<%= render :partial => 'shared/casesearch' %>
-	<table class="table table-striped table-bordered table-condensed">
+	<h1>Search results for <%=@searchstring %></h1>
+	<%= render :partial => 'shared/casesearch' %>
+
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
 			<td>Defendant</td>
 			<td>CCN</td>
@@ -17,9 +18,12 @@
 			<% end %>
 		</tr>
 		<tr>
-			<%= render :partial => 'shared/case_item', :collection => @casefiles %>
+			<% if !@casefiles.count[0].nil? %>
+				<%= render :partial => 'shared/case_item', :collection => @casefiles %>
+			<% end %>
 		</tr>
 	</table>
+
 <% else %>
 	<div class="hero-unit">
 		<h1>You're not logged in!</h1>

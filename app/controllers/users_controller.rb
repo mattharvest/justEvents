@@ -3,10 +3,10 @@ class UsersController < ApplicationController
 	before_filter :correct_user, :only => [:edit, :update]
 	before_filter :admin_user, :only => :destroy
 	
-  def new
-	@user = User.new
-	@title = "Sign Up"
-  end
+	  def new
+		@user = User.new
+		@title = "Sign Up"
+	  end
 	
 	def destroy
 		User.find(params[:id]).destroy
@@ -17,7 +17,8 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(params[:user])
 		if @user.save
-		sign_in @user
+			UserMailer.registration_confirmation(@user).deliver
+			sign_in @user
 			flash[:success] = "Welcome to justEvents"
 			redirect_to @user
 		else
@@ -43,13 +44,19 @@ class UsersController < ApplicationController
 	end
 	
 	def update
-		@user = User.find(params[:id])
-		if @user.update_attributes(params[:user])
-			flash[:succcess] = "Profile updated."
-			redirect_to @user
+		if params[:id].nil?
+			#should mean that this is a password reset
+			reset_password(params[:email])
 		else
-			@title = "Edit User"
-			render 'edit'
+			#if not, then it's an update
+			@user = User.find(params[:id])
+			if @user.update_attributes(params[:user])
+				flash[:succcess] = "Profile updated."
+				redirect_to @user
+			else
+				@title = "Edit User"
+				render 'edit'
+			end
 		end
 	end
 	

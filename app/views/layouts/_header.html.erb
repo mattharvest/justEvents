@@ -9,12 +9,18 @@
 					<a class="brand" href="#">justEvents</a>
 						<div class="nav-collapse">
 							<ul class="nav">
+								<li>
+									<form class="navbar-search" action="/casefiles" method="get">
+										<input id="search" name="search" type="text" class="input-small search-query" placeholder="Casenumber?">
+									</form>
+								</li>
 								<li class="active"><%= link_to "New Post", root_path %></li>
 								<% if signed_in? %>
 									<li><%= link_to "All Posts", posts_path %></li>
 									<li><%= link_to "Calls", calls_path %></li>
 									<li><%= link_to "Todo", todoitems_path %></li>
 									<li><%= link_to "Cases", cases_path %></li>
+									
 									<li><%= link_to "Full Dispo", fulldisposition_path %></li>
 									<li></li>
 									<li class="dropdown" id="UserMenu">
@@ -23,7 +29,7 @@
 											<li><%= link_to "Profile", current_user %></li>
 											<li><%= link_to "Edit", edit_user_path(current_user) %></li>
 										</ul>
-								</li>
+									</li>
 									<li><%= link_to "Sign Out", signout_path, :method => :delete %></li>
 									<% if current_user.admin? %>
 										<li class="dropdown" id="AdminMenu">

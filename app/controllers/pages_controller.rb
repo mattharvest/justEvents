@@ -9,6 +9,11 @@ class PagesController < ApplicationController
 		end
 	end
 	
+	def reset_password
+		@user=User.new
+		@title="Reset password"
+	end
+	
 	def cases
 		@title="Casefiles"
 		@casefiles = Casefile.find(:all)

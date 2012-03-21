@@ -1,29 +1,34 @@
 <tr>
 	<td>
-		<p>
-		<% if todo_item.complete %>
-			<em>
-		<% end %>
-		<%= todo_item.summary %>
-		<% if todo_item.complete %>
-			</em>
-		<% end %>		
-		</p>
-		<small>	<%= link_to todo_item.user.name, todo_item.user %></small>
-		<small> Created <%= time_ago_in_words(todo_item.created_at) %> ago in <%= link_to todo_item.casenumber.to_s, todo_item.retrieve_casefile %>			
-			<% if current_user?(todo_item.user) || current_user.admin? %>
-
-			<% if !todo_item.complete %>
-				<a class="btn btn-mini" href=<%=update_task_path(todo_item.id, :complete=>"true")%>>
-					<i class="icon-ok"></i>
-				</a>
-				<a class="btn btn-mini btn-inverse" href=<%= delete_task_path(todo_item.id)%>>
-					<i class="icon-remove icon-white"></i>
-				</a>
+		<% if !todo_item.nil? %>
+			<p>
+				<% if todo_item.complete %>
+					<em>
+				<% end %>
+				<%= todo_item.summary %>
+				<% if todo_item.complete %>
+					</em>
+				<% end %>		
+			</p>
+			<% if todo_item.user.nil? %>
+				<% #THIS MEANS THE USER WAS DELETED %>
+				User no longer exists.
 			<% else %>
-				<i class="icon-ok"></i><button class="btn btn-mini disabled">complete</button>
+				<small>	<%= link_to todo_item.user.name, todo_item.user %></small>
 			<% end %>
-			
+			<small> Created <%= time_ago_in_words(todo_item.created_at) %> ago in <%= link_to todo_item.casenumber.to_s, todo_item.retrieve_casefile %>			
+			<% if current_user?(todo_item.user) || current_user.admin? %>
+				<% if !todo_item.complete %>
+					<a class="btn btn-mini" href=<%=update_task_path(todo_item.id, :complete=>"true")%>>
+						<i class="icon-ok"></i>
+					</a>
+					<a class="btn btn-mini btn-inverse" href=<%= delete_task_path(todo_item.id)%>>
+						<i class="icon-remove icon-white"></i>
+					</a>
+				<% else %>
+					<i class="icon-ok"></i><button class="btn btn-mini disabled">complete</button>
+				<% end %>
 			<% end %>
+		<% end %>
 	</td>
 </tr>

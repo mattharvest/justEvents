@@ -3,7 +3,23 @@
 		<h1>what's happened?</h1>
 		<div class="row-fluid">
 			<div class="span6">
-				<%= render 'shared/micropost_form' %>
+				<% if current_user.title=="ASA" %>
+					<%= render 'shared/micropost_form' %>
+					<% #ADD TEMPLATE-ADD %>
+				<% elsif current_user.title=="CHIEF" %>
+					<%= render 'shared/micropost_form' %>
+					<% #ADD TEMPLATE-ADD %>
+				<% elsif current_user.title=="DEPUTY" %>
+					<%= render 'shared/micropost_form' %>
+					<% #ADD TEMPLATE-ADD %>
+				<% elsif current_user.title=="ASSISTANT" %>
+					<% #ADD TEMPLATE-ADD %>
+				<% elsif current_user.title=="INTERN" %>
+					<%= render 'shared/micropost_form' %>
+				<% elsif current_user.title=="OTHER" %>
+				<% else %>
+					<%= render 'shared/micropost_form' %>
+				<% end %>
 			</div>
 			<div class="span2">
 				<%= render 'shared/user_info' %>

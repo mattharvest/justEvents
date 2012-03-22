@@ -40,7 +40,7 @@
 									</li>
 									<li class="divider-vertical"></li>
 									<li><%= link_to "Sign Out", signout_path, :method => :delete %></li>
-									<% if current_user.admin? %>
+									<% if current_user.admin?||current_user.supervisor? %>
 										<li class="dropdown" id="AdminMenu">
 											<a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin</a>
 											<ul class="dropdown-menu">
@@ -48,7 +48,7 @@
 												<li><%= link_to "Reports", reports_path %></li>
 											</ul>
 										</li>
-										<% end %>
+									<% end %>
 								<% else %>
 									<li><%= link_to "Sign in", signin_path %></li>
 								<% end %>

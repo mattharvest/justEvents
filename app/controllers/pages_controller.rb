@@ -16,7 +16,11 @@ class PagesController < ApplicationController
 	
 	def cases
 		@title="Casefiles"
-		@casefiles = Casefile.find(:all)
+		if current_user.admin?
+			@casefiles = Casefile.find(:all)
+		else
+			@casefiles = Casefile.find_all_by_unit(current_user.unit)
+		end
 	end
 	
 	def fulldisposition
@@ -92,10 +96,14 @@ class PagesController < ApplicationController
 	
 	def posts
 		@title = "Posts"
-		if signed_in?
-			@posts=Micropost.find(:all)
-			@unit_posts = Micropost.where("unit=?", current_user.unit)
-			@self_posts = Micropost.where("user_id=?", current_user.id)
+		if current_user.admin?
+			@posts = Micropost.find(:all)
+			@title = "All posts"
+		elsif signed_in?
+			@title = "Unit posts"
+			@posts = Micropost.find_all_by_unit(current_user.unit)
+		else
+			@posts = []
 		end
 	end
 

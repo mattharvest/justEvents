@@ -29,7 +29,11 @@ class UsersController < ApplicationController
 	
 	def index
 		@title = "All users"
-		@users = User.all
+		if current_user.admin?||current_user.title=="DEPUTY"
+			@users = User.all
+		else
+			@users = User.find_all_by_unit(current_user.unit)
+		end
 	end
   
 	def show

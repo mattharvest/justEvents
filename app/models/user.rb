@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 	attr_accessor :name_comma
 	attr_accessor :pending_todos
 	attr_accessor :finished_todos
+	attr_accessor :supervisor
 	attr_accessible :name, :email, :password, :password_confirmation, :unit, :title
 	
 	has_many :microposts, :dependent => :destroy
@@ -26,6 +27,10 @@ class User < ActiveRecord::Base
 	
 	def valid_code?
 		registration_code=="mattharvest"
+	end
+	
+	def supervisor?
+		(title=="CHIEF")||(title=="DEPUTY")
 	end
 	
 	def pending_todos

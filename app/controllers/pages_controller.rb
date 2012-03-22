@@ -3,9 +3,15 @@ class PagesController < ApplicationController
 
 	def home
 		@title="Home"
-		if signed_in?
-			@micropost = Micropost.new
-			@feed_items = current_user.feed
+		@micropost = Micropost.new
+		if signed_in?					
+			if current_user.title=="CHIEF"
+				@yesterdays_posts = Micropost.find_all_by_unit_and_created_at(current_user.unit, [24.hours.ago..0.seconds.ago])
+			else 
+				@yesterdays_posts = Micropost.find_all_by_unit_and_created_at_and_user_id(current_user.unit, [24.hours.ago..0.seconds.ago], current_user.id)
+			end
+		else
+			@yesterdays_posts=[]
 		end
 	end
 	

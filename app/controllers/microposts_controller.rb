@@ -8,6 +8,9 @@ class MicropostsController < ApplicationController
 	def create
 		params[:micropost][:casenumber].upcase!
 		@micropost = current_user.microposts.new(params[:micropost])
+		if @micropost.event_date.nil?||@micropost.event_date.blank?
+			@micropost.event_date = @micropost.created_at
+		end
 		
 		
 		@micropost.unit = current_user.unit

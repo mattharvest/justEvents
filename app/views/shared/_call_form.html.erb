@@ -6,6 +6,7 @@
 			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
 			<%= f.input :category, :as=>'hidden', :input_html => { :value=>'phonecall' } %>
 			<%= f.input :adf, :as=>'hidden', :input_html => { :value=>'' } %>
+			<%= f.input :event_date, :as=>'hidden', :input_html => {:value =>Date.today.to_s } %>
 		<% end %>
 		<%= f.actions do %>
 			<%= f.action(:submit) %>

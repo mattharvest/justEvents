@@ -10,7 +10,8 @@
 	<tbody>
 		<% @users.each do |u| %>
 			<tr>
-				<th><%=link_to u.name, u %></th>
+				<% title_and_name = u.title.to_s+" "+u.name.to_s %>
+				<th><%=link_to title_and_name, u %></th>
 				<th><%= u.email %></th>
 				<th><%= u.unit %></th>
 		<% end %>		

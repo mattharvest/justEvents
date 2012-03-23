@@ -1,3 +1,5 @@
+<% user_list = User.all.collect {|p| [p.name_comma+" ("+p.email+")", p.id] } %>
+
 <div class="well">	
 	<%= semantic_form_for @micropost do |f| %>
 		<%= f.semantic_errors %>
@@ -7,6 +9,7 @@
 			<%= f.input :category, :as=>'hidden', :input_html => { :value=>'phonecall' } %>
 			<%= f.input :adf, :as=>'hidden', :input_html => { :value=>'' } %>
 			<%= f.input :event_date, :as=>'hidden', :input_html => {:value =>Date.today.to_s } %>
+			<%= f.input :notify, :label=>'Who should be emailed?', :as=>'select', :collection=>user_list.sort, :hint=>'Default: nobody' %>
 		<% end %>
 		<%= f.actions do %>
 			<%= f.action(:submit) %>

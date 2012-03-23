@@ -1,6 +1,7 @@
 class Micropost < ActiveRecord::Base
 
 	belongs_to :user
+	attr_accessor :notify
 	attr_accessible :dob, :adf, :defendant, :category, :casenumber, :event_date, :unit, :content, :casefile_id, :gang, :jail, :probation, :restitution, :communityservice, :judge, :leadcharge, :convictedcharges, :enhanced, :guidelines, :teamleader
 	
 	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9][A-Z]|CCN[0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/i
@@ -9,6 +10,11 @@ class Micropost < ActiveRecord::Base
 	validates :casenumber, :presence => true, :format => {:with => casenum_regex }
 
 	default_scope :order => 'microposts.created_at DESC'
+	
+	def notify_of_call
+		user_to_email = User.find_by_id(notify)
+		UserMailer.call_notice(user_to_email, content.to_s, casenumber.to_s).deliver
+	end
 	
 	def description
 		casenumber.to_s+", "+unit.to_s+", "+category.to_s

@@ -11,4 +11,11 @@ class UserMailer < ActionMailer::Base
 		@password = password
 		mail(:to=> user.email, :subject => "Password reset")
 	end
+	
+	def call_notice(user, content, casenumber)
+		@user = user
+		@content = content
+		@casenumber=casenumber
+		mail(:to=> user.email, :subject => "New call in ("+casenumber.to_s+")")
+	end
 end

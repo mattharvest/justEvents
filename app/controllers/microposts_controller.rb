@@ -12,7 +12,6 @@ class MicropostsController < ApplicationController
 			@micropost.event_date = @micropost.created_at
 		end
 		
-		
 		@micropost.unit = current_user.unit
 		
 		if @micropost.save
@@ -30,6 +29,12 @@ class MicropostsController < ApplicationController
 			flash[:micropostfailure]="Micropost not created, "+@micropost.casenumber
 			flash[:errorsnotice]=@micropost.errors.full_messages
 			redirect_to :back
+		end
+		
+		if (@micropost.category=="phonecall")&&!(params[:micropost][:notify]=="")
+			@micropost.notify = params[:micropost][:notify]
+			@micropost.notify_of_call
+			flash[:phonecallnotice]="Notice of phone call sent"
 		end
 	end
 	

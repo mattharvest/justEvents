@@ -28,7 +28,7 @@ class CasefilesController < ApplicationController
 		@title=@casefile.defendant
 
 		@microposts = @casefile.get_microposts
-		@todos = @casefile.get_todos
+		@todos = @casefile.get_todos.sort_by {|t| t.daysleft}
 		
 		@todoitem = Todoitem.new
 		@micropost = Micropost.new

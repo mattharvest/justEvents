@@ -1,22 +1,34 @@
 
 <tr>
-	<td>
+	<td>	
 		<%= link_to brief_todo.casenumber.to_s, brief_todo.retrieve_casefile %>
+		<% if !brief_todo.complete %>
+			<% code_string="btn-mini"
+			case brief_todo.daysleft
+				when 0..1
+					code_string+=" btn-danger"
+				when 2..4
+					code_string+=" btn-warning"
+				when 5..7
+					code_string+=" btn-primary"
+			end %>
+			<button class="btn <%=code_string%>">due in <%= brief_todo.daysleft.to_s %></button>
+		<% end %>
+		<%=brief_todo.content%>
 		<% if brief_todo.complete %>
 			<em>
 		<% end %>
 		
-		<%= brief_todo.summary %>
 		<% if brief_todo.complete %>
 			</em>
 		<% end %> by <%= link_to brief_todo.user.name, brief_todo.user %> 			
 			<% if current_user?(brief_todo.user) || current_user.admin? %>
+				<a class="btn btn-mini btn-inverse" href=<%= delete_task_path(brief_todo.id)%>>
+						<i class="icon-remove icon-white"></i>
+				</a>
 				<% if !brief_todo.complete %>
 					<a class="btn btn-mini" href=<%=update_task_path(brief_todo.id, :complete=>"true")%>>
 						<i class="icon-ok"></i>
-					</a>
-					<a class="btn btn-mini btn-inverse" href=<%= delete_task_path(brief_todo.id)%>>
-						<i class="icon-remove icon-white"></i>
 					</a>
 					<a class="btn btn-mini" href=<%=update_task_path(brief_todo.id, :duedate=>brief_todo.duedate+7)%>>
 						postpone

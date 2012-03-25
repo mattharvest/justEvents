@@ -71,9 +71,9 @@
 		<%= f.semantic_errors %>
 		<%= f.inputs do %>
 			<div class="accordion" id="form_accordion">
-				<div class="accordion-group'">
+				<div class="accordion-group">
 					<div class="accordion-heading">
-						<a class="accordion-toggle" data-toggle="collapse" data-parent="form_accordion" data-target="#partyInfo">
+						<a class="btn btn-inverse accordion-toggle" data-toggle="collapse" data-parent="form_accordion" data-target="#partyInfo">
 							Party Info
 						</a>
 					</div>
@@ -82,8 +82,8 @@
 							<%= f.input :teamleader, :label=>'Team Leader?', :as=>'select', :collection=>user_list.sort %>
 							<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
 							<%= f.input :defendant, :as=>'string', :placeholder=>'[defendant]' %>
-										<div class="input-append date" id="micropost_dob" data-date="2012-12-12" data-date-format="yyyy-mm-dd">
-											<input type="text" value="2012-12-12" readonly class="span2" name="micropost[dob]">
+										<div class="input-append date" id="micropost_dob" data-date="<%=18.years.ago.to_s%>" data-date-format="yyyy-mm-dd">
+											<input type="text" value="<%=18.years.ago.to_s%>" readonly class="span2" name="micropost[dob]">
 											<span class="add-on">
 												<i class="icon-th"></i>
 											</span>
@@ -109,9 +109,9 @@
 					</div>
 				</div>
 
-				<div class="accordion-group'">
+				<div class="accordion-group">
 					<div class="accordion-heading">
-						<a class="accordion-toggle" data-toggle="collapse" data-parent="form_accordion" data-target="#sentenceInfo">
+						<a class="btn btn-inverse accordion-toggle" data-toggle="collapse" data-parent="form_accordion" data-target="#sentenceInfo">
 							Sentence Info
 						</a>
 					</div>
@@ -119,6 +119,7 @@
 						<div class="accordion-inner">
 							<%= f.input :enhanced, :label=>'Enhanced/Mandatory penalties?' %>
 							<%= f.input :gang, :label=>'Gang name (if related)?' %>
+							<%= f.input :offendertype, :label=>'Offender type?', :as=>'select', :collection=>["multiple conviction", "gang-related", "major offender"] %>
 							<%= f.input :guidelines, :label=>'Sentence guidelines range for convicted charges?' %>
 							<%= f.input :jail, :label=>'Jail?', :hint=>' months' %>
 							<%= f.input :probation, :label=>'Probation?', :placeholder=>'Y years, [un]supervised'%>
@@ -127,20 +128,32 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="btn btn-inverse accordion-toggle" data-toggle="collapse" data-parent="form_accordion" data-target="#convictionInfo">
+							Outcome info
+						</a>
+					</div>
+					<div id="convictionInfo" class="accordion-body collapse in">
+						<div class="accordion-inner">
+								<div class="input-append date" id="micropost_event_date" data-date="2012-12-12" data-date-format="yyyy-mm-dd">
+									<input type="text" value="<%=Date.today.to_s%>" readonly class="span2" name="micropost[event_date]">
+									<span class="add-on">
+										<i class="icon-th"></i>
+									</span>
+									<span class="help-inline">when?</span>
+								</div>								
+								<%= f.input :leadcharge, :label=>'Lead charge?' %>
+								<%= f.input :convictedcharges, :label=>'Convicted charges?', :input_html => { :class=>'autogrow' }%>
+								<%= f.input :category, :label=>'Category?', :collection => list %>
+								<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[text of event]'}, :label=>'What happened?'%>
+							</div>
+					</div>
+				</div>
 			</div>
 			
-			<div class="input-append date" id="micropost_event_date" data-date="2012-12-12" data-date-format="yyyy-mm-dd">
-				<input type="text" value="2012-12-12" readonly class="span2" name="micropost[event_date]">
-				<span class="add-on">
-					<i class="icon-th"></i>
-				</span>
-				<span class="help-inline">when?</span>
-			</div>
-			
-			<%= f.input :leadcharge, :label=>'Lead charge?' %>
-			<%= f.input :convictedcharges, :label=>'Convicted charges?', :input_html => { :class=>'autogrow' }%>
-			<%= f.input :category, :label=>'Category?', :collection => list %>
-			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[text of event]'}, :label=>'What happened?'%>
+
 
 		<% end %>
 		<%= f.actions do %>

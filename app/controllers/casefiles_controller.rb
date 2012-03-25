@@ -5,8 +5,14 @@ class CasefilesController < ApplicationController
 	end
 	
 	def create
-		@casefile = Casefile.build(params[:casefile])
+		@casefile = Casefile.new
+		if @casefile.update_attributes(params[:casefile])
+			redirect_to :cases
+		else
+			render 'new'
+		end
 	end
+	
 	
 	def edit
 		@casefile = Casefile.find(params[:id])

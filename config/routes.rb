@@ -31,6 +31,7 @@ resources :casefiles
   match '/todoitems', :to => 'pages#todos'
   match '/todo', :to=>'pages#todos'
   match '/fulldisposition', :to=>'pages#fulldisposition'
+  match '/newcase', :to => 'casefiles#new', :as=>'new_case'
   
   
   root :to => 'pages#home'

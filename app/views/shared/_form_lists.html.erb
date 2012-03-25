@@ -1,0 +1,67 @@
+<% dob_label="Defendant DOB?" %>
+<% if current_user.unit=="juvenile"	
+	dob_label= "Respondent DOB?"
+	end %>
+	
+<% user_list = User.all.collect {|p| [p.name_comma, p.id] } %>
+
+<% juvenile_categories = {
+			'screening' => 'screening',
+			'continuance' => 'continuance',
+			'writ' => 'writ',
+			'merits hearing' => 'trial',
+			'plea deal (incl. stet)' => 'plea',
+			'decline to prosecute' => 'dtp',
+			'acquittal' => 'acquittal',
+			'dismissal' => 'dismissal',
+			'waiver-up' => 'waiver up'
+			} 
+		grandjury_categories = {
+			'screening' => 'screening',
+			'charged' => 'charged',
+			'returned for investigation' => 'RFI',
+			'declined to prosecute' => 'dtp'
+			}
+		circuit_categories = {
+			'preliminary hearing'=>'ph',
+			'sent to district court'=>'dcwl',
+			'screening'=>'screening',
+			'trial'=>'trial',
+			'plea deal (incl. stet)'=>'plea',
+			'nolle prosequi'=>'dtp',
+			'acquittal'=>'acquittal',
+			'bench warrant'=>'bench warrant',
+			'other'=>'other',
+			'Broadcast Notice'=>'notice',
+			'NCIC'=>'NCIC',
+			'search warrant'=>'search warrant',
+			'subpoeana issued'=>'subpoena issued',
+			'waiver down to juvenile'=>'waiver down'
+			}
+		community_categories = {
+			'community need identified'=>'community need identified',
+			'suspect assigned to attorney'=>'assigned'
+			}
+		postconviction_categories = {
+			'corum nobias' => 'corum nobis',
+			'appeal filed' => 'appeal filed',
+			'appeal rejected' => 'appeal rejected',
+			'verdict overturned' => 'verdict overturned'
+			} 
+		specialinvestigation_categories = {
+			'suspect suggested'=>'new suspect',
+			'suspect rejected'=>'suspect rejected'
+			}
+		if current_user.unit.eql?("juvenile")
+			list=juvenile_categories.sort
+		elsif current_user.unit.eql?("grand jury")
+			list=grandjury_categories.merge(circuit_categories).sort
+		elsif current_user.unit.eql?("community prosecution")
+			list=community_categories.merge(circuit_categories).sort
+		elsif current_user.unit.eql?("postconviction")
+			list=postconviction_categories.merge(circuit_categories).sort
+		elsif current_user.unit.eql?("special investigation")
+			list=specialinvestigation_categories.merge(circuit_categories).sort
+		else
+			list=circuit_categories.sort
+		end %>

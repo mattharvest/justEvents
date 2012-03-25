@@ -1,8 +1,9 @@
 class UserMailer < ActionMailer::Base
   default from: "matthew.bohrer@gmail.com"
   
-	def registration_confirmation(user)
+	def registration_confirmation(user, password)
 		@user = user
+		@password = password
 		mail(:to=> user.email, :subject => "Registered with justEvents")
 	end
 	

@@ -22,11 +22,7 @@ class PagesController < ApplicationController
 	
 	def cases
 		@title="Casefiles"
-		if current_user.admin?
-			@casefiles = Casefile.find(:all)
-		else
-			@casefiles = Casefile.find_all_by_unit(current_user.unit)
-		end
+		@casefiles = Casefile.find(:all)
 	end
 	
 	def fulldisposition

@@ -12,7 +12,8 @@
 			'decline to prosecute' => 'dtp',
 			'acquittal' => 'acquittal',
 			'dismissal' => 'dismissal',
-			'waiver-up' => 'waiver up'
+			'waiver-up' => 'waiver up',
+			'waiver-down' => 'waiver down'
 			} 
 		grandjury_categories = {
 			'screening' => 'screening',
@@ -48,7 +49,9 @@
 			} 
 		specialinvestigation_categories = {
 			'suspect suggested'=>'new suspect',
-			'suspect rejected'=>'suspect rejected'
+			'suspect rejected'=>'suspect rejected',
+			'suspect accepted'=>'suspect accepted',
+			'case assigned'=>'case assigned'
 			}
 		if current_user.unit.eql?("juvenile")
 			list=juvenile_categories.sort

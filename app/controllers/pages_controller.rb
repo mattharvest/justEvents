@@ -22,7 +22,8 @@ class PagesController < ApplicationController
 	
 	def cases
 		@title="Casefiles"
-		@casefiles = Casefile.find(:all)
+		#@casefiles = Casefile.find(:all)
+		@casefiles = Casefile.paginate(:page=>params[:page], :per_page => 20).order('updated_at DESC')
 	end
 	
 	def fulldisposition
@@ -99,11 +100,11 @@ class PagesController < ApplicationController
 	def posts
 		@title = "Posts"
 		if current_user.admin?
-			@posts = Micropost.find(:all)
 			@title = "All posts"
+			@posts = Micropost.paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
 		elsif signed_in?
 			@title = "Unit posts"
-			@posts = Micropost.find_all_by_unit(current_user.unit)
+			@posts = Micropost.where(:unit=>current_user.unit).paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
 		else
 			@posts = []
 		end

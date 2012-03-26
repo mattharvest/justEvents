@@ -1,5 +1,7 @@
 <% if signed_in? %>
 	<h1>All Posts</h1>
+	
+	<%= will_paginate @posts %>
 	<table class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
@@ -14,7 +16,7 @@
 				<th>	Category: 		</th>
 				<th>	What Happened: 	</th>
 				<th>	Created On: 	</th>
-				<td>	Gang:			</th>
+				<th>	Gang:			</th>
 				<th>	Jail:			</th>
 				<th>	Probation:		</th>
 				<th>	Community Service:	</th>
@@ -34,6 +36,8 @@
 			<%= render :partial => 'shared/post_item', :collection => @posts %>
 		</tbody>
 	</table>
+	
+	<%= will_paginate @posts%>
 <% else %>
 	<div class="hero-unit">
 		<h1>You're not logged in!</h1>

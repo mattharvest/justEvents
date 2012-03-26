@@ -1,6 +1,8 @@
 <% if signed_in? %>
 	<h1>All Casefiles</h1>
 <%= render :partial => 'shared/casesearch' %>
+
+<%= will_paginate @casefiles %>
 	<table class="table table-striped table-bordered table-condensed">
 		<tr>
 			<td>Defendant</td>
@@ -20,6 +22,7 @@
 			<%= render :partial => 'shared/case_item', :collection => @casefiles %>
 		</tr>
 	</table>
+<%= will_paginate @casefiles %>
 <% else %>
 	<div class="hero-unit">
 		<h1>You're not logged in!</h1>

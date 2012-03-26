@@ -34,6 +34,13 @@ class UsersController < ApplicationController
 		else
 			@users = User.find_all_by_unit(current_user.unit)
 		end
+		
+		@users.each do |u|
+			if u.title.to_s.blank?
+				u.title="ASA"
+				u.save
+			end
+		end
 	end
   
 	def show

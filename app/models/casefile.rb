@@ -13,11 +13,11 @@ class Casefile < ActiveRecord::Base
 	#validates :ca, :format => { :with => /CA[0-9][0-9][0-9][0-9][0-9][0-9]/ }
 	#validates :ja, :format => { :with => /JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]/ }
 	
-	validates :cr, :uniqueness => { :case_sensitive => false }
-	validates :ct, :uniqueness => { :case_sensitive => false }
-	validates :cj, :uniqueness => { :case_sensitive => false }
-	validates :ca, :uniqueness => { :case_sensitive => false }
-	validates :ja, :uniqueness => { :case_sensitive => false }
+	#validates :cr, :uniqueness => { :case_sensitive => false }
+	#validates :ct, :uniqueness => { :case_sensitive => false }
+	#validates :cj, :uniqueness => { :case_sensitive => false }
+	#validates :ca, :uniqueness => { :case_sensitive => false }
+	#validates :ja, :uniqueness => { :case_sensitive => false }
 	
 	def lead_casenumber
 		if !ct.blank?

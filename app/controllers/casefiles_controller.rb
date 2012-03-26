@@ -7,7 +7,6 @@ class CasefilesController < ApplicationController
 	def create
 		@casefile = Casefile.new
 		if @casefile.update_attributes(params[:casefile])
-			redirect_to :cases
 		else
 			render 'new'
 		end

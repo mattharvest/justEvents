@@ -10,6 +10,16 @@
 	<td>	<%= post_item.category %> 			</td>
 	<td>	<%= post_item.content %> 			</td>
 	<td>	<%= post_item.created_at.to_s %> 	</td>
+	<td		<%= post_item.gang.to_s %>			</td>
+	<td		<%= post_item.jail.to_s %>			</td>
+	<td		<%= post_item.probation.to_s %>		</td>
+	<td		<%= post_item.communityservice.to_s %>	</td>
+	<td		<%= post_item.judge.to_s %>			</td>
+	<td		<%= post_item.leadcharge.to_s %>	</td>
+	<td		<%= post_item.convictedcharges.to_s %>	</td>
+	<td		<%= post_item.enhanced.to_s %>		</td>
+	<td		<%= post_item.guidelines.to_s %>	</td>
+	<td		<%= post_item.teamleader.to_s %>	</td>
 	<td>	<% if current_user?(post_item.user) || current_user.admin? %>
 				<%= link_to "delete", post_item, 	:method => :delete, 
 													:confirm => "You sure?"
@@ -17,3 +27,4 @@
 			<% end %>							
 			</td>
 </tr>
+	

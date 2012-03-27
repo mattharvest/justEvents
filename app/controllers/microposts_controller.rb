@@ -4,6 +4,7 @@ class MicropostsController < ApplicationController
 	
 	def new
 	end
+
 	
 	def create
 		params[:micropost][:casenumber].upcase!

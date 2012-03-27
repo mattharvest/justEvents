@@ -16,7 +16,6 @@ resources :casefiles
    match '/todoitems/:id/delete' => 'todoitems#destroy', :as=>'delete_task'
    match '/casefiles/:id/delete' => 'casefiles#destroy', :as=>'delete_casefile'
 
- 
   
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
@@ -25,6 +24,7 @@ resources :casefiles
   match '/posts', :to => 'pages#posts'
   match '/signup', :to => 'users#new' 
   match '/reports', :to => 'pages#reports'
+  match '/custom_report', :to => 'pages#custom_report'
   match '/csv', :to => 'pages#export_to_csv'
   match '/calls', :to => 'pages#calls'
   match '/cases', :to => 'pages#cases'

@@ -1,0 +1,106 @@
+<% juvenile_categories = {
+			'screening' => 'screening',
+			'continuance' => 'continuance',
+			'writ' => 'writ',
+			'merits hearing' => 'trial',
+			'plea deal (incl. stet)' => 'plea',
+			'decline to prosecute' => 'dtp',
+			'acquittal' => 'acquittal',
+			'dismissal' => 'dismissal',
+			'waiver-up' => 'waiver up',
+			'waiver-down' => 'waiver down',
+			'restitution hearing'=> 'restitution hearing',
+			'to do'=>'todoitem',
+			'phonecall'=>'phonecall'
+			} 
+		grandjury_categories = {
+			'screening' => 'screening',
+			'charged' => 'charged',
+			'returned for investigation' => 'RFI',
+			'declined to prosecute' => 'dtp'
+			}
+		circuit_categories = {
+			'preliminary hearing'=>'ph',
+			'sent to district court'=>'dcwl',
+			'screening'=>'screening',
+			'trial'=>'trial',
+			'plea deal (incl. stet)'=>'plea',
+			'nolle prosequi'=>'dtp',
+			'acquittal'=>'acquittal',
+			'bench warrant'=>'bench warrant',
+			'other'=>'other',
+			'Broadcast Notice'=>'notice',
+			'NCIC'=>'NCIC',
+			'search warrant'=>'search warrant',
+			'subpoeana issued'=>'subpoena issued',
+			'waiver down to juvenile'=>'waiver down',
+			'to do'=>'todoitem',
+			'phonecall'=>'phonecall'
+			}
+		community_categories = {
+			'community need identified'=>'community need identified',
+			'suspect assigned to attorney'=>'assigned'
+			}
+		postconviction_categories = {
+			'corum nobias' => 'corum nobis',
+			'appeal filed' => 'appeal filed',
+			'appeal rejected' => 'appeal rejected',
+			'verdict overturned' => 'verdict overturned'
+			} 
+		specialinvestigation_categories = {
+			'suspect suggested'=>'new suspect',
+			'suspect rejected'=>'suspect rejected',
+			'suspect accepted'=>'suspect accepted',
+			'case assigned'=>'case assigned'
+			}
+		if current_user.unit.eql?("juvenile")
+			list=juvenile_categories.sort
+		elsif current_user.unit.eql?("grand jury")
+			list=grandjury_categories.merge(circuit_categories).sort
+		elsif current_user.unit.eql?("community prosecution")
+			list=community_categories.merge(circuit_categories).sort
+		elsif current_user.unit.eql?("postconviction")
+			list=postconviction_categories.merge(circuit_categories).sort
+		elsif current_user.unit.eql?("special investigation")
+			list=specialinvestigation_categories.merge(circuit_categories).sort
+		else
+			list=circuit_categories.sort
+		end %>
+
+<form action="/custom_report" method="get">
+
+	<select id="micropost_category" class="span2" name="micropost_category">
+		<% list.each do |l| %>
+			<option value="<%= l[1] %>"><%=l[0].to_s %></option>
+		<% end %>
+	</select>
+
+	<div class="input-append date" id="start" data-date="<%= (Date.today-1).to_s %>" data-date-format="yyyy-mm-dd">
+		<input type="text" value="<%= (Date.today-1).to_s %>" readonly class="span2" name="start">
+		<span class="add-on">
+			<i class="icon-th"></i>
+		</span>
+		<span class="help-inline">Start Date</span>
+	</div>
+
+	<div class="input-append date" id="end" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
+		<input type="text" value="<%= Date.today.to_s %>" readonly class="span2" name="end">
+		<span class="add-on">
+			<i class="icon-th"></i>
+		</span>
+		<span class="help-inline">End Date</span>
+	</div>	
+	
+	<button type="submit" class="btn">Search</button>
+</form>
+
+<script>
+	$('#start').datepicker()
+		.on('changeDate', function(ev) {
+			$('#start').datepicker('hide');
+		})
+	$('#end').datepicker()
+		.on('changeDate', function(ev) {
+			$('#end').datepicker('hide');
+		})
+</script>

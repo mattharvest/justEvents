@@ -66,6 +66,13 @@ class PagesController < ApplicationController
 		end
 	end
 	
+	def custom_report
+		if @microposts = Micropost.find_all_by_category_and_event_date(params[:micropost_category], [params[:start]...params[:end]])
+		else
+			flash[:microposterror] = "Search by category and date failed!"
+		end
+	end
+	
 	def export_to_csv
 		csv_string = CSV.generate do |c|
 		scope=params[:scope]	

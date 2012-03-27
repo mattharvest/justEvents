@@ -3,6 +3,14 @@ class PagesController < ApplicationController
 
 	def home
 		@title="Home"
+		if signed_in?
+			redirect_to current_user
+		else
+			redirect_to post
+		end
+	end
+	
+	def post
 		@micropost = Micropost.new
 		if signed_in?					
 			if current_user.title=="CHIEF"
@@ -13,6 +21,7 @@ class PagesController < ApplicationController
 		else
 			@yesterdays_posts=[]
 		end
+	
 	end
 	
 	def reset_password

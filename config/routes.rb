@@ -32,6 +32,7 @@ resources :casefiles
   match '/todo', :to=>'pages#todos'
   match '/fulldisposition', :to=>'pages#fulldisposition'
   match '/newcase', :to => 'casefiles#new', :as=>'new_case'
+  match '/post', :to => 'pages#post'
   
   
   root :to => 'pages#home'

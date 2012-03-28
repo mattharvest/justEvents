@@ -67,6 +67,7 @@ class PagesController < ApplicationController
 	end
 	
 	def custom_report
+		@title = Custom Search
 		if @microposts = Micropost.find_all_by_category_and_event_date(params[:micropost_category], [params[:start]...params[:end]])
 		else
 			flash[:microposterror] = "Search by category and date failed!"

@@ -2,18 +2,6 @@
 <% if current_user.unit=="juvenile"	
 	dob_label= "Respondent DOB?"
 	end %>
-	
-<script>
-	$('.typeahead').typeahead()
-	$('#micropost_dob').datepicker()
-		.on('changeDate', function(ev) {
-			$('#micropost_dob').datepicker('hide');
-		})
-	$('#micropost_event_date').datepicker()
-			.on('changeDate', function(ev) {
-			$('#micropost_event_date').datepicker('hide');
-		})
-</script>
 
 <% juvenile_categories = {
 			'screening' => 'screening',
@@ -124,3 +112,14 @@
 	<% end %>
 </div>
 
+<script>
+	$('.typeahead').typeahead()
+	$('#micropost_dob').datepicker()
+		.on('changeDate', function(ev) {
+			$('#micropost_dob').datepicker('hide');
+		})
+	$('#micropost_event_date').datepicker()
+			.on('changeDate', function(ev) {
+			$('#micropost_event_date').datepicker('hide');
+		})
+</script>

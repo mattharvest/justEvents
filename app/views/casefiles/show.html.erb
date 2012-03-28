@@ -1,5 +1,15 @@
 <% user_list = User.all.collect {|p| [p.name, p.id] } %>
 
+<div id="micropostModal" class="modal modal-form hide fade autowidth" style="display: none; ">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">x</a>
+		<h3>Quick-add event in this case</h3>
+	</div>
+	<div class="modal-body">
+		<%= render 'shared/quick_micropost_form' %>
+	</div>
+</div>
+		
 <% if signed_in? %>
 	<div class="container-fluid">
 		<h1>Case file for <%=@casefile.defendant %></h1>
@@ -51,15 +61,6 @@
 			<%= render 'shared/quick_todo_form' %>
 		</div>
 		
-		<div id="micropostModal" class="modal modal-form hide fade autowidth" style="display: none; ">
-			<div class="modal-header">
-				<a class="close" data-dismiss="modal">x</a>
-				<h3>Quick-add event in this case</h3>
-			</div>
-			<div class="modal-body">
-				<%= render 'shared/quick_micropost_form' %>
-			</div>
-		</div>
 		<div class="row-fluid">
 			<h3> What's happened: </h3>
 		</div>

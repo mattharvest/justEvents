@@ -47,11 +47,8 @@ class TodoitemsController < ApplicationController
 				@casefile.defendant="Doe, John"
 			end
 			
-			if @casefile.save
-				flash[:casefilesuccess]="Casefile created/saved"+@casefile.summary
-			else
-				flash[:casefilefailure]="Casefile not created, "+@casefile.summary
-			end
+			@casefile.save
+			redirect_to @casefile and return
 		else
 			flash[:todoitemfailure]=@todoitem.errors.full_messages
 		end

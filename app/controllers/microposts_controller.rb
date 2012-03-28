@@ -17,14 +17,14 @@ class MicropostsController < ApplicationController
 		
 		if @micropost.save
 			flash[:micropostsuccess]= "Micropost created"
-			
 			@casefile = @micropost.get_casefile
 			if @casefile.save
 				flash[:casefilesuccess]="Casefile created/saved, "+@casefile.summary
+				redirect_to @casefile and return
 			else
 				flash[:casefilefailure]="Casefile not created, "+@casefile.summary
+				redirect_to :back
 			end
-			redirect_to :back
 		else
 			@feed_items=[]
 			flash[:micropostfailure]="Micropost not created, "+@micropost.casenumber

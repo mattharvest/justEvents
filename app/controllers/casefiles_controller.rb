@@ -37,8 +37,6 @@ class CasefilesController < ApplicationController
 		
 		@todoitem = Todoitem.new
 		@micropost = Micropost.new
-
-		flash[:notice]="Microposts: "+@microposts.count.to_s+", Todos: "+@todos.count.to_s
 	end
 	
 	def destroy

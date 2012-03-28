@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 		if signed_in?
 			redirect_to current_user
 		else
-			redirect_to post
+			redirect_to post_path
 		end
 	end
 	

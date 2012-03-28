@@ -14,7 +14,9 @@
 			'dismissal' => 'dismissal',
 			'waiver-up' => 'waiver up',
 			'waiver-down' => 'waiver down',
-			'restitution hearing'=> 'restitution hearing'
+			'restitution hearing'=> 'restitution hearing',
+			'to do'=>'todoitem',
+			'phonecall'=>'phonecall'
 			} 
 		grandjury_categories = {
 			'screening' => 'screening',
@@ -36,7 +38,9 @@
 			'NCIC'=>'NCIC',
 			'search warrant'=>'search warrant',
 			'subpoeana issued'=>'subpoena issued',
-			'waiver down to juvenile'=>'waiver down'
+			'waiver down to juvenile'=>'waiver down',
+			'to do'=>'todoitem',
+			'phonecall'=>'phonecall'
 			}
 		community_categories = {
 			'community need identified'=>'community need identified',
@@ -48,7 +52,7 @@
 			'appeal rejected' => 'appeal rejected',
 			'verdict overturned' => 'verdict overturned'
 			} 
-		specialinvestigation_categories = {
+		strategicinvestigation_categories = {
 			'suspect suggested'=>'new suspect',
 			'suspect rejected'=>'suspect rejected',
 			'suspect accepted'=>'suspect accepted',
@@ -62,8 +66,8 @@
 			list=community_categories.merge(circuit_categories).sort
 		elsif current_user.unit.eql?("postconviction")
 			list=postconviction_categories.merge(circuit_categories).sort
-		elsif current_user.unit.eql?("special investigation")
-			list=specialinvestigation_categories.merge(circuit_categories).sort
+		elsif current_user.unit.eql?("strategic investigation")
+			list=strategicinvestigation_categories.merge(circuit_categories).sort
 		else
 			list=circuit_categories.sort
 		end %>

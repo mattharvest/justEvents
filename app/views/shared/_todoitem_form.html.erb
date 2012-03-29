@@ -1,4 +1,10 @@
-<% user_list = User.all.collect {|p| [p.name_comma, p.id] } %>
+<%
+if current_user.admin?
+	user_list = User.all.collect {|p| [p.name_comma, p.id] }
+else
+	user_list = User.where(:unit=>current_user.unit).collect {|p| [p.name_comma, p.id] } 
+end
+%>
 
 <div class="well">	
 	<%= semantic_form_for @todoitem do |f| %>

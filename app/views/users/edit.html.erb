@@ -25,7 +25,7 @@
 		<%= f.input :name, :label=>'Name?' %>
 		<%= f.input :email, :label=>'Email?', :hint=>'This MUST match your county email address' %>
 		<%= f.input :unit, :label=>'Unit?', :collection => units %>
-		<% if current_user.admin? %>
+		<% if current_user.supervisor? || current_user.admin? %>
 			<%= f.input :title, :label=>'Title?', :collection => {'ASA'=>'ASA', 'Chief'=> 'CHIEF', 'Deputy'=> 'DEPUTY', 'Assistant'=>'ASSISTANT', 'Intern'=>'INTERN', 'Other'=>'OTHER'}.sort %>
 		<% end %>
 		<%= f.input :password, :label=>'Password?' %>

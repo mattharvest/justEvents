@@ -1,4 +1,4 @@
-<% if current_user?(@user.id) %>
+<% if current_user.id==@user.id %>
 	<div class="hero-unit">
 		<h3>This is your user page,</h3><h1> <%=@user.name %></h1>
 		<p>Unit: <%=@user.unit%></p>
@@ -18,8 +18,14 @@
 <% end %>
 
 <div class="container-fluid">
+	<div class="row-fluid">
+		<% if current_user.admin? %>
+		<% #ADMIN CONTROLS %>
+		<a class="btn btn-danger btn-mini" href="<%= edit_user_path(@user)%>">Edit this User</a>
+<% end %>
+	</div>
 	<div class="span4"
-		<h3>Pending ToDo items</h3>
+		<h2>Pending ToDo items</h2>
 			<div class="row-fluid">
 				<table class="table table-condensed table-striped">
 					<%= render :partial => 'shared/brief_todo', :collection => @user.pending_todos %>
@@ -27,7 +33,7 @@
 			</div>
 	</div>
 	<div class="span4"
-		<h3>Seven Recent Posts</h3>
+		<h2>Seven Recent Posts</h2>
 			<div class="row-fluid">
 				<table class="table table-striped">
 					<%= render :partial => 'shared/brief_post', :collection => @recent_posts %>

@@ -29,10 +29,6 @@ class User < ActiveRecord::Base
 		registration_code=="mattharvest"
 	end
 	
-	def supervisor?
-		(title=="CHIEF")||(title=="DEPUTY")
-	end
-	
 	def pending_todos
 		pending = []
 		self.todoitems.each do |t|

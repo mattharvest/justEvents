@@ -7,7 +7,7 @@ class Micropost < ActiveRecord::Base
 	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9][A-Z]|CCN[0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/i
 	
 	validates :content, :presence => true
-	validates :casenumber, :presence => true, :format => {:with => casenum_regex }
+	validates :casenumber, :presence => true
 
 	default_scope :order => 'microposts.created_at DESC'
 	

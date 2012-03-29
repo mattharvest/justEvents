@@ -1,0 +1,27 @@
+			<form 
+				action="/todoitems"
+				id="new_todoitem"
+				class="well form-inline" 
+				method="post" 
+				>
+				<input 
+					id="todoitem_content_input" 
+					name="todoitem[content]" 
+					type="text"
+					class="input-small"
+					>
+				<input 
+					class="input-small"
+					id="todoitem_casenumber_input" 
+					name="todoitem[casenumber]" 
+					value= <%=@casefile.lead_casenumber.to_s%>
+					type="hidden"
+					>
+				<input 
+					class="action input_action btn btn-primary" 
+					id="todoitem_submit_action" 
+					name="commit" 
+					type="submit" 
+					value="add"
+					>
+			</form>

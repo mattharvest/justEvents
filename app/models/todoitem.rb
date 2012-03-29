@@ -9,7 +9,7 @@ class Todoitem < ActiveRecord::Base
 	validates :content, :presence => true
 	validates :user_id, :presence => true
 	validates :duedate, :presence => true
-	validates :casenumber, :format  => { :with => casenum_regex }, :presence => true
+	validates :casenumber, :presence => true
 	
 	def daysleft
 		(duedate-Date.today).to_i

@@ -87,26 +87,19 @@
 							<%= f.input :defendant, :as=>'string', :placeholder=>'[defendant]' %>
 										<div class="input-append date" id="micropost_dob" data-date="<%=18.years.ago.to_s%>" data-date-format="yyyy-mm-dd">
 											<input type="text" value="<%=18.years.ago.to_s%>" readonly class="span2" name="micropost[dob]">
-											<span class="add-on">
-												<i class="icon-th"></i>
-											</span>
+											<span class="add-on"><i class="icon-th"></i></span>
 											<span class="help-inline">DOB</span>
 										</div>
-							<div class="input" id="micropost_judge" name="micropost[judge]">
+							<div class="input">
 								<label>Judge:</label>
-								<input type="text"
-									class="span3"
-									data-provide="typeahead"
+								<input type="text" id="micropost_judge"	name="micropost[judge]"	class="span3" data-provide="typeahead"
 									data-source='["Tillerson Adams, Sheila R.", "Alves, Krystal Quinn", "Clark, Toni E.", "Cotton, DaNeeka Varner", "Davey, John Paul", "Dawson, Herman C.", "El-Amin, Hassan Ali", "Shaw Geter, Melanie M.", "Green, Leo E. Jr", "Jackson, Dwight D.", "Krauser, Sherrie L.", "Lamasney, Maureen M.", "Martin, Larnzell Jr.", "Mittelstaedt, Crystal Dixon", "Nichols, C. Philip, Jr.", "Northrop, Albert W.", "Pearson, Michael R.", "Rattal, Nicholas E.", "Serrette, Cathy", "Wallace, Sean D.", "Weatherly, Julia B.", "Whalen, Michael P.", "Woodard, Beverly J.", "Ahalt, A. Monty", "Beard, DeLawrence", "Casula, Joseph", "Cave, William M.", "Chapdelaine, A. Michael", "Clark, Richard", "Femia, Vincent J.",  "Kahl, Christian M.", "Kaminetz, Marvin S.", "Lombardi, James J.", "Mason, Robert", "McGuckian, Paul A.", "McKee, Graydon S.  III", "Platt, Steven I.", "Ryan, James L.", "Smith, Thomas P."]'>
-
 							</div>
-							<div class="input" id="micropost_adf" name="micropost[adf]">
+
+							<div class="input">
 								<label>ADF:</label>	
-								<input type="text" 
-									class="span3" 
-									data-provide="typeahead" 
-									data-items="4" 
-									data-source='["Jones, Debra", "Gupta, Kavita", "Johnson, Lyvette", "Josendale, Erin", "Saccarelli, Gale", "Whitehall, Beatrix", "Wilson, Monica", "Peek, Leslie", "Abdullah, Raouf", "Edwards, Christal", "Okeke, Loretta", "Powell, Greg", "Pride-Hebron, Kelly", "Shelton, Bill", "Uba-Okarafor, Vivent", "Mungin, Vaughn", "Handy, Ronald", "Ucheomunu, Andrew", "Moore, Sonya", "Azari, Omid"]'>			
+								<input type="text" class="span3" id="micropost_adf" name="micropost[adf]" data-provide="typeahead" data-items="4" 
+									data-source='["Jones, Debra", "Gupta, Kavita", "Johnson, Lyvette", "Josendale, Erin", "Saccarelli, Gale", "Whitehall, Beatrix", "Wilson, Monica", "Peek, Leslie", "Abdullah, Raouf", "Edwards, Christal", "Okeke, Loretta", "Powell, Greg", "Pride-Hebron, Kelly", "Shelton, Bill", "Uba-Okarafor, Vivent", "Mungin, Vaughn", "Handy, Ronald", "Ucheomunu, Andrew", "Moore, Sonya", "Azari, Omid"]'>
 							</div>
 						</div>
 					</div>
@@ -156,12 +149,8 @@
 				</div>
 			</div>
 			
-
-
 		<% end %>
-		<%= f.actions do %>
-			<%= f.action(:submit) %>
-		<% end %>
+		<input class="action input_action btn btn-primary" id="todo_submit_action" name="commit" type="submit" value="Save">
 	<% end %>
 </div>
 

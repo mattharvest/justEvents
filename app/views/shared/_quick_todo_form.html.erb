@@ -43,5 +43,8 @@ end
 
 <script>
 	$('#todoitem_duedate').datepicker()
+		.on('changeDate', function(ev) {
+			$('#micropost_dob').datepicker('hide');
+		})
 	$(".collapse").collapse()
 </script>

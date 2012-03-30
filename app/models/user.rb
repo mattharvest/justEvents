@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
 			title="ASA" #default value
 			self.save
 		end
-		title+" "+name+" ("+email+") of "+unit
+		title.to_s+" "+name.to_s+" ("+email.to_s+") of "+unit.to_s
 	end
 	
 	def name_comma

@@ -1,5 +1,13 @@
 <% if signed_in? %>
 	<h1>Your Search Results...</h1>
+	<h3><i class="icon-download"></i><%= link_to 'Download as CSV', csv_path(
+				:scope=>"full", 
+				:targetunit=>current_user.unit, 
+				:start=>@start, 
+				:end=>@end,
+				:category=>@category
+				) %>
+				</h3>
 	
 	<table class="table table-striped table-bordered table-condensed">
 		<thead>

@@ -116,9 +116,9 @@
 							<%= f.input :enhanced, :label=>'Enhanced/Mandatory penalties?' %>
 							<%= f.input :gang, :label=>'Gang name (if related)?' %>
 							<%= f.input :offendertype, :label=>'Offender type?', :as=>'select', :collection=>["multiple conviction", "gang-related", "major offender"] %>
-							<%= f.input :guidelines, :label=>'Sentence guidelines range for convicted charges?' %>
-							<%= f.input :jail, :label=>'Jail?', :hint=>' months' %>
-							<%= f.input :probation, :label=>'Probation?', :placeholder=>'Y years, [un]supervised'%>
+							<%= f.input :guidelines, :label=>'Sentence guidelines range for convicted charges? (in months)' %>
+							<%= f.input :jail, :label=>'Jail?', :placeholder=>'X months' %>
+							<%= f.input :probation, :label=>'Probation?', :placeholder=>'X months, [un]supervised'%>
 							<%= f.input :restitution, :label=>'Restitition? (whole dollars only)', :input_html=> {:class=>'span2'} %>
 							<%= f.input :communityservice, :label=>'Community service?', :hint=>' hours', :input_html=> {:class=>'span1'} %>
 						</div>

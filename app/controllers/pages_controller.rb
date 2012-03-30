@@ -81,7 +81,7 @@ class PagesController < ApplicationController
 	def last_week
 		unit=params[:unit]
 		#@posts = Micropost.find_all_by_event_date_and_unit([Date.today-7..Date.today], unit)
-		@posts = Micropost.find_all_by_unit(params[:unit])
+		@posts = Micropost.find_all_by_unit_and_event_date(params[:unit], [Date.today-7..Date.today])
 		csv_string = CSV.generate do |c|
 			c << ["event_date", "user", "user.email", "user unit", "post unit", "defendant", "dob", "adf", "category", "content", "created_at", "jail", "probation", "community service", "judge", "lead charge", "convicted charges", "enhanced", "guidelines", "team leader"]
 			@posts.each do |post|

@@ -78,7 +78,8 @@ class TodoitemsController < ApplicationController
 				:casenumber => @todoitem.casenumber,
 				:content => "Todo Completed: "+@todoitem.content,
 				:event_date => Date.today,
-				:category => "todoitem"
+				:category => "todoitem",
+				:unit => current_user.unit
 				)
 			@micropost.save
 		elsif !params[:duedate].nil?
@@ -91,7 +92,8 @@ class TodoitemsController < ApplicationController
 				:casenumber=>@todoitem.casenumber,
 				:content=>"Todo postponed, now due "+@todoitem.duedate.to_s,
 				:event_date=>Date.today,
-				:category=>"todoitem"
+				:category=>"todoitem",
+				:unit => current_user.unit
 				)
 			@micropost.save
 		else

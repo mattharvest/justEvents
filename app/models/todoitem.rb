@@ -15,6 +15,10 @@ class Todoitem < ActiveRecord::Base
 		(duedate-Date.today).to_i
 	end
 	
+	def notify_of_todo(user)
+		UserMailer.todo_notice(user, content.to_s, casenumber.to_s).deliver
+	end
+	
 	def summary
 		if complete
 			content+" (completed on "+updated_at.to_s+")"

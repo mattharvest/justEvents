@@ -33,8 +33,7 @@ class MicropostsController < ApplicationController
 		end
 		
 		if (@micropost.category=="phonecall")&&!(params[:micropost][:notify]=="")
-			@micropost.notify = params[:micropost][:notify]
-			@micropost.notify_of_call
+			@micropost.notify_of_call(User.find_by_id(params[:micropost][:notify]))
 			flash[:phonecallnotice]="Notice of phone call sent"
 		end
 	end

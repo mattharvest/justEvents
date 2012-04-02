@@ -11,9 +11,8 @@ class Micropost < ActiveRecord::Base
 
 	default_scope :order => 'microposts.created_at DESC'
 	
-	def notify_of_call
-		user_to_email = User.find_by_id(notify)
-		UserMailer.call_notice(user_to_email, content.to_s, casenumber.to_s).deliver
+	def notify_of_call(user)
+		UserMailer.call_notice(user, content.to_s, casenumber.to_s).deliver
 	end
 	
 	def description

@@ -39,6 +39,7 @@ class TodoitemsController < ApplicationController
 		@todoitem.complete=false
 		
 		if @todoitem.save
+			@todoitem.notify_of_todo(User.find_by_id(params[:todoitem][:user_id]))
 			flash[:todoitemsuccess]= "Todo item created"
 			#always go to where you were, so the different forms dont get confusing
 			@casefile = get_casefile(@todoitem.casenumber)

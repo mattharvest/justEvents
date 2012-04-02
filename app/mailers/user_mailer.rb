@@ -19,4 +19,12 @@ class UserMailer < ActionMailer::Base
 		@casenumber=casenumber
 		mail(:to=> user.email, :subject => "New call in ("+casenumber.to_s+")")
 	end
+	
+	
+	def todo_notice(user, content, casenumber)
+		@user = user
+		@content = content
+		@casenumber=casenumber
+		mail(:to=> user.email, :subject => "New ToDo in ("+casenumber.to_s+")")
+	end
 end

@@ -39,7 +39,10 @@ class TodoitemsController < ApplicationController
 		@todoitem.complete=false
 		
 		if @todoitem.save
-			@todoitem.notify_of_todo(User.find_by_id(params[:todoitem][:user_id]))
+			if !params[:todoitem][:user_id].blank?
+				@todoitem.notify_of_todo(User.find_by_id(params[:todoitem][:user_id]))
+			end
+			
 			flash[:todoitemsuccess]= "Todo item created"
 			#always go to where you were, so the different forms dont get confusing
 			@casefile = get_casefile(@todoitem.casenumber)
@@ -67,7 +70,10 @@ class TodoitemsController < ApplicationController
 	end
 	
 	def update
-		@todoitem = Todoitem.find_by_id(params[:id])
+		if @todoitem = Todoitem.find_or_create_by_id(params[:id])
+		else
+			flash[:todonotice2]="Failed to find or create by ID the Todo here"
+		end
 		if params[:complete]=="true"
 			flash[:todonotice]="Task marked complete!"
 			@todoitem.complete=true
@@ -83,15 +89,16 @@ class TodoitemsController < ApplicationController
 				:unit => current_user.unit
 				)
 			@micropost.save
-		elsif !params[:duedate].nil?
+		elsif !params[:todoitem][:duedate].nil?
 			#update the date
-			@todoitem.duedate=params[:duedate]
+			@todoitem.duedate=params[:todoitem][:duedate]
 			@casefile = get_casefile(@todoitem.casenumber)
+			flash[:todosuccess]="Duedate updated, now "+params[:todoitem][:duedate]
 			
 			@micropost = current_user.microposts.build(
 				:defendant=>@casefile.defendant,
 				:casenumber=>@todoitem.casenumber,
-				:content=>"Todo postponed, now due "+@todoitem.duedate.to_s,
+				:content=>"("+@todoitem.content+") now due "+@todoitem.duedate.to_s,
 				:event_date=>Date.today,
 				:category=>"todoitem",
 				:unit => current_user.unit
@@ -99,8 +106,12 @@ class TodoitemsController < ApplicationController
 			@micropost.save
 		else
 			flash[:todonotice]="Task not updated"
-		end		
-		@todoitem.save
+		end
+		
+		if @todoitem.save
+		else
+			flash[:todofailure]="Todo not saved!"
+		end
 		
 		redirect_to :back
 		

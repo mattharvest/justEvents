@@ -3,7 +3,7 @@ class Todoitem < ActiveRecord::Base
 	
 	attr_accessor :daysleft
 	
-	attr_accessible :content, :duedate, :priority, :complete, :casenumber, :user_id
+	attr_accessible :content, :duedate, :priority, :complete, :casenumber, :user_id, :id
 	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]/i
 	
 	validates :content, :presence => true

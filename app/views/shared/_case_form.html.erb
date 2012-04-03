@@ -5,13 +5,13 @@
 			
 			<%= f.input :defendant, :as=>'string', :input_html => {}, :label=>'Defendant'%>
 			
-			<%= f.input :ccn, :as=>'string', :input_html => {}, :label=>'CCN'%>
-			<%= f.input :cr, :as=>'string', :input_html => {}, :label=>'CR'%>
-			<%= f.input :ca, :as=>'string', :input_html => {}, :label=>'CA'%>
-			<%= f.input :cj, :as=>'string', :input_html => {}, :label=>'CJ'%>
-			<%= f.input :ct, :as=>'string', :input_html => {}, :label=>'CT'%>
-			<%= f.input :ja, :as=>'string', :input_html => {}, :label=>'JA'%>
-			<%= f.input :sao, :as=>'string', :input_html => {}, :label=>'SAO'%>
+			<%= f.input :ccn, :as=>'string', :placeholder => 'CCN##-###-####', :input_html => {}, :label=>'CCN'%>
+			<%= f.input :cr, :as=>'string', :placeholder => 'CR#E########', :input_html => {}, :label=>'CR'%>
+			<%= f.input :ca, :as=>'string', :placeholder => 'CA######', :input_html => {}, :label=>'CA'%>
+			<%= f.input :cj, :as=>'string', :placeholder => 'CJ######', :input_html => {}, :label=>'CJ'%>
+			<%= f.input :ct, :as=>'string', :placeholder => 'CT######[A-Z]', :input_html => {}, :label=>'CT'%>
+			<%= f.input :ja, :as=>'string', :placeholder => 'JA-##-####', :input_html => {}, :label=>'JA'%>
+			<%= f.input :sao, :as=>'string', :placeholder => 'SAO##-##-####', :input_html => {}, :label=>'SAO'%>
 
 		<% end %>
 		<%= f.actions do %>

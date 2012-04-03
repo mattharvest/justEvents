@@ -1,3 +1,27 @@
+<div id="todoModal_<%=brief_todo.id%>" class="modal modal-form hide fade autowidth" style="display: none; ">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">x</a>
+		<h3>New duedate?</h3>
+	</div>
+	<div class="modal-body">
+		<%= semantic_form_for brief_todo do |f| %>
+			<%= f.semantic_errors %>
+			<%= f.inputs do %>
+				<div class="input-append date" id="todoitem_duedate_<%=brief_todo.id%>" data-date="<%= (brief_todo.duedate+14).to_s %>" data-date-format="yyyy-mm-dd">
+					<input type="text" id="duedate" value="<%= brief_todo.duedate.to_s %>" readonly class="span2" name="todoitem[duedate]">
+					<span class="add-on">
+						<i class="icon-th"></i>
+					</span>
+					<span class="help-inline">Due</span>
+				</div>
+			<% end %>
+			<%= f.actions do %>
+				<%= f.action(:submit) %>
+			<% end %>
+		<% end %>
+	</div>
+</div>	
+
 
 <tr>
 	<td>	
@@ -36,7 +60,7 @@
 					<a class="btn btn-mini" href=<%=update_task_path(brief_todo.id, :complete=>"true")%>>
 						<i class="icon-ok"></i>
 					</a>
-					<a class="btn btn-mini" href=<%=update_task_path(brief_todo.id, :duedate=>brief_todo.duedate+7)%>>
+					<a data-toggle="modal" class="btn btn-mini" href="#todoModal_<%=brief_todo.id%>">
 						postpone
 					</a>
 				<% else %>
@@ -49,5 +73,8 @@
 </tr>
 
 <script>
-	$(".datepicker").datepicker()
+	$('#todoitem_duedate_<%=brief_todo.id%>').datepicker()
+		.on('changeDate', function(ev) {
+			$('#todoitem_duedate_<%=brief_todo.id%>').datepicker('hide');
+		})
 </script>

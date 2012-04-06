@@ -27,7 +27,15 @@ class TodoitemsController < ApplicationController
 	
 	def create
 		params[:todoitem][:casenumber].upcase!
-		@todoitem = current_user.todoitems.new(params[:todoitem])
+		if !params[:todoitem][:user_id].blank?
+			target_user = User.find_by_id(params[:todoitem][:user_id])
+			@todoitem = target_user.todoitems.new(params[:todoitem])
+			@todoitem.notify_of_todo(target_user)
+		else
+			@todoitem = current_user.todoitems.new(params[:todoitem])
+			
+		end
+		
 		if @todoitem.priority.nil?
 			@todoitem.priority=1
 		end

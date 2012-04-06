@@ -32,6 +32,8 @@ class CasefilesController < ApplicationController
 	def show
 		@casefile = Casefile.find(params[:id])
 		@title=@casefile.defendant
+		
+		@investigation = @casefile.get_investigation
 
 		@microposts = @casefile.get_microposts
 		@todos = @casefile.get_todos.sort_by {|t| t.daysleft}

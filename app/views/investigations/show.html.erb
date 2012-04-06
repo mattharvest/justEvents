@@ -1,0 +1,104 @@
+
+<% if signed_in? %>
+	<div class="container-fluid">
+		<h2>Investigation file for <%=@investigation.defendant %> in <%=link_to @investigation.casenumber, @investigation.get_casefile %></h2>
+		<%
+		#:unit
+		#:assignee_id
+		#:assignor
+		#:defendant
+		#:arrest_date
+		#:casenumber
+		#:initial_appearance
+		#:preliminary_hearing
+		#:district_date
+		#:district_room
+		#:victim
+		#:incident_date
+		#:address
+		#:synopsis
+		%>
+		
+	</div>
+	<div class="well">
+		<h3>Assigned to <%= User.find_by_id(@investigation.assignee_id).name %></h3>
+		<%
+		status_string=""
+		if @investigation.status==1
+			status_string=" btn-success"
+		elsif @investigation.status==2
+			status_string=" btn-danger"
+		end
+		%>
+		<h3 class="btn btn-primary disabled<%=status_string%>">Current status: <%= @investigation.current_status %></h3>
+		
+		<div class="btn-group" data-toggle="buttons-radio">
+			<a 
+				class="btn btn-mini btn-primary" 
+				href="<%=update_investigation_path(:id=>@investigation.id, :status=>'1') %>"
+				>
+				Accept
+				</a>
+			<a class="btn btn-mini btn-primary"
+				href="<%=update_investigation_path(:id=>@investigation.id, :status=>'2') %>"
+				>
+				Reject
+				</a>
+			<a 
+				class="btn btn-mini btn-primary"
+				href="<%=update_investigation_path(:id=>@investigation.id, :status=>'3') %>"
+				>
+				Hiatus
+				</a>
+		</div>
+		
+	</div>
+	<%
+	if @investigation.preliminary_hearing.nil?
+		time_to_ph=0
+	else
+		time_to_ph = @investigation.preliminary_hearing-Date.today
+	end
+	
+	if @investigation.district_date.nil?
+		time_to_dc=0
+	else
+		time_to_dc = @investigation.district_date-Date.today
+	end
+	
+	ph_string = "btn disabled btn-mini"
+	dc_string = "btn disabled btn-mini"
+	if time_to_ph<1
+		ph_string += " btn-danger"
+	elsif time_to_ph<7
+		ph_string += " btn-warning"
+	end
+	if time_to_dc<1
+		dc_string += " btn-danger"
+	elsif time_to_dc<7
+		dc_string += " btn-warning"
+	end
+	%>
+	<div class="well">
+		<h4>Important dates:</h4>
+		<ul>
+			<li>Incident Date: <%= @investigation.incident_date.to_s %></li>
+			<li>Arrest Date: <%= @investigation.arrest_date.to_s %></li>
+			<li>Preliminary Hearing: <button class="<%=ph_string%>"><%= @investigation.preliminary_hearing.to_s %></button></li>
+			<li>District Court Date: <button class="<%=dc_string%>"><%= @investigation.district_date.to_s %></button></li>
+		</ul>
+	</div>
+	
+	<div class="well">
+		<p>It is alleged that the defendant, on <%= @investigation.incident_date %>, at <%= @investigation.address%>: <%= @investigation.synopsis %></p>
+	</div>
+<% else %>
+	<%= render 'shared/introstub' %>
+<% end %>
+<div>
+
+<script>
+	$('#todoitem_duedate').datepicker()
+	$(".collapse").collapse()
+	$('.tabs').button()
+</script>

@@ -59,6 +59,12 @@
 			<%end%>
 		</tr>
 	</table>
+	
+	<% if !@investigation.nil? %>
+		<div class="row-fluid">
+			<h3> Be sure to review the <%= link_to "investigation file", @investigation %> </h3>
+		</div>
+	<% end %>
 		<div class="row-fluid">
 			<h3> What needs to be done:</h3>
 			<div class="span12">
@@ -86,7 +92,7 @@
 			</div>
 		</div>
 
-	<div>
+	</div>
 <% else %>
 	<%= render 'shared/introstub' %>
 <% end %>

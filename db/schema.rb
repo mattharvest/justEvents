@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120325012555) do
+ActiveRecord::Schema.define(:version => 20120404160503) do
 
   create_table "casefiles", :force => true do |t|
     t.string   "defendant"
@@ -24,6 +24,27 @@ ActiveRecord::Schema.define(:version => 20120325012555) do
     t.string   "ct"
     t.string   "sao"
     t.string   "ja"
+  end
+
+  create_table "investigations", :force => true do |t|
+    t.string   "unit"
+    t.integer  "assignee_id"
+    t.integer  "assignor"
+    t.string   "defendant"
+    t.date     "arrest_date"
+    t.string   "casenumber"
+    t.date     "initial_appearance"
+    t.date     "preliminary_hearing"
+    t.date     "district_date"
+    t.string   "district_room"
+    t.string   "victim"
+    t.date     "incident_date"
+    t.string   "address"
+    t.text     "synopsis"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "user_id"
+    t.integer  "status"
   end
 
   create_table "microposts", :force => true do |t|

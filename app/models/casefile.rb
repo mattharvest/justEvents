@@ -38,6 +38,32 @@ class Casefile < ActiveRecord::Base
 		end
 	end
 	
+	def get_investigation
+		ccn_investigation = Investigation.find_by_casenumber(ccn)
+		sao_investigation = Investigation.find_by_casenumber(sao)
+		ct_investigation = Investigation.find_by_casenumber(ct)
+		cj_investigation = Investigation.find_by_casenumber(cj)
+		ca_investigation = Investigation.find_by_casenumber(ca)
+		cr_investigation = Investigation.find_by_casenumber(cr)
+		ja_investigation = Investigation.find_by_casenumber(ja)
+		
+		if !ccn_investigation.nil?
+			ccn_investigation
+		elsif !sao_investigation.nil?
+			sao_investigation
+		elsif !ct_investigation.nil?
+			ct_investigation
+		elsif !cj_investigation.nil?
+			cj_investigation
+		elsif !ca_investigation.nil?
+			ca_investigation
+		elsif !cr_investigation.nil?
+			cr_investigation
+		elsif !ja_investigation.nil?
+			ja_investigation
+		end
+	end
+	
 	def casenumber?(submitted_casenumber)
 		(ccn==submitted_casenumber)||
 		(cr==submitted_casenumber)||

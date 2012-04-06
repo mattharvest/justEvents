@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 	has_many :microposts, :dependent => :destroy
 	has_many :casefiles
 	has_many :todoitems
+	has_many :investigations
 	
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	

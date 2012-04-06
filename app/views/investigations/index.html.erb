@@ -1,0 +1,32 @@
+<% if signed_in? %>
+	<h1>All Invstigations</h1>
+	<h2>There are <%=@investigations.count %> investigations </h3>
+
+<%= will_paginate @investigations %>
+	<table class="table table-striped table-bordered table-condensed">
+		<tr>
+			<td>	Defendant			</td>
+			<td>	Arrest Date			</td>
+			<td> 	Casenumber			</td>
+			<td> 	Initial Appearance	</td>
+			<td> 	Preliminary Hearing	</td>
+			<td> 	District Court Date	</td>
+			<td> 	Victim				</td>
+			<td> 	Incident Date		</td>
+			<td> 	Incident Address	</td>
+			<td> 	Synopsis			</td>
+			<td>	Current Status 		</td>
+			<% if current_user.admin? %>
+				<td>Delete Button</td>
+			<% end %>
+		</tr>
+		<tr>
+			<%= render :partial => 'shared/brief_investigation', :collection => @investigations %>
+		</tr>
+	</table>
+<%= will_paginate @investigations %>
+
+<% else %>
+	<%= render 'shared/introstub' %>
+<% end %>
+

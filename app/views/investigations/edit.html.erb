@@ -1,0 +1,11 @@
+<% if signed_in? %>
+	<h1>Edit investigation</h1>
+	<%= render :partial => 'shared/investigation_form'%>
+<% else %>
+	<div class="hero-unit">
+		<h1>You're not logged in!</h1>
+		<p>Please log in or sign up.</p>
+		<a class="btn btn-primary btn-large" href="<%= signup_path %>">Sign Up!</a>
+		<h6>This software is available only to Prince George's County ASAs.  If you are not on the whitelist, your signup will fail.  Contact ASA Bohrer with any questions.</h6>
+	</div>
+<% end %>

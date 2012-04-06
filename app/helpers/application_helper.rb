@@ -23,7 +23,8 @@ module ApplicationHelper
 			'waiver-down' => 'waiver down',
 			'restitution hearing'=> 'restitution hearing',
 			'to do'=>'todoitem',
-			'phonecall'=>'phonecall'
+			'phonecall'=>'phonecall',
+			'investigation'=>'investigation'
 		}
 	end
 	def grandjury_categories
@@ -31,7 +32,8 @@ module ApplicationHelper
 		'screening' => 'screening',
 		'charged' => 'charged',
 		'returned for investigation' => 'RFI',
-		'declined to prosecute' => 'dtp'
+		'declined to prosecute' => 'dtp',
+		'investigation'=>'investigation'
 		}
 	end
 	def circuit_categories
@@ -52,14 +54,16 @@ module ApplicationHelper
 		'waiver down to juvenile'=>'waiver down',
 		'to do'=>'todoitem',
 		'phonecall'=>'phonecall',
-		'referred to Strategic Investigations'=>'referred to SI'
+		'referred to Strategic Investigations'=>'referred to SI',
+		'investigation'=>'investigation'
 		}
 	end
 	
 	def community_categories
 		{
 		'community need identified'=>'community need identified',
-		'suspect assigned to attorney'=>'assigned'
+		'suspect assigned to attorney'=>'assigned',
+		'investigation'=>'investigation'
 		}
 	end
 	
@@ -68,7 +72,10 @@ module ApplicationHelper
 		'corum nobias' => 'corum nobis',
 		'appeal filed' => 'appeal filed',
 		'appeal rejected' => 'appeal rejected',
-		'verdict overturned' => 'verdict overturned'
+		'verdict overturned' => 'verdict overturned',
+		'investigation'=>'investigation',
+		'violation reported'=>'violation reported',
+		'violation hearing'=>'violation hearing'		
 		} 
 	end
 	
@@ -77,7 +84,8 @@ module ApplicationHelper
 		'suspect suggested'=>'new suspect',
 		'suspect rejected'=>'suspect rejected',
 		'suspect accepted'=>'suspect accepted',
-		'case assigned'=>'case assigned'
+		'case assigned'=>'case assigned',
+		'investigation'=>'investigation'
 		}
 	end
 	

@@ -1,0 +1,113 @@
+<% #investigation form %>
+	<%
+		#:unit
+		#:assignee_id
+		#:assignor
+		#:defendant
+		#:arrest_date
+		#:casenumber
+		#:initial_appearance
+		#:preliminary_hearing
+		#:district_date
+		#:district_room
+		#:victim
+		#:incident_date
+		#:address
+		#:synopsis
+	%>
+	
+<%
+if current_user.admin?
+	user_list = User.all.collect {|p| [p.name_comma, p.id] }
+else
+	user_list = User.where(:unit=>current_user.unit).collect {|p| [p.name_comma, p.id] } 
+end
+%>
+
+<div class="well">	
+	<%= semantic_form_for @investigation do |f| %>
+		<%= f.semantic_errors %>
+		<%= f.inputs do %>
+			<% #HIDDEN FIELDS %>
+				<%= f.input :unit, :as=>'hidden', :value=>current_user.unit %>
+				<%= f.input :assignor, :as=>'hidden', :value=>current_user.id %>
+			
+			<% #ACTIVE FIELDS %>
+			
+			<%= f.input :defendant, :as=>'string', :input_html => {}, :label=>'Defendant'%>
+			<%= f.input :casenumber, :as=>'string', :input_html => {}, :label=>'Case number', :hint=>'Must be a validly formatted casenumber.'%>
+			<div class="input-append date" id="investigation_arrest_date" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
+				<input type="text" value="<%= Date.today.to_s %>" readonly class="span2" name="investigation[arrest_date]">
+				<span class="add-on">
+					<i class="icon-th"></i>
+				</span>
+				<span class="help-inline">Arrest date</span>
+			</div>
+			<div class="input-append date" id="investigation_initial_appearance" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
+				<input type="text" value="" readonly class="span2" name="investigation[initial_appearance]">
+				<span class="add-on">
+					<i class="icon-th"></i>
+				</span>
+				<span class="help-inline">Initial appearance</span>
+			</div>
+			<div class="input-append date" id="investigation_preliminary_hearing" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
+				<input type="text" value="" readonly class="span2" name="investigation[preliminary_hearing]">
+				<span class="add-on">
+					<i class="icon-th"></i>
+				</span>
+				<span class="help-inline">Preliminary hearing</span>
+			</div>
+			<div class="input-append date" id="investigation_district_date" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
+				<input type="text" value="" readonly class="span2" name="investigation[district_date]">
+				<span class="add-on">
+					<i class="icon-th"></i>
+				</span>
+				<span class="help-inline">District Court date (if any)</span>
+			</div>
+			<div class="input-append date" id="investigation_incident_date" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
+				<input type="text" value="<%= Date.today.to_s %>" readonly class="span2" name="investigation[incident_date]">
+				<span class="add-on">
+					<i class="icon-th"></i>
+				</span>
+				<span class="help-inline">Incident date</span>
+			</div>
+			<%= f.input :victim, :as=>'string', :hint=>'if applicable' %>
+			<%= f.input :address, :as=>'string', :hint=>'street address of the incident' %>
+			<%= f.input :synopsis, :as=>'text', :hint=>'please limit to one or two paragraphs' %>
+			<%= f.input :assignee_id, :label=>'Assign to?', :as=>'select', :collection=>user_list.sort %>
+		<% end %>
+		<%= f.actions do %>
+			<%= f.action(:submit) %>
+		<% end %>
+	<% end %>
+</div>
+
+<script>
+	$('#investigation_arrest_date').datepicker()
+		.on('changeDate', function(ev) {
+			$('#invesitgation_arrest_date').datepicker('hide');
+		})
+		
+	$('#investigation_initial_appearance').datepicker()
+		.on('changeDate', function(ev) {
+			$('#invesitgation_initial_appearance').datepicker('hide');
+		})
+		
+	$('#investigation_district_date').datepicker()
+		.on('changeDate', function(ev) {
+			$('#invesitgation_district_date').datepicker('hide');
+		})
+	$('#investigation_district_date').datepicker()
+		.on('changeDate', function(ev) {
+			$('#invesitgation_district_date').datepicker('hide');
+		})
+	$('#investigation_preliminary_hearing').datepicker()
+		.on('changeDate', function(ev) {
+			$('#investigation_preliminary_hearing').datepicker('hide');
+		})
+	$('#investigation_incident_date').datepicker()
+		.on('changeDate', function(ev) {
+			$('#investigation_incident_date').datepicker('hide');
+		})
+
+</script>

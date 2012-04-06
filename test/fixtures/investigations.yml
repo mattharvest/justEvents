@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  unit: MyString
+  assignee_id: 1
+  assignor: 1
+  defendant: MyString
+  arrest_date: 2012-04-03
+  casenumber: MyString
+  initial_appearance: 2012-04-03
+  preliminary_hearing: 2012-04-03
+  district_date: 2012-04-03
+  district_room: MyString
+  victim: MyString
+  incident_date: 2012-04-03
+  address: MyString
+  synopsis: MyText
+
+two:
+  unit: MyString
+  assignee_id: 1
+  assignor: 1
+  defendant: MyString
+  arrest_date: 2012-04-03
+  casenumber: MyString
+  initial_appearance: 2012-04-03
+  preliminary_hearing: 2012-04-03
+  district_date: 2012-04-03
+  district_room: MyString
+  victim: MyString
+  incident_date: 2012-04-03
+  address: MyString
+  synopsis: MyText

@@ -3,6 +3,7 @@ class MicropostsController < ApplicationController
 	before_filter :authorized_user, :only => :destroy
 	
 	def new
+		@micropost = Micropost.new
 	end
 
 	

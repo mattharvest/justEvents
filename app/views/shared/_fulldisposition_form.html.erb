@@ -50,9 +50,11 @@
 					<div id="sentenceInfo" class="accordion-body collapse in">
 						<div class="accordion-inner">
 							<%= f.input :enhanced, :label=>'Enhanced/Mandatory penalties?' %>
+							<%= f.input :aba, :label=>'ABA plea?' %>
 							<%= f.input :gang, :label=>'Gang name (if related)?' %>
 							<%= f.input :offendertype, :label=>'Offender type?', :as=>'select', :collection=>["multiple conviction", "gang-related", "major offender"] %>
-							<%= f.input :guidelines, :label=>'Sentence guidelines range for convicted charges? (in months)' %>
+							<%= f.input :guidelines_top, :label=>'Top of the Guidlines Sentence Range? (in months)' %>
+							<%= f.input :guidelines_bottom, :label=>'Bottom of the Range?' %>
 							<%= f.input :jail, :label=>'Jail?', :placeholder=>'X months' %>
 							<%= f.input :probation, :label=>'Probation?', :placeholder=>'X months, [un]supervised'%>
 							<%= f.input :restitution, :label=>'Restitition? (whole dollars only)', :input_html=> {:class=>'span2'} %>

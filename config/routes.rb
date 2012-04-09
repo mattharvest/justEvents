@@ -16,7 +16,7 @@ JustEvents::Application.routes.draw do
 	match '/casefiles/:id/edit' => 'casefiles#edit', :as=>'edit_case'
 	match '/todoitems/:id/delete' => 'todoitems#destroy', :as=>'delete_task'
 	match '/casefiles/:id/delete' => 'casefiles#destroy', :as=>'delete_casefile'
-	match '/lastweek/' => 'pages#last_week'
+	match '/lastweek/' => 'pages#last_week', :as=>'last_week'
 	match '/investigations/:id/update' => 'investigations#update_status', :as=>'update_investigation'
   
 	match '/signin', :to => 'sessions#new'

@@ -25,6 +25,7 @@
 				<th>	Convicted Charges:	</th>
 				<th>	Enhanced:		</th>
 				<th>	Guidelines:		</th>
+				<th>	ABA:			</th>
 				<th>	Team Leader:	</th>
 	
 				<%if current_user.admin? %>
@@ -39,10 +40,5 @@
 	
 	<%= will_paginate @posts%>
 <% else %>
-	<div class="hero-unit">
-		<h1>You're not logged in!</h1>
-		<p>Please log in or sign up.</p>
-		<a class="btn btn-primary btn-large" href="<%= signup_path %>">Sign Up!</a>
-		<h6>This software is available only to Prince George's County ASAs.  If you are not on the whitelist, your signup will fail.  Contact ASA Bohrer with any questions.</h6>
-	</div>
+	<%= render 'shared/introstub' %>
 <% end %>

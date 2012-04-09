@@ -1,11 +1,10 @@
 <% if signed_in? %>
 	<h1>Your Search Results...</h1>
 	<h3><i class="icon-download"></i><%= link_to 'Download as CSV', csv_path(
-				:scope=>"full", 
-				:targetunit=>current_user.unit, 
+				:type=>'custom', 
 				:start=>@start, 
 				:end=>@end,
-				:category=>@category
+				:micropost_category=>@category
 				) %>
 				</h3>
 	
@@ -45,10 +44,5 @@
 	</table>
 	
 <% else %>
-	<div class="hero-unit">
-		<h1>You're not logged in!</h1>
-		<p>Please log in or sign up.</p>
-		<a class="btn btn-primary btn-large" href="<%= signup_path %>">Sign Up!</a>
-		<h6>This software is available only to Prince George's County ASAs.  If you are not on the whitelist, your signup will fail.  Contact ASA Bohrer with any questions.</h6>
-	</div>
+	<%= render 'shared/introstub' %>
 <% end %>

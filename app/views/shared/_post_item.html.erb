@@ -3,7 +3,7 @@
 	<td>	<%= post_item.defendant %>			</td>
 	<td>	<%= link_to post_item.casenumber, post_item.get_casefile %>			</td>
 	<td>	<%= post_item.user.name %> 			</td>
-	<td>	<%= post_item.user.unit %>			</td>
+	<td>	<%= post_item.unit %>			</td>
 	<td>	<%= post_item.user.email %> 		</td>
 	<td>	<%= post_item.dob.to_s %> 			</td>
 	<td>	<%= post_item.adf %> 				</td>
@@ -18,7 +18,8 @@
 	<td>	<%= post_item.leadcharge %>	</td>
 	<td>	<%= post_item.convictedcharges %>	</td>
 	<td>	<%= post_item.enhanced %>		</td>
-	<td>	<%= post_item.guidelines %>	</td>
+	<td>	<%= post_item.guidelines_top %> - <%= post_item.guidelines_bottom %>m</td>
+	<td>	<%= post_item.aba %> </td>
 	<td>	<%= post_item.teamleader %>	</td>
 	<td>	<% if current_user?(post_item.user) || current_user.admin? %>
 				<%= link_to "delete", post_item, 	:method => :delete, 

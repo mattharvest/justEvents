@@ -44,9 +44,10 @@ class PagesController < ApplicationController
 	def reports
 		@title="Reports"
 		if signed_in?
-			@posts=Micropost.find(:all)
+			@microposts=Micropost.find(:all)
 			@unit_posts = Micropost.where("unit=?", current_user.unit)
 			@self_posts = Micropost.where("user_id=?", current_user.id)
+			@last_week = Micropost.find_all_by_unit_and_event_date(current_user.unit, [Date.today-7..Date.today])
 		end
 	end
 	
@@ -72,7 +73,7 @@ class PagesController < ApplicationController
 		@start=params[:start]
 		@end=params[:end]
 		@category=params[:micropost_category]
-		if @microposts = Micropost.find_all_by_category_and_event_date(params[:micropost_category], [params[:start]..params[:end]])
+		if @microposts = Micropost.where(:category=>params[:micropost_category], :event_date=>[params[:start]..params[:end]], :unit=>current_user.unit)
 		else
 			flash[:microposterror] = "Search by category and date failed!"
 		end
@@ -82,50 +83,29 @@ class PagesController < ApplicationController
 		if !signed_in?
 			return
 		end
-		
 		unit=current_user.unit
-		@posts = Micropost.find_all_by_unit_and_event_date(unit, [Date.today-7..Date.today])
-		csv_string = CSV.generate do |c|
-			c << ["event_date", "user", "user.email", "user unit", "post unit", "defendant", "dob", "adf", "category", "content", "created_at", "jail", "probation", "community service", "judge", "lead charge", "convicted charges", "enhanced", "guidelines", "team leader"]
-			@posts.each do |post|
-				leader = User.new
-				if !post.teamleader.blank? && !post.teamleader.nil?
-					leader = User.find_by_id(post.teamleader)
-				end
-				if leader.nil?
-					c << [post.event_date.to_s, post.user.name.to_s, post.user.email.to_s, post.user.unit.to_s, post.unit.to_s, post.defendant.to_s, post.dob.to_s, post.adf.to_s, post.category.to_s, post.content.to_s, post.created_at.to_s, post.jail.to_s, post.probation.to_s, post.communityservice.to_s, post.judge.to_s, post.leadcharge.to_s, post.convictedcharges.to_s, post.enhanced.to_s, post.guidelines.to_s, ""]
-				else
-					c << [post.event_date.to_s, post.user.name.to_s, post.user.email.to_s, post.user.unit.to_s, post.unit.to_s, post.defendant.to_s, post.dob.to_s, post.adf.to_s, post.category.to_s, post.content.to_s, post.created_at.to_s, post.jail.to_s, post.probation.to_s, post.communityservice.to_s, post.judge.to_s, post.leadcharge.to_s, post.convictedcharges.to_s, post.enhanced.to_s, post.guidelines.to_s, leader.name_comma]
-				end
-			end
-		end
-		
-		send_data csv_string,
-			:type => 'text/csv; charset=iso8859-1; header=present',
-			:disposition => 'attachment; filename=this_weeks_posts.csv'
-	
+		@microposts = @last_week
+		export_to_csv
 	end
 	
 	def export_to_csv
-		csv_string = CSV.generate do |c|
-		scope=params[:scope]	
-
-		if scope.eql?("unit")
-			@posts = Micropost.where("unit=?", params[:targetunit])
-		elsif scope=="basic"
-			@posts = Micropost.find(:all)	
-		elsif scope=="date"
-			@posts = Micropost.find_all_by_event_date([params[:start]..params[:end]])
-		elsif scope=="dateunit"
-			startdate = Date.strptime(params[:start], "%Y-%m-%d")
-			enddate = Date.strptime(params[:end], "%Y-%m-%d")
-			@posts = Micropost.all(:conditions => {
-				:event_date => startdate..enddate, :unit=> params[:targetunit]})
-		elsif scope=="full"
-			@posts = Micropost.find_all_by_category_and_event_date_and_unit(params[:category], [params[:start]..params[:end]], params[:targetunit])
+		if @microposts.nil?
+			@microposts=Micropost.find(:all)
 		end
+		
+		if params[:type]=="unit"
+			@microposts=Micropost.where("unit=?", current_user.unit)
+		elsif params[:type]=="self"
+			@microposts=Micropost.where("user_id=?", current_user.id)
+		elsif params[:type]=="lastweek"
+			@microposts=Micropost.where(:unit=>current_user.unit, :event_date=>[Date.today-7..Date.today])
+		elsif params[:type]=="custom"
+			@microposts=Micropost.where(:category=>params[:micropost_category], :event_date=>[params[:start]..params[:end]], :unit=>current_user.unit)
+		end
+		
+		csv_string = CSV.generate do |c|
 			c << ["event_date", "user", "user.email", "user.unit", "defendant", "dob", "adf", "category", "content", "created_at", "jail", "probation", "community service", "judge", "lead charge", "convicted charges", "enhanced", "guidelines", "team leader"]
-			@posts.each do |post|
+			@microposts.each do |post|
 				leader = User.new
 				
 				if !post.teamleader.blank? && !post.teamleader.nil?
@@ -141,8 +121,8 @@ class PagesController < ApplicationController
 		end
 		
 		send_data csv_string,
-			:type => 'text/csv; charset=iso8859-1; header=present',
-			:disposition => 'attachment; filename=posts.csv'
+		:type => 'text/csv; charset=iso8859-1; header=present',
+		:disposition => 'attachment; filename='+Time.now.to_s+'posts.csv'
 	end
 	
 

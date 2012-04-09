@@ -24,7 +24,7 @@ class InvestigationsController < ApplicationController
 		@investigation = Investigation.find_by_id(params[:id])
 		@investigation.status = params[:status]
 		if @investigation.save
-			investigation_post = current_user.microposts.build(:event_date=>Date.today.to_s, :content=>'Investigation updated to '+@investigation.current_status, :defendant=>@investigation.defendant, :category=>'investigation', :casenumber=>@investigation.get_casefile.lead_casenumber)
+			investigation_post = current_user.microposts.build(:unit=>current_user.unit, :event_date=>Date.today.to_s, :content=>'Investigation updated to '+@investigation.current_status, :defendant=>@investigation.defendant, :category=>'investigation', :casenumber=>@investigation.get_casefile.lead_casenumber)
 			if investigation_post.save
 				flash[:investigationpostsuccess]="Assignment of investigation posted"
 			else
@@ -52,7 +52,11 @@ class InvestigationsController < ApplicationController
 		@investigation.status=0 #sets it as ACTIVE to start
 		@investigation.unit = current_user.unit
 		@investigation.assignor=current_user.id
-		@assignee = User.find_by_id(params[:investigation][:assignee_id])
+		if params[:investigation][:assignee_id].blank?
+			@assignee = current_user
+		else
+			@assignee = User.find_by_id(params[:investigation][:assignee_id])
+		end
 		
 		if @casefile = @investigation.get_casefile #should handle that via the model
 		else

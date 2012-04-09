@@ -49,13 +49,6 @@ class PagesController < ApplicationController
 			@self_posts = Micropost.where("user_id=?", current_user.id)
 			@last_week = Micropost.find_all_by_unit_and_event_date(current_user.unit, [Date.today-7..Date.today])
 		end
-		
-		@microposts.each do |post|
-			if post.user_id==1
-				post.unit="juvenile"
-				post.save
-			end
-		end
 	end
 	
 	def todos

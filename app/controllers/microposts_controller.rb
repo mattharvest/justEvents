@@ -19,6 +19,9 @@ class MicropostsController < ApplicationController
 		if @micropost.save
 			flash[:micropostsuccess]= "Micropost created"
 			@casefile = @micropost.get_casefile
+			if @micropost.defendant.to_s.blank?
+				@micropost.defendant=@casefile.defendant
+			end
 			if @casefile.save
 				flash[:casefilesuccess]="Casefile created/saved, "+@casefile.summary
 				redirect_to @casefile and return
@@ -35,6 +38,7 @@ class MicropostsController < ApplicationController
 		
 		if (@micropost.category=="phonecall")&&!(params[:micropost][:notify]=="")
 			@micropost.notify_of_call(User.find_by_id(params[:micropost][:notify]))
+			
 			flash[:phonecallnotice]="Notice of phone call sent"
 		end
 	end

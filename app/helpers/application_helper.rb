@@ -24,7 +24,8 @@ module ApplicationHelper
 			'restitution hearing'=> 'restitution hearing',
 			'to do'=>'todoitem',
 			'phonecall'=>'phonecall',
-			'investigation'=>'investigation'
+			'investigation'=>'investigation',
+			'email'=>'email'
 		}
 	end
 	def grandjury_categories
@@ -33,7 +34,8 @@ module ApplicationHelper
 		'charged' => 'charged',
 		'returned for investigation' => 'RFI',
 		'declined to prosecute' => 'dtp',
-		'investigation'=>'investigation'
+		'investigation'=>'investigation',
+		'email'=>'email'
 		}
 	end
 	def circuit_categories
@@ -55,7 +57,8 @@ module ApplicationHelper
 		'to do'=>'todoitem',
 		'phonecall'=>'phonecall',
 		'referred to Strategic Investigations'=>'referred to SI',
-		'investigation'=>'investigation'
+		'investigation'=>'investigation',
+		'email'=>'email'
 		}
 	end
 	
@@ -63,7 +66,8 @@ module ApplicationHelper
 		{
 		'community need identified'=>'community need identified',
 		'suspect assigned to attorney'=>'assigned',
-		'investigation'=>'investigation'
+		'investigation'=>'investigation',
+		'email'=>'email'
 		}
 	end
 	
@@ -75,7 +79,8 @@ module ApplicationHelper
 		'verdict overturned' => 'verdict overturned',
 		'investigation'=>'investigation',
 		'violation reported'=>'violation reported',
-		'violation hearing'=>'violation hearing'		
+		'violation hearing'=>'violation hearing',
+		'email'=>'email'
 		} 
 	end
 	
@@ -85,7 +90,8 @@ module ApplicationHelper
 		'suspect rejected'=>'suspect rejected',
 		'suspect accepted'=>'suspect accepted',
 		'case assigned'=>'case assigned',
-		'investigation'=>'investigation'
+		'investigation'=>'investigation',
+		'email'=>'email'
 		}
 	end
 	

@@ -22,7 +22,7 @@ class MicropostsController < ApplicationController
 		params[:micropost][:casenumber].upcase!
 		
 		@micropost = current_user.microposts.new(params[:micropost])
-		@micropost.defendant = params[:micropost][:defendant].titlelize
+		@micropost.defendant = params[:micropost][:defendant].titlecase
 		if @micropost.event_date.nil?||@micropost.event_date.blank?
 			@micropost.event_date = @micropost.created_at
 		end

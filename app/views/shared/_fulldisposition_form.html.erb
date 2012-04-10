@@ -95,6 +95,12 @@
 <script>
 	$('.typeahead').typeahead()
 	$('#micropost_dob').datepicker()
+		.on('changeDate', function(ev) {
+			$('#micropost_dob').datepicker('hide');
+		})
 	$('#micropost_event_date').datepicker()
+			.on('changeDate', function(ev) {
+			$('#micropost_event_date').datepicker('hide');
+		})
 	$('.collapse').collapse()
 </script>

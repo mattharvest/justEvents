@@ -1,3 +1,4 @@
+<% if !case_item.nil? %>
 <tr>
 	<td>	<%= link_to case_item.defendant.to_s, case_item %>	</td>
 	<td>	<%= case_item.ccn %> 		</td>
@@ -21,3 +22,4 @@
 			</td>
 	<%end%>
 </tr>
+<% end %>

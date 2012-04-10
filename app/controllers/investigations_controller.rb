@@ -17,7 +17,7 @@ class InvestigationsController < ApplicationController
 	before_filter :authorized_user, :only => :destroy
 	
 	def check_achievements
-		investigation_cout = current_user.investigations.count
+		investigation_count = current_user.investigations.count
 		case investigation_count
 			when 1
 				flash[:investigationachievement1]="You made your first investigation!"

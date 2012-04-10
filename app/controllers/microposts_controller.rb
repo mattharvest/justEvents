@@ -6,10 +6,23 @@ class MicropostsController < ApplicationController
 		@micropost = Micropost.new
 	end
 
+	def check_achievements
+		post_count = current_user.microposts.count
+		case post_count
+			when 1
+				flash[:micropostachievement1]="You made your first post!"
+			when 10
+				flash[:micropostachievement10]="You made your 10th post!"
+			when 100
+				flash[:micropostachievement100]="You made your 100th post!"
+		end
+	end
 	
 	def create
 		params[:micropost][:casenumber].upcase!
+		
 		@micropost = current_user.microposts.new(params[:micropost])
+		@micropost.defendant = params[:micropost][:defendant].titlelize
 		if @micropost.event_date.nil?||@micropost.event_date.blank?
 			@micropost.event_date = @micropost.created_at
 		end
@@ -17,6 +30,7 @@ class MicropostsController < ApplicationController
 		@micropost.unit = current_user.unit
 		
 		if @micropost.save
+			check_achievements
 			flash[:micropostsuccess]= "Micropost created"
 			@casefile = @micropost.get_casefile
 			if @micropost.defendant.to_s.blank?

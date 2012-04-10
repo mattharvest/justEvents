@@ -1,14 +1,67 @@
-		<% flash.each do |key, value| %>
-			<% if key.to_s.include?("success") %>
-				<div class="alert alert-success">
-			<% elsif key.to_s.include?("failure") %>
-				<div class="alert alert-error">
-			<% elsif key.to_s.include?("notice") %>
-				<div class="alert">
-			<% else %>
-				<div class="alert alert-info span2">
-					<%= key %>
-			<% end %>
-					<%= value %>
-				</div>
-        <% end %>
+<table>
+<% flash.each do |key, value| %>
+	<tr>
+	<% if key.to_s.include?("success") %>
+		<div class="alert alert-block alert-success fade in">
+			<a class="close" data-dismiss="alert" href="#">&times;</a>
+			<h4 class="alert-heading">Success!</h4>
+			<%= value %>
+		</div>
+	
+	<% elsif key.to_s.include?("failure") %>
+		<div class="alert alert-block alert-failure fade in">
+			<a class="close" data-dismiss="alert" href="#">&times;</a>
+			<h4 class="alert-heading">Failure!</h4>
+			<%= value %>
+		</div>
+		
+	<% elsif key.to_s.include?("notice") %>
+		<div class="alert alert-block alert-notice fade in">
+			<a class="close" data-dismiss="alert" href="#">&times;</a>
+			<h4 class="alert-heading">Notice!</h4>
+			<%= value %>
+		</div>
+		
+	<% elsif key.to_s.include?("micropostachievement") %>
+		<div class="alert alert-block alert-success fade in">
+			<a class="close" data-dismiss="alert" href="#">&times;</a>
+			<h4 class="alert-heading">Micropost Achievement Unlocked!</h4>
+			<%= value %>
+		</div>
+
+	<% elsif key.to_s.include?("todoachievement") %>
+		<div class="alert alert-block alert-success fade in">
+			<a class="close" data-dismiss="alert" href="#">&times;</a>
+			<h4 class="alert-heading">ToDo Achievement Unlocked!</h4>
+			<%= value %>
+		</div>
+
+	<% elsif key.to_s.include?("casefileachievement") %>
+		<div class="alert alert-block alert-success fade in">
+			<a class="close" data-dismiss="alert" href="#">&times;</a>
+			<h4 class="alert-heading">Casefile Achievement Unlocked!</h4>
+			<%= value %>
+		</div>
+
+	<% elsif key.to_s.include?("investigationachievement") %>
+		<div class="alert alert-block alert-success fade in">
+			<a class="close" data-dismiss="alert" href="#">&times;</a>
+			<h4 class="alert-heading">Investigation Achievement Unlocked!</h4>
+			<%= value %>
+		</div>
+		
+	<% else %>
+	
+	<% end %>
+	</tr>
+<% end %>
+</table>
+
+<script>
+	$(".alert").alert()
+	$(function timeMsg()
+		{
+			var t=setTimeout("$('.alert').alert('close')", 3000);
+		})
+</script>
+

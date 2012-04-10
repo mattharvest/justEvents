@@ -16,6 +16,18 @@ class InvestigationsController < ApplicationController
 	before_filter :authenticate, :only => [:create, :destroy]
 	before_filter :authorized_user, :only => :destroy
 	
+	def check_achievements
+		investigation_cout = current_user.investigations.count
+		case investigation_count
+			when 1
+				flash[:investigationachievement1]="You made your first investigation!"
+			when 10
+				flash[:investigationachievement10]="You made your 10th investigation!"
+			when 100
+				flash[:investigationachievement100]="You made your 100th investigation!"
+		end
+	end
+	
 	def new
 		@investigation = Investigation.new
 	end
@@ -64,6 +76,7 @@ class InvestigationsController < ApplicationController
 		end
 		
 		if @investigation.save
+			check_achievements
 			flash[:investigationsuccess]="Investigation created"
 			#now create the ToDo for the assignee to review the case within 7 days
 			assignee_todo = @assignee.todoitems.build(:duedate=>Date.today+7, :casenumber=>@casefile.lead_casenumber, :user_id=>@investigation.assignee_id, :content=>'Review this case for SIU')

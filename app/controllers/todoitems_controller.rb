@@ -2,6 +2,17 @@ class TodoitemsController < ApplicationController
 	before_filter :authenticate, :only => [:create, :destroy]
 	before_filter :authorized_user, :only => :destroy
 	
+	def check_achievements
+		todo_count = current_user.todoitems.count
+		case todo_count
+			when 1
+				flash[:todoachievement1]="You made your first todo!"
+			when 10
+				flash[:todoachievement10]="You made your 10th todo!"
+			when 100
+				flash[:todoachievement100]="You made your 100th todo!"
+		end
+	end
 	
 	def get_casefile(casenum)
 		stub = casenum[0..1]
@@ -47,6 +58,7 @@ class TodoitemsController < ApplicationController
 		@todoitem.complete=false
 		
 		if @todoitem.save
+			check_achievements
 			if !params[:todoitem][:user_id].blank?
 				@todoitem.notify_of_todo(User.find_by_id(params[:todoitem][:user_id]))
 			end

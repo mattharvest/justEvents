@@ -1,5 +1,5 @@
 class CasefilesController < ApplicationController
-
+	
   	def new
 		@casefile = Casefile.new
 	end

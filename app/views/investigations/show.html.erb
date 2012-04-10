@@ -25,12 +25,12 @@
 		<%
 		status_string=""
 		if @investigation.status==1
-			status_string=" btn-success"
+			status_string=" label-info"
 		elsif @investigation.status==2
-			status_string=" btn-danger"
+			status_string=" label-important"
 		end
 		%>
-		<h3 class="btn btn-primary disabled<%=status_string%>">Current status: <%= @investigation.current_status %></h3>
+		<h3 class="label <%=status_string%>">Current status: <%= @investigation.current_status %></h3>
 		
 		<div class="btn-group" data-toggle="buttons-radio">
 			<a 
@@ -66,17 +66,17 @@
 		time_to_dc = @investigation.district_date-Date.today
 	end
 	
-	ph_string = "btn disabled btn-mini"
-	dc_string = "btn disabled btn-mini"
+	ph_string = "label"
+	dc_string = "label"
 	if time_to_ph<1
-		ph_string += " btn-danger"
+		ph_string += " label-important"
 	elsif time_to_ph<7
-		ph_string += " btn-warning"
+		ph_string += " label-warning"
 	end
 	if time_to_dc<1
-		dc_string += " btn-danger"
+		dc_string += " label-important"
 	elsif time_to_dc<7
-		dc_string += " btn-warning"
+		dc_string += " label-warning"
 	end
 	%>
 	<div class="well">
@@ -84,8 +84,8 @@
 		<ul>
 			<li>Incident Date: <%= @investigation.incident_date.to_s %></li>
 			<li>Arrest Date: <%= @investigation.arrest_date.to_s %></li>
-			<li>Preliminary Hearing: <button class="<%=ph_string%>"><%= @investigation.preliminary_hearing.to_s %></button></li>
-			<li>District Court Date: <button class="<%=dc_string%>"><%= @investigation.district_date.to_s %></button></li>
+			<li>Preliminary Hearing: <span class="<%=ph_string%>"><%= @investigation.preliminary_hearing.to_s %></span></li>
+			<li>District Court Date: <span class="<%=dc_string%>"><%= @investigation.district_date.to_s %></span></li>
 		</ul>
 	</div>
 	

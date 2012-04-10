@@ -28,20 +28,20 @@
 		<%= link_to brief_todo.casenumber.to_s, brief_todo.retrieve_casefile %>
 		<% if !brief_todo.complete %>
 			<% 
-			code_string="btn-mini disabled"
-			button_string="due in "
+			code_string="label-mini disabled"
+			label_string="due in "
 			case brief_todo.daysleft
 				when 0..1
-					code_string+=" btn-danger"
+					code_string+=" label-important"
 				when 2..4
-					code_string+=" btn-warning"
+					code_string+=" label-warning"
 				when 5..7
-					code_string+=" btn-primary"
+					code_string+=""
 			end %>
 			<% if brief_todo.daysleft>0 %>
-				<button class="btn <%=code_string %>"> <%=button_string+" "+brief_todo.daysleft.to_s+" on "+brief_todo.duedate.to_s %></button>
+				<span class="label <%=code_string %>"> <%=label_string+" "+brief_todo.daysleft.to_s+" on "+brief_todo.duedate.to_s %></span>
 			<% else %>
-				<button class="btn btn-danger btn-mini disabled">OVERDUE</button>
+				<span class="label label-important">OVERDUE</span>
 			<% end %>
 		<% end %>
 		<%=brief_todo.content%>

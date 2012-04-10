@@ -46,8 +46,6 @@ class PagesController < ApplicationController
 		if signed_in?
 			@microposts=Micropost.find(:all)
 			@unit_posts = Micropost.where("unit=?", current_user.unit)
-			@self_posts = Micropost.where("user_id=?", current_user.id)
-			@last_week = Micropost.find_all_by_unit_and_event_date(current_user.unit, [Date.today-7..Date.today])
 		end
 	end
 	

@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/justinfrench/formtastic.git
-  revision: 1c92cf532f5425e6385e9ff5b990dc2580fdae30
+  revision: 7b7428fa4a6a44aea1e8278523f4f45f2570a33d
   branch: 2.1-stable
   specs:
-    formtastic (2.1.0)
+    formtastic (2.1.1)
       actionpack (~> 3.0)
 
 GIT

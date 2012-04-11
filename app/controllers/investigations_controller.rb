@@ -86,9 +86,18 @@ class InvestigationsController < ApplicationController
 			else
 				flash[:investigationtodofailure]="ToDo for assignee not created!"
 			end
+			
+			@notifications = []
+			user_ids_to_notify = params[:investigation][:notifications]
+			user_ids_to_notify.each do |p|
+				if !p.blank?
+					@notifications << User.find_by_id(p).email
+				end
+			end
 
 			#send the email to the assignee so they get a full report
-			UserMailer.investigation_notice(@assignee, @investigation).deliver
+			UserMailer.investigation_notice(@assignee, @investigation, @notifications).deliver
+
 			
 			#finally, create the event to reflect that it's been assigned
 			investigation_post = current_user.microposts.build(:unit=>@assignee.unit, :event_date=>Date.today.to_s, :content=>'New investigation started by '+current_user.name+', assigned to '+@assignee.name, :defendant=>@investigation.defendant, :category=>'investigation', :casenumber=>@casefile.lead_casenumber)
@@ -99,7 +108,7 @@ class InvestigationsController < ApplicationController
 			end
 			redirect_to current_user
 		else
-			flash[:investigationfailure]="Investigation not created!"
+			flash[:investigationfailure]="Investigation not created! "+"("+@investigation.errors.full_messages.to_s+")"
 			redirect_to :back
 		end
 	end

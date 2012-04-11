@@ -1,6 +1,6 @@
 class Investigation < ActiveRecord::Base
 	belongs_to :user
-	attr_accessor :current_status
+	attr_accessor :current_status, :notifications
 	attr_accessible :status, :user_id, :unit, :assignee_id, :assignor, :defendant, :arrest_date, :casenumber, :initial_appearance, :preliminary_hearing, :district_date, :district_room, :victim, :incident_date, :address, :synopsis 
 	validates :casenumber, :presence => true
 	validates :synopsis, :presence=> true

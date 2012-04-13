@@ -44,8 +44,8 @@ class PagesController < ApplicationController
 	def reports
 		@title="Reports"
 		if signed_in?
-			@microposts=Micropost.find(:all)
-			@unit_posts = Micropost.where("unit=?", current_user.unit)
+			@microposts=Micropost.paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
+			@unit_posts = Micropost.where(:unit=>current_user.unit).paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
 		end
 	end
 	
@@ -142,7 +142,7 @@ class PagesController < ApplicationController
 	
 	def posts
 		@title = "Posts"
-		if current_user.admin?
+		if current_user.admin?||current_user.supervisor?
 			@title = "All posts"
 			@posts = Micropost.paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
 		elsif signed_in?

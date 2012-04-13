@@ -1,4 +1,4 @@
-You have been assigned to investigate the following case by your supervisor.  Please log into justEvents promptly to review your assigned ToDo items.
+<%=@assignor.name%> has assigned the following case to <%=@user.name %> to investigate the following case.
 
 Defendant: <%= @investigation.defendant.to_s %>
 Date of Arrest: <%= @investigation.arrest_date.to_s %>
@@ -11,4 +11,4 @@ Date of Incident: <%= @investigation.incident_date.to_s %>
 Address of Incident: <%= @investigation.address.to_s %>
 Synopsis: <%= @investigation.synopsis %>
 
-Please contact your supervisor promptly if you have any questions.  Do not just hit "reply".
+Please contact your supervisor promptly if you have any questions.  Do not just hit "reply" or "reply-all".

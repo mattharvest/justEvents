@@ -70,10 +70,18 @@ class PagesController < ApplicationController
 		@title = "Custom Search"
 		@start=params[:start]
 		@end=params[:end]
+		@user_id = params[:target_user]
+		@category = params[:micropost_category]
+
 		@category=params[:micropost_category]
-		if @microposts = Micropost.where(:category=>params[:micropost_category], :event_date=>[params[:start]..params[:end]], :unit=>current_user.unit)
-		else
-			flash[:microposterror] = "Search by category and date failed!"
+		if @user_id.blank?&&@category.blank? #BOTH BLANK
+			@microposts = Micropost.where(:event_date=>[params[:start]..params[:end]], :unit=>current_user.unit)
+		elsif @user_id.blank?&&!@category.blank? #USER blank, CATEGORY NOT
+			@microposts = Micropost.where(:category=>@category, :event_date=>[params[:start]..params[:end]], :unit=>current_user.unit)
+		elsif !@user_id.blank?&&@category.blank? #USER not, CATEGORY BLANK
+			@microposts = Micropost.where(:user_id=>@user_id, :event_date=>[params[:start]..params[:end]], :unit=>current_user.unit)
+		else #neither blank
+			@microposts = Micropost.where(:user_id=>@user_id, :category=>params[:micropost_category], :event_date=>[params[:start]..params[:end]], :unit=>current_user.unit)
 		end
 	end
 	

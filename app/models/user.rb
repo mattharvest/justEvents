@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
 		(title=="CHIEF")||(title=="DEPUTY")||self.admin?
 	end
 	
+	def support?
+		(title=="COORDINATOR")||(title=="ASSISTANT")
+	end
+	
 	def to_s
 		if title.nil?
 			title="ASA" #default value

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120409200357) do
+ActiveRecord::Schema.define(:version => 20120413123723) do
 
   create_table "casefiles", :force => true do |t|
     t.string   "defendant"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20120409200357) do
     t.string   "defendant"
     t.integer  "casefile_id"
     t.string   "gang"
-    t.string   "jail"
+    t.integer  "jail",              :limit => 255
     t.string   "probation"
     t.integer  "restitution"
     t.integer  "communityservice"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20120409200357) do
     t.integer  "guidelines_top"
     t.integer  "guidelines_bottom"
     t.boolean  "aba"
+    t.integer  "suspended_time"
   end
 
   add_index "microposts", ["user_id", "created_at"], :name => "index_microposts_on_user_id_and_created_at"

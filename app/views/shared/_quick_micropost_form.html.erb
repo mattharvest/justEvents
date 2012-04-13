@@ -13,7 +13,7 @@
 			<%= f.input :casenumber, :as=>'hidden', :value=>@casefile.lead_casenumber %>
 			
 			<div class="input">
-				<label>ADF:</label>	
+				<label>Defense attorney:</label>	
 				<input type="text" 
 					class="span3" 
 					id="micropost_adf"
@@ -39,10 +39,10 @@
 				<span class="help-inline">when?</span>
 			</div>
 		<% end %>
-		
-		<a href="#" class="btn btn-inverse" data-dismiss="modal">Close</a>
-		<input class="action input_action btn btn-primary" id="micropost_submit_action" name="commit" type="submit" value="Save">
-
+		<div class="form-actions">
+			<a href="#" class="btn btn-inverse" data-dismiss="modal">Close</a>
+			<input class="action input_action btn btn-primary" id="micropost_submit_action" name="commit" type="submit" value="Save">
+		</div>
 	<% end %>
 </div>
 

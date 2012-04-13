@@ -1,9 +1,7 @@
-<% dob_label="Defendant DOB?" %>
-<% if current_user.unit=="juvenile"	
-	dob_label= "Respondent DOB?"
-	end %>
-	
+
 <% user_list = User.all.collect {|p| [p.name_comma, p.id] } %>
+<% user_list = user_list.sort %>
+<% full_dispo_categories = { "Plea"=>"plea", "Trial"=>"trial", "NP"=>"np" }.sort %>
 		
 <div class="well">	
 	<%= semantic_form_for @micropost do |f| %>
@@ -21,11 +19,11 @@
 							<%= f.input :teamleader, :label=>'Team Leader?', :as=>'select', :collection=>user_list.sort %>
 							<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
 							<%= f.input :defendant, :as=>'string', :placeholder=>'[defendant]' %>
-										<div class="input-append date" id="micropost_dob" data-date="<%=18.years.ago.to_s%>" data-date-format="yyyy-mm-dd">
-											<input type="text" value="<%=18.years.ago.to_s%>" readonly class="span2" name="micropost[dob]">
-											<span class="add-on"><i class="icon-th"></i></span>
-											<span class="help-inline">DOB</span>
-										</div>
+							<div class="input-append date" id="micropost_dob" data-date="<%=18.years.ago.to_s%>" data-date-format="yyyy-mm-dd">
+								<input type="text" value="<%=18.years.ago.to_s%>" readonly class="span2" name="micropost[dob]">
+								<span class="add-on"><i class="icon-th"></i></span>
+								<span class="help-inline">DOB</span>
+							</div>
 							<div class="input">
 								<label>Judge:</label>
 								<input type="text" id="micropost_judge"	name="micropost[judge]"	class="span3" data-provide="typeahead"
@@ -33,7 +31,7 @@
 							</div>
 
 							<div class="input">
-								<label>ADF:</label>	
+								<label>Defense attorney:</label>	
 								<input type="text" class="span3" id="micropost_adf" name="micropost[adf]" data-provide="typeahead" data-items="4" 
 									data-source='["Jones, Debra", "Gupta, Kavita", "Johnson, Lyvette", "Josendale, Erin", "Saccarelli, Gale", "Whitehall, Beatrix", "Wilson, Monica", "Peek, Leslie", "Abdullah, Raouf", "Edwards, Christal", "Okeke, Loretta", "Powell, Greg", "Pride-Hebron, Kelly", "Shelton, Bill", "Uba-Okarafor, Vivent", "Mungin, Vaughn", "Handy, Ronald", "Ucheomunu, Andrew", "Moore, Sonya", "Azari, Omid"]'>
 							</div>
@@ -55,7 +53,8 @@
 							<%= f.input :offendertype, :label=>'Offender type?', :as=>'select', :collection=>["multiple conviction", "gang-related", "major offender"] %>
 							<%= f.input :guidelines_top, :label=>'Top of the Guidlines Sentence Range? (in months)' %>
 							<%= f.input :guidelines_bottom, :label=>'Bottom of the Range?' %>
-							<%= f.input :jail, :label=>'Jail?', :placeholder=>'X months' %>
+							<%= f.input :jail, :label=>'Executed sentence?', :placeholder=>'X months' %>
+							<%= f.input :suspended_time, :label=>'Suspended sentence?', :placeholder=>'Y months' %>
 							<%= f.input :probation, :label=>'Probation?', :placeholder=>'X months, [un]supervised'%>
 							<%= f.input :restitution, :label=>'Restitition? (whole dollars only)', :input_html=> {:class=>'span2'} %>
 							<%= f.input :communityservice, :label=>'Community service?', :hint=>' hours', :input_html=> {:class=>'span1'} %>
@@ -80,7 +79,7 @@
 								</div>								
 								<%= f.input :leadcharge, :label=>'Lead charge?' %>
 								<%= f.input :convictedcharges, :label=>'Convicted charges?', :input_html => { :class=>'autogrow' }%>
-								<%= f.input :category, :label=>'Category?', :collection => post_categories %>
+								<%= f.input :category, :label=>'Category?', :collection => full_dispo_categories %>
 								<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[text of event]'}, :label=>'What happened?'%>
 							</div>
 					</div>
@@ -103,4 +102,5 @@
 			$('#micropost_event_date').datepicker('hide');
 		})
 	$('.collapse').collapse()
+	$('.button').button()
 </script>

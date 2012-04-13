@@ -1,9 +1,6 @@
 <%
-if current_user.admin?
 	user_list = User.all.collect {|p| [p.name_comma, p.id] }
-else
-	user_list = User.where(:unit=>current_user.unit).collect {|p| [p.name_comma, p.id] } 
-end
+	user_list = user_list.sort
 %>
 
 <div class="span6">	
@@ -20,7 +17,11 @@ end
 				</span>
 				<span class="help-inline">Due</span>
 			</div>
-			<%= f.input :user_id, :label=>'Assign to?', :as=>'select', :collection=>user_list.sort %>
+			<div class="control-group">
+				<div class="controls">
+					<%= f.input :user_id, :label=>"Assign to", :as=>'select', :collection=>user_list %>
+				</div>
+			</div>
 
 		<% end %>
 

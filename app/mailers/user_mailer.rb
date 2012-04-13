@@ -28,8 +28,9 @@ class UserMailer < ActionMailer::Base
 		mail(:to=> user.email, :subject => "New ToDo in ("+casenumber.to_s+")")
 	end
 	
-	def investigation_notice(user, investigation, notifications)
+	def investigation_notice(assignor, user, investigation, notifications)
 		@user = user
+		@assignor=assignor
 		@investigation=investigation
 		mail(:to=> @user.email, :subject => "New Investigation assigned to "+@user.name+" in "+@investigation.casenumber, :cc=> notifications)
 	end

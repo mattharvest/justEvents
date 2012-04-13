@@ -9,6 +9,14 @@ module ApplicationHelper
 		end
 	end
 	
+	def user_list
+		Users.find(:all)
+	end
+	
+	def current_user_users
+
+	end
+	
 	def juvenile_categories
 		{
 			'screening' => 'screening',

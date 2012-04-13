@@ -1,30 +1,60 @@
 <% list = post_categories %>
+<% user_list = User.all.collect {|p| [p.name_comma, p.id] } %>
+<% user_list = user_list.sort %>
+		
+<form action="/custom_report" method="get" class="form-horizontal">
+	<fieldset>
+		<legend>Set the parameters of your report</legend>
+		<div class="control-group">
+			<label class="control-label" for="micropost_category">What type of event? (blank for all)</label>
+			<div class="controls">
+				<select id="micropost_category" name="micropost_category">
+					<option value=""></option>
+					<% list.each do |l| %>
+						<option value="<%= l[1] %>"><%=l[0].to_s %></option>
+					<% end %>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="target_user">Which user? (blank for all)</label>
+			<div class="controls">
+				<select id="target_user" name="target_user">
+				<option value=""></option>
+				<% user_list.each do |u| %>
+					<option value="<%= u[1] %>"><%=u[0].to_s %>"</option>
+				<% end %>
+			</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="start">Start date</label>
+			<div class="controls">
+				<div class="input-append date" id="start" data-date="<%= (Date.today-1).to_s %>" data-date-format="yyyy-mm-dd">
+					<input type="text" class="span2" value="<%= (Date.today-1).to_s %>" readonly name="start">
+					<span class="add-on">
+						<i class="icon-th"></i>
+					</span>
+				</div>
+			</div>
+		</div>
 
-<form action="/custom_report" method="get">
-
-	<select id="micropost_category" class="span2" name="micropost_category">
-		<% list.each do |l| %>
-			<option value="<%= l[1] %>"><%=l[0].to_s %></option>
-		<% end %>
-	</select>
-
-	<div class="input-append date" id="start" data-date="<%= (Date.today-1).to_s %>" data-date-format="yyyy-mm-dd">
-		<input type="text" value="<%= (Date.today-1).to_s %>" readonly class="span2" name="start">
-		<span class="add-on">
-			<i class="icon-th"></i>
-		</span>
-		<span class="help-inline">Start Date</span>
-	</div>
-
-	<div class="input-append date" id="end" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
-		<input type="text" value="<%= Date.today.to_s %>" readonly class="span2" name="end">
-		<span class="add-on">
-			<i class="icon-th"></i>
-		</span>
-		<span class="help-inline">End Date</span>
-	</div>	
+		<div class="control-group">
+			<label class="control-label" for="end" >End date</label>
+			<div class="controls">			
+				<div class="input-append date" id="end" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
+					<input type="text" class="span2" value="<%= Date.today.to_s %>" readonly name="end">
+					<span class="add-on">
+						<i class="icon-th"></i>
+					</span>
+				</div>			
+			</div>
+		</div>
 	
-	<button type="submit" class="btn">Search</button>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-large btn-primary">Search</button>
+	</div>
 </form>
 
 <script>

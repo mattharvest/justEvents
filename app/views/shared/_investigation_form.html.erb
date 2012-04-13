@@ -1,27 +1,6 @@
-<% #investigation form %>
-	<%
-		#:unit
-		#:assignee_id
-		#:assignor
-		#:defendant
-		#:arrest_date
-		#:casenumber
-		#:initial_appearance
-		#:preliminary_hearing
-		#:district_date
-		#:district_room
-		#:victim
-		#:incident_date
-		#:address
-		#:synopsis
-	%>
-	
 <%
-if current_user.admin?
 	user_list = User.all.collect {|p| [p.name_comma, p.id] }
-else
-	user_list = User.where(:unit=>current_user.unit).collect {|p| [p.name_comma, p.id] } 
-end
+	user_list = user_list.sort
 %>
 
 <div class="well">	
@@ -73,9 +52,10 @@ end
 			</div>
 			<%= f.input :victim, :as=>'string', :hint=>'if applicable' %>
 			<%= f.input :address, :as=>'string', :hint=>'street address of the incident' %>
-			<%= f.input :synopsis, :as=>'text', :hint=>'please limit to one or two paragraphs' %>
+			<%= f.input :synopsis, :as=>'text', :hint=>'please limit to one or two paragraphs', :required=>true %>
 			<%= f.input :assignee_id, :label=>'Assign to?', :as=>'select', :collection=>user_list.sort %>
-			<%= f.input :notifications, :label=>'Whom should be notified?', :as=>:select, :collection=>user_list.sort, :input_html => { :multiple=>true } %>
+			<%= f.input :notifications, :label=>'Whom (in the office) should be notified?', :as=>:select, :collection=>user_list.sort, :input_html => { :multiple=>true } %>
+			<%= f.input :external_notifications, :label=>'Any others to notify? (enter only email addresses, separated by commas)' %>
 		<% end %>
 		<%= f.actions do %>
 			<%= f.action(:submit) %>

@@ -1,6 +1,6 @@
 class Investigation < ActiveRecord::Base
 	belongs_to :user
-	attr_accessor :current_status, :notifications
+	attr_accessor :current_status, :notifications, :external_notifications
 	attr_accessible :status, :user_id, :unit, :assignee_id, :assignor, :defendant, :arrest_date, :casenumber, :initial_appearance, :preliminary_hearing, :district_date, :district_room, :victim, :incident_date, :address, :synopsis 
 	validates :casenumber, :presence => true
 	validates :synopsis, :presence=> true
@@ -44,13 +44,13 @@ class Investigation < ActiveRecord::Base
 		end
 		if !@casefile.nil?
 			casefile_id=@casefile.id
-			if @casefile.defendant.nil? || @casefile.defendant=="Doe, John"
+			if @casefile.defendant.blank? || @casefile.defendant=="Doe, John"
 				@casefile.defendant = self.defendant
+			else
+				self.defendant = @casefile.defendant
 			end
 			@casefile.save
 			@casefile
-		else
-			#this means the casefile didn't exist
 		end
 	end
 	

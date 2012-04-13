@@ -1,7 +1,4 @@
-<% dob_label="Defendant DOB?" %>
-<% if current_user.unit=="juvenile"	
-	dob_label= "Respondent DOB?"
-	end %>
+dob_label= "Respondent DOB?"
 		
 <div class="well">	
 	<%= semantic_form_for @micropost do |f| %>

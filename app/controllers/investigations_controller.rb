@@ -87,6 +87,7 @@ class InvestigationsController < ApplicationController
 				flash[:investigationtodofailure]="ToDo for assignee not created!"
 			end
 			
+			#add the in-office notifications
 			@notifications = []
 			user_ids_to_notify = params[:investigation][:notifications]
 			user_ids_to_notify.each do |p|
@@ -94,9 +95,19 @@ class InvestigationsController < ApplicationController
 					@notifications << User.find_by_id(p).email
 				end
 			end
+			
+			#add the external notifications
+			if !params[:investigation][:external_notifications].nil?
+				emails = params[:investigation][:external_notifications].split(',')
+				emails.each do |e|
+					if !e.blank?
+						@notifications << e
+					end
+				end
+			end
 
 			#send the email to the assignee so they get a full report
-			UserMailer.investigation_notice(@assignee, @investigation, @notifications).deliver
+			UserMailer.investigation_notice(current_user, @assignee, @investigation, @notifications).deliver
 
 			
 			#finally, create the event to reflect that it's been assigned

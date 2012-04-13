@@ -5,6 +5,7 @@
 			<th>Name</th>
 			<th>Email</th>
 			<th>Unit</th>
+			<% if current_user.admin? %> <th>Delete</th> <% end %>
 		</tr>
 	</thead>
 	<tbody>
@@ -14,6 +15,11 @@
 				<th><%=link_to title_and_name, u %></th>
 				<th><%= u.email %></th>
 				<th><%= u.unit %></th>
+				<% if current_user.admin? %>
+					<th>	<%= link_to "delete", u, :method => :delete, 
+													:confirm => "You sure?"
+													%></th>
+				<% end %>
 		<% end %>		
 	</tbody>
 </table>

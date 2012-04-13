@@ -28,7 +28,7 @@
 				<th>	ABA:			</th>
 				<th>	Team Leader:	</th>
 	
-				<%if current_user.admin? %>
+				<% if current_user?(post_item.user) || current_user.admin? %>
 					<th>	Delete Button: 	</th>
 				<% end %>
 			</tr>

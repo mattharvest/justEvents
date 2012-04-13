@@ -1,4 +1,4 @@
-<%= dob_label= "Respondent DOB?" %>
+<% dob_label= "Respondent DOB?" %>
 		
 <div class="well">	
 	<%= semantic_form_for @micropost do |f| %>
@@ -22,7 +22,7 @@
 				
 			</div>
 			
-			<div class="input-append date" id="micropost_dob" data-date="<%= Date.today.years_ago(18).to_s %>" data-date-format="yyyy-mm-dd">
+			<div class="input-append" id="micropost_dob" data-date="<%= Date.today.years_ago(18).to_s %>" data-date-format="yyyy-mm-dd">
 				<input type="text" value="<%= Date.today.years_ago(18).to_s %>" readonly class="span2" name="micropost[dob]">
 				<span class="add-on">
 					<i class="icon-th"></i>
@@ -30,7 +30,7 @@
 				<span class="help-inline">DOB</span>
 			</div>
 			
-			<div class="input-append date" id="micropost_event_date" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
+			<div class="input-append" id="micropost_event_date" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
 				<input type="text" value="<%= Date.today.to_s %>" readonly class="span2" name="micropost[event_date]">
 				<span class="add-on">
 					<i class="icon-th"></i>

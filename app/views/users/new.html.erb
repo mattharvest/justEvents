@@ -1,31 +1,14 @@
-<% units = {
-			'Admnistration' => 'administration',
-			'Grand Jury' => 'grand jury',
-			'Community Prosecution' => 'community prosecution',
-			'DV' => 'DV',
-			'Juvenile' => 'juvenile',
-			'District Court' => 'district',
-			'FTU' => 'FTU',
-			'Child Abuse and Sex' => 'child abuse and sex',
-			'Violent Crime' => 'violent crime',
-			'Motor Vehicle' => 'motor vehicle',
-			'Guns and Drugs' => 'guns and drugs',
-			'Homicide' => 'homicide',
-			'Post-Conviction' => 'postconviction',
-			'Special Prosecution' => 'special prosecution',
-			'Strategic Investigation' => 'strategic investigation'
-			}.sort %>
+
 
 <h1>Sign up</h1>
 
 <div class="well">
 <%= semantic_form_for(@user) do |f| %>
-	<%= render 'shared/error_messages', :object => f.object %>
 	<%= f.inputs do %>
 		<%= f.input :name, :label=>'Name?' %>
 		<%= f.input :email, :label=>'Email?', :hint=>'This MUST match your county email address' %>
-		<%= f.input :title, :label=>'Title?', :collection => {'ASA'=>'ASA', 'Chief'=> 'CHIEF', 'Deputy'=> 'DEPUTY', 'Assistant'=>'ASSISTANT', 'Intern'=>'INTERN', 'Other'=>'OTHER'}.sort %>
-		<%= f.input :unit, :label=>'Unit?', :collection => units %>
+		<%= f.input :title, :label=>'Title?', :collection => titles %>
+		<%= f.input :unit, :label=>'Unit?', :collection => units, :hint=>'Pick the most specific unit that applies to you at this time.' %>
 		<%= f.input :password, :label=>'Password?' %>
 		<%= f.input :password_confirmation, :label=>'Confirm password' %>
 		<%= f.input :registration_code, :label=>'Registration Code' %>

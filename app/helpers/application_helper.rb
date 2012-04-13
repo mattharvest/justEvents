@@ -9,6 +9,40 @@ module ApplicationHelper
 		end
 	end
 	
+	def units 
+		{
+			'Admnistration' => 'administration',
+			'Grand Jury' => 'grand jury',
+			'Community Prosecution' => 'community prosecution',
+			'DV' => 'DV',
+			'Juvenile' => 'juvenile',
+			'District Court' => 'district',
+			'Felony Trial Team' => 'felony trial team',
+			'Child Abuse and Sexual Assault Team' => 'child abuse and sexual assault team',
+			'Violent Crimes Team' => 'violent crimes team',
+			'Motor Vehicle Manslaughter Team' => 'motor vehicle manslaughter team',
+			'Gun and Drug Team' => 'gun and drug team',
+			'Homicide' => 'homicide',
+			'Post-Conviction' => 'postconviction',
+			'Special Prosecution' => 'special prosecution',
+			'Economic Crimes' => 'economic crimes',
+			'Strategic Investigation' => 'strategic investigation'
+		}.sort
+	end
+	
+	def titles
+		{
+			'ASA'=>'ASA', 
+			'Chief'=> 'CHIEF', 
+			'Asst Chief'=> 'ASST CHIEF',
+			'Deputy'=> 'DEPUTY', 
+			'Assistant'=>'ASSISTANT', 
+			'Intern'=>'INTERN', 
+			'Other'=>'OTHER',
+			'Coordinator'=>'COORDINATOR'			
+		}.sort
+	end
+	
 	def user_list
 		Users.find(:all)
 	end

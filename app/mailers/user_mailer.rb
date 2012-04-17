@@ -34,4 +34,11 @@ class UserMailer < ActionMailer::Base
 		@investigation=investigation
 		mail(:to=> @user.email, :subject => "New Investigation assigned to "+@user.name+" in "+@investigation.casenumber, :cc=> notifications)
 	end
+	
+	def casefile_notice(user, casefile, notifications)
+		@casefile = casefile
+		@user=user
+
+		mail(:to=>notifications, :subject=>"Casefile created: "+@casefile.lead_casenumber)
+	end
 end

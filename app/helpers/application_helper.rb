@@ -33,7 +33,9 @@ module ApplicationHelper
 	def titles
 		{
 			'ASA'=>'ASA', 
-			'Chief'=> 'CHIEF', 
+			'Chief'=> 'CHIEF',
+			'Unit Chief'=>'UNIT CHIEF',
+			'Team Leader'=>'TEAM LEADER',
 			'Asst Chief'=> 'ASST CHIEF',
 			'Deputy'=> 'DEPUTY', 
 			'Assistant'=>'ASSISTANT', 

@@ -1,18 +1,53 @@
+<%
+	user_list = User.all.collect {|p| [p.name_comma, p.id] }
+	user_list = user_list.sort
+%>
 <div class="well">	
 	<%= semantic_form_for @casefile do |f| %>
 		<%= f.semantic_errors %>
 		<%= f.inputs do %>
-			
-			<%= f.input :defendant, :as=>'string', :input_html => {}, :label=>'Defendant'%>
-			
-			<%= f.input :ccn, :as=>'string', :placeholder => 'CCN##-###-####', :input_html => {}, :label=>'CCN'%>
-			<%= f.input :cr, :as=>'string', :placeholder => 'CR#E########', :input_html => {}, :label=>'CR'%>
-			<%= f.input :ca, :as=>'string', :placeholder => 'CA######', :input_html => {}, :label=>'CA'%>
-			<%= f.input :cj, :as=>'string', :placeholder => 'CJ######', :input_html => {}, :label=>'CJ'%>
-			<%= f.input :ct, :as=>'string', :placeholder => 'CT######[A-Z]', :input_html => {}, :label=>'CT'%>
-			<%= f.input :ja, :as=>'string', :placeholder => 'JA-##-####', :input_html => {}, :label=>'JA'%>
-			<%= f.input :sao, :as=>'string', :placeholder => 'SAO##-##-####', :input_html => {}, :label=>'SAO'%>
-
+			<div class="row-fluid">
+				<div class="span6 offset2">
+					<%= f.input :defendant, :as=>'string', :input_html => {}, :label=>'Defendant'%>
+				</div>
+			</div>
+			<div class="row-fluid">			
+				<div class="span3">
+					<%= f.input :ccn, :as=>'string', :placeholder => 'CCN##-###-####', :input_html => {:class=>'span2'}, :label=>'CCN'%>
+				</div>
+				<div class="span3">
+					<%= f.input :cr, :as=>'string', :placeholder => 'CR#E########', :input_html => {:class=>'span2'}, :label=>'CR'%>
+				</div>
+				<div class="span3">
+					<%= f.input :ca, :as=>'string', :placeholder => 'CA######', :input_html => {:class=>'span2'}, :label=>'CA'%>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span3">
+					<%= f.input :cj, :as=>'string', :placeholder => 'CJ######', :input_html => {:class=>'span2'}, :label=>'CJ'%>
+				</div>
+				<div class="span3">
+					<%= f.input :ct, :as=>'string', :placeholder => 'CT######[A-Z]', :input_html => {:class=>'span2'}, :label=>'CT'%>
+				</div>
+				<div class="span3">
+					<%= f.input :ja, :as=>'string', :placeholder => 'JA-##-####', :input_html => {:class=>'span2'}, :label=>'JA'%>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span3 offset3">
+					<%= f.input :sao, :as=>'string', :placeholder => 'SAO##-##-####', :input_html => {:class=>'span2', :offset=>'span2'}, :label=>'SAO'%>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span6 offset2">
+					<%= f.input :notifications, :label=>'Whom (in the office) should be notified?', :as=>:select, :collection=>user_list, :input_html => { :multiple=>true } %>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span6 offset2">
+					<%= f.input :external_notifications, :label=>'Any others to notify? (enter only email addresses, separated by commas)' %>
+				</div>
+			</div>
 		<% end %>
 		<%= f.actions do %>
 			<%= f.action(:submit) %>

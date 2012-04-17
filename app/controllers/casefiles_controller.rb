@@ -7,6 +7,27 @@ class CasefilesController < ApplicationController
 	def create
 		@casefile = Casefile.new
 		if @casefile.update_attributes(params[:casefile])
+			#add the in-office notifications
+			@notifications = []
+			user_ids_to_notify = params[:casefile][:notifications]
+			user_ids_to_notify.each do |p|
+				if !p.blank?
+					@notifications << User.find_by_id(p).email
+				end
+			end
+			
+			#add the external notifications
+			if !params[:casefile][:external_notifications].nil?
+				emails = params[:casefile][:external_notifications].split(',')
+				emails.each do |e|
+					if !e.blank?
+						@notifications << e
+					end
+				end
+			end
+			#send the email to the assignee so they get a full report
+			UserMailer.casefile_notice(current_user, @casefile, @notifications).deliver
+			
 			redirect_to @casefile
 		else
 			redirect back

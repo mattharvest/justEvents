@@ -15,6 +15,7 @@ class InvestigationsController < ApplicationController
 	#:synopsis
 	before_filter :authenticate, :only => [:create, :destroy]
 	before_filter :authorized_user, :only => :destroy
+	before_filter :authorized_viewer, :only => :show
 	
 	def check_achievements
 		investigation_count = current_user.investigations.count
@@ -111,7 +112,7 @@ class InvestigationsController < ApplicationController
 
 			
 			#finally, create the event to reflect that it's been assigned
-			investigation_post = current_user.microposts.build(:unit=>@assignee.unit, :event_date=>Date.today.to_s, :content=>'New investigation started by '+current_user.name+', assigned to '+@assignee.name, :defendant=>@investigation.defendant, :category=>'investigation', :casenumber=>@casefile.lead_casenumber)
+			investigation_post = current_user.microposts.build(:unit=>@assignee.unit, :event_date=>Date.today.to_s, :content=>'New investigation started by '+current_user.name+', assigned to '+@assignee.name+", notifications sent to "+@notifications.to_sentence, :defendant=>@investigation.defendant, :category=>'investigation', :casenumber=>@casefile.lead_casenumber)
 			if investigation_post.save
 				flash[:investigationpostsuccess]="Assignment of investigation posted"
 			else
@@ -145,6 +146,14 @@ class InvestigationsController < ApplicationController
 				redirect_to root_path if @investigation.nil?
 			else
 				@investigation = Investigation.find_by_id(params[:id])
+			end
+		end
+		
+		def authorized_viewer
+			@investigation = Investigation.find_by_id(params[:id])
+			if current_user.admin?||current_user.unit==@investigation.unit||current_user.supervisor?
+				@investigation
+			else redirect_to root_path
 			end
 		end
 

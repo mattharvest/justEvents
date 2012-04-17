@@ -3,6 +3,7 @@
 		<td>	<%= link_to brief_investigation.defendant, brief_investigation %>	</td>
 		<td> 	<%= brief_investigation.arrest_date.to_s %>			</td>
 		<td> 	<%= link_to brief_investigation.casenumber, brief_investigation.get_casefile %>				</td>
+		<td>	<%= brief_investigation.unit %>						</td>
 		<td> 	<%= brief_investigation.initial_appearance.to_s %>	</td>
 		<td> 	<%= brief_investigation.preliminary_hearing.to_s %>	</td>
 		<td> 	<%= brief_investigation.district_date.to_s %>		</td>

@@ -19,7 +19,7 @@
 	<td>	<%= post_item.leadcharge %>	</td>
 	<td>	<%= post_item.convictedcharges %>	</td>
 	<td>	<%= post_item.enhanced %>		</td>
-	<td>	<%= post_item.guidelines_top %> - <%= post_item.guidelines_bottom %>m</td>
+	<td>	<% if !post_item.guidelines_top.nil? %> <%= post_item.guidelines_top %> - <%= post_item.guidelines_bottom %>m <%end%></td>
 	<td>	<%= post_item.aba %> </td>
 	<td>	<%= post_item.teamleader %>	</td>
 	<td>	<%= post_item.victims.to_s %></td>

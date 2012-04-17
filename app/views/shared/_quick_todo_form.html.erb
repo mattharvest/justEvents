@@ -9,7 +9,8 @@
 		<%= f.inputs do %>
 			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[text of event]'}, :label=>'Task?'%>
 			<%= f.input :casenumber, :as=>'hidden', :value=>@casefile.lead_casenumber %>
-				
+			<%= f.input :precomplete, :as=>:boolean,  :label=>'Mark already completed?' %>
+			
 			<div class="input-append date" id="todoitem_duedate" data-date="<%= (Date.today+14).to_s %>" data-date-format="yyyy-mm-dd">
 				<input type="text" value="<%= (Date.today+14).to_s %>" readonly class="span2" name="todoitem[duedate]">
 				<span class="add-on">

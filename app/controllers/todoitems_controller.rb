@@ -71,7 +71,22 @@ class TodoitemsController < ApplicationController
 				@casefile.defendant="Doe, John"
 			end
 			
+			if params[:todoitem][:precomplete]
+				@todoitem.complete=true	
+				flash[:todonotice]="Task marked complete!"
+				@micropost = current_user.microposts.build(
+					:defendant => @casefile.defendant,
+					:casenumber => @todoitem.casenumber,
+					:content => "Todo Completed: "+@todoitem.content,
+					:event_date => Date.today,
+					:category => "todoitem",
+					:unit => current_user.unit
+					)
+				@micropost.save
+			end
+			
 			@casefile.save
+			
 			redirect_to @casefile and return
 		else
 			flash[:todoitemfailure]=@todoitem.errors.full_messages

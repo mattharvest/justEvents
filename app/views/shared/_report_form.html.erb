@@ -17,6 +17,17 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label" for="micropost_unit">What unit/team? (MANDATORY)</label>
+			<div class="controls">
+				<select id="micropost_unit" name="micropost_unit">
+					<option value="<%=current_user.unit %>"></option>
+					<% units.each do |l| %>
+						<option value="<%= l[1] %>"><%=l[0].to_s %></option>
+					<% end %>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label" for="target_user">Which user? (blank for all)</label>
 			<div class="controls">
 				<select id="target_user" name="target_user">

@@ -29,6 +29,24 @@ class MicropostsController < ApplicationController
 		
 		@micropost.unit = current_user.unit
 		
+		if @micropost.category  =="referred to SI"
+			#create a todo item for Ruddy in particular
+			@ruddy = User.find_by_id(18) #NOTE THE HARDCODED VALUE HERE!!!
+			if !@ruddy.nil?
+				si_todo = @ruddy.todoitems.build(
+					:duedate=>Date.today+7, 
+					:casenumber=>@micropost.casenumber, 
+					:user_id=>@ruddy.id, 
+					:content=>'Review this case, as requested by '+current_user.name
+					)
+				if si_todo.save
+					flash[:todosuccess]="SIU notified of your referral."
+				else
+					flash[:todofailure]="SIU not notfied!"
+				end
+			end
+		end
+		
 		if @micropost.save
 			check_achievements
 			flash[:micropostsuccess]= "Micropost created"

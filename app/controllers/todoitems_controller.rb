@@ -82,6 +82,7 @@ class TodoitemsController < ApplicationController
 					:category => "todoitem",
 					:unit => current_user.unit
 					)
+				@todoitem.save
 				@micropost.save
 			end
 			

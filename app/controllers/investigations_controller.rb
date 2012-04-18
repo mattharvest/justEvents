@@ -81,7 +81,6 @@ class InvestigationsController < ApplicationController
 			flash[:investigationsuccess]="Investigation created"
 			#now create the ToDo for the assignee to review the case within 7 days
 			assignee_todo = @assignee.todoitems.build(:duedate=>Date.today+7, :casenumber=>@casefile.lead_casenumber, :user_id=>@investigation.assignee_id, :content=>'Review this case for '+current_user.unit)
-				#insert the email notice HERE
 			if assignee_todo.save
 				flash[:investigationtodosuccess]="ToDo for assignee created"
 			else

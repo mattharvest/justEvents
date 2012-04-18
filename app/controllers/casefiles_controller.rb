@@ -7,8 +7,16 @@ class CasefilesController < ApplicationController
 	def create
 		@casefile = Casefile.new
 		if @casefile.update_attributes(params[:casefile])
-			#add the in-office notifications
 			@notifications = []
+			#handle the assignment
+			if params[:casefile][:assignee_id].blank?
+				@assignee = current_user
+			else
+				@assignee = User.find_by_id(params[:casefile][:assignee_id])
+				@notifications << @assignee.email # this only happens if it isn't the current_user
+			end
+			
+			#add the in-office notifications
 			user_ids_to_notify = params[:casefile][:notifications]
 			user_ids_to_notify.each do |p|
 				if !p.blank?
@@ -26,8 +34,15 @@ class CasefilesController < ApplicationController
 				end
 			end
 			#send the email to the assignee so they get a full report
-			UserMailer.casefile_notice(current_user, @casefile, @notifications).deliver
-			
+			UserMailer.casefile_notice(current_user, @assignee, @casefile, @notifications).deliver
+
+			#finally, create the event to reflect that it's been assigned
+			casefile_post = current_user.microposts.build(:unit=>@assignee.unit, :event_date=>Date.today.to_s, :content=>'Case started by '+current_user.name+', assigned to '+@assignee.name+", notifications sent to "+@notifications.to_sentence, :defendant=>@casefile.defendant, :category=>'investigation', :casenumber=>@casefile.lead_casenumber)
+			if casefile_post.save
+				flash[:casefilepostsuccess]="Assignment of casefile posted"
+			else
+				flash[:casefilepostfailure]="Assignment of casefile not posted!"
+			end
 			redirect_to @casefile
 		else
 			redirect back

@@ -45,7 +45,7 @@ class CasefilesController < ApplicationController
 			end
 			redirect_to @casefile
 		else
-			redirect back
+			redirect_to :back
 		end
 	end
 	

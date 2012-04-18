@@ -1,0 +1,22 @@
+<% if signed_in? %>
+	<div class="hero-unit">
+		<h1>In the last week, there were</h1>
+		<dl class="dl-horizontal">
+			<dt>Trials</dt>
+				<dd><%= @trials.count.to_s %></dd>
+			<dt>Pleas</dt>
+				<dd><%= @pleas.count.to_s %></dd>
+			<dt>Warrants</dt>
+				<dd><%= @warrants.count.to_s %></dd>
+			<dt>Continuances</dt>
+				<dd><%= @continuances.count.to_s %></dd>
+			<dt>Calls/Emails</dt>
+				<dd><%= @calls.count.to_s %></dd>
+			<dt>Todo events (created, completed, etc.)</dt>
+				<dd><%= @todoevents.count.to_s %></dd>
+		</dl>
+	</div>
+	
+<% else %>
+	<%= render 'shared/introstub' %>
+<% end %>

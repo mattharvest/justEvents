@@ -11,6 +11,40 @@ class PagesController < ApplicationController
 		end
 	end
 	
+	def current_events
+		@title="This Week's Events"
+		if current_user.admin?||current_user.unit=="administration"
+			@posts = Micropost.find_all_by_created_at([50.days.ago..0.seconds.ago])
+		else
+			@posts = Micropost.find_all_by_unit_and_created_at(current_user.unit, [7.days.ago..0.seconds.ago])
+		end
+		
+		@calls = []
+		@pleas=[]
+		@continuances=[]
+		@trials=[]
+		@warrants=[]
+		@todoevents=[]
+		#ADD THE REST OF THE CATEGORIES
+		@posts.each do |p|
+			case p.category
+				when "phonecall","email"
+					@calls << p
+				when "plea"
+					@pleas << p
+				when "continuance"
+					@continuances << p
+				when "trial"
+					@trials << p
+				when "writ", "warrant"
+					@warrants <<p
+				when "todoitem"
+					@todoevents<<p
+				
+			end
+		end
+	end
+	
 	def post
 		@micropost = Micropost.new
 		if signed_in?					

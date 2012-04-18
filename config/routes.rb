@@ -13,6 +13,7 @@ JustEvents::Application.routes.draw do
 	resources :tags, :only => [:create, :destroy]
 
 	match '/todoitems/:id/update' => 'todoitems#update', :as=>'update_task'
+	match '/current_events' => 'pages#current_events'
 	match '/casefiles/:id/edit' => 'casefiles#edit', :as=>'edit_case'
 	match '/todoitems/:id/delete' => 'todoitems#destroy', :as=>'delete_task'
 	match '/casefiles/:id/delete' => 'casefiles#destroy', :as=>'delete_casefile'

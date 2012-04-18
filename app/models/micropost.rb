@@ -9,6 +9,7 @@ class Micropost < ActiveRecord::Base
 	
 	validates_length_of :content, :in => 1..255, :allow_blank => false
 	validates :casenumber, :presence => true
+	validates :category, :presence => true
 
 	default_scope :order => 'microposts.created_at DESC'
 	

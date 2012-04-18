@@ -14,7 +14,7 @@ class PagesController < ApplicationController
 	def current_events
 		@title="This Week's Events"
 		if current_user.admin?||current_user.unit=="administration"
-			@posts = Micropost.find_all_by_created_at([50.days.ago..0.seconds.ago])
+			@posts = Micropost.find_all_by_created_at([7.days.ago..0.seconds.ago])
 		else
 			@posts = Micropost.find_all_by_unit_and_created_at(current_user.unit, [7.days.ago..0.seconds.ago])
 		end

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 	before_filter :authenticate, :only=> [:edit, :update, :index]
 	before_filter :correct_user, :only => [:edit, :update]
 	before_filter :admin_user, :only => :destroy
+	before_filter :supervisor_status, :only => :show
 	
 	  def new
 		@user = User.new
@@ -81,5 +82,20 @@ class UsersController < ApplicationController
 		
 		def admin_user
 			redirect_to(root_path) unless current_user.admin?
+		end
+		
+		def supervisor_status
+			if User.exists?(params[:id])
+				@user = User.find(params[:id])
+				if current_user.admin?||current_user?(@user)||current_user.supervisor?
+
+				else
+					flash[:unauthorizedaccessfailure]="You don't have the privileges to view this page.  Don't do that."
+					redirect_to(root_path)
+				end
+			else
+				flash[:userfailure]="User not found."
+				redirect_to(root_path)
+			end
 		end
 end

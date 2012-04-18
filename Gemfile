@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-#gem 'rails', '3.2.1'
+gem 'rails', '3.2.1'
 gem 'bootstrap-will_paginate'
 
 # Bundle edge Rails instead:

@@ -43,7 +43,6 @@ class TodoitemsController < ApplicationController
 			@todoitem = target_user.todoitems.new(params[:todoitem])
 		else
 			@todoitem = current_user.todoitems.new(params[:todoitem])
-			
 		end
 		
 		if @todoitem.priority.nil?

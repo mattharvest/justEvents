@@ -71,7 +71,7 @@ class TodoitemsController < ApplicationController
 				@casefile.defendant="Doe, John"
 			end
 			
-			if params[:todoitem][:precomplete].to_s=="1"
+			if params[:todoitem][:precomplete].to_s=="1" #marked to complete
 				@todoitem.complete=true	
 				flash[:todonotice]="Task marked complete!"
 				@micropost = current_user.microposts.build(

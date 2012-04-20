@@ -16,8 +16,10 @@ class CasefilesController < ApplicationController
 			if params[:casefile][:assignee_id].blank?
 				@assignee = current_user
 				#send the email to the assignee so they get a full report
-				UserMailer.casefile_notice(current_user, @assignee, @casefile, @notifications).deliver
-
+				if !@notifications.blank?
+					UserMailer.casefile_notice(current_user, @assignee, @casefile, @notifications).deliver
+				end 
+				
 				#now create the ToDo for the assignee to review the case within 7 days
 				assignee_todo = @assignee.todoitems.build(:duedate=>Date.today+7, :casenumber=>@casefile.lead_casenumber, :user_id=>@casefile.assignee_id, :content=>'Review this case for '+current_user.unit)
 				if assignee_todo.save

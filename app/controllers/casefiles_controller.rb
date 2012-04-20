@@ -97,7 +97,7 @@ class CasefilesController < ApplicationController
 		@casefiles = []
 		if params[:search]
 			#SEARCH MODE
-			@searchstring = params[:search]
+			@searchstring = params[:search].upcase
 			stub = @searchstring[0..1]
 			if stub=="CR"
 				@casefiles << Casefile.find_by_cr(params[:search])

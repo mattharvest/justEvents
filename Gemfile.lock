@@ -125,7 +125,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  bootstrap-sass (~> 2.0.2)
+  bootstrap-sass
   bootstrap-will_paginate
   coffee-rails (~> 3.2.1)
   formtastic!

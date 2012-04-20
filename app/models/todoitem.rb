@@ -15,8 +15,8 @@ class Todoitem < ActiveRecord::Base
 		(duedate-Date.today).to_i
 	end
 	
-	def notify_of_todo(user)
-		UserMailer.todo_notice(self, user).deliver
+	def notify_of_todo(user, sender)
+		UserMailer.todo_notice(self, user, sender).deliver
 	end
 	
 	def summary

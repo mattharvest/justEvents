@@ -59,7 +59,7 @@ class TodoitemsController < ApplicationController
 		if @todoitem.save
 			check_achievements
 			if !params[:todoitem][:user_id].blank?
-				if @todoitem.notify_of_todo(User.find_by_id(params[:todoitem][:user_id]))
+				if @todoitem.notify_of_todo(User.find_by_id(params[:todoitem][:user_id]), current_user)
 					flash[:todomailsuccess]="notification sent by email"
 				else
 					flash[:todomailfailure]="notification by email of todo failed"
@@ -110,6 +110,7 @@ class TodoitemsController < ApplicationController
 	
 	def update
 		if @todoitem = Todoitem.find_or_create_by_id(params[:id])
+
 		else
 			flash[:todonotice2]="Failed to find or create by ID the Todo here"
 		end
@@ -131,6 +132,7 @@ class TodoitemsController < ApplicationController
 		elsif !params[:todoitem][:duedate].nil?
 			#update the date
 			@todoitem.duedate=params[:todoitem][:duedate]
+			
 			@casefile = get_casefile(@todoitem.casenumber)
 			flash[:todosuccess]="Duedate updated, now "+params[:todoitem][:duedate]
 			
@@ -148,6 +150,7 @@ class TodoitemsController < ApplicationController
 		end
 		
 		if @todoitem.save
+			@todoitem.notify_of_todo(User.find_by_id(@todoitem.user_id), current_user)
 		else
 			flash[:todofailure]="Todo not saved!"
 		end

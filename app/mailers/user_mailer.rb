@@ -30,17 +30,22 @@ class UserMailer < ActionMailer::Base
 			end
 	end
 	
-	def todo_notice(todoitem, recipient)
+	def todo_notice(todoitem, recipient, sender)
 
 		@user = recipient
+		@sender = sender
 		@todoitem=todoitem
 		@content = @todoitem.content
 		@casenumber = @todoitem.casenumber
-			mail(:to=> @user.email, :subject=>"New ToDo in ("+@casenumber.to_s+")") do |format|
+		
+			mail(:from=>@sender.email, :to=> @user.email, :subject=>@casenumber.to_s+"-TODO: "+@content) do |format|
 				format.ics {
 					event = Icalendar::Event.new
-					event.start = @todoitem.duedate
-					event.end = @todoitem.duedate
+					event.dtstart = @todoitem.duedate
+					event.dtstart.ical_params = { "VALUE" => "DATE" }
+					event.dtend = @todoitem.duedate
+					event.dtend.ical_params = { "VALUE" => "DATE" }
+					#event.end = (@todoitem.duedate+1).to_datetime
 					event.summary = @todoitem.content #TITLE
 					event.description = @todoitem.content #BODY
 					event.location = "Upper Marlboro"

@@ -15,6 +15,25 @@ class CasefilesController < ApplicationController
 			#handle the assignment
 			if params[:casefile][:assignee_id].blank?
 				@assignee = current_user
+				#send the email to the assignee so they get a full report
+				UserMailer.casefile_notice(current_user, @assignee, @casefile, @notifications).deliver
+
+				#now create the ToDo for the assignee to review the case within 7 days
+				assignee_todo = @assignee.todoitems.build(:duedate=>Date.today+7, :casenumber=>@casefile.lead_casenumber, :user_id=>@casefile.assignee_id, :content=>'Review this case for '+current_user.unit)
+				if assignee_todo.save
+					flash[:investigationtodosuccess]="ToDo for assignee created"
+					assignee_todo.notify_of_todo(@assignee, current_user)
+				else
+					flash[:investigationtodofailure]="ToDo for assignee not created!"
+				end
+				
+				#finally, create the event to reflect that it's been assigned
+				casefile_post = current_user.microposts.build(:unit=>@assignee.unit, :event_date=>Date.today.to_s, :content=>'Case started by '+current_user.name+', assigned to '+@assignee.name+", notifications sent to "+@notifications.to_sentence, :defendant=>@casefile.defendant, :category=>'investigation', :casenumber=>@casefile.lead_casenumber)
+				if casefile_post.save
+					flash[:casefilepostsuccess]="Assignment of casefile posted"
+				else
+					flash[:casefilepostfailure]="Assignment of casefile not posted!"
+				end
 			else
 				@assignee = User.find_by_id(params[:casefile][:assignee_id])
 				@notifications << @assignee.email # this only happens if it isn't the current_user
@@ -37,25 +56,7 @@ class CasefilesController < ApplicationController
 					end
 				end
 			end
-			#send the email to the assignee so they get a full report
-			UserMailer.casefile_notice(current_user, @assignee, @casefile, @notifications).deliver
-
-			#now create the ToDo for the assignee to review the case within 7 days
-			assignee_todo = @assignee.todoitems.build(:duedate=>Date.today+7, :casenumber=>@casefile.lead_casenumber, :user_id=>@casefile.assignee_id, :content=>'Review this case for '+current_user.unit)
-			if assignee_todo.save
-				flash[:investigationtodosuccess]="ToDo for assignee created"
-				assignee_todo.notify_of_todo(@assignee, current_user)
-			else
-				flash[:investigationtodofailure]="ToDo for assignee not created!"
-			end
 			
-			#finally, create the event to reflect that it's been assigned
-			casefile_post = current_user.microposts.build(:unit=>@assignee.unit, :event_date=>Date.today.to_s, :content=>'Case started by '+current_user.name+', assigned to '+@assignee.name+", notifications sent to "+@notifications.to_sentence, :defendant=>@casefile.defendant, :category=>'investigation', :casenumber=>@casefile.lead_casenumber)
-			if casefile_post.save
-				flash[:casefilepostsuccess]="Assignment of casefile posted"
-			else
-				flash[:casefilepostfailure]="Assignment of casefile not posted!"
-			end
 			redirect_to @casefile
 		else
 			redirect_to :back

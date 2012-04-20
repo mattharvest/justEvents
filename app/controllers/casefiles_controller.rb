@@ -100,21 +100,21 @@ class CasefilesController < ApplicationController
 			@searchstring = params[:search].upcase
 			stub = @searchstring[0..1]
 			if stub=="CR"
-				@casefiles << Casefile.find_by_cr(params[:search])
+				@casefiles << Casefile.find_by_cr(@searchstring)
 			elsif stub=="CT"
-				@casefiles << Casefile.find_by_ct(params[:search])
+				@casefiles << Casefile.find_by_ct(@searchstring)
 			elsif stub=="CJ"
-				@casefiles << Casefile.find_by_cj(params[:search])
+				@casefiles << Casefile.find_by_cj(@searchstring)
 			elsif stub=="CA"
-				@casefiles << Casefile.find_by_ca(params[:search])
+				@casefiles << Casefile.find_by_ca(@searchstring)
 			elsif stub=="SA"
-				Casefile.find_all_by_sao(params[:search]).each do |c|
+				Casefile.find_all_by_sao(@searchstring).each do |c|
 					@casefiles << c
 				end
 			elsif stub=="JA"
-				@casefiles << Casefile.find_by_ja(params[:search])
+				@casefiles << Casefile.find_by_ja(@searchstring)
 			elsif stub=="CC"
-				Casefile.find_all_by_ccn(params[:search]).each do |c|
+				Casefile.find_all_by_ccn(@searchstring).each do |c|
 					@casefiles << c
 				end
 			else

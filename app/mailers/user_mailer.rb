@@ -43,9 +43,9 @@ class UserMailer < ActionMailer::Base
 					event = Icalendar::Event.new
 					event.dtstart = @todoitem.duedate
 					event.dtstart.ical_params = { "VALUE" => "DATE" }
-					event.dtend = @todoitem.duedate
+					event.dtend = @todoitem.duedate+1
 					event.dtend.ical_params = { "VALUE" => "DATE" }
-					#event.end = (@todoitem.duedate+1).to_datetime
+
 					event.summary = @todoitem.content #TITLE
 					event.description = @todoitem.content #BODY
 					event.location = "Upper Marlboro"

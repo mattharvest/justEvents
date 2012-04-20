@@ -40,7 +40,7 @@ class UserMailer < ActionMailer::Base
 				format.ics {
 					event = Icalendar::Event.new
 					event.start = @todoitem.duedate
-					event.end = @todoitem.duedate+1
+					event.end = @todoitem.duedate
 					event.summary = @todoitem.content #TITLE
 					event.description = @todoitem.content #BODY
 					event.location = "Upper Marlboro"

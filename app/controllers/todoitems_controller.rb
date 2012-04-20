@@ -17,19 +17,19 @@ class TodoitemsController < ApplicationController
 	def get_casefile(casenum)
 		stub = casenum[0..1]
 		if stub=="CC"
-			Casefile.find_or_create_by_ccn(@todoitem.casenumber)
+			Casefile.find_or_create_by_ccn(casenum.upcase)
 		elsif stub=="CR"
-			Casefile.find_or_create_by_cr(@todoitem.casenumber)
+			Casefile.find_or_create_by_cr(casenum.upcase)
 		elsif stub=="CT"
-			Casefile.find_or_create_by_ct(@todoitem.casenumber)
+			Casefile.find_or_create_by_ct(casenum.upcase)
 		elsif stub=="CJ"
-			Casefile.find_or_create_by_cj(@todoitem.casenumber)
+			Casefile.find_or_create_by_cj(casenum.upcase)
 		elsif stub=="CA"
-			Casefile.find_or_create_by_ca(@todoitem.casenumber)
+			Casefile.find_or_create_by_ca(casenum.upcase)
 		elsif stub=="SA"
-			Casefile.find_or_create_by_sao(@todoitem.casenumber)
+			Casefile.find_or_create_by_sao(casenum.upcase)
 		elsif stub=="JA"
-			Casefile.find_or_create_by_ja(@todoitem.casenumber)
+			Casefile.find_or_create_by_ja(casenum.upcase)
 		else
 			false
 		end
@@ -41,7 +41,6 @@ class TodoitemsController < ApplicationController
 		if !params[:todoitem][:user_id].blank?
 			target_user = User.find_by_id(params[:todoitem][:user_id])
 			@todoitem = target_user.todoitems.new(params[:todoitem])
-			@todoitem.notify_of_todo(target_user)
 		else
 			@todoitem = current_user.todoitems.new(params[:todoitem])
 			
@@ -60,7 +59,11 @@ class TodoitemsController < ApplicationController
 		if @todoitem.save
 			check_achievements
 			if !params[:todoitem][:user_id].blank?
-				@todoitem.notify_of_todo(User.find_by_id(params[:todoitem][:user_id]))
+				if @todoitem.notify_of_todo(User.find_by_id(params[:todoitem][:user_id]))
+					flash[:todomailsuccess]="notification sent by email"
+				else
+					flash[:todomailfailure]="notification by email of todo failed"
+				end
 			end
 			
 			flash[:todoitemsuccess]= "Todo item created"

@@ -19,6 +19,7 @@ class Casefile < ActiveRecord::Base
 	validates :cj, :uniqueness => { :case_sensitive => false }, :allow_blank => true
 	validates :ca, :uniqueness => { :case_sensitive => false }, :allow_blank => true
 	validates :ja, :uniqueness => { :case_sensitive => false }, :allow_blank => true
+	validates :defendant, :presence=>true
 	
 	def lead_casenumber
 		if !ct.blank?
@@ -96,9 +97,6 @@ class Casefile < ActiveRecord::Base
 	end
 	
 	def summary
-		if defendant.nil?
-			defendant="Doe, John"
-		end
 		returnstring=
 			"CCN: "+self.ccn.to_s+
 			", CR: "+self.cr.to_s+

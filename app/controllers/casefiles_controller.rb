@@ -7,6 +7,10 @@ class CasefilesController < ApplicationController
 	def create
 		@casefile = Casefile.new
 		if @casefile.update_attributes(params[:casefile])
+			if @casefile.defendant.blank?||@casefile.defendant.nil?
+				@casefile.defendant="Doe, John"
+			end
+			
 			@notifications = []
 			#handle the assignment
 			if params[:casefile][:assignee_id].blank?

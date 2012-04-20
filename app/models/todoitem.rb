@@ -16,7 +16,7 @@ class Todoitem < ActiveRecord::Base
 	end
 	
 	def notify_of_todo(user)
-		UserMailer.todo_notice(user, content.to_s, casenumber.to_s).deliver
+		UserMailer.todo_notice(self, user).deliver
 	end
 	
 	def summary

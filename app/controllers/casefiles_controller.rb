@@ -44,6 +44,7 @@ class CasefilesController < ApplicationController
 			assignee_todo = @assignee.todoitems.build(:duedate=>Date.today+7, :casenumber=>@casefile.lead_casenumber, :user_id=>@casefile.assignee_id, :content=>'Review this case for '+current_user.unit)
 			if assignee_todo.save
 				flash[:investigationtodosuccess]="ToDo for assignee created"
+				assignee_todo.notify_of_todo(@assignee, current_user)
 			else
 				flash[:investigationtodofailure]="ToDo for assignee not created!"
 			end

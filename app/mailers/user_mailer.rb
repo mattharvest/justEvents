@@ -49,7 +49,7 @@ class UserMailer < ActionMailer::Base
 					event.summary = @todoitem.content #TITLE
 					event.description = @todoitem.content #BODY
 					event.location = "Upper Marlboro"
-					event.uid = "TODOITEM-"+@todoitem.id.to_s
+					event.uid = "TODOITEM-"+@user.email+"-"+@todoitem.id.to_s
 					
 					calendar = Icalendar::Calendar.new
 					calendar.add_event(event)

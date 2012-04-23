@@ -149,7 +149,9 @@ class TodoitemsController < ApplicationController
 		end
 		
 		if @todoitem.save
-			@todoitem.notify_of_todo(User.find_by_id(@todoitem.user_id), current_user)
+			if !@todoitem.complete?
+				@todoitem.notify_of_todo(User.find_by_id(@todoitem.user_id), current_user)
+			end
 		else
 			flash[:todofailure]="Todo not saved!"
 		end

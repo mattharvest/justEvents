@@ -39,6 +39,13 @@ class User < ActiveRecord::Base
 		end
 		pending.sort_by{|t| t[:duedate]}
 	end
+	
+	def self.email_dailies
+		User.all.each do |user|
+			todos = user.todoitems.all
+			UserMailer.daily_report(user, todos).deliver
+		end
+	end
 
 	def finished_todos
 		finished = []

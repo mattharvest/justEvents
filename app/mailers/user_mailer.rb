@@ -30,6 +30,12 @@ class UserMailer < ActionMailer::Base
 			end
 	end
 	
+	def daily_report(user, todos)
+		@user = user
+		@todos=todos
+		mail(:to=> @user.email, :subject=>"Daily report")
+	end
+	
 	def todo_notice(todoitem, recipient, sender)
 
 		@user = recipient

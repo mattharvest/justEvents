@@ -1,0 +1,37 @@
+<h1><%= @user.name %>, this is your daily report.</h1>
+<%
+	#prep the lists by day
+	due_today = []
+	due_tomorrow = []
+	
+	@todos.each do |t|
+		case t.daysleft
+		when 0
+			due_today << t
+		when 1
+			due_tomorrow << t
+		end
+	end
+%>
+
+<div>
+	<h2>You have the following ToDo items due today or tomorrow:</h3>
+</div>
+<h3> Today </h3>
+<div>
+	<ul>
+		<% due_today.each do |t| %>
+				<% the_url = casefile_url(t.retrieve_casefile, :host=>"justevents.herokuapps.com") %>
+				<li><%= link_to the_url, t.casenumber %>: <%=t.content %>, due <%=t.duedate.to_s %></li>
+		<% end %>
+	</ul>
+</div>
+<h3> Tomorrow </h3>
+<div>
+	<ul>
+		<% due_tomorrow.each do |t| %>
+				<% the_url = casefile_url(t.retrieve_casefile, :host=>"justevents.herokuapps.com") %>
+				<li><%= link_to the_url, t.casenumber %>: <%=t.content %>, due <%=t.duedate.to_s %></li>
+		<% end %>
+	</ul>
+</div>

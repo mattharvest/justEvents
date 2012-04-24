@@ -3,5 +3,5 @@
 You have the following ToDo items:
 
 <% @todos.each do |t| %>
-	<%=t.casenumber%>: <%=t.content %>, due <%=t.duedate.to_s %>
+	<%= t.casenumber%>: <%=t.content %>, due <%=t.duedate.to_s %>
 <% end %>

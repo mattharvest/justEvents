@@ -14,8 +14,8 @@ end
 			
 			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.'%>
 			<%= f.input :precomplete, :as=>:boolean,  :label=>'Mark already completed?' %>
-			<div class="input-append date" id="todoitem_duedate" data-date="2012-12-12" data-date-format="yyyy-mm-dd">
-				<input type="text" value="2012-12-12" readonly class="span2" name="todoitem[duedate]">
+			<div class="input-append date" id="todoitem_duedate" data-date="<%= (Date.today+14).to_s %>" data-date-format="yyyy-mm-dd">
+				<input type="text" value="<%= (Date.today+14).to_s %>" readonly class="span2" name="todoitem[duedate]">
 				<span class="add-on">
 					<i class="icon-th"></i>
 				</span>

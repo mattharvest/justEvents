@@ -5,6 +5,9 @@
 		<%= f.semantic_errors %>
 		<%= f.inputs do %>
 			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[phone number], [content of message]'}, :label=>'What happened?'%>
+			<div id="content_count">
+				
+			</div>
 			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.' %>
 			<%= f.input :category, :as=>'hidden', :input_html => { :value=>'phonecall' } %>
 			<%= f.input :adf, :as=>'hidden', :input_html => { :value=>'' } %>
@@ -16,3 +19,11 @@
 		<% end %>
 	<% end %>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#micropost_content').charCount({
+			allowed: 255,
+			counterText: 'Characters left: '
+		});
+	});
+</script>

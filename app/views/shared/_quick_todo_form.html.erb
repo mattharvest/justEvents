@@ -37,4 +37,10 @@
 			$('#todoitem_duedate').datepicker('hide');
 		})
 	$(".collapse").collapse()
+	$(document).ready(function() {
+		$('#todoitem_content').charCount({
+			allowed: 255,
+			counterText: 'Characters left: '
+		});
+	});
 </script>

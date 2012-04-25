@@ -57,4 +57,10 @@
 			.on('changeDate', function(ev) {
 			$('#micropost_event_date').datepicker('hide');
 		})
+	$(document).ready(function() {
+		$('#micropost_content').charCount({
+			allowed: 255,
+			counterText: 'Characters left: '
+		});
+	});
 </script>

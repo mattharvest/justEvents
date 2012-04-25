@@ -102,7 +102,9 @@ module ApplicationHelper
 		'phonecall'=>'phonecall',
 		'referred to Strategic Investigations'=>'referred to SI',
 		'investigation'=>'investigation',
-		'email'=>'email'
+		'email'=>'email',
+		'bail/bond'=>'bail or bond',
+		'motions hearing'=>'motions hearing',
 		}
 	end
 	

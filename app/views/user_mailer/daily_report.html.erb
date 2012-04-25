@@ -22,7 +22,7 @@
 	<ul>
 		<% due_today.each do |t| %>
 				<% the_url = casefile_url(t.retrieve_casefile, :host=>"justevents.herokuapps.com") %>
-				<li><%= link_to the_url, t.casenumber %>: <%=t.content %>, due <%=t.duedate.to_s %></li>
+				<li><%= link_to t.casenumber, the_url %>: <%=t.content %>, due <%=t.duedate.to_s %></li>
 		<% end %>
 	</ul>
 </div>
@@ -31,7 +31,7 @@
 	<ul>
 		<% due_tomorrow.each do |t| %>
 				<% the_url = casefile_url(t.retrieve_casefile, :host=>"justevents.herokuapps.com") %>
-				<li><%= link_to the_url, t.casenumber %>: <%=t.content %>, due <%=t.duedate.to_s %></li>
+				<li><%= link_to t.casenumber, the_url %>: <%=t.content %>, due <%=t.duedate.to_s %></li>
 		<% end %>
 	</ul>
 </div>

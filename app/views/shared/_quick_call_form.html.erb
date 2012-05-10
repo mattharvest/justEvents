@@ -1,0 +1,29 @@
+<% user_list = User.all.collect {|p| [p.name_comma+" ("+p.email+")", p.id] } %>
+
+<div class="well">	
+	<%= semantic_form_for @micropost do |f| %>
+		<%= f.semantic_errors %>
+		<%= f.inputs do %>
+			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[phone number], [content of message]'}, :label=>'What happened?'%>
+			<div id="content_count">
+				
+			</div>
+			<%= f.input :casenumber, :as=>'hidden', :value=>@casefile.lead_casenumber %>
+			<%= f.input :category, :as=>'hidden', :input_html => { :value=>'phonecall' } %>
+			<%= f.input :adf, :as=>'hidden', :input_html => { :value=>'' } %>
+			<%= f.input :event_date, :as=>'hidden', :input_html => {:value =>Date.today.to_s } %>
+			<%= f.input :notify, :label=>'Who should be emailed?', :as=>'select', :collection=>user_list.sort, :hint=>'Default: nobody' %>
+		<% end %>
+		<%= f.actions do %>
+			<%= f.action(:submit) %>
+		<% end %>
+	<% end %>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#micropost_content').charCount({
+			allowed: 255,
+			counterText: 'Characters left: '
+		});
+	});
+</script>

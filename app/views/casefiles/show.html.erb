@@ -152,4 +152,10 @@
 <script>
 	$('#todoitem_duedate').datepicker()
 	$(".collapse").collapse()
+	$(document).ready(function() {
+		$('#micropost_content').charCount({
+			allowed: 255,
+			counterText: 'Characters left: '
+		});
+	});
 </script>

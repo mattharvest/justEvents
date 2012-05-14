@@ -8,7 +8,16 @@
 		<%= f.semantic_errors %>
 		<%= f.inputs do %>
 			<%= f.input :defendant, :as=>'hidden', :value=>@casefile.defendant %>
-			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[text of event]'}, :label=>'What happened?'%>
+			
+			<div class="input">
+				<label>What is it?</label>
+				<textarea
+					class="span3"
+					id="plea_content"
+					rows="3"
+					placeholder="What is the deal?"
+					name="micropost[content]"></textarea>
+			</div>
 			<%= f.input :category, :as=>'hidden', :input_html => { :value=>'plea' } %>
 			<%= f.input :casenumber, :as=>'hidden', :value=>@casefile.lead_casenumber %>
 			
@@ -56,4 +65,10 @@
 			.on('changeDate', function(ev) {
 			$('#plea_event_date').datepicker('hide');
 		})
+	$(document).ready(function() {
+		$('#plea_content').charCount({
+			allowed: 255,
+			counterText: 'Characters left: '
+		});
+	});
 </script>

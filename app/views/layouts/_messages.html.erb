@@ -9,14 +9,21 @@
 		</div>
 	
 	<% elsif key.to_s.include?("failure") %>
-		<div class="alert alert-block alert-failure fade in">
+		<div class="alert alert-block alert-error fade in">
+			<a class="close" data-dismiss="alert" href="#">&times;</a>
+			<h4 class="alert-heading">Failure!</h4>
+			<%= value %>
+		</div>
+	
+	<% elsif key.to_s.include?("error") %>
+		<div class="alert alert-block fade in">
 			<a class="close" data-dismiss="alert" href="#">&times;</a>
 			<h4 class="alert-heading">Failure!</h4>
 			<%= value %>
 		</div>
 		
 	<% elsif key.to_s.include?("notice") %>
-		<div class="alert alert-block alert-notice fade in">
+		<div class="alert alert-block alert-info fade in">
 			<a class="close" data-dismiss="alert" href="#">&times;</a>
 			<h4 class="alert-heading">Notice!</h4>
 			<%= value %>

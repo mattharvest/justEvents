@@ -1,0 +1,5 @@
+<h1>Index of Petitions</h1>
+<%= link_to "new petition", new_petition_path %>
+<% @petitions.each do |p| %>
+	<%= "\n"+p.ccn+", "+p.defendant %>
+<% end %>

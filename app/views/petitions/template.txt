@@ -1,0 +1,194 @@
+<div class="row-fluid">
+	<div class="span6">
+		ASA
+	</div>
+	<div class="span6">
+		JA
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span6">
+		DATE
+	</div>
+	<div class="span6">
+		CCN
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="offset3">
+		PRETITION INFORMATION FORM
+	</div>
+</div>
+<div>
+	<div class="row-fluid">
+		Respondent
+	</div>
+	<div class="row-fluid">
+		Address
+	</div>
+	<div class="row-fluid">
+		Parent
+	</div>
+	<div class="row-fluid">
+		<div class="span4">
+			DOB
+		</div>
+		<div class="span4">
+			AGE
+		</div>
+		<div class="span4">
+			SCHOOL
+		</div>
+	</div>
+</div>
+<div>
+	<div class="row-fluid">
+		Name of Victim
+	</div>
+	<div class="row-fluid">
+		Offense Date
+	</div>
+	<div class="row-fluid">
+		Charges
+	</div>
+	<div class="row-fluid">
+		Charging officer
+	</div>
+	<div class="row-fluid">
+		Assisting Officers
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span1">
+		Chemist
+	</div>
+	<div class="span1">
+		PWID
+	</div>
+	<div class="span1">
+		MJ
+	</div>
+	<div class="span1">
+		CC
+	</div>
+	<div class="span1">
+		PCP
+	</div>
+	<div class="span1">
+		Other
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span6">
+		Victim
+	</div>
+	<div class="span6">
+		Adult/DOB
+	</div>
+</div>
+<div class="row-fluid">
+	Witnesses
+</div>
+<div class="row-fluid">
+	<div class="span3">
+		Fingerprint
+	</div>
+	<div class="span3">
+		Examiner
+	</div>
+	<div class="span3">
+		Tech
+	</div>
+	<div class="span3">
+		Counterfeit
+	</div>
+</div>
+<div class="row-fluid">
+	Co-Respondents
+</div>
+
+<div class="row-fluid">
+	<div>
+		Icon Letter
+	</div>
+	<div class="row-fluid">
+		<div class="span4">
+			Incident Report
+		</div>
+		<div class="span4">
+			Statement of Respondent
+		</div>
+		<div class="span4">
+			Victim/Witness list
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span4">
+			Arrest Report
+		</div>
+		<div class="span4">
+			Investigation Report
+		</div>
+		<div class="span4">
+			Accident Report
+		</div>
+	</div>
+	<div class="row-fluid span4">
+		<div class="span4">
+			Screening Appointment
+		</div>
+	</div>
+</div>
+
+<div>
+	<div class="row-fluid">
+		<div class="span12">
+			Statement of PC
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			Mitigation
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			Searches and Siezures
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			Respondent Statements
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			Witness Statements
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			Premerits ID
+		</div>
+	</div>
+</div>
+	<div class="row-fluid">
+		<div class="span8">
+			Expert and Notices
+			<div class="row-fluid">
+				<div class="span3">
+					Medical
+				</div>
+				<div class="span3">
+					Business
+				</div>
+				<div class="span3">
+					911
+				</div>
+				<div class="span3">
+					MVA
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

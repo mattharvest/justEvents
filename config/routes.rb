@@ -5,6 +5,7 @@ JustEvents::Application.routes.draw do
 	get "sessions/new"
 
 	resources :users
+	resources :petitions
 	resources :casefiles
 	resources :sessions, :only => [:new, :create, :destroy]
 	resources :microposts

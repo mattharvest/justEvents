@@ -4,9 +4,13 @@
 	<%= semantic_form_for @micropost do |f| %>
 		<%= f.semantic_errors %>
 		<%= f.inputs do %>
-			<%= f.input :content, :as=>'text', :input_html => {:class => 'autogrow', :rows=>3, :placeholder=>'[phone number], [content of message]'}, :label=>'What happened?'%>
-			<div id="content_count">
-				
+			<div class="input">
+				<label>What is it?</label>
+				<textarea
+					id="call_content"
+					rows="3"
+					placeholder="what's the call?"
+					name="micropost[content]"></textarea>
 			</div>
 			<%= f.input :casenumber, :as=>'hidden', :value=>@casefile.lead_casenumber %>
 			<%= f.input :category, :as=>'hidden', :input_html => { :value=>'phonecall' } %>
@@ -21,7 +25,7 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#micropost_content').charCount({
+		$('#call_content').charCount({
 			allowed: 255,
 			counterText: 'Characters left: '
 		});

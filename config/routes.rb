@@ -11,6 +11,7 @@ JustEvents::Application.routes.draw do
 	resources :investigations
 	resources :todoitems, :only => [:new, :create, :destroy, :update]
 	resources :tags, :only => [:create, :destroy]
+	resources :petitions
 
 	match '/todoitems/:id/update' => 'todoitems#update', :as=>'update_task'
 	match '/current_events' => 'pages#current_events'

@@ -7,11 +7,7 @@
 	<i class="icon-folder-open"></i>
 		<blockquote>
 			<h2>the case</h2>
-<<<<<<< HEAD
 			i am petitioning a case with <label for="petition_ccn">ccn</label> <%= f.input :ccn, :label=>false %>, against <label for="defendant">respondent</label> <input  type="text" name="petition[defendant]" id="defendant" class="span2" value>. the <label for="corespondents">co-respondents</label> are <input type="text" name="petition[corespondents]" id="corespondents" class="span2" value>.
-=======
-			i am petitioning a case with <label for="ccn">ccn</label> <%= f.input :ccn, :label=>false %>, against <label for="defendant">respondent</label> <input  type="text" name="petition[defendant]" id="defendant" class="span2" value>. the <label for="corespondents">co-respondents</label> are <input type="text" name="petition[corespondents]" id="corespondents" class="span2" value>.
->>>>>>> newbranch
 			<br>
 			the respondent <label for="defendant_address">lives at</label> <input  type="text" id="defendant_address" name="petition[defendant_address]" class="span3" value>.  he attends <label for="school">school</label> at <input  type="text" name="petition[school]" id="school" class="span2" value>.
 			<br>
@@ -27,7 +23,7 @@
 			<h2>the victim</h2>
 			in this case, it is alleged that <label for="offense_date">on or about</label> <input  type="text" name="petition[offense_date]" id="offense_date" class="span1" value>, <label for="incident_address">in the area</label> of <input  type="text" name="petition[incident_address]" id="incident_address" class="span2" value>the respondent <label for="victim">victimized</label> <input  type="text" name="petition[victim]" id="victim" class="span2" value>.
 			<br>
-			the victim, who <label for="victim_address">lives at</label> <input  type="text" name="petition[victim_address]" id="victim_address" class="span3" value>, <label for="victim_adult_or_minor">is</label> a minor <input  type="checkbox" name="petition[victim_adult_or_minor]" id="victim_adult_or_minor" value>.
+			the victim <label for="victim_address">lives at</label> <input  type="text" name="petition[victim_address]" id="victim_address" class="span3" value>. <%= f.input :victim_adult_or_minor, :label=>"The victim is a minor." %>
 			<br>
 			<small class="pull-right">victim information</small>
 		</blockquote>

@@ -1,3 +1,20 @@
+GIT
+  remote: git://github.com/justinfrench/formtastic.git
+  revision: 7b7428fa4a6a44aea1e8278523f4f45f2570a33d
+  branch: 2.1-stable
+  specs:
+    formtastic (2.1.1)
+      actionpack (~> 3.0)
+
+GIT
+  remote: https://github.com/cgunther/formtastic-bootstrap.git
+  revision: 4e6a7f50153af805470d43a2bd2c9885a902e4a6
+  branch: bootstrap2-rails3-2-formtastic-2-1
+  specs:
+    formtastic-bootstrap (1.1.2)
+      formtastic
+      rails (>= 3.1.0)
+
 GEM
   remote: https://rubygems.org/
   remote: http://gems.github.com/
@@ -44,13 +61,6 @@ GEM
     erubis (2.7.0)
     execjs (1.3.0)
       multi_json (~> 1.0)
-    formtastic (2.2.0)
-      actionpack (>= 3.0)
-    formtastic-plus-bootstrap (1.0.1)
-      bootstrap-sass (~> 2.0)
-      formtastic (~> 2.2)
-      railties (>= 3.1.0)
-      sass-rails
     hike (1.2.1)
     i18n (0.6.0)
     icalendar (1.1.6)
@@ -120,8 +130,8 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-will_paginate
   coffee-rails (~> 3.2.1)
-  formtastic (~> 2.1)
-  formtastic-plus-bootstrap
+  formtastic!
+  formtastic-bootstrap!
   icalendar
   jquery-rails
   pg

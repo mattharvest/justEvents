@@ -1,0 +1,45 @@
+
+form blockquote label {
+	display: inline;
+	font-weight: bold;
+	margin-right: 1em;
+	margin-left: 0;
+}
+
+stringish {
+	display: inline;
+	float: left;
+}
+
+form blockquote input {
+	background-color: transparent;
+	border: none;
+	border-bottom: 0.0714em dashed #ccc;
+	margin: 0 0.5em;
+	font-weight: bold;
+	font-style: normal;
+	display: inline;
+	float: left;
+	margin-right: 1em;
+	margin-left: 0;
+}
+
+form blockquote textarea {
+	background-color: transparent;
+	border: none;
+	border-bottom: 0.0714em dashed #ccc;
+	margin: 0 0.5em;
+	font-weight: bold;
+	font-style: normal;
+	display: inline-block;
+	}
+	
+form blockquote select {
+	background-color: transparent;
+	border: none;
+	border-bottom: 0.0714em dashed #ccc;
+	margin: 0 0.5em;
+	font-weight: bold;
+	font-style: normal;
+	display: inline-block;
+	}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Place all the styles related to the Petitions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
@@ -32,4 +33,45 @@ form blockquote select {
 	margin: 0 0.5em;
 	font-weight: bold;
 	font-style: normal;
+=======
+// Place all the styles related to the Petitions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'bootstrap';
+body {
+	padding-top: 60px;
+	padding-left: 10px;
+}
+
+form blockquote label {
+	display: inline;
+	font-weight: bold;
+}
+
+form blockquote input {
+	background-color: transparent;
+	border: none;
+	border-bottom: 0.0714em dashed #ccc;
+	margin: 0 0.5em;
+	font-weight: bold;
+	font-style: normal;
+}
+
+form blockquote textarea {
+	background-color: transparent;
+	border: none;
+	border-bottom: 0.0714em dashed #ccc;
+	margin: 0 0.5em;
+	font-weight: bold;
+	font-style: normal;
+	}
+	
+form blockquote select {
+	background-color: transparent;
+	border: none;
+	border-bottom: 0.0714em dashed #ccc;
+	margin: 0 0.5em;
+	font-weight: bold;
+	font-style: normal;
+>>>>>>> newbranch
 	}

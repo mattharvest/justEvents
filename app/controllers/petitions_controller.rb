@@ -56,6 +56,7 @@ class PetitionsController < ApplicationController
 				casefile_post.save
 				
 				casefile_todo = current_user.todoitems.build(:duedate=>Date.today+21, :casenumber=>@casefile.ccn, :user_id=>current_user.id, :content=>'Add JA number and review file.')
+				casefile_todo.notify_of_todo(current_user, current_user)
 				casefile_todo.save
 			else
 				flash[:petitioncasefilefailure]="Casefile for petition NOT built"

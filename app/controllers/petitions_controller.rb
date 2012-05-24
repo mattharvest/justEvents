@@ -52,7 +52,7 @@ class PetitionsController < ApplicationController
 				
 			if @casefile.save
 				flash[:petitioncasefilesuccess]="Casefile built based off petition."
-				casefile_post = current_user.microposts.build(:unit=>current_user.unit, :event_date=>Date.today.to_s, :content=>'Case petitioned.', :defendant=>@casefile.defendant, :category=>'petition', :casenumber=>@petition.ccn)
+				casefile_post = current_user.microposts.build(:unit=>current_user.unit, :event_date=>Date.today.to_s, :content=>'Case petitioned.', :defendant=>@casefile.defendant, :category=>'petition', :casenumber=>@casefile.ccn)
 				casefile_post.save
 				
 				casefile_todo = current_user.todoitems.build(:duedate=>Date.today+21, :casenumber=>@casefile.ccn, :user_id=>current_user.id, :content=>'Add JA number and review file.')

@@ -1,7 +1,5 @@
 JustEvents::Application.routes.draw do
 	get "case_files/new"
-  
-
 	get "sessions/new"
 
 	resources :users
@@ -18,6 +16,7 @@ JustEvents::Application.routes.draw do
 	match '/casefiles/:id/edit' => 'casefiles#edit', :as=>'edit_case'
 	match '/todoitems/:id/delete' => 'todoitems#destroy', :as=>'delete_task'
 	match '/casefiles/:id/delete' => 'casefiles#destroy', :as=>'delete_casefile'
+	match '/petitions/:id/delete' => 'petitions#destroy', :as=>'delete_petition'
 	match '/lastweek/' => 'pages#last_week', :as=>'last_week'
 	match '/investigations/:id/update' => 'investigations#update_status', :as=>'update_investigation'
   
@@ -39,7 +38,6 @@ JustEvents::Application.routes.draw do
 	match '/newcase', :to => 'casefiles#new', :as=>'new_case'
 	match '/post', :to => 'pages#post'
 	match '/newinvestigation', :to => 'investigations#new', :as=>'new_investigation'
-  
   
   root :to => 'pages#home'
 end

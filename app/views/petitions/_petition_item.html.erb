@@ -1,0 +1,16 @@
+<% if !petition_item.nil? %>
+<tr>
+	<td>	<%= link_to petition_item.defendant.to_s, petition_item %>	</td>
+	<td>	<%= petition_item.ccn %> 		</td>
+
+	<% if current_user.admin? %>
+			<td>	
+			<%= link_to "delete", petition_item, :method => :delete, 
+												:confirm => "You sure?",
+												:class => "btn btn-mini",
+												:title => "delete this case"
+												%>							
+			</td>
+	<%end%>
+</tr>
+<% end %>

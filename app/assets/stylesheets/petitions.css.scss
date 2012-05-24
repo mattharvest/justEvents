@@ -9,9 +9,12 @@ body {
 }
 
 form blockquote label {
-	display: inline;
+	display: inline-block;
 	font-weight: bold;
+	margin: 0em;
 }
+.form-inline .controls,
+.form-inline .control-group { display:inline-block; }
 
 form blockquote input {
 	background-color: transparent;
@@ -20,6 +23,9 @@ form blockquote input {
 	margin: 0 0.5em;
 	font-weight: bold;
 	font-style: normal;
+	display: inline-block;
+	class: span1;
+	float:none;
 }
 
 form blockquote textarea {

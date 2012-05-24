@@ -1,4 +1,4 @@
-<%= semantic_form_for @petition do |f| %>
+<%= semantic_form_for @petition, {:html=>{:class=>"form-inline" }} do |f| %>
 	
 	<%= f.inputs do %>
 		<%= f.input :asa, :as=>'hidden', :value=>current_user.name %>
@@ -7,11 +7,12 @@
 	<i class="icon-folder-open"></i>
 		<blockquote>
 			<h2>the case</h2>
-			i am petitioning a case with <label for="petition_ccn">ccn</label> <%= f.input :ccn, :label=>false %>, against <label for="defendant">respondent</label> <input  type="text" name="petition[defendant]" id="defendant" class="span2" value>. the <label for="corespondents">co-respondents</label> are <input type="text" name="petition[corespondents]" id="corespondents" class="span2" value>.
+			I am petitioning a case with <%= f.input :ccn, :label=>"CCN", :input_html=>{:class=>"span2"} %>, against <%= f.input :defendant, :label=>"Respondent", :input_html=>{:class=>"span2"}%>.  The <%=f.input :corespondents, :label=>"co-respondents are ", :input_html=>{:class=>"span2"} %>.
+			
 			<br>
-			the respondent <label for="defendant_address">lives at</label> <input  type="text" id="defendant_address" name="petition[defendant_address]" class="span3" value>.  he attends <label for="school">school</label> at <input  type="text" name="petition[school]" id="school" class="span2" value>.
+			The respondent <%= f.input :defendant_address, :label=>"lives at ", :input_html=>{:class=>"span3"} %>, and <%= f.input :school, :label=>"attends ", :input_html=>{:class=>"span2"} %>.
 			<br>
-			the respondent's <label for="dob">dob</label> is <input  type="date" id="dob" name="petitition[dob]" class="span1" value>, and his <label for="parent">parent's</label> name is <input  type="text" name="petition[parent]" id="parent" class="span2" value>.
+			The respondent <%= f.input :defendant_dob, :as=>"string", :label=>"was born ", :input_html=>{:class=>"span1"} %>, and <%= f.input :parent, :label=>"the parent's name is ", :input_html=>{:class=>"span2"} %>.
 			<br>
 			<small class="pull-right">identifying information</small>
 		</blockquote>
@@ -21,9 +22,7 @@
 	<fieldset>
 		<blockquote>
 			<h2>the victim</h2>
-			in this case, it is alleged that <label for="offense_date">on or about</label> <input  type="text" name="petition[offense_date]" id="offense_date" class="span1" value>, <label for="incident_address">in the area</label> of <input  type="text" name="petition[incident_address]" id="incident_address" class="span2" value>the respondent <label for="victim">victimized</label> <input  type="text" name="petition[victim]" id="victim" class="span2" value>.
-			<br>
-			the victim <label for="victim_address">lives at</label> <input  type="text" name="petition[victim_address]" id="victim_address" class="span3" value>. <%= f.input :victim_adult_or_minor, :label=>"The victim is a minor." %>
+			In this case, it is alleged that <%= f.input :offense_date, :label=>"on or about", :as=>"string", :input_html=>{:class=>"span1"} %>, <%= f.input :incident_address, :label=>"in the area of ", :input_html=>{:class=>"span2"} %> the respondent <%= f.input :victim, :label=>"victimized ", :input_html=>{:class=>"span2"} %>.  The victim <%= f.input :victim_address, :label=>"lives at", :input_html=>{:class=>"span2"} %>. <%= f.input :victim_adult_or_minor, :label=>"The victim is a minor. (True/False)" %>
 			<br>
 			<small class="pull-right">victim information</small>
 		</blockquote>
@@ -33,12 +32,15 @@
 	<fieldset>
 		<blockquote>
 			<h2>the charges</h2>
-			these charges were brought by <label for="cpo_name">officer</label> <input type="text" name="petition[cpo_name]" id="cpo_name" class="span2" placeholder="blank if none" value>, <label for="cpo_id">id</label> <input type="text" name="petition[cpo_id]" id="cpo_id" class="span1" value>.  the officer was <label for="assisting_officers">assisted by</label> <input type="text" name="petition[assisting_officers]" id="assisting_officers" class="span3" value>.
+			These charges were brought by <%= f.input :cpo_name, :label=>"Officer ", :input_html=>{:class=>"span2"} %>, <%= f.input :cpo_id, :label=>"badge ", :input_html=>{:class=>"span1"} %>.  The officer was <%= f.input :assisting_officers, :label=>"assisted by ", :input_html=>{:class=>"span2"} %>.
 			<br>
-			here's <label for="statement_of_pc">what happened</label> on that date: <textarea  name="petition[statement_of_pc]" rows="4" id="statement_of_pc" class="span6" value></textarea>
+			Here's <%= f.input :statement_of_pc, :label=>"what happened on that date: ", :input_html=>{:class=>"span4", :rows=>"4"} %>
 			<br>
-			in fairness to the respondent, there is the following <label for="mitigation">mitigating information:</label> <input type="text" name="petition[mitigation]" id="mitigation" class="span6" value>.
+			Based on that, I want the Respondent charged with <%= f.input :charges, :label=>"the following: ", :input_html=>{:class=>"span4", :rows=>"4"} %>
 			<br>
+			In fairness to the respondent, there is the following <%= f.input :mitigation, :label=>"mitigating circumstances", :input_html=>{:class=>"span3"} %>.
+			<br>
+			The following searches or seizures happened: <%= f.input :search_and_seizures, :label=>false, :input_html=>{:class=>"span2", :rows=>"2"} %>
 			<small class="pull-right">charge information</small>
 			
 		</blockquote>
@@ -48,21 +50,22 @@
 	<fieldset>
 		<blockquote>
 			<h2>experts</h2>
-			for trial, we need to summons the following experts:
-				<div class="span2">
+			For trial, we need to summons the following experts:
+			<br>
+				<div class="span4">
 					<%= f.input	:chemist %>
 					<%= f.input	:pwid %>
 					<%= f.input	:tech %>
 				</div>
-				<div class="span2">
+				<div class="span4">
 					<%= f.input	:fingerprint %>
 					<%= f.input	:examiner %>
 					<%= f.input	:counterfeit %>
 				</div>
-			<br>
-			the expert will <label for="expert_content">testify</label> to: <input type="text" name="petition[expert_content]" id="expert_content" value>
+			<br><br>
+			The expert will <%= f.input :expert_content, :label=>"testify to:", :input_html=>{:class=>"span4"} %>
 			
-				
+			<br>
 			<small class="pull-right">information on the experts in this case</small>
 		</blockquote>
 	</fieldset>
@@ -71,7 +74,7 @@
 	<fieldset>
 		<blockquote>
 			<h2>witnesses</h2>
-				this is the <label for="victim_witness_list">witness</label> information, including addresses: <textarea  name="petition[victim_witness_list]" rows="4" id="victim_witness_list" class="span6" value></textarea>
+				Here is <%= f.input :witnesses, :label=>"the victim/witness information (including addresses):", :input_html=>{:class=>"span4", :rows=>"4"} %>
 				<br>
 			<small class="pull-right">the witnesses</small>
 		</blockquote>
@@ -101,23 +104,21 @@
 	<fieldset>
 		<blockquote>
 			<h2>statements</h2>
-				the witness[es] 
-					<select name="additional[witness_statement_type_string]" id="witness_statement_type_string" class="span2">
-						<option>didn't give a </option>
-						<option>gave a written </option>
-						<option>gave an oral </option>
-					</select> 
-				<label for="witness_statement">statement</label>.  the statement was <input type="text" name="petition[witness_statement]" id="witness_statement" class="span4" value>
+			<%= f.input :witness_statement_type_string, 
+				:as=>:select, 
+				:collection => ["didn't give a", "gave a written ", "gave an oral "], 
+				:label=>"The witness[es] ", 
+				:input_html=> {:class=>"span2"} %> statement.  If they gave one, 
+			<%= f.input :witness_statement, :label=>"the statement was ", :input_html=> {:class=>"span3", :rows=>"2"} %>
 				<br><br>
-				here is the <label for="premerits_id">pre-merits id</label> information: <input type="text" name="petition[premerits_id]" id="premerits_id" class="span4" value>.
+				Here is the <%= f.input :premerits_id, :label=>"premerits ID", :input_html=>{:class=>"span2"} %>.
 				<br><br>
-				the respondent 
-					<select name="additional[respondent_statement_type_string]" id="respondent_statement_type_string" class="span2">
-						<option>didn't give a </option>
-						<option>gave a written </option>
-						<option>gave an oral </option>
-					</select> 
-				<label for="respondent_statement">statement</label>.  the statement was <input type="text" name="petition[respondent_statement]" id="respondent_statement" class="span4" value>
+			<%= f.input :respondent_statement_type_string, 
+				:as=>:select, 
+				:collection => ["didn't give a", "gave a written ", "gave an oral "], 
+				:label=>"The Respondent ", 
+				:input_html=> {:class=>"span2"} %> statement.  If they gave one, 
+			<%= f.input :respondent_statement, :label=>"the statement was ", :input_html=> {:class=>"span3", :rows=>"2"} %>
 				<br>
 			<small class="pull-right">statements by respondent/witnesses</small>
 		</blockquote>
@@ -127,13 +128,17 @@
 	<fieldset>
 		<blockquote>
 			<h2>certified records</h2>
-				we will introduce the following certified records: 
+				<br>
+				<div class="span3">
+					We will introduce the following certified records: 
+				</div>
 				<div class="span6">
 					<%= f.input	:medical_records %>
 					<%= f.input	:business_records %>
 					<%= f.input	:police_records %>
 					<%= f.input	:mva_records %>
 					<%= f.input	:other_records %>
+					<br>
 					<%= f.input	:other_description %>
 				</div>
 			<small class="pull-right">notices to be provided to defense</small>
@@ -147,12 +152,12 @@
 <% end %>
 
 <script>
-	$('#offense_date').datepicker({format: 'mm/dd/yyyy'})
+	$('#petition_offense_date').datepicker({format: 'mm/dd/yyyy'})
 			.on('changeDate', function(ev) {
-			$('#offense_date').datepicker('hide');
+			$('#petition_offense_date').datepicker('hide');
 		})
-	$('#dob').datepicker({format: 'mm/dd/yyyy'})
+	$('#petition_defendant_dob').datepicker({format: 'mm/dd/yyyy'})
 			.on('changeDate', function(ev) {
-			$('#dob').datepicker('hide');
+			$('#petition_defendant_dob').datepicker('hide');
 		})
 </script>

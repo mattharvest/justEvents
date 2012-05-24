@@ -1,1 +1,286 @@
-<%= @petition %>
+<div class="well">
+	<div class="row-fluid">
+		<div class="span6">
+			<h4>ASA:</h4> <%= @petition.asa %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span6">
+			<h4>DATE:</h4> <%= @petition.created_at.to_s %>
+		</div>
+		<div class="span6">
+			<h4>CCN:</h4> <%= link_to @petition.ccn, @casefile %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="offset1">
+			<h3>PRETITION INFORMATION FORM</h3>
+		</div>
+	</div>
+</div>
+
+<div class="well">
+	<div class="row-fluid">
+		<span class="span4"><h4>Respondent:</h4> <%= @petition.defendant %></span>
+		<span class="span4"><h4>Address:</h4> <%= @petition.defendant_address %></span>
+	</div>
+	<div class="row-fluid">
+		<h4>Parent:</h4> <%= @petition.parent %>
+	</div>
+	<div class="row-fluid">
+		<div class="span2">
+			<h4>DOB:</h4> <%= @petition.defendant_dob.to_s %>
+		</div>
+		<div class="span2">
+			<h4>AGE:</h4>	
+				<% if !@petition.defendant_dob.blank? %>
+					<%=(Date.today-@petition.defendant_dob).to_s %>
+				<% else %>
+					unknown
+				<% end %>
+		</div>
+		<div class="span2">
+			<h4>SCHOOL:</h4> <%= @petition.school %>
+		</div>
+	</div>
+</div>
+<div class="well">
+	<div class="row-fluid">
+		<div class="span5">
+			<h4>Name of Victim:</h4> <%= @petition.victim %>
+		</div>
+		<div class="span2">
+			<em>The victim is
+			<% if @petition.victim_adult_or_minor %>
+				an adult
+			<% else %>
+				a minor.
+			<% end %></em>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<h4>Offense Date:</h4> <%= @petition.offense_date.to_s %>
+	</div>
+	<div class="row-fluid">
+		<h4>Charges:</h4> <%= @petition.charges %>
+	</div>
+	<div class="row-fluid">
+		<h4>Charging Officer:</h4> <%= @petition.cpo_id + " " +@petition.cpo_name %>
+	</div>
+	<div class="row-fluid">
+		<h4>Assisting Officers:</h4> <%= @petition.assisting_officers %>
+	</div>
+</div>
+
+<% if @petition.expert? %>
+	<div class="well">
+		<div class="row-fluid">
+			<em>Please summon the following experts, and file appropriate notice:</em>
+		</div>
+		<div class="row-fluid">
+			<div class="span2">
+					<% if @petition.chemist %> 
+						<i class="icon-ok"></i>
+						<h4>Chemist</h4> 
+					<% else %>
+					<% end %>
+			</div>
+			<div class="span2">
+				
+					<% if @petition.pwid %> 
+						<i class="icon-ok"></i>
+						<h4>PWID</h4>
+					<% else %>
+					<% end %>
+			</div>
+			<div class="span2">
+					<% if @petition.tech %> 
+						<i class="icon-ok"></i>
+						<h4>Tech</h4>
+					<% else %>
+					<% end %>
+			</div>
+			<div class="span2">
+					<% if @petition.fingerprint %> 
+						<i class="icon-ok"></i>
+						<h4>Fingerprint</h4>
+					<% else %>
+					<% end %>
+			</div>
+			<div class="span2">
+					<% if @petition.counterfeit %> 
+						<i class="icon-ok"></i>
+						<h4>Counterfeit</h4>
+					<% else %>
+					<% end %>
+			</div>
+			<div class="span2">
+				<h4>The expert will testify to:</h4> <%= @petition.expert_content %>
+			</div>
+		</div>
+	</div>
+<% end %>
+
+<div class="well">
+	<div class="row-fluid">
+		<h4>Witnesses:</h4> <%= @petition.witnesses %>
+	</div>
+	<div class="row-fluid">
+		<h4>Co-Respondents:</h4> <%= @petition.corespondents %>
+	</div>
+</div>
+
+<div class="well">
+	<div>
+		<h3>Icon Letter</h3>
+		<em>please include the following requests</em>
+	</div>
+	<% if @petition.icon_letter?%>
+		<div class="row-fluid">
+			<div class="span4">
+				<% if @petition.incident_report %> 
+					<i class="icon-ok"></i>
+					<h4>Incident Report</h4>
+				<% else %>
+					
+				<% end %>
+			</div>
+			<div class="span4">				 
+				<% if @petition.statement_of_respondent %> 
+					<i class="icon-ok"></i>
+					<h4>Statement of Respondent</h4>
+				<% else %>
+					
+				<% end %>
+			</div>
+			<div class="span4">
+				<% if @petition.victim_witness_list %> 
+					<i class="icon-ok"></i>
+					<h4>Victim/Witness list</h4>
+				<% else %>
+					
+				<% end %>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span4">
+				<% if @petition.arrest_report %> 
+					<i class="icon-ok"></i>
+					<h4>Arrest Report</h4>
+				<% else %>
+					
+				<% end %>
+			</div>
+			<div class="span4">
+				<% if @petition.investigation_report %> 
+					<i class="icon-ok"></i>
+					<h4>Investigation Report</h4>
+				<% else %>
+					
+				<% end %>
+			</div>
+			<div class="span4">
+				<% if @petition.accident_report %> 
+					<i class="icon-ok"></i>
+					<h4>Accident Report</h4>
+				<% else %>
+					
+				<% end %>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span4">
+					<% if @petition.screening_apt %> 
+						<i class="icon-ok"></i>
+						<h4>Screening Appointment</h4>
+					<% else %>
+						
+					<% end %>
+			</div>
+		</div>
+	<% else %>
+		<span class="offset1"><em>No Icon Letter needed.</em></span>
+	<% end %>
+</div>
+
+<div class="well">
+	<div class="row-fluid">
+		<div class="span12">
+			<h4>Statement of PC:</h4> <%= @petition.statement_of_pc %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<h4>Mitigation:</h4> <%= @petition.mitigation %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<h4>Searches and Siezures:</h4> <%= @petition.search_and_seizures %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<h4>Respondent Statements:</h4> <%= @petition.defendant_statement_block %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<h4>Witness Statements:</h4> <%= @petition.witness_statement_block %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<h4>Premerits ID:</h4> <%= @petition.premerits_id %>
+		</div>
+	</div>
+</div>
+<% if @petition.notices? %>
+	<div class="well">
+		<div class="row-fluid">
+			<div class="span8">
+				<h3>Record notices:</h3>
+				<div class="row-fluid">
+					<div class="span2">
+						<% if @petition.medical_records %> 
+							<i class="icon-ok"></i>
+							<h4>Medical</h4>
+						<% else %>
+						<% end %>
+					</div>
+					<div class="span2">						
+						<% if @petition.business_records %> 
+							<i class="icon-ok"></i>
+							<h4>Business</h4> 
+						<% else %>
+							
+						<% end %>
+					</div>
+					<div class="span2">
+							<% if @petition.police_records %> 
+								<i class="icon-ok"></i>
+								<h4>911</h4>
+							<% else %>
+							<% end %>
+					</div>
+					<div class="span2">
+							<% if @petition.mva_records %> 
+								<i class="icon-ok"></i>
+								<h4>MVA</h4>
+							<% else %>
+							<% end %>
+					</div>
+					<div class="span2">
+						
+						<% if @petition.other_records %> 
+							<i class="icon-ok"></i>
+							<h4>Other</h4>
+						<% else %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>
+

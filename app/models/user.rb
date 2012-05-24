@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 	has_many :casefiles
 	has_many :todoitems
 	has_many :investigations
+	has_many :petitions
 	
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	

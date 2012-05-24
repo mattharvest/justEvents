@@ -51,7 +51,7 @@
 		</div>
 		<div class="span2">
 			<em>The victim is
-			<% if @petition.victim_adult_or_minor %>
+			<% if !@petition.victim_adult_or_minor %>
 				an adult
 			<% else %>
 				a minor.

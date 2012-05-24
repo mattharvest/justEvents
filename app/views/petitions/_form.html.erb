@@ -152,11 +152,11 @@
 <% end %>
 
 <script>
-	$('#petition_offense_date').datepicker()
+	$('#petition_offense_date').datepicker({format: 'yyyy-mm-dd'})
 			.on('changeDate', function(ev) {
 			$('#petition_offense_date').datepicker('hide');
 		})
-	$('#petition_defendant_dob').datepicker()
+	$('#petition_defendant_dob').datepicker({format: 'yyyy-mm-dd'})
 			.on('changeDate', function(ev) {
 			$('#petition_defendant_dob').datepicker('hide');
 		})

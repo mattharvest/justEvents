@@ -14,6 +14,8 @@ class Petition < ActiveRecord::Base
 	validates :victim_address, :presence=>true
 	validates :charges, :presence=>true
 	validates :statement_of_pc, :presence=>true
+	validates :offense_date, :presence=>true
+	validates :defendant_dob, :presence=>true
 	validates :incident_address, :presence=>true, :allow_blank => true
 	
 	def defendant_statement_block

@@ -63,6 +63,7 @@ module ApplicationHelper
 			'decline to prosecute' => 'dtp',
 			'acquittal' => 'acquittal',
 			'dismissal' => 'dismissal',
+			'petition' => 'petition',
 			'waiver-up' => 'waiver up',
 			'waiver-down' => 'waiver down',
 			'restitution hearing'=> 'restitution hearing',

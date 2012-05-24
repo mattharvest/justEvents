@@ -56,4 +56,8 @@ class Petition < ActiveRecord::Base
 	def notices?
 		medical_records | business_records | police_records | mva_records | other_records
 	end
+	
+	def full_pc
+		"On or about "+offense_date.to_s+", at "+incident_address+", Prince George's County, "+statement_of_pc
+	end
 end

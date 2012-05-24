@@ -100,8 +100,7 @@
 		<div class="row-fluid">
 			<h3>Review the petition <%= link_to "here", @petition %></h3>
 			<blockquote>
-				<%= @petition.statement_of_pc %>
-				<small><%= @petition.offense_date.to_s %> at <%= @petition.incident_address %></small>
+				<%= @petition.full_pc %>
 			</blockquote>
 		</div>
 	<% end %>

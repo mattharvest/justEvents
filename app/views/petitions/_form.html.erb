@@ -32,7 +32,7 @@
 	<fieldset>
 		<blockquote>
 			<h2>the charges</h2>
-			These charges were brought by <%= f.input :cpo_name, :label=>"Officer ", :input_html=>{:class=>"span2"} %>, <%= f.input :cpo_id, :label=>"badge ", :input_html=>{:class=>"span1"} %>.  The officer was <%= f.input :assisting_officers, :label=>"assisted by ", :input_html=>{:class=>"span2"} %>.
+			These charges were brought by <%= f.input :cpo_name, :label=>"Officer ", :input_html=>{:class=>"span2"} %>, <%= f.input :agency, :input_html=>{:class=>"span1"} %> <%= f.input :cpo_id, :label=>"badge ", :input_html=>{:class=>"span1"} %>.  The officer was <%= f.input :assisting_officers, :label=>"assisted by ", :input_html=>{:class=>"span2"} %>.
 			<br>
 			Here's <%= f.input :statement_of_pc, :label=>"what happened on that date: ", :input_html=>{:class=>"span4", :rows=>"4"} %>
 			<br>

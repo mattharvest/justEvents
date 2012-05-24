@@ -34,7 +34,7 @@
 		<div class="span2">
 			<h4>AGE:</h4>	
 				<% if !@petition.defendant_dob.blank? %>
-					<%=(Date.today-@petition.defendant_dob).to_s %>
+					<%=((Date.today-@petition.defendant_dob)/365).to_s %>
 				<% else %>
 					unknown
 				<% end %>
@@ -65,7 +65,7 @@
 		<h4>Charges:</h4> <%= @petition.charges %>
 	</div>
 	<div class="row-fluid">
-		<h4>Charging Officer:</h4> <%= @petition.cpo_id + " " +@petition.cpo_name %>
+		<h4>Charging Officer:</h4> <%= @petition.agency.to_s + " " + @petition.cpo_id.to_s + " " +@petition.cpo_name.to_s %>
 	</div>
 	<div class="row-fluid">
 		<h4>Assisting Officers:</h4> <%= @petition.assisting_officers %>

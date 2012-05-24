@@ -77,7 +77,7 @@ class PetitionsController < ApplicationController
 	def show
 		@petition = Petition.find(params[:id])
 		@casefile = Casefile.find_by_ccn("CCN"+@petition.ccn)
-		@title=@petition.defendant
+		@title=@petition.defendant+" CCN: "+@petition.ccn
 	end
 		private
 		def authorized_user

@@ -99,6 +99,11 @@ class CasefilesController < ApplicationController
 	def show
 		@casefile = Casefile.find(params[:id])
 		@title=@casefile.defendant
+		@petition
+		if !@casefile.ccn.blank?
+			@petition = Petition.find_by_ccn(@casefile.ccn.tr("CCN", ""))
+		end
+		
 		
 		@investigation = @casefile.get_investigation
 

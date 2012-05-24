@@ -92,9 +92,20 @@
 	
 	<% if !@investigation.nil? %>
 		<div class="row-fluid">
-			<h3> Be sure to review the <%= link_to "investigation file", @investigation %> </h3>
+			<h3> Review the <%= link_to "investigation file", @investigation %> </h3>
 		</div>
 	<% end %>
+	
+	<% if !@petition.nil? %>
+		<div class="row-fluid">
+			<h3>Review the petition <%= link_to "here", @petition %></h3>
+			<blockquote>
+				<%= @petition.statement_of_pc %>
+				<small><%= @petition.offense_date.to_s %></small>
+			</blockquote>
+		</div>
+	<% end %>
+	
 		<div class="row-fluid">
 			<h3> What needs to be done:</h3>
 		</div>

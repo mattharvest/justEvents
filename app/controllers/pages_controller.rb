@@ -180,6 +180,13 @@ class PagesController < ApplicationController
 	
 	def posts
 		@title = "Posts"
+			@all_posts = Micropost.where(:content=>"Case petitioned.")
+			flash[:notice]=""
+			@all_posts.each do |p|
+				flash[:notice]+="\n"+p.casenumber[0..2]
+				p.casenumber="CCN"+p.casenumber
+				p.save
+			end
 		if current_user.admin?||current_user.supervisor?
 			@title = "All posts"
 			@posts = Micropost.paginate(:page => params[:page], :per_page => 20).order('created_at DESC')

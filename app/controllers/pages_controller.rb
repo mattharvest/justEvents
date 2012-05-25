@@ -184,10 +184,9 @@ class PagesController < ApplicationController
 			flash[:notice]=""
 			@all_posts.each do |p|
 				p.casenumber = p.casenumber.tr('ccn', '')
+				p.casenumber="CCN"+p.casenumber
 				flash[:notice]+="\n"+p.casenumber
-				
-				#p.casenumber="CCN"+p.casenumber
-				#p.save
+				p.save
 			end
 		if current_user.admin?||current_user.supervisor?
 			@title = "All posts"

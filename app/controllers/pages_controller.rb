@@ -183,7 +183,7 @@ class PagesController < ApplicationController
 			@all_posts = Micropost.where(:content=>"Case petitioned.")
 			flash[:notice]=""
 			@all_posts.each do |p|
-				p = p.casenumber.tr('ccn', '')
+				p.casenumber = p.casenumber.tr('ccn', '')
 				flash[:notice]+="\n"+p.casenumber
 				
 				#p.casenumber="CCN"+p.casenumber

@@ -92,4 +92,10 @@ class UserMailer < ActionMailer::Base
 
 		mail(:to=>notifications, :subject=>"Casefile created: "+@casefile.lead_casenumber)
 	end
+	
+	def petition_notice(petition, user)
+		@petition=petition
+		@user=user
+		mail(:to=>@petition.email_address, :subject=>@petition.ccn+"-"+@petition.defendant, :cc=>@user.email)
+	end
 end

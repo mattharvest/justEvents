@@ -3,6 +3,14 @@
 	<%= f.inputs do %>
 		<%= f.input :asa, :as=>'hidden', :value=>current_user.name %>
 		<%= f.input :asa_email, :as=>'hidden', :value=>current_user.email %>
+		<%= f.input :email_address, :as=>'string', :placeholder=>current_user.email, :as=>'select', :label=>"Who should be emailed?",  :collection =>
+					{"Jackson, Gigi L."=>"GLJackson1@co.pg.md.us", 
+					"Robinson, Pamela F."=> "PFRobinson@co.pg.md.us", 
+					"Marquart, Cherie C."=> "CCMarquart@co.pg.md.us", 
+					"Johnson, Christy S."=> "csjohnson@co.pg.md.us",
+					"Jenkins, Akiya L."=> "ALJenkins@co.pg.md.us", 
+					@current_user.name=>@current_user.email}
+					%>
 	<fieldset>
 	<i class="icon-folder-open"></i>
 		<blockquote>
@@ -152,6 +160,7 @@
 <% end %>
 
 <script>
+	$('.typeahead').typeahead()
 	$('#petition_offense_date').datepicker({format: 'yyyy-mm-dd'})
 			.on('changeDate', function(ev) {
 			$('#petition_offense_date').datepicker('hide');

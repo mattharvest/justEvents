@@ -1,7 +1,7 @@
 class Petition < ActiveRecord::Base
 	belongs_to :user
 	
-	attr_accessible :ccn, :asa, :asa_email, :defendant, :defendant_address, :defendant_dob, :school, :parent, :victim, :victim_address, :victim_adult_or_minor, :charges, :cpo_id, :cpo_name, :assisting_officers, :witnesses, :chemist, :pwid, :fingerprint, :examiner, :tech, :counterfeit, :expert_content, :corespondents, :incident_report, :statement_of_respondent, :statement_of_corespondents_etc, :victim_witness_list, :arrest_report, :investigation_report, :accident_report, :screening_apt, :statement_of_pc, :mitigation, :search_and_seizures, :respondent_statement_type, :respondent_statement, :witness_statement_type, :witness_statement, :premerits_id, :medical_records, :business_records, :police_records, :mva_records, :other_records, :other_description, :offense_date, :incident_address, :agency
+	attr_accessible :ccn, :asa, :asa_email, :defendant, :defendant_address, :defendant_dob, :school, :parent, :victim, :victim_address, :victim_adult_or_minor, :charges, :cpo_id, :cpo_name, :assisting_officers, :witnesses, :chemist, :pwid, :fingerprint, :examiner, :tech, :counterfeit, :expert_content, :corespondents, :incident_report, :statement_of_respondent, :statement_of_corespondents_etc, :victim_witness_list, :arrest_report, :investigation_report, :accident_report, :screening_apt, :statement_of_pc, :mitigation, :search_and_seizures, :respondent_statement_type, :respondent_statement, :witness_statement_type, :witness_statement, :premerits_id, :medical_records, :business_records, :police_records, :mva_records, :other_records, :other_description, :offense_date, :incident_address, :agency, :email_address
 	
 	attr_accessor :victim_age, :witness_statement_type_string, :respondent_statement_type_string
 	

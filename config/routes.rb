@@ -19,6 +19,7 @@ JustEvents::Application.routes.draw do
 	match '/petitions/:id/delete' => 'petitions#destroy', :as=>'delete_petition'
 	match '/lastweek/' => 'pages#last_week', :as=>'last_week'
 	match '/investigations/:id/update' => 'investigations#update_status', :as=>'update_investigation'
+	match '/petitions/:id/resend_petition' => 'petitions#resend_petition', :as=>'resend_petition'
   
 	match '/signin', :to => 'sessions#new'
 	match '/signout', :to => 'sessions#destroy'

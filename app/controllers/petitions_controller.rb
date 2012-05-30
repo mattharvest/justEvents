@@ -58,11 +58,7 @@ class PetitionsController < ApplicationController
 				casefile_todo = current_user.todoitems.build(:duedate=>Date.today+21, :casenumber=>@casefile.ccn, :user_id=>current_user.id, :content=>'Add JA number and review file.')
 				casefile_todo.notify_of_todo(current_user, current_user)
 				casefile_todo.save
-				if	UserMailer.petition_notice(@petition, current_user).deliver
-					flash[:petitionemailsuccess]="Email sent.  Please attach printout to file."
-				else
-					flash[:petitionemailfailure]="Email not sent.  Manually file this petition."
-				end
+				email_petition
 			else
 				flash[:petitioncasefilefailure]="Casefile for petition NOT built"
 			end
@@ -78,6 +74,20 @@ class PetitionsController < ApplicationController
 			end
 			render :action=>'new'
 		end	
+	end
+	
+	def email_petition
+		if	UserMailer.petition_notice(@petition, current_user).deliver
+			flash[:petitionemailsuccess]="Email sent.  Please attach printout to file."
+		else
+			flash[:petitionemailfailure]="Email not sent.  Manually file this petition."
+		end
+	end
+	
+	def resend_petition
+		@petition = Petition.find(params[:id])
+		email_petition
+		render :action=>'show'
 	end
 		
 	def show

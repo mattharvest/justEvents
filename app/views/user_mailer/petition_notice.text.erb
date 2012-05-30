@@ -8,7 +8,6 @@ Address: <%= @petition.defendant_address %>
 Parent: <%= @petition.parent %>
 School: <%= @petition.school %>
 DOB: <%= @petition.defendant_dob.to_s %>
-Age:<%=((Date.today-@petition.defendant_dob)/365).to_s %>
 
 Victim: <%= @petition.victim %>, <% if !@petition.victim_adult_or_minor %> an adult<% else %> a minor. <% end %>
 Date of Offense: <%= @petition.offense_date.to_s %>

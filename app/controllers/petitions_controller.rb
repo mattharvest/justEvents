@@ -87,7 +87,7 @@ class PetitionsController < ApplicationController
 	def resend_petition
 		@petition = Petition.find(params[:id])
 		email_petition
-		redirect_to 'show'
+		redirect_to @petition
 	end
 		
 	def show

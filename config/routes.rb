@@ -14,6 +14,7 @@ JustEvents::Application.routes.draw do
 	match '/todoitems/:id/update' => 'todoitems#update', :as=>'update_task'
 	match '/current_events' => 'pages#current_events'
 	match '/casefiles/:id/edit' => 'casefiles#edit', :as=>'edit_case'
+	match '/petitions/:id/edit' => 'petitions#edit', :as=>'edit_petition'
 	match '/todoitems/:id/delete' => 'todoitems#destroy', :as=>'delete_task'
 	match '/casefiles/:id/delete' => 'casefiles#destroy', :as=>'delete_casefile'
 	match '/petitions/:id/delete' => 'petitions#destroy', :as=>'delete_petition'

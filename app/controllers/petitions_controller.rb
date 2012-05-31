@@ -99,6 +99,19 @@ class PetitionsController < ApplicationController
 		@casefile = Casefile.find_by_ccn("CCN"+@petition.ccn)
 		@title=@petition.defendant+" CCN: "+@petition.ccn
 	end
+	
+	def edit
+		@petition = Petition.find(params[:id])
+	end
+	
+	def update
+		@petition = Petition.find(params[:id])
+		if @petition.update_attributes(params[:petition])
+			redirect_to @petition
+		else
+			render 'edit'
+		end
+	end
 		private
 		def authorized_user
 			@petition = Petition.find_by_id(params[:id])

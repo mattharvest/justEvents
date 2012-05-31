@@ -96,7 +96,6 @@ class UserMailer < ActionMailer::Base
 	def petition_notice(petition, user)
 		@petition=petition
 		@user=user
-		mail(:subject=>@petition.ccn+" - "+@petition.defendant, :to=>@user.email, :from=>@user.email)
-		#:to=>@petition.email_address, 
+		mail(:subject=>@petition.ccn+" - "+@petition.defendant, :cc=>@user.email, :to=>@petition.email_address)
 	end
 end

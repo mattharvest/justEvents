@@ -2,53 +2,5 @@ A petition in this matter has been filed by <%= @user.name %> on <%= @petition.c
 
 CCN: <%= @petition.ccn %>
 Respondent: <%= @petition.defendant %>
-Address: <%= @petition.defendant_address %>
-Parent: <%= @petition.parent %>
-School: <%= @petition.school %>
-DOB: <%= @petition.defendant_dob.to_s %>
-
-Victim: <%= @petition.victim %>, <% if !@petition.victim_adult_or_minor %> an adult<% else %> a minor. <% end %>
-Date of Offense: <%= @petition.offense_date.to_s %>
-Charges: <%= @petition.charges %>
-
-CPO: <%= @petition.agency.to_s + " " + @petition.cpo_id.to_s + " " +@petition.cpo_name.to_s %>
-Assisting: <%= @petition.assisting_officers %>
-
-Experts:
-	Chemist: 	<%= @petition.chemist %>
-	Pwid: 		<%= @petition.pwid %>
-	Tech: 		<%= @petition.tech %>
-	Fingerprint: <%= @petition.fingerprint %>
-	Coutnerfeit: <%= @petition.counterfeit %>
-	Content: 	<%= @petition.expert_content %>
-
-Witnesses: <%= @petition.witnesses %>
-
-Co-Respondents: <%= @petition.corespondents %>
-
-Icon Letter:
-	Incident Report: 	<%= @petition.incident_report %>
-	Statements: 		<%= @petition.statement_of_respondent %>
-	Victim/Witness List: <%= @petition.victim_witness_list %>
-	Arrest Report: 		<%= @petition.arrest_report %>
-	Investigation Report: <%= @petition.investigation_report %>
-	Accident Report: 	<%= @petition.accident_report %>
-	Other (screening apt.): <%= @petition.screening_apt %>
 
 Statement of Probable Cause: <%= @petition.full_pc %>
-
-Mitigation: <%= @petition.mitigation %>
-
-Searches & Seizures: <%= @petition.search_and_seizures %>
-
-Respondent Statements: <%= @petition.defendant_statement_block %>
-
-Witness Statements: <%= @petition.witness_statement_block %>
-
-Pre-Merits ID: <%= @petition.premerits_id %>
-
-Notices:
-	Medical: 	<%= @petition.medical_records %>
-	Business: 	<%= @petition.business_records %>
-	Police: 	<%= @petition.police_records %>
-	Other: 		<%= @petition.other_records %>

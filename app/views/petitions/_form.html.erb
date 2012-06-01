@@ -44,7 +44,7 @@
 			<br>
 			Here's <%= f.input :statement_of_pc, :label=>"what happened on that date: ", :input_html=>{:class=>"span4", :rows=>"4"} %>
 			<br>
-			Based on that, I want the Respondent charged with <%= f.input :charges, :label=>"the following: ", :input_html=>{:class=>"span4", :rows=>"4"} %>
+			Based on that, I want the Respondent charged with <%= f.input :charges, :label=>"the following (including statute): ", :input_html=>{:class=>"span4", :rows=>"4"}, :placeholder=>"charge(statute), ..." %>
 			<br>
 			In fairness to the respondent, there is the following <%= f.input :mitigation, :label=>"mitigating circumstances", :input_html=>{:class=>"span3"} %>.
 			<br>

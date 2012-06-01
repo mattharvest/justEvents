@@ -45,7 +45,7 @@ class CasefilesController < ApplicationController
 			end
 			
 			#handle the assignment
-			handle_assigment
+			handle_assignment
 			
 			@notifications = []
 			#add the in-office notifications
@@ -161,6 +161,7 @@ class CasefilesController < ApplicationController
 			
 			if @casefiles.length==0
 				flash[:casefilefailure] = "No cases found."
+				
 				redirect_to :back
 			end
 		end

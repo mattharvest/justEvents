@@ -169,4 +169,10 @@
 			.on('changeDate', function(ev) {
 			$('#petition_defendant_dob').datepicker('hide');
 		})
+	$(document).ready(function() {
+		$('#petition_statement_of_pc').charCount({
+			allowed: 255,
+			counterText: 'Characters left: '
+		});
+		});
 </script>

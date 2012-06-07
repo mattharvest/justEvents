@@ -14,18 +14,9 @@ end
 			
 			<%= f.input :casenumber, :label=>'Case number?', :placeholder=>'CR..., CT..., JA..., etc.'%>
 			<%= f.input :precomplete, :as=>:boolean,  :label=>'Mark already completed?' %>
-			<div class="input-append date" id="todoitem_duedate" data-date="<%= (Date.today+14).to_s %>" data-date-format="yyyy-mm-dd">
-				<input type="text" value="<%= (Date.today+14).to_s %>" readonly class="span2" name="todoitem[duedate]">
-				<span class="add-on">
-					<i class="icon-th"></i>
-				</span>
-				<span class="help-inline">Due</span>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<%= f.input :user_id, :label=>"Assign to", :as=>'select', :collection=>user_list %>
-				</div>
-			</div>
+			<%= f.input :duedate, :as=>'string', :label=>"Due on?", :input_html=>{:class=>"span2", :value=>(Date.today+14).to_s} %>
+			
+			<%= f.input :user_id, :label=>"Assign to", :as=>'select', :collection=>user_list %>
 		<% end %>
 		<%= f.actions do %>
 			<%= f.action(:submit) %>
@@ -34,7 +25,7 @@ end
 </div>
 
 <script>
-	$('#todoitem_duedate').datepicker()
+	$('#todoitem_duedate').datepicker({format: 'yyyy-mm-dd'})
 		.on('changeDate', function(ev) {
 			$('#todoitem_duedate').datepicker('hide');
 		})

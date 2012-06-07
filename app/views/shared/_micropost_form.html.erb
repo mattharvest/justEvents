@@ -21,24 +21,10 @@
 					data-source='["Jones, Debra", "Gupta, Kavita", "Johnson, Lyvette", "Josendale, Erin", "Saccarelli, Gale", "Whitehall, Beatrix", "Wilson, Monica", "Peek, Leslie", "Abdullah, Raouf", "Edwards, Christal", "Okeke, Loretta", "Powell, Greg", "Pride-Hebron, Kelly", "Shelton, Bill", "Uba-Okarafor, Vivent", "Mungin, Vaughn", "Handy, Ronald", "Ucheomunu, Andrew", "Moore, Sonya", "Azari, Omid"]'>
 				
 			</div>
-			<div class="control-group">
-				<label class="control-label" for="">DOB</label>
-				<div class="input-append date" id="micropost_dob" data-date="<%= Date.today.years_ago(18).to_s %>" data-date-format="yyyy-mm-dd">
-					<input type="text" value="<%= Date.today.years_ago(18).to_s %>" readonly class="span2" name="micropost[dob]">
-					<span class="add-on">
-						<i class="icon-th"></i>
-					</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label" for="">Event Date</label>
-				<div class="input-append date" id="micropost_event_date" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
-					<input type="text" value="<%= Date.today.to_s %>" readonly class="span2" name="micropost[event_date]">
-					<span class="add-on">
-						<i class="icon-th"></i>
-					</span>
-				</div>
-			</div>		
+			
+			<%= f.input :dob, :as=>'string', :label=>'DOB', :input_html=>{ :class=>'span2', :value=>(Date.today-18.years).to_s } %>
+			<%= f.input :event_date, :as=>'string', :label=>'Event Date', :input_html=>{ :class=>'span2', :value=>(Date.today).to_s } %>
+
 			
 		<% end %>
 		<%= f.actions do %>
@@ -49,11 +35,11 @@
 
 <script>
 	$('.typeahead').typeahead()
-	$('#micropost_dob').datepicker()
+	$('#micropost_dob').datepicker({format: 'yyyy-mm-dd'})
 		.on('changeDate', function(ev) {
 			$('#micropost_dob').datepicker('hide');
 		})
-	$('#micropost_event_date').datepicker()
+	$('#micropost_event_date').datepicker({format: 'yyyy-mm-dd'})
 			.on('changeDate', function(ev) {
 			$('#micropost_event_date').datepicker('hide');
 		})

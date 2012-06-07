@@ -3,7 +3,9 @@
 	<%= f.inputs do %>
 		<%= f.input :asa, :as=>'hidden', :value=>current_user.name %>
 		<%= f.input :asa_email, :as=>'hidden', :value=>current_user.email %>
-		<%= f.input :email_address, :as=>'string', :placeholder=>current_user.email, :as=>'select', :label=>"Who should be emailed?",  :collection =>
+		<blockquote>
+			<div class="row-fluid">
+				<%= f.input :email_address, :as=>'string', :placeholder=>current_user.email, :as=>'select', :label=>"Whom should be emailed?",  :collection =>
 					{"Jackson, Gigi L."=>"GLJackson1@co.pg.md.us", 
 					"Robinson, Pamela F."=> "PFRobinson@co.pg.md.us", 
 					"Marquart, Cherie C."=> "CCMarquart@co.pg.md.us", 
@@ -11,6 +13,11 @@
 					"Jenkins, Akiya L."=> "ALJenkins@co.pg.md.us", 
 					@current_user.name=>@current_user.email}
 					%>
+			</div>
+			<div class="row-fluid">
+				This petition is <%= f.input :soft_due_date, :as=>"string", :label=>"due to my secretary on", :input_html=>{:class=>"span2", :value=>Date.today.to_s} %>, and has a <%= f.input :hard_due_date, :as=>"string", :label=>"final due date of ", :input_html=>{:class=>"span2", :value=>Date.today.to_s} %>.
+			</div>
+		</blockquote>
 	<fieldset>
 	<i class="icon-folder-open"></i>
 		<blockquote>
@@ -20,7 +27,7 @@
 			<br>
 			The respondent <%= f.input :defendant_address, :label=>"lives at ", :input_html=>{:class=>"span3"} %>, and <%= f.input :school, :label=>"attends ", :input_html=>{:class=>"span2"} %>.
 			<br>
-			The respondent <%= f.input :defendant_dob, :as=>"string", :label=>"was born ", :input_html=>{:class=>"span1"} %>, and <%= f.input :parent, :label=>"the parent's name is ", :input_html=>{:class=>"span2"} %>.
+			The respondent <%= f.input :defendant_dob, :as=>"string", :label=>"was born ", :input_html=>{:class=>"span1", :value=>(Date.today-18.years).to_s} %>, and <%= f.input :parent, :label=>"the parent's name is ", :input_html=>{:class=>"span2"} %>.
 			<br>
 			<small class="pull-right">identifying information</small>
 		</blockquote>
@@ -30,7 +37,7 @@
 	<fieldset>
 		<blockquote>
 			<h2>the victim</h2>
-			In this case, it is alleged that <%= f.input :offense_date, :label=>"on or about", :as=>"string", :input_html=>{:class=>"span1"} %>, <%= f.input :incident_address, :label=>"in the area of ", :input_html=>{:class=>"span2"} %> the respondent <%= f.input :victim, :label=>"victimized ", :input_html=>{:class=>"span2"} %>.  The victim <%= f.input :victim_address, :label=>"lives at", :input_html=>{:class=>"span2"} %>. <%= f.input :victim_adult_or_minor, :label=>"The victim is a minor. (True/False)" %>
+			In this case, it is alleged that <%= f.input :offense_date, :label=>"on or about", :as=>"string", :input_html=>{:class=>"span1", :value=>(Date.today-30.days).to_s} %>, <%= f.input :incident_address, :label=>"in the area of ", :input_html=>{:class=>"span2"} %> the respondent <%= f.input :victim, :label=>"victimized ", :input_html=>{:class=>"span2"} %>.  The victim <%= f.input :victim_address, :label=>"lives at", :input_html=>{:class=>"span2"} %>. <%= f.input :victim_adult_or_minor, :label=>"The victim is a minor. (True/False)" %>
 			<br>
 			<small class="pull-right">victim information</small>
 		</blockquote>
@@ -169,4 +176,18 @@
 			.on('changeDate', function(ev) {
 			$('#petition_defendant_dob').datepicker('hide');
 		})
+	$('#petition_soft_due_date').datepicker({format: 'yyyy-mm-dd'})
+			.on('changeDate', function(ev) {
+			$('#petition_soft_due_date').datepicker('hide');
+		})
+	$('#petition_hard_due_date').datepicker({format: 'yyyy-mm-dd'})
+			.on('changeDate', function(ev) {
+			$('#petition_hard_due_date').datepicker('hide');
+		})
+	$(document).ready(function() {
+		$('#petition_statement_of_pc').charCount({
+			allowed: 255,
+			counterText: 'Characters left: '
+		});
+		});
 </script>

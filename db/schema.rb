@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120529200644) do
+ActiveRecord::Schema.define(:version => 20120607122315) do
 
   create_table "casefiles", :force => true do |t|
     t.string   "defendant"
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(:version => 20120529200644) do
   create_table "microposts", :force => true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "unit"
     t.date     "event_date"
     t.string   "category"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20120529200644) do
     t.string   "defendant"
     t.integer  "casefile_id"
     t.string   "gang"
-    t.integer  "jail",              :limit => 255
+    t.string   "jail"
     t.string   "probation"
     t.integer  "restitution"
     t.integer  "communityservice"
@@ -138,12 +138,14 @@ ActiveRecord::Schema.define(:version => 20120529200644) do
     t.datetime "updated_at",                     :null => false
     t.string   "agency"
     t.string   "email_address"
+    t.date     "soft_due_date"
+    t.date     "hard_due_date"
   end
 
   create_table "tags", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "todoitems", :force => true do |t|
@@ -159,22 +161,12 @@ ActiveRecord::Schema.define(:version => 20120529200644) do
 
   add_index "todoitems", ["created_at"], :name => "index_todoitems_on_todolist_id_and_created_at"
 
-  create_table "todolists", :force => true do |t|
-    t.string   "name"
-    t.integer  "casefile_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "user_id"
-  end
-
-  add_index "todolists", ["casefile_id", "created_at"], :name => "index_todolists_on_casefile_id_and_created_at"
-
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "unit"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin",              :default => false

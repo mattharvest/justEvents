@@ -11,6 +11,13 @@ class UserMailer < ActionMailer::Base
 		mail(:to=>"matthew.bohrer@gmail.com", :subject=>"verifying mail settings")
 	end
 	
+	def dtp_notice(user, post)
+		@user=user
+		@post=post
+		#yacunningham@co.pg.md.us
+		mail(:to=>"matthew.bohrer@gmail.com", :subject=>"DTP: "+@post.casenumber+" "+@post.defendant)
+	end
+	
 	def test_calendar
 		mail(:to=> "matthew.bohrer@gmail.com", :subject=>"testing iCalendar") do |format|
 				format.ics {

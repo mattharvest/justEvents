@@ -50,6 +50,12 @@ class MicropostsController < ApplicationController
 			end
 		end
 		
+		if @micropost.category =="dtp"
+			#send the extra notification to Cunningham
+			UserMailer.dtp_notice(current_user, @micropost).deliver
+			flash[:dtpsuccess]="DTP notice sent!"
+		end
+		
 		if @micropost.save
 			check_achievements
 			flash[:micropostsuccess]= "Micropost created"

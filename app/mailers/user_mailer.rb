@@ -15,7 +15,7 @@ class UserMailer < ActionMailer::Base
 		@user=user
 		@post=post
 		#
-		mail(:to=>"yacunningham@co.pg.md.us", :cc=>@user.email :subject=>"DTP: "+@post.casenumber+" "+@post.defendant)
+		mail(:to=>"yacunningham@co.pg.md.us", :cc=>@user.email, :subject=>"DTP: "+@post.casenumber+" "+@post.defendant)
 	end
 	
 	def test_calendar

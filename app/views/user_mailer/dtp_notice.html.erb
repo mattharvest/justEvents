@@ -1,0 +1,15 @@
+<div class="row-fluid">
+<%= @user.name %> has Declined to Prosecute the above-captioned case, and declares:
+</div>
+
+<div class="row-fluid">
+<p>"I have reviewed the above-captioned case for petitioning, and for the following reasons I decline to prosecute:</p>
+<div class="span6 offset1">
+	<%= @post.content %>
+</div>
+
+<div class="row-fluid">
+For the above-stated reasons, the State officially Declines to Prosecute these matters."
+</div>
+
+So submitted on <%=Date.today.to_s %>.

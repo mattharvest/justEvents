@@ -15,7 +15,7 @@
 					%>
 			</div>
 			<div class="row-fluid">
-				This petition is <%= f.input :soft_due_date, :as=>"string", :label=>"due to my secretary on", :input_html=>{:class=>"span2", :value=>Date.today.to_s} %>, and has a <%= f.input :hard_due_date, :as=>"string", :label=>"final due date of ", :input_html=>{:class=>"span2", :value=>Date.today.to_s} %>.
+				This petition is <%= f.input :soft_due_date, :as=>"string", :label=>"due to my secretary on", :input_html=>{ :value=>Date.today.to_s} %>, and has a <%= f.input :hard_due_date, :as=>"string", :label=>"final due date of ", :input_html=>{:value=>Date.today.to_s} %>.
 			</div>
 		</blockquote>
 	<fieldset>

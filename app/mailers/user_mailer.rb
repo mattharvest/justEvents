@@ -14,8 +14,8 @@ class UserMailer < ActionMailer::Base
 	def dtp_notice(user, post)
 		@user=user
 		@post=post
-		#yacunningham@co.pg.md.us
-		mail(:to=>"matthew.bohrer@gmail.com", :subject=>"DTP: "+@post.casenumber+" "+@post.defendant)
+		#
+		mail(:to=>"yacunningham@co.pg.md.us", :cc=>@user.email :subject=>"DTP: "+@post.casenumber+" "+@post.defendant)
 	end
 	
 	def test_calendar

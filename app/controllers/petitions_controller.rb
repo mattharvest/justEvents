@@ -62,6 +62,11 @@ class PetitionsController < ApplicationController
 			else
 				flash[:petitioncasefilefailure]="Casefile for petition NOT built"
 			end
+			
+			#now, create a ToDo on the day before the Hard Due Date to make sure the petition was filed
+				duedate_todo = current_user.todoitems.build(:duedate=>@petition.hard_due_date+1, :casenuber=>@casefile.ccn, :user_id=>current_user.id, :content=>'Ensure that petition has been filed!')
+				duedate_todo.notify_of_todo(current_user, current_user)
+				duedate_todo.save
 			redirect_to @petition
 
 		else

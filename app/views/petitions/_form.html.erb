@@ -5,7 +5,7 @@
 		<%= f.input :asa_email, :as=>'hidden', :value=>current_user.email %>
 		<blockquote>
 			<div class="row-fluid">
-				<%= f.input :email_address, :as=>'string', :placeholder=>current_user.email, :as=>'select', :label=>"Whom should be emailed?",  :collection =>
+				<%= f.input :email_address, :as=>'string', :placeholder=>current_user.email, :as=>'select', :label=>"Who should be emailed?",  :collection =>
 					{"Jackson, Gigi L."=>"GLJackson1@co.pg.md.us", 
 					"Robinson, Pamela F."=> "PFRobinson@co.pg.md.us", 
 					"Marquart, Cherie C."=> "CCMarquart@co.pg.md.us", 

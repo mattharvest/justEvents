@@ -27,7 +27,6 @@ class CasefilesController < ApplicationController
 				@assignee = current_user			
 			else
 				@assignee = User.find_by_id(@casefile.assignee_id)
-				handle_assignment
 			end
 			
 			@notifications << @assignee.email

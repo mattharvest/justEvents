@@ -4,32 +4,6 @@ class CasefilesController < ApplicationController
 		@casefile = Casefile.new
 	end
 	
-	def handle_notifications
-		UserMailer.casefile_notice(current_user, @assignee, @casefile, @notifications).deliver
-	end
-	
-	def handle_assignment
-	
-		if params[:casefile][:assignee_id].blank?
-			@assignee = current_user			
-		else
-			@assignee = User.find_by_id(@casefile.assignee_id)
-			handle_assignment
-		end
-		
-		@notifications << @assignee.email
-
-		#create the event to reflect that it's been assigned
-		casefile_post = @assignee.microposts.build(:unit=>@assignee.unit, :event_date=>Date.today.to_s, :content=>'Case started by '+current_user.name+', assigned to '+@assignee.name+", notifications sent to "+@notifications.to_sentence, :defendant=>@casefile.defendant, :category=>'investigation', :casenumber=>@casefile.lead_casenumber)
-		if casefile_post.save
-			flash[:casefilepostsuccess]="Assignment of casefile posted"
-		else
-			flash[:casefilepostfailure]="Assignment of casefile not posted!"
-		end
-		
-		
-	end
-	
 	def handle_todo
 		assignee_todo = @assignee.todoitems.build(:duedate=>Date.today+7, :casenumber=>@casefile.lead_casenumber, :user_id=>@casefile.assignee_id, :content=>'Review this case for '+current_user.unit)
 		if assignee_todo.save
@@ -46,11 +20,27 @@ class CasefilesController < ApplicationController
 			if @casefile.defendant.blank?||@casefile.defendant.nil?
 				@casefile.defendant="Doe, John"
 			end
+			@notifications = []
 			
 			#handle the assignment
-			handle_assignment
+			if params[:casefile][:assignee_id].blank?
+				@assignee = current_user			
+			else
+				@assignee = User.find_by_id(@casefile.assignee_id)
+				handle_assignment
+			end
 			
-			@notifications = []
+			@notifications << @assignee.email
+
+			#create the event to reflect that it's been assigned
+			casefile_post = @assignee.microposts.build(:unit=>@assignee.unit, :event_date=>Date.today.to_s, :content=>'Case started by '+current_user.name+', assigned to '+@assignee.name+", notifications sent to "+@notifications.to_sentence, :defendant=>@casefile.defendant, :category=>'investigation', :casenumber=>@casefile.lead_casenumber)
+			if casefile_post.save
+				flash[:casefilepostsuccess]="Assignment of casefile posted"
+			else
+				flash[:casefilepostfailure]="Assignment of casefile not posted!"
+			end
+			
+			
 			#add the in-office notifications
 			user_ids_to_notify = params[:casefile][:notifications]
 			user_ids_to_notify.each do |p|
@@ -71,7 +61,7 @@ class CasefilesController < ApplicationController
 			
 			#send the email to the assignee so they get a full report
 			if !@notifications.blank?
-				handle_notifications
+				UserMailer.casefile_notice(current_user, @assignee, @casefile, @notifications).deliver
 			end	
 			
 			#now create the ToDo for the assignee to review the case within 7 days

@@ -16,6 +16,9 @@ class CasefilesController < ApplicationController
 			@assignee = User.find_by_id(@casefile.assignee_id)
 			handle_assignment
 		end
+		
+		@notifications << @assignee.email
+
 		#create the event to reflect that it's been assigned
 		casefile_post = @assignee.microposts.build(:unit=>@assignee.unit, :event_date=>Date.today.to_s, :content=>'Case started by '+current_user.name+', assigned to '+@assignee.name+", notifications sent to "+@notifications.to_sentence, :defendant=>@casefile.defendant, :category=>'investigation', :casenumber=>@casefile.lead_casenumber)
 		if casefile_post.save
@@ -24,7 +27,7 @@ class CasefilesController < ApplicationController
 			flash[:casefilepostfailure]="Assignment of casefile not posted!"
 		end
 		
-		@notifications << @assignee.email
+		
 	end
 	
 	def handle_todo

@@ -64,7 +64,7 @@ class PetitionsController < ApplicationController
 			end
 			
 			#now, create a ToDo on the day before the Hard Due Date to make sure the petition was filed
-			duedate_todo = current_user.todoitems.build(:duedate=>@petition.hard_due_date-1, :casenumber=>@casefile.ccn, :user_id=>current_user.id, :content=>'Ensure that petition has been filed!')
+			duedate_todo = current_user.todoitems.build(:duedate=>@petition.hard_due_date-1, :casenumber=>@casefile.ccn, :user_id=>current_user.id, :content=>('Ensure that petition has been filed for '+@casefile.defendant))
 			duedate_todo.notify_of_todo(current_user, current_user)
 			duedate_todo.save
 			redirect_to @petition

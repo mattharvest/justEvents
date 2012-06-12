@@ -105,7 +105,6 @@ class PagesController < ApplicationController
 		@start=params[:start]
 		@end=params[:end]
 		@user_id = params[:target_user]
-		@category = params[:micropost_category]
 		@unit = params[:micropost_unit]
 		if @unit.blank?
 			@unit=current_user.unit
@@ -123,6 +122,13 @@ class PagesController < ApplicationController
 		end
 	end
 	
+	def custom_petition_report
+		@title="Petition search"
+		@start_date=params[:start]
+		@end_date=params[:end]
+		@petitions = Petition.where(:created_at=>[@start_date..@end_date])
+	end
+	
 	def last_week
 		if !signed_in?
 			return
@@ -130,6 +136,32 @@ class PagesController < ApplicationController
 		unit=current_user.unit
 		@microposts = @last_week
 		export_to_csv
+	end
+	
+	def export_petitions_to_csv
+		@petitions=[]
+		
+		if params[:type]=="petition_by_date"
+			@start_date=params[:start]
+			@end_date=params[:end]
+			@petitions = Petition.where(:created_at=>[@start_date..@end_date])
+		end
+		
+		if !@petitions.nil?
+			csv_string = CSV.generate do |c|
+				c << ["Respondent", "Created At", "CCN", "ASA"]
+				@petitions.each do |petition|
+					c<< [petition.defendant, petition.created_at.to_s, petition.ccn, petition.asa]
+				end
+			end
+			
+			send_data csv_string,
+			:type => 'text/csv; charset=iso8859-1; header=present',
+			:disposition => 'attachment; filename='+Time.now.to_s+'petitions.csv'		
+		else
+			flash[:petition_csv_error]="Petitions was nil!"
+		end
+		
 	end
 	
 	def export_to_csv
@@ -145,6 +177,7 @@ class PagesController < ApplicationController
 			@microposts=Micropost.where(:unit=>current_user.unit, :event_date=>[Date.today-7..Date.today])
 		elsif params[:type]=="custom"
 			@microposts=Micropost.where(:category=>params[:micropost_category], :event_date=>[params[:start]..params[:end]], :unit=>current_user.unit)
+
 		end
 		
 		csv_string = CSV.generate do |c|

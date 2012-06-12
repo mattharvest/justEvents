@@ -2,7 +2,7 @@ class PetitionsController < ApplicationController
 	before_filter :authorized_user, :only => :destroy
 	def index
 		@title="Index of Petitions"
-		@petitions = Petition.find(:all)
+		@petitions = Petition.paginate(:page=>params[:page], :per_page => 20).order('updated_at DESC')
 	end
 	
 	def destroy

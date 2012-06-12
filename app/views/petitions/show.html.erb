@@ -46,9 +46,9 @@
 			<h4>DOB:</h4> <%= @petition.defendant_dob.to_s %>
 		</div>
 		<div class="span2">
-			<h4>AGE:</h4>	
+			<h4>AGE (on offense date):</h4>	
 				<% if !@petition.defendant_dob.blank? %>
-					<%=((Date.today-@petition.defendant_dob)/365).to_s %>
+					<%= distance_of_time_in_words(@petition.defendant_dob, @petition.offense_date) %>
 				<% else %>
 					unknown
 				<% end %>

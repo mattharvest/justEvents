@@ -1,5 +1,6 @@
  <% if signed_in? %>
 	<h1>Petitions</h1>
+		<%= will_paginate @petitions %>
 		<table class="table table-striped table-bordered table-condensed">
 		<tr>
 			<td>Defendant</td>
@@ -14,6 +15,7 @@
 			<% end %>
 		</tr>
 	</table>
+	<%= will_paginate @petitions %>
 
 <% else %>
 	<%= render :partial => 'shared/not_signed_in' %>

@@ -147,15 +147,19 @@ class CasefilesController < ApplicationController
 				end
 			else
 				flash[:casefilefailure] = "Not a valid format for a casenumber."
-				redirect_to :back
-				return
+				redirect_to :back and return
 			end
 			
 			if @casefiles.length==0
-				flash[:casefilefailure] = "No cases found."
-				
-				redirect_to :back
+				flash[:casefilefailure] = "No cases found.  Would you like to create one?"
+				redirect_to new_case_path and return
 			end
+			
+			if @casefiles.length==1
+				flash[:casefilesuccess]="Only one case found, loading it now!"
+				redirect_to @casefiles[0]
+			end
+			
 		end
 	end
 	

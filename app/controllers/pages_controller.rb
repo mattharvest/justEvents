@@ -149,9 +149,11 @@ class PagesController < ApplicationController
 		
 		if !@petitions.nil?
 			csv_string = CSV.generate do |c|
-				c << ["Respondent", "Created At", "CCN", "ASA"]
+				#c << ["Respondent", "Created At", "CCN", "ASA"]
+				c << ["ccn", "asa", "asa_email", "defendant", "defendant_address", "defendant_dob", "school", "parent", "victim", "victim_address", "victim_adult_or_minor", "charges", "cpo_id", "cpo_name", "assisting_officers", "witnesses", "chemist", "pwid", "fingerprint", "examiner", "tech", "counterfeit", "expert_content", "corespondents", "incident_report", "statement_of_respondent", "statement_of_corespondents_etc", "victim_witness_list", "arrest_report", "investigation_report", "accident_report", "screening_apt", "statement_of_pc", "incident_address", "mitigation", "search_and_seizures", "respondent_statement_type", "respondent_statement", "witness_statement_type", "witness_statement", "premerits_id", "medical_records", "business_records", "police_records", "mva_records", "other_records", "other_description", "offense_date", "agency", "email_address,", "soft_due_date", "hard_due_date"]
 				@petitions.each do |petition|
-					c<< [petition.defendant, petition.created_at.to_s, petition.ccn, petition.asa]
+					#c<< [petition.defendant, petition.created_at.to_s, petition.ccn, petition.asa]
+					c<<[petition.ccn, petition.asa, petition.asa_email, petition.defendant, petition.defendant_address, petition.defendant_dob, petition.school, petition.parent, petition.victim, petition.victim_address, petition.victim_adult_or_minor, petition.charges, petition.cpo_id, petition.cpo_name, petition.assisting_officers, petition.witnesses, petition.chemist, petition.pwid, petition.fingerprint, petition.examiner, petition.tech, petition.counterfeit, 	petition.expert_content, petition.corespondents, petition.incident_report, petition.statement_of_respondent, petition.statement_of_corespondents_etc, petition.victim_witness_list, petition.arrest_report, petition.investigation_report, petition.accident_report, petition.screening_apt, petition.statement_of_pc, petition.incident_address, 	petition.mitigation, petition.search_and_seizures, petition.respondent_statement_type, petition.respondent_statement, petition.witness_statement_type, petition.witness_statement, petition.premerits_id, petition.medical_records, petition.business_records, petition.police_records, petition.mva_records, petition.other_records, petition.other_description, petition.offense_date, petition.agency, petition.email_address, petition.soft_due_date, petition.hard_due_date]
 				end
 			end
 			

@@ -13,7 +13,7 @@ class Investigation < ActiveRecord::Base
 			"accepted for prosecution"
 		elsif status==2
 			"declined"
-		elsif status=3
+		elsif status==3
 			"hiatus"
 		else
 			"under investigation"

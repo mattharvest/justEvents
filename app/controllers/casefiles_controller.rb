@@ -153,13 +153,12 @@ class CasefilesController < ApplicationController
 			if @casefiles.length==0
 				flash[:casefilefailure] = "No cases found.  Would you like to create one?"
 				redirect_to new_case_path and return
-			end
-			
-			if @casefiles.length==1
+			elsif @casefiles.length==1
 				flash[:casefilesuccess]="Only one case found, loading it now!"
 				if !@casefiles[0].nil?
 					redirect_to @casefiles[0] and return
 				else
+					flash[:casefileerror]="Actually, no, that's not a casefile.  Are you sure it exists?"
 					redirect_to :back and return
 				end
 			end

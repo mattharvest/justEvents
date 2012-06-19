@@ -29,7 +29,7 @@ class CasefilesController < ApplicationController
 				@assignee = User.find_by_id(@casefile.assignee_id)
 			end
 			
-			@notifications << @assignee.email
+			@notifications << @assignee.email.to_s
 
 			#create the event to reflect that it's been assigned
 			casefile_post = @assignee.microposts.build(:unit=>@assignee.unit, :event_date=>Date.today.to_s, :content=>'Case started by '+current_user.name+', assigned to '+@assignee.name+", notifications sent to "+@notifications.to_sentence, :defendant=>@casefile.defendant, :category=>'investigation', :casenumber=>@casefile.lead_casenumber)
@@ -154,9 +154,9 @@ class CasefilesController < ApplicationController
 				flash[:casefilefailure] = "No cases found.  Would you like to create one?"
 				redirect_to new_case_path and return
 			elsif @casefiles.length==1
-				flash[:casefilesuccess]="Only one case found, loading it now!"
 				if !@casefiles[0].nil?
-					redirect_to @casefiles[0] and return
+					flash[:casefilesuccess]="Only one case found, loading it now!"
+					redirect_to @casefiles[0] and returngit 
 				end
 			end
 			

@@ -1,6 +1,6 @@
 class Casefile < ActiveRecord::Base
 	attr_accessor :lead_casenumber, :notifications, :external_notifications, :assignee_id
-	attr_accessible :ccn, :cr, :ct, :ca, :ca, :ja, :sao, :defendant, :victims
+	attr_accessible :ccn, :cr, :ct, :ca, :cj, :ca, :ja, :sao, :defendant, :victims, :notifications, :external_notifications, :assignee_id
 	
 	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]/i
 

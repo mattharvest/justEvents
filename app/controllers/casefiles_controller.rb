@@ -157,9 +157,6 @@ class CasefilesController < ApplicationController
 				flash[:casefilesuccess]="Only one case found, loading it now!"
 				if !@casefiles[0].nil?
 					redirect_to @casefiles[0] and return
-				else
-					flash[:casefileerror]="Actually, no, that's not a casefile.  Are you sure it exists?"
-					redirect_to :back and return
 				end
 			end
 			

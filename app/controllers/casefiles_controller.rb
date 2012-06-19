@@ -156,7 +156,7 @@ class CasefilesController < ApplicationController
 			elsif @casefiles.length==1
 				if !@casefiles[0].nil?
 					flash[:casefilesuccess]="Only one case found, loading it now!"
-					redirect_to @casefiles[0] and returngit 
+					redirect_to @casefiles[0] and return
 				end
 			end
 			

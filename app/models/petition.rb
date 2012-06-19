@@ -64,6 +64,6 @@ class Petition < ActiveRecord::Base
 	end
 	
 	def full_pc
-		"On or about "+offense_date.to_s+", at "+incident_address+", Prince George's County, "+statement_of_pc
+		"On or about "+offense_date.to_s+", at "+incident_address+", Prince George's County, "+statement_of_pc+"  All events did occur within Prince George's County."
 	end
 end

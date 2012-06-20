@@ -96,13 +96,15 @@
 		</div>
 	<% end %>
 	
-	<% if !@petition.nil? %>
-		<div class="row-fluid">
-			<h3>Review the petition <%= link_to "here", @petition %></h3>
-			<blockquote>
-				<%= @petition.full_pc %>
-			</blockquote>
-		</div>
+	<% if !@petitions.nil? %>
+		<% @petitions.each do |petition| %>
+			<div class="row-fluid">
+				<h3>Review the petition for <%= petition.defendant %> <%= link_to "here", petition %></h3>
+				<blockquote>
+					<%= petition.full_pc %>
+				</blockquote>
+			</div>
+		<% end %>
 	<% end %>
 	
 		<div class="row-fluid">

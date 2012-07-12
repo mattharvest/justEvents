@@ -178,12 +178,12 @@ class PagesController < ApplicationController
 		elsif params[:type]=="lastweek"
 			@microposts=Micropost.where(:unit=>current_user.unit, :event_date=>[Date.today-7..Date.today])
 		elsif params[:type]=="custom"
-			@microposts=Micropost.where(:category=>params[:micropost_category], :event_date=>[params[:start]..params[:end]], :unit=>current_user.unit)
+			@microposts=Micropost.where(:category=>params[:micropost_category], :event_date=>[params[:start]..params[:end]], :unit=>params[:unit])
 
 		end
 		
 		csv_string = CSV.generate do |c|
-			c << ["event_date", "user", "user.email", "user.unit", "defendant", "dob", "adf", "category", "content", "created_at", "jail", "probation", "community service", "judge", "lead charge", "convicted charges", "enhanced", "guidelines top", "guidelines bottom", "aba plea", "team leader"]
+			c << ["event_date", "user", "casenumber", "user.email", "user.unit", "defendant", "dob", "adf", "category", "content", "created_at", "jail", "probation", "community service", "judge", "lead charge", "convicted charges", "enhanced", "guidelines top", "guidelines bottom", "aba plea", "team leader"]
 			@microposts.each do |post|
 				leader = User.new
 				
@@ -192,7 +192,7 @@ class PagesController < ApplicationController
 				end
 				
 				if leader.nil?
-					c << [post.event_date.to_s, post.user.name.to_s, post.user.email.to_s, post.user.unit.to_s, post.defendant.to_s, post.dob.to_s, post.adf.to_s, post.category.to_s, post.content.to_s, post.created_at.to_s, post.jail.to_s, post.probation.to_s, post.communityservice.to_s, post.judge.to_s, post.leadcharge.to_s, post.convictedcharges.to_s, post.enhanced.to_s, post.guidelines_top.to_s, post.guidelines_bottom.to_s, post.aba.to_s, "", post.victims.to_s]
+					c << [post.event_date.to_s, post.user.name.to_s, post.casenumber.to_s, post.user.email.to_s, post.user.unit.to_s, post.defendant.to_s, post.dob.to_s, post.adf.to_s, post.category.to_s, post.content.to_s, post.created_at.to_s, post.jail.to_s, post.probation.to_s, post.communityservice.to_s, post.judge.to_s, post.leadcharge.to_s, post.convictedcharges.to_s, post.enhanced.to_s, post.guidelines_top.to_s, post.guidelines_bottom.to_s, post.aba.to_s, "", post.victims.to_s]
 				else
 					c << [post.event_date.to_s, post.user.name.to_s, post.user.email.to_s, post.user.unit.to_s, post.defendant.to_s, post.dob.to_s, post.adf.to_s, post.category.to_s, post.content.to_s, post.created_at.to_s, post.jail.to_s, post.probation.to_s, post.communityservice.to_s, post.judge.to_s, post.leadcharge.to_s, post.convictedcharges.to_s, post.enhanced.to_s, post.guidelines_top.to_s, post.guidelines_bottom.to_s, post.aba.to_s, leader.name_comma, post.victims.to_s]
 				end

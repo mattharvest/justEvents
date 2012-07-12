@@ -194,7 +194,7 @@ class PagesController < ApplicationController
 				if leader.nil?
 					c << [post.event_date.to_s, post.user.name.to_s, post.casenumber.to_s, post.user.email.to_s, post.user.unit.to_s, post.defendant.to_s, post.dob.to_s, post.adf.to_s, post.category.to_s, post.content.to_s, post.created_at.to_s, post.jail.to_s, post.probation.to_s, post.communityservice.to_s, post.judge.to_s, post.leadcharge.to_s, post.convictedcharges.to_s, post.enhanced.to_s, post.guidelines_top.to_s, post.guidelines_bottom.to_s, post.aba.to_s, "", post.victims.to_s]
 				else
-					c << [post.event_date.to_s, post.user.name.to_s, post.user.email.to_s, post.user.unit.to_s, post.defendant.to_s, post.dob.to_s, post.adf.to_s, post.category.to_s, post.content.to_s, post.created_at.to_s, post.jail.to_s, post.probation.to_s, post.communityservice.to_s, post.judge.to_s, post.leadcharge.to_s, post.convictedcharges.to_s, post.enhanced.to_s, post.guidelines_top.to_s, post.guidelines_bottom.to_s, post.aba.to_s, leader.name_comma, post.victims.to_s]
+					c << [post.event_date.to_s, post.user.name.to_s, post.casenumber.to_s, post.user.email.to_s, post.user.unit.to_s, post.defendant.to_s, post.dob.to_s, post.adf.to_s, post.category.to_s, post.content.to_s, post.created_at.to_s, post.jail.to_s, post.probation.to_s, post.communityservice.to_s, post.judge.to_s, post.leadcharge.to_s, post.convictedcharges.to_s, post.enhanced.to_s, post.guidelines_top.to_s, post.guidelines_bottom.to_s, post.aba.to_s, leader.name_comma, post.victims.to_s]
 				end
 			end
 		end

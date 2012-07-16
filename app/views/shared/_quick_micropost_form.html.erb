@@ -12,6 +12,8 @@
 			<%= f.input :category, :label=>'Category?', :collection => post_categories %>
 			<%= f.input :casenumber, :as=>'hidden', :value=>@casefile.lead_casenumber %>
 			
+			<%= f.input :leadcharge %>
+			
 			<div class="input">
 				<label>Defense attorney:</label>	
 				<input type="text" 

@@ -21,6 +21,8 @@
 			<%= f.input :category, :as=>'hidden', :input_html => { :value=>'plea' } %>
 			<%= f.input :casenumber, :as=>'hidden', :value=>@casefile.lead_casenumber %>
 			
+			<%= f.input :leadcharge %>
+			
 			<div class="input">
 				<label>Defense attorney:</label>	
 				<input type="text" 

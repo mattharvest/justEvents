@@ -3,15 +3,12 @@ class Casefile < ActiveRecord::Base
 	attr_accessible :ccn, :cr, :ct, :ca, :cj, :ca, :ja, :sao, :defendant, :victims, :notifications, :external_notifications, :assignee_id
 	
 	casenum_regex = /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]|JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]|CJ[0-9][0-9][0-9][0-9][0-9][0-9]|CA[0-9][0-9][0-9][0-9][0-9][0-9]|CT[0-9][0-9][0-9][0-9][0-9][0-9]/i
-
-	#validation isn't fully working at the moment....
 	
-	#validates :ccn, :format => { :with => /CCN[0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/ }
-	#validates :cr, :format => { :with => /CR[0-9]E[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/ }
-	#validates :ct, :format => { :with => /CT[0-9][0-9][0-9][0-9][0-9][0-9] }
-	#validates :cj, :format => { :with => /CJ[0-9][0-9][0-9][0-9][0-9][0-9]/ }
-	#validates :ca, :format => { :with => /CA[0-9][0-9][0-9][0-9][0-9][0-9]/ }
-	#validates :ja, :format => { :with => /JA-[0-9][0-9]-[0-9][0-9][0-9][0-9]/ }
+	scope :with_defendant_like, lambda { |str|
+			{
+				:conditions => ['lower(defendant) like ?', "%#{str.downcase}%"]
+			}
+		}		
 	
 	
 	validates :cr, :uniqueness => { :case_sensitive => false }, :allow_blank => true

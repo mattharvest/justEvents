@@ -123,31 +123,25 @@ class CasefilesController < ApplicationController
 	
 	def index
 		@casefiles = []
+		@name_cases=[]
+		@casenumber_cases=[]
+		
 		if params[:search]
 			#SEARCH MODE
 			@searchstring = params[:search].upcase
-			stub = @searchstring[0..1]
-			if stub=="CR"
-				@casefiles << Casefile.find_by_cr(@searchstring)
-			elsif stub=="CT"
-				@casefiles << Casefile.find_by_ct(@searchstring)
-			elsif stub=="CJ"
-				@casefiles << Casefile.find_by_cj(@searchstring)
-			elsif stub=="CA"
-				@casefiles << Casefile.find_by_ca(@searchstring)
-			elsif stub=="SA"
-				Casefile.find_all_by_sao(@searchstring).each do |c|
-					@casefiles << c
+			@casefiles << Casefile.find_by_cr(@searchstring)
+			@casefiles << Casefile.find_by_ct(@searchstring)
+			@casefiles << Casefile.find_by_cj(@searchstring)
+			@casefiles << Casefile.find_by_ca(@searchstring)
+			Casefile.find_all_by_sao(@searchstring).each do |c|
+				@casefiles << c
 				end
-			elsif stub=="JA"
-				@casefiles << Casefile.find_by_ja(@searchstring)
-			elsif stub=="CC"
-				Casefile.find_all_by_ccn(@searchstring).each do |c|
-					@casefiles << c
+			@casefiles << Casefile.find_by_ja(@searchstring)
+			Casefile.find_all_by_ccn(@searchstring).each do |c|
+				@casefiles << c
 				end
-			else
-				flash[:casefilefailure] = "Not a valid format for a casenumber."
-				redirect_to :back and return
+			Casefile.with_defendant_like(@searchstring).each do |c|
+				@casefiles << c
 			end
 			
 			if @casefiles.length==0

@@ -110,13 +110,14 @@
 		<div class="row-fluid">
 			<h3> What needs to be done:</h3>
 		</div>
-		<div class="span12">
-			<a data-toggle="modal" href="#todoModal" class="btn btn-primary">Do Something</a>
-			<table class="table table-striped">
-				<%= render :partial => 'shared/brief_todo', :collection => @todos %>
-			</table>
+		<div class="row-fluid">
+			<div class="span12">
+				<a data-toggle="modal" href="#todoModal" class="btn btn-primary">Do Something</a>
+				<table class="table table-striped">
+					<%= render :partial => 'shared/brief_todo', :collection => @todos %>
+				</table>
+			</div>
 		</div>
-
 		
 		<div class="row-fluid">
 			<h3> What's happened: </h3>

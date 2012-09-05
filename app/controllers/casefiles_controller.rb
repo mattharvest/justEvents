@@ -182,6 +182,8 @@ class CasefilesController < ApplicationController
 				end
 			end
 			
+			@casefiles = @casefiles.paginate(:page=>params[:page], :per_page=>30 )
+			
 			
 			if @casefiles.length==0
 				flash[:casefilefailure] = "No cases found.  Would you like to create one?"

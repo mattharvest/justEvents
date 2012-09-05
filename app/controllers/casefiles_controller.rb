@@ -167,7 +167,20 @@ class CasefilesController < ApplicationController
 				end
 			Casefile.with_defendant_like(@searchstring).each do |c|
 				@casefiles << c
-			end			
+			end	
+			petitions=[]
+			Petition.with_statement_of_pc_like(@searchstring).each do |petition|
+				petitions << petition
+			end
+			Petition.with_charges_like(@searchstring).each do |petition|
+				petitions << petition
+			end
+				
+			petitions.each do |petition|
+				petition.associated_cases.each do |casefile|
+					@casefiles << casefile
+				end
+			end
 			
 			
 			if @casefiles.length==0

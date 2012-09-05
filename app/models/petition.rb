@@ -5,6 +5,17 @@ class Petition < ActiveRecord::Base
 	
 	attr_accessor :victim_age, :witness_statement_type_string, :respondent_statement_type_string, :respondent_age
 	
+	scope :with_statement_of_pc_like, lambda { |str|
+		{
+			:conditions => ['lower(statement_of_pc) like ?', "%#{str.downcase}%"]
+		}
+	}
+	scope :with_charges_like, lambda { |str|
+		{
+			:conditions => ['lower(charges) like ?', "%#{str.downcase}%"]
+		}
+	}
+	
 	validates :ccn, :presence=>true, :allow_blank=>false
 	validates :asa, :presence=>true
 	validates :asa_email, :presence=>true
@@ -19,6 +30,10 @@ class Petition < ActiveRecord::Base
 	validates :incident_address, :presence=>true, :allow_blank => true
 	validates :soft_due_date, :presence=>true
 	validates :hard_due_date, :presence=>true
+	
+	def associated_cases
+		Casefile.with_ccn_like(ccn)
+	end
 	
 	def defendant_statement_block
 		tempstring=""

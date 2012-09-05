@@ -8,7 +8,37 @@ class Casefile < ActiveRecord::Base
 			{
 				:conditions => ['lower(defendant) like ?', "%#{str.downcase}%"]
 			}
-		}		
+		}
+	scope :with_cr_like, lambda { |str|
+			{
+				:conditions => ['lower(cr) like ?', "%#{str.downcase}%"]
+			}
+		}
+	scope :with_ct_like, lambda { |str|
+			{
+				:conditions => ['lower(ct) like ?', "%#{str.downcase}%"]
+			}
+		}
+	scope :with_cj_like, lambda { |str|
+			{
+				:conditions => ['lower(cj) like ?', "%#{str.downcase}%"]
+			}
+		}
+	scope :with_ca_like, lambda { |str|
+			{
+				:conditions => ['lower(ca) like ?', "%#{str.downcase}%"]
+			}
+		}
+	scope :with_ja_like, lambda { |str|
+			{
+				:conditions => ['lower(ja) like ?', "%#{str.downcase}%"]
+			}
+		}
+	scope :with_ccn_like, lambda { |str|
+			{
+				:conditions => ['lower(ccn) like ?', "%#{str.downcase}%"]
+			}
+		}
 	
 	
 	validates :cr, :uniqueness => { :case_sensitive => false }, :allow_blank => true

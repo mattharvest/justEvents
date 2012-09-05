@@ -129,20 +129,46 @@ class CasefilesController < ApplicationController
 		if params[:search]
 			#SEARCH MODE
 			@searchstring = params[:search].upcase
-			@casefiles << Casefile.find_by_cr(@searchstring)
-			@casefiles << Casefile.find_by_ct(@searchstring)
-			@casefiles << Casefile.find_by_cj(@searchstring)
-			@casefiles << Casefile.find_by_ca(@searchstring)
+			#@casefiles << Casefile.find_by_cr(@searchstring)
+			#@casefiles << Casefile.find_by_ct(@searchstring)
+			#@casefiles << Casefile.find_by_cj(@searchstring)
+			#@casefiles << Casefile.find_by_ca(@searchstring)
+			#Casefile.find_all_by_sao(@searchstring).each do |c|
+			#	@casefiles << c
+			#	end
+			#@casefiles << Casefile.find_by_ja(@searchstring)
+			#Casefile.find_all_by_ccn(@searchstring).each do |c|
+			#	@casefiles << c
+			#	end
+			#Casefile.with_defendant_like(@searchstring).each do |c|
+			#	@casefiles << c
+			#end
+
+			Casefile.with_cr_like(@searchstring).each do |c|
+				@casefiles << c
+				end
+			Casefile.with_ct_like(@searchstring).each do |c|
+				@casefiles << c
+				end
+			Casefile.with_cj_like(@searchstring).each do |c|
+				@casefiles << c
+				end
+			Casefile.with_ca_like(@searchstring).each do |c|
+				@casefiles << c
+				end
+			Casefile.with_ja_like(@searchstring).each do |c|
+				@casefiles << c
+				end
 			Casefile.find_all_by_sao(@searchstring).each do |c|
 				@casefiles << c
 				end
-			@casefiles << Casefile.find_by_ja(@searchstring)
-			Casefile.find_all_by_ccn(@searchstring).each do |c|
+			Casefile.with_ccn_like(@searchstring).each do |c|
 				@casefiles << c
 				end
 			Casefile.with_defendant_like(@searchstring).each do |c|
 				@casefiles << c
-			end
+			end			
+			
 			
 			if @casefiles.length==0
 				flash[:casefilefailure] = "No cases found.  Would you like to create one?"

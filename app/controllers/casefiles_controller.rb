@@ -182,7 +182,6 @@ class CasefilesController < ApplicationController
 				end
 			end
 			
-			@casefiles = @casefiles.paginate(:page=>params[:page], :per_page=>30 )
 			
 			
 			if @casefiles.length==0

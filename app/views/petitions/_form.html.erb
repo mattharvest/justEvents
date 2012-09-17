@@ -22,11 +22,12 @@
 	<i class="icon-folder-open"></i>
 		<blockquote>
 			<h2>the case</h2>
-			I am petitioning a case with <%= f.input :ccn, :label=>"CCN", :input_html=>{:class=>"span2"} %>, against <%= f.input :defendant, :label=>"Respondent", :input_html=>{:class=>"span2"}%>.  The <%=f.input :corespondents, :label=>"co-respondents are ", :input_html=>{:class=>"span2"} %>.
+			I am petitioning a case with <%= f.input :ccn, :label=>"CCN", :input_html=>{:class=>"span2"} %><span id="ccn_unique"></span>, against <%= f.input :defendant, :label=>"Respondent", :input_html=>{:class=>"span2"}%>.  The <%=f.input :corespondents, :label=>"co-respondents are ", :input_html=>{:class=>"span2"} %>.
 			
 			<br>
 			The respondent <%= f.input :defendant_address, :label=>"lives at ", :input_html=>{:class=>"span3"} %>, and <%= f.input :school, :label=>"attends ", :input_html=>{
-				:class=>"span2", 
+				:class=>"span2",
+				:autocomplete=>"off",
 				:data=>{
 					:provide=>"typeahead", 
 					:items=>'8',

@@ -100,9 +100,20 @@ class PetitionsController < ApplicationController
 	end
 		
 	def show
-		@petition = Petition.find(params[:id])
-		@casefile = Casefile.find_by_ccn("CCN"+@petition.ccn)
-		@title=@petition.defendant+" CCN: "+@petition.ccn
+		
+		respond_to do |format|
+			format.html {
+				@petition = Petition.find(params[:id])
+				@casefile = Casefile.find_by_ccn("CCN"+@petition.ccn)
+				@title=@petition.defendant+" CCN: "+@petition.ccn
+				render 'show'
+				}
+			format.json {
+				@petition = Petition.find_by_ccn(params[:ccn])
+				@casefile = Casefile.find_by_ccn("CCN"+params[:ccn])
+				render :json => @petition
+				}
+		end
 	end
 	
 	def edit

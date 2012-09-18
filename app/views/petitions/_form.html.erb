@@ -1,3 +1,5 @@
+<%= javascript_include_tag "check_ccn.js" %>
+
 <%= semantic_form_for @petition, {:html=>{:class=>"form-inline" }} do |f| %>
 	
 	<%= f.inputs do %>
@@ -22,7 +24,7 @@
 	<i class="icon-folder-open"></i>
 		<blockquote>
 			<h2>the case</h2>
-			I am petitioning a case with <%= f.input :ccn, :label=>"CCN", :input_html=>{:class=>"span2"} %><span id="ccn_unique"></span>, against <%= f.input :defendant, :label=>"Respondent", :input_html=>{:class=>"span2"}%>.  The <%=f.input :corespondents, :label=>"co-respondents are ", :input_html=>{:class=>"span2"} %>.
+			I am petitioning a case with <%= f.input :ccn, :label=>"CCN", :input_html=>{:class=>"span2"} %><span id="ccn_unique"></span>, against <%= f.input :defendant, :label=>"Respondent", :input_html=>{:class=>"span2"}%><span id="defendant_unique"></span>.  The <%=f.input :corespondents, :label=>"co-respondents are ", :input_html=>{:class=>"span2"} %>.
 			
 			<br>
 			The respondent <%= f.input :defendant_address, :label=>"lives at ", :input_html=>{:class=>"span3"} %>, and <%= f.input :school, :label=>"attends ", :input_html=>{

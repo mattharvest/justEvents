@@ -109,8 +109,14 @@ class PetitionsController < ApplicationController
 				render 'show'
 				}
 			format.json {
-				@petition = Petition.find_by_ccn(params[:ccn])
-				@casefile = Casefile.find_by_ccn("CCN"+params[:ccn])
+				if (params[:ccn].nil?)&(!params[:defendant].nil?)
+					@petition = Petition.find_by_defendant(params[:defendant])
+				elsif !params[:ccn].nil?
+					@petition = Petition.find_by_ccn(params[:ccn])
+					@casefile = Casefile.find_by_ccn("CCN"+params[:ccn])
+				else
+					return
+				end
 				render :json => @petition
 				}
 		end

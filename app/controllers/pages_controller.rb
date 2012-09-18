@@ -120,6 +120,7 @@ class PagesController < ApplicationController
 		else #neither blank
 			@microposts = Micropost.where(:user_id=>@user_id, :category=>params[:micropost_category], :event_date=>[params[:start]..params[:end]], :unit=>@unit)
 		end
+		export_to_csv(@microposts)
 	end
 	
 	def custom_petition_report
@@ -127,6 +128,7 @@ class PagesController < ApplicationController
 		@start_date=params[:start]
 		@end_date=params[:end]
 		@petitions = Petition.where(:created_at=>[@start_date..@end_date])
+		export_petitions_to_csv(@petitions)
 	end
 	
 	def last_week
@@ -134,18 +136,12 @@ class PagesController < ApplicationController
 			return
 		end
 		unit=current_user.unit
-		@microposts = @last_week
-		export_to_csv
+		@microposts = Micropost.where(:user_id=>@user_id, :event_date=>[7.days.ago..0.seconds.ago])
+		export_to_csv(@microposts)
 	end
 	
-	def export_petitions_to_csv
-		@petitions=[]
-		
-		if params[:type]=="petition_by_date"
-			@start_date=params[:start]
-			@end_date=params[:end]
-			@petitions = Petition.where(:created_at=>[@start_date..@end_date])
-		end
+	def export_petitions_to_csv(petitions)
+		@petitions=petitions
 		
 		if !@petitions.nil?
 			csv_string = CSV.generate do |c|
@@ -161,41 +157,18 @@ class PagesController < ApplicationController
 			:type => 'text/csv; charset=iso8859-1; header=present',
 			:disposition => 'attachment; filename='+Time.now.to_s+'petitions.csv'		
 		else
-			flash[:petition_csv_error]="Petitions was nil!"
+			flash[:petition_csv_error]="Petitions were nil!"
 		end
 		
 	end
 	
-	def export_to_csv
-		if @microposts.nil?
-			@microposts=Micropost.find(:all)
-		end
-		
-		if params[:type]=="unit"
-			@microposts=Micropost.where("unit=?", current_user.unit)
-		elsif params[:type]=="self"
-			@microposts=Micropost.where("user_id=?", current_user.id)
-		elsif params[:type]=="lastweek"
-			@microposts=Micropost.where(:unit=>current_user.unit, :event_date=>[Date.today-7..Date.today])
-		elsif params[:type]=="custom"
-			@microposts=Micropost.where(:category=>params[:micropost_category], :event_date=>[params[:start]..params[:end]], :unit=>params[:unit])
-
-		end
+	def export_to_csv(microposts)
+		@microposts=microposts
 		
 		csv_string = CSV.generate do |c|
-			c << ["event_date", "user", "casenumber", "user.email", "user.unit", "defendant", "dob", "adf", "category", "content", "created_at", "jail", "probation", "community service", "judge", "lead charge", "convicted charges", "enhanced", "guidelines top", "guidelines bottom", "aba plea", "team leader"]
+			c << ["event_date", "user", "casenumber", "user.email", "user.unit", "defendant", "dob", "adf", "category", "content", "created_at", "victims"]
 			@microposts.each do |post|
-				leader = User.new
-				
-				if !post.teamleader.blank? && !post.teamleader.nil?
-					leader = User.find_by_id(post.teamleader)
-				end
-				
-				if leader.nil?
-					c << [post.event_date.to_s, post.user.name.to_s, post.casenumber.to_s, post.user.email.to_s, post.user.unit.to_s, post.defendant.to_s, post.dob.to_s, post.adf.to_s, post.category.to_s, post.content.to_s, post.created_at.to_s, post.jail.to_s, post.probation.to_s, post.communityservice.to_s, post.judge.to_s, post.leadcharge.to_s, post.convictedcharges.to_s, post.enhanced.to_s, post.guidelines_top.to_s, post.guidelines_bottom.to_s, post.aba.to_s, "", post.victims.to_s]
-				else
-					c << [post.event_date.to_s, post.user.name.to_s, post.casenumber.to_s, post.user.email.to_s, post.user.unit.to_s, post.defendant.to_s, post.dob.to_s, post.adf.to_s, post.category.to_s, post.content.to_s, post.created_at.to_s, post.jail.to_s, post.probation.to_s, post.communityservice.to_s, post.judge.to_s, post.leadcharge.to_s, post.convictedcharges.to_s, post.enhanced.to_s, post.guidelines_top.to_s, post.guidelines_bottom.to_s, post.aba.to_s, leader.name_comma, post.victims.to_s]
-				end
+				c << [post.event_date.to_s, post.user.name.to_s, post.casenumber.to_s, post.user.email.to_s, post.user.unit.to_s, post.defendant.to_s, post.dob.to_s, post.adf.to_s, post.category.to_s, post.content.to_s, post.created_at.to_s, post.victims.to_s]
 			end
 		end
 		

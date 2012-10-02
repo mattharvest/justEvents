@@ -8,10 +8,10 @@
 	<% else %>
 		<ul>
 			<% if current_user.admin? %>
-				<li><i class="icon-download"></i><%= link_to 'All Posts', csv_path(:type=>'all') %></li>
+				<li><i class="icon-download"></i><%= link_to 'All Posts', csv_path(Micropost.all) %></li>
 			<% end %>
-			<li><i class="icon-download"></i><%= link_to 'All posts in your unit', csv_path(:type=>'unit') %></li>
-			<li><i class="icon-download"></i><%= link_to 'All of your posts', csv_path(:type=>'self') %></li>
+			<li><i class="icon-download"></i><%= link_to 'All posts in your unit', csv_path(Micropost.where(:unit=>current_user.uit)) %></li>
+			<li><i class="icon-download"></i><%= link_to 'All of your posts', csv_path(Micropost.where(:user_id=>current_user.id) %></li>
 			
 		</ul>
 	<% end %>

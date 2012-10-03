@@ -91,7 +91,7 @@ class CasefilesController < ApplicationController
 	def show
 		@casefile = Casefile.find(params[:id])
 		@title=@casefile.defendant
-		@petitions
+		@petitions=[]
 		if !@casefile.ccn.blank?
 			@petitions = Petition.find_all_by_ccn(@casefile.ccn.tr("CCN", ""))
 		end

@@ -1,9 +1,5 @@
-<% dob_label="Defendant DOB?" %>
-<% if current_user.unit=="juvenile"	
-	dob_label= "Respondent DOB?"
-	end %>
-		
-<div class="span6">	
+	
+<div>	
 	<%= semantic_form_for @micropost do |f| %>
 		<%= f.semantic_errors %>
 		<%= f.inputs do %>
@@ -26,20 +22,18 @@
 					data-source='["Jones, Debra", "Gupta, Kavita", "Johnson, Lyvette", "Josendale, Erin", "Saccarelli, Gale", "Whitehall, Beatrix", "Wilson, Monica", "Peek, Leslie", "Abdullah, Raouf", "Edwards, Christal", "Okeke, Loretta", "Powell, Greg", "Pride-Hebron, Kelly", "Shelton, Bill", "Uba-Okarafor, Vivent", "Mungin, Vaughn", "Handy, Ronald", "Ucheomunu, Andrew", "Moore, Sonya", "Azari, Omid"]'>
 			</div>
 			
-			<div class="input-append date" id="micropost_dob" data-date="<%= Date.today.years_ago(18).to_s %>" data-date-format="yyyy-mm-dd">
-				<input type="text" value="<%= Date.today.years_ago(18).to_s %>" readonly class="span2" name="micropost[dob]">
-				<span class="add-on">
-					<i class="icon-th"></i>
-				</span>
-				<span class="help-inline">DOB</span>
-			</div>
+			<% if !@petitions.nil? %>
+				<div class="input-prepend input-append date" id="micropost_dob" data-date="<%= Date.today.years_ago(18).to_s %>" data-date-format="yyyy-mm-dd">
+					<span class="add-on">DOB:</span><input type="text" value="<%= @petitions.first.defendant_dob %>" readonly class="span2" name="micropost[dob]"><span class="add-on"><i class="icon-th"></i></span>
+				</div>
+			<% else %>
+				<div class="input-prepend input-append date" id="micropost_dob" data-date="<%= Date.today.years_ago(18).to_s %>" data-date-format="yyyy-mm-dd">
+					<span class="add-on">DOB</span><input type="text" value="<%= Date.today.years_ago(18).to_s %>" readonly class="span2" name="micropost[dob]"><span class="add-on"><i class="icon-th"></i></span>
+				</div>
+			<% end %>
 			
-			<div class="input-append date" id="micropost_event_date" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
-				<input type="text" value="<%= Date.today.to_s %>" readonly class="span2" name="micropost[event_date]">
-				<span class="add-on">
-					<i class="icon-th"></i>
-				</span>
-				<span class="help-inline">when?</span>
+			<div class="input-prepend input-append date" id="micropost_event_date" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
+				<span class="add-on">When?</span><input type="text" value="<%= Date.today.years_ago(18).to_s %>" readonly class="span2" name="micropost[event_date]"><span class="add-on"><i class="icon-th"></i></span>
 			</div>
 		<% end %>
 		<div class="form-actions">
